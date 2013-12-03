@@ -1,0 +1,3 @@
+i_list_backend_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: iListBackendBundle:Default:index }

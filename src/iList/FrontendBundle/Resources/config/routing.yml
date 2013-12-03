@@ -1,0 +1,3 @@
+i_list_frontend_homepage:
+    pattern:  /
+    defaults: { _controller: iListFrontendBundle:Default:index }

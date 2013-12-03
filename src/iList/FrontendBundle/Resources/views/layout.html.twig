@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Maniac, Compra e Venda Apple por todo Brasil - Iphone, Ipad, Ipod, Imac entre outros.</title>
+<link type="text/css" rel="stylesheet" href="css/style.css" />
+
+
+{% block javascripts %}
+	{% javascripts
+		'@iListFrontendBundle/Resources/public/js/jquery-1.10.2.min.js'
+		'@iListFrontendBundle/Resources/public/js/jquery.main.js'
+	 %}
+	    <script src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+{% endblock %}
+
+{% block stylesheets %}
+	{% stylesheets 
+		'bundles/ilistfrontend/css/style.css'
+	filter='cssrewrite' %}
+	    <link rel="stylesheet" href="{{ asset_url }}" />
+	{% endstylesheets %}
+{% endblock %}
+
+</head>
+
+<body>
+    <div id="wrapper">
+    	<div class="container">
+            <div class="header">
+                <div class="logo">
+                	<h1></h1>
+                </div>
+                <div class="sell-apple">
+                	<input class="mainButton" name="commit" type="submit" value="Venda seu Apple">
+                </div>
+                <div class="breadcrumb">
+                    <div class="account">
+                   	<img src="{{ asset('images/sec.gif') }}" width="23" height="24" alt="security" class="iconSec"/> 
+                    <a href="#" class="security">Acesse sua conta</a>
+                    
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+            	{% block body %}{% endblock %}
+           		
+            </div>
+            <div class="footer">
+            	<ul class="list">
+                	<li class="item">
+                        <a href="#" class="btn-footer">Iphone</a>
+                    </li>
+                    <li class="item">
+                        <a href="#" class="btn-footer">Ipad</a>
+                    </li>
+                    <li class="item">
+                        <a href="#" class="btn-footer">Ipod</a>
+                    </li>
+                    <li class="item">
+                        <a href="#" class="btn-footer">Macbook</a>
+                    </li>
+                    <li class="item">
+                        <a href="#" class="btn-footer">Imac</a>
+                    </li>
+                    <li class="item">
+                        <a href="#" class="btn-footer">Acessórios</a>
+                    </li>
+                </ul>
+                <ul class="list">
+                	<li class="item">
+                        <a href="#" class="btn-footer">Venda seu Apple</a>
+                    </li>
+                    <li class="item">
+                        <a href="#" class="btn-footer">Cadastre-se</a>
+                    </li>
+                    <li class="item">
+                        <a href="#" class="btn-footer">Concectar pelo Facebook</a>
+                    </li>
+                    <li class="item">
+                        <a href="#" class="btn-footer">Login</a>
+                    </li>
+                    <li class="item">
+                        <a href="#" class="btn-footer">Esqueci Minha Senha</a>
+                    </li>
+                    <li class="item">
+                        <a href="#" class="btn-footer"></a>
+                    </li>
+                </ul>
+                <div class="facebook"></div>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

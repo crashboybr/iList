@@ -66,5 +66,16 @@ border: none;color: #FFF;cursor: pointer;display: inline-block;font-size: 15px;f
 #wrapper .container .footer .list .item .btn-footer:hover{text-decoration:underline;}
 
 
+/* msgs de erro */
+.inputLabel ul {
+	list-style-type: none;
+    padding: 0;
+    font-size: 12px;
+    color: red;
+    height: 0px;
+
+}
+
+
 
 

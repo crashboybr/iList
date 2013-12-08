@@ -1,0 +1,30 @@
+subcategoria:
+    pattern:  /
+    defaults: { _controller: "iListBackendBundle:SubCategory:index" }
+
+subcategoria_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "iListBackendBundle:SubCategory:show" }
+
+subcategoria_new:
+    pattern:  /new
+    defaults: { _controller: "iListBackendBundle:SubCategory:new" }
+
+subcategoria_create:
+    pattern:  /create
+    defaults: { _controller: "iListBackendBundle:SubCategory:create" }
+    requirements: { _method: post }
+
+subcategoria_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "iListBackendBundle:SubCategory:edit" }
+
+subcategoria_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "iListBackendBundle:SubCategory:update" }
+    requirements: { _method: post|put }
+
+subcategoria_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "iListBackendBundle:SubCategory:delete" }
+    requirements: { _method: post|delete }

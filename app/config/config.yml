@@ -2,6 +2,9 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: @iListBackendBundle/Resources/config/services.yml }
+
+parameters:
+    domain: ilist
 framework:
     #esi:             ~
     default_locale:  pt_BR
@@ -75,3 +78,15 @@ fos_user:
     registration:
         form:
             type: ilist_user_registration
+        confirmation:
+            enabled:    true
+
+    from_email:
+        address:        noreply@acmedemo.com
+        sender_name:    Acme Demo App
+
+
+services:
+  slug.helper:
+    class: iList\BackendBundle\Helper\SlugHelper
+

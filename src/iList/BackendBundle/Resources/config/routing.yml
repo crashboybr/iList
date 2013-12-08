@@ -1,3 +1,16 @@
 i_list_backend_homepage:
-    pattern:  /hello/{name}
+    pattern:  /
     defaults: { _controller: iListBackendBundle:Default:index }
+
+
+iListBackendBundle_categoria:
+        resource: "@iListBackendBundle/Resources/config/routing/category.yml"
+        prefix:   /categoria
+
+iListBackendBundle_subcategoria:
+        resource: "@iListBackendBundle/Resources/config/routing/subcategory.yml"
+        prefix:   /subcategoria
+
+iListBackendBundle_produto:
+        resource: "@iListBackendBundle/Resources/config/routing/product.yml"
+        prefix:   /produto

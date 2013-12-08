@@ -5,16 +5,16 @@ h3{font-size:22px;}
 
 /* CSS Document */
 body{margin:0;color:#666;font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;}
-#wrapper{height:auto;background-image:url(../img/bc-bg.gif);background-repeat: repeat-x;}
+#wrapper{height:auto;background-image:url(/images/bc-bg.gif);background-repeat: repeat-x;}
 #wrapper .container {width:960px;height:auto;margin:0 auto;}
 #wrapper .container .header{width:auto;height:120px;}
-#wrapper .container .header .logo{float:left;width:215px;height:87px;background-image:url(../img/maniac.gif);background-repeat: no-repeat;}
+#wrapper .container .header .logo{float:left;width:215px;height:87px;background-image:url(/images/maniac.gif);background-repeat: no-repeat;}
 #wrapper .container .header .search{width:377px;float: left;margin: 10px 0 0 60px;}
 #wrapper .container .header .search form fieldset{border:none;}
 #wrapper .container .header .search form fieldset input{width: 284px;background: #FFF none;display: inline-block;border: 1px solid #cacaca;border-radius: 3px;height: 25px;margin: 8px 0 0 0;padding: 5px 4px 3px;color: #666;font-size: 16px;line-height: 1.143em;}
 #wrapper .container .header .search form fieldset .searchButton{float:right;width:40px;background-color: #666;}
 #wrapper .container .header .sell-apple{float:right;width:240px;height: 60px;margin: 20px 0 0 0;}
-#wrapper .container .header .sell-apple .mainButton{float: right;width: 212px;height: 41px;background: url(../img/btn-venda-seu-apple.png) no-repeat;
+#wrapper .container .header .sell-apple .mainButton{float: right;width: 212px;height: 41px;background: url(/images/btn-venda-seu-apple.png) no-repeat;
 border: none;color: #FFF;cursor: pointer;display: inline-block;font-size: 15px;font-weight: bold;line-height:3px;padding:0 2px 0 0px;text-align: center;text-shadow: 0 1px 0 rgba(0,0,0,0.3);}
 
 #wrapper .container .header .sell-apple .mainButton:hover {background-position:0 -41px;}
@@ -41,12 +41,12 @@ border: none;color: #FFF;cursor: pointer;display: inline-block;font-size: 15px;f
 #wrapper .container .content .right-menu .list .item .btn-product{padding: 0 0 0 55px;line-height: 39px;color: #666;text-decoration: none;}
 
 
-#wrapper .container .content .right-menu .list .item.iphone{background-image: url(../img/sprite-listing.png);background-position: 10px 4px;}
-#wrapper .container .content .right-menu .list .item.ipad{background-image: url(../img/sprite-listing.png);background-position: 10px -39px;}
-#wrapper .container .content .right-menu .list .item.ipod{background-image: url(../img/sprite-listing.png);background-position: 10px -80px;}
-#wrapper .container .content .right-menu .list .item.macbook{background-image: url(../img/sprite-listing.png);background-position: 10px -122px;}
-#wrapper .container .content .right-menu .list .item.imac{background-image: url(../img/sprite-listing.png);background-position: 10px -161px;}
-#wrapper .container .content .right-menu .list .item.others{background-image: url(../img/sprite-listing.png);background-position: 10px -202px;}
+#wrapper .container .content .right-menu .list .item.iphone{background-image: url(/images/sprite-listing.png);background-position: 10px 4px;}
+#wrapper .container .content .right-menu .list .item.ipad{background-image: url(/images/sprite-listing.png);background-position: 10px -39px;}
+#wrapper .container .content .right-menu .list .item.ipod{background-image: url(/images/sprite-listing.png);background-position: 10px -80px;}
+#wrapper .container .content .right-menu .list .item.macbook{background-image: url(/images/sprite-listing.png);background-position: 10px -122px;}
+#wrapper .container .content .right-menu .list .item.imac{background-image: url(/images/sprite-listing.png);background-position: 10px -161px;}
+#wrapper .container .content .right-menu .list .item.others{background-image: url(/images/sprite-listing.png);background-position: 10px -202px;}
 
 
 /* Content-listing */
@@ -63,7 +63,7 @@ border: none;color: #FFF;cursor: pointer;display: inline-block;font-size: 15px;f
 /* Footer */
 #wrapper .container .footer{width:950px;float:left;margin: 60px 0 0 0;border: 1px #e4e4e4 solid;border-radius: 4px;background-color: #f7f7f7;}
 #wrapper .container .footer .list{float:left;width: 150px;padding:0;list-style:none;margin: 15px 0 15px 15px;line-height: 20px;}
-#wrapper .container .footer .facebook{float:right;width:350px;height:80px;background-image: url(../img/facebook.png);float: right;background-repeat: no-repeat;margin: 15px 15px 0 0;}
+#wrapper .container .footer .facebook{float:right;width:350px;height:80px;background-image: url(/images/facebook.png);float: right;background-repeat: no-repeat;margin: 15px 15px 0 0;}
 #wrapper .container .footer .list .item .btn-footer{color:#666;text-decoration:none;font-size:13px;}
 #wrapper .container .footer .list .item .btn-footer:hover{text-decoration:underline;}
 

@@ -24,8 +24,17 @@ border: none;color: #FFF;cursor: pointer;display: inline-block;font-size: 15px;f
 /* Content-left */
 #wrapper .container .content {height:auto;}
 #wrapper .container .content-left {float:left;}
-#wrapper .container .content-right {float:right;}
+#wrapper .container .content .content-left .ButtonRegister{width: 297px;height: 41px;border: none;color: #FFF;cursor: pointer;display: inline-block;font-size: 15px;font-weight: bold;line-height:3px;padding:0 17px 0 0px;text-align: center;text-shadow: 0 1px 0 rgba(0,0,0,0.3);background-image: url(/images/btn-venda-seu-apple.png);background-repeat: no-repeat;background-position: -222px 0px;}
+#wrapper .container .content .content-left .ButtonRegister:hover{background-position: -222px -41px;}
+#wrapper .container .content .content-left .fconnect{float:left;width: 138px;height:35px;background-image: url(/images/btn-venda-seu-apple.png);background-repeat: no-repeat;background-position: -528px 0px;border: none;display: block;margin: 0 0 0 80px;}
+#wrapper .container .content .content-left .fconnect:hover{background-position: -528px -35px;}
+#wrapper .container .content .content-left .fconnect-text{margin: 15px 0 5px 80px;font-size: 15px;}
+#wrapper .container .content .content-left input{width:284px;background: #FFF none;display: inline-block;border: 1px solid #cacaca;border-radius:3px;height: 25px;margin:8px 0 0 0;padding: 5px 4px 3px;color: 
+#666;font-size: 16px;line-height: 1.143em;}
 
+
+/* Content-rigth */
+#wrapper .container .content-right {float:right;}
 #wrapper .container .content-right .ButtonRegister{width: 297px;height: 41px;border: none;color: #FFF;cursor: pointer;display: inline-block;font-size: 15px;font-weight: bold;line-height:3px;padding:0 17px 0 0px;text-align: center;text-shadow: 0 1px 0 rgba(0,0,0,0.3);background-image: url(/images/btn-venda-seu-apple.png);background-repeat: no-repeat;background-position: -222px 0px;}
 #wrapper .container .content-right .ButtonRegister:hover{background-position: -222px -41px;}
 #wrapper .container .content-right .fconnect{float:left;width: 138px;height:35px;background-image: url(/images/btn-venda-seu-apple.png);background-repeat: no-repeat;background-position: -528px 0px;border: none;display: block;margin: 0 0 0 80px;}
@@ -56,7 +65,17 @@ border: none;color: #FFF;cursor: pointer;display: inline-block;font-size: 15px;f
 #wrapper .container .products .list .item .others.btn-product{background-image: url(/images/sprite-index.png);background-position: -759px 0;padding: 0 133px 106px 10px;width:150px;height:150px;}
 #wrapper .container .products .list .item .others.btn-product:hover{background-image: url(/images/sprite-index.png);background-position: -759px 127px;}
 
+/* send-buttons */
+#wrapper .container .content-right .ButtonSend{width: 197px;height: 41px;border: none;color: #FFF;cursor: pointer;display: inline-block;font-size: 15px;font-weight: bold;line-height:3px;padding:0 17px 0 0px;text-align: center;text-shadow: 0 1px 0 rgba(0,0,0,0.3);background-image: url(/images/btn-venda-seu-apple.png);background-repeat: no-repeat;background-position: -222px 0px;}
+#wrapper .container .content-right .ButtonSend:hover{background-position: -222px -41px;}
 
+.space{margin:5px 0 0 0;}
+.link-generico{color:#666;text-decoration:none;font-size:14px;line-height: 20px;}
+.link-generico:hover {text-decoration:underline;}
+
+/* alert */
+#wrapper .container .alert {width:293px;border-radius:3px; }
+#wrapper .container .alert .alert-text{ margin:0;font-size:14px;color:#C00; margin-top: 10px;}
 
 /* Footer */
 #wrapper .container .footer{width:950px;float:left;margin: 60px 0 0 0;border: 1px #e4e4e4 solid;border-radius: 4px;background-color: #f7f7f7;}
@@ -75,7 +94,4 @@ border: none;color: #FFF;cursor: pointer;display: inline-block;font-size: 15px;f
     height: 0px;
 
 }
-
-
-
 

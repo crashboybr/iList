@@ -5,7 +5,7 @@ namespace iList\BackendBundle\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * User
  *
@@ -38,11 +38,17 @@ class User extends BaseUser
      */
     protected $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Ad", mappedBy="user")
+     */
+    protected $ads;
+
 
     public function __construct()
     {
         parent::__construct();
-        // your own logic
+
+        $this->ads = new ArrayCollection();
     }
 
     /**
@@ -81,4 +87,37 @@ class User extends BaseUser
 
 
     
+
+    /**
+     * Add ads
+     *
+     * @param \iList\BackendBundle\Entity\Ad $ads
+     * @return User
+     */
+    public function addAd(\iList\BackendBundle\Entity\Ad $ads)
+    {
+        $this->ads[] = $ads;
+    
+        return $this;
+    }
+
+    /**
+     * Remove ads
+     *
+     * @param \iList\BackendBundle\Entity\Ad $ads
+     */
+    public function removeAd(\iList\BackendBundle\Entity\Ad $ads)
+    {
+        $this->ads->removeElement($ads);
+    }
+
+    /**
+     * Get ads
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAds()
+    {
+        return $this->ads;
+    }
 }

@@ -2,27 +2,48 @@
 
 <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="new_entity_factories_free_entity_factory" novalidate>
     	{{ form_errors(form) }}
-    	 {{ form_row(form._token) }} 
+    	{{ form_row(form._token) }} 
  
 	    <div class="inputLabel">
+	    	
+	    	{% if (form.name.vars.errors|length > 0) %}
+	    		<div class="alert">
+					<p class="alert-text">{{ form.name.vars.errors[0].message }}</p>
+				</div>
+	    	{% endif %}
 			{{ form_widget(form.name, { 'attr': {'class': 'rounder', 'placeholder': form.name.vars.label } }) }}
-			{{ form_errors(form.name) }}
+			
 		</div>
 
-		<div class="inputLabel">			
+		<div class="inputLabel">	
+			{% if (form.username.vars.errors|length > 0) %}
+	    		<div class="alert">
+					<p class="alert-text">{{ form.username.vars.errors[0].message }}</p>
+				</div>
+	    	{% endif %}	
 			{{ form_widget(form.username, { 'attr': {'class': 'rounder', 'placeholder': form.username.vars.label }}) }}
-			{{ form_errors(form.username) }}
+			
 		</div>
 
 		<div class="inputLabel">
+			{% if (form.email.vars.errors|length > 0) %}
+	    		<div class="alert">
+					<p class="alert-text">{{ form.email.vars.errors[0].message }}</p>
+				</div>
+	    	{% endif %}
 			{{ form_widget(form.email, { 'attr': {'class': 'rounder', 'placeholder': form.email.vars.label }}) }}
-			{{ form_errors(form.email) }}
+			
 		</div>
 
 		{% for passwordField in form.plainPassword %}
 		    <div class="inputLabel">
+		    	{% if (passwordField.vars.errors|length > 0) %}
+	    			<div class="alert">
+						<p class="alert-text">{{ passwordField.vars.errors[0].message }}</p>
+					</div>
+	    		{% endif %}
 		        {{ form_widget(passwordField, { 'attr': {'class': 'rounder', 'placeholder': passwordField.vars.label }}) }}
-		        {{ form_errors(passwordField) }}
+		        
 		        
 		        
 		    </div>

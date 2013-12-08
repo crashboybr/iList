@@ -2,6 +2,7 @@ parameters:
 #    i_list_frontend.example.class: iList\FrontendBundle\Example
 
 services:
-#    i_list_frontend.example:
-#        class: %i_list_frontend.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    ilist.twig.frontend_extension:
+        class: iList\FrontendBundle\Twig\FrontendExtension
+        tags:
+            - { name: twig.extension }

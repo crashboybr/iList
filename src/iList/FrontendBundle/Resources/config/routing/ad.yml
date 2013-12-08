@@ -1,0 +1,30 @@
+anuncio:
+    pattern:  /
+    defaults: { _controller: "iListFrontendBundle:Ad:index" }
+
+anuncio_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "iListFrontendBundle:Ad:show" }
+
+anuncio_new:
+    pattern:  /novo
+    defaults: { _controller: "iListFrontendBundle:Ad:new" }
+
+anuncio_create:
+    pattern:  /create
+    defaults: { _controller: "iListFrontendBundle:Ad:create" }
+    requirements: { _method: post }
+
+anuncio_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "iListFrontendBundle:Ad:edit" }
+
+anuncio_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "iListFrontendBundle:Ad:update" }
+    requirements: { _method: post|put }
+
+anuncio_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "iListFrontendBundle:Ad:delete" }
+    requirements: { _method: post|delete }

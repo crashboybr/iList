@@ -1,0 +1,236 @@
+{% extends 'iListFrontendBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+	{% stylesheets 
+		'bundles/ilistfrontend/css/style-sell-apple.css'
+	filter='cssrewrite' %}
+	    <link rel="stylesheet" href="{{ asset_url }}" />
+	{% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+
+
+           		<div class="content-ad">
+                	<div class="titleMenu">
+                        <p class="titleStyle">Informações sobre o produto</p>
+                    </div>
+                    
+
+                	{{ form_start(form, { attr: { 'novalidate': 'novalidate' }}) }}
+                		<div class="cont" id="">
+	                		<div class="cont-left">
+	                        	{{ form_label(form.adType,'Tipo do Anúncio', { attr: { 'class': 'item_desc' } }) }}
+	                        </div>
+                			<div class="cont-right">
+		                		{% for adType in form.adType %}
+									
+									{{ form_widget(adType, { attr: { 'class': 'ipt_radio' }}) }}
+
+                            		<label class="ipt_label">{{ adType.vars.label }}</label>
+
+								{% endfor %}
+								{{ form_errors(form.adType) }}
+							</div>
+						</div>
+
+
+                		
+	                		
+						   
+
+						<div class="cont" id="">
+	                		<div class="cont-left">
+	                        	{{ form_label(form.productType,'Tipo do Anúncio', { attr: { 'class': 'item_desc' } }) }}
+	                        </div>
+                			<div class="cont-right">
+		                		{% for productType in form.productType %}
+									
+									{{ form_widget(productType, { attr: { 'class': 'ipt_radio' }}) }}
+
+                            		<label class="ipt_label">{{ productType.vars.label }}</label>
+
+								{% endfor %}
+								{{ form_errors(form.productType) }}
+							</div>
+						</div>
+
+                		<div class="cont" id="">
+	                		<div class="cont-left">
+	                        	{{ form_label(form.category,'Categoria', { attr: { 'class': 'item_desc' } }) }}
+	                        </div>
+						     <div class="cont-right">
+						     	<div class="estados">
+									{{ form_errors(form.category) }}
+									{{ form_widget(form.category) }}
+								</div>
+							</div>
+						</div>
+
+						<div class="cont" id="">
+	                		<div class="cont-left">
+	                        	{{ form_label(form.subcategory,'SubCategoria', { attr: { 'class': 'item_desc' } }) }}
+	                        </div>
+						     <div class="cont-right">
+						     	<div class="estados">
+									{{ form_errors(form.subcategory) }}
+									{{ form_widget(form.subcategory) }}
+								</div>
+							</div>
+						</div>
+
+						<div class="cont" id="">
+	                		<div class="cont-left">
+	                        	{{ form_label(form.product,'Produto', { attr: { 'class': 'item_desc' } }) }}
+	                        </div>
+						     <div class="cont-right">
+						     	<div class="estados">
+									{{ form_errors(form.product) }}
+									{{ form_widget(form.product) }}
+								</div>
+							</div>
+						</div>
+
+						<div class="cont" id="">
+	                		<div class="cont-left">
+	                        	{{ form_label(form.size,'Capacidade', { attr: { 'class': 'item_desc' } }) }}
+	                        </div>
+						     <div class="cont-right">
+						     	<div class="estados">
+									{{ form_errors(form.size) }}
+									{{ form_widget(form.size) }}
+								</div>
+							</div>
+						</div>
+
+						<div class="cont" id="">
+	                		<div class="cont-left">
+	                        	{{ form_label(form.color,'Cor', { attr: { 'class': 'item_desc' } }) }}
+	                        </div>
+						     <div class="cont-right">
+						     	<div class="estados">
+									{{ form_errors(form.color) }}
+									{{ form_widget(form.color) }}
+								</div>
+							</div>
+						</div>
+
+						<div class="cont" id="">
+	                		<div class="cont-left">
+	                        	{{ form_label(form.title,'Título', { attr: { 'class': 'item_desc' } }) }}
+	                        </div>
+						     <div class="cont-right">
+						     	<div class="estados">
+									{{ form_errors(form.title) }}
+									{{ form_widget(form.title) }}
+								</div>
+							</div>
+						</div>
+
+						<div class="cont" id="">
+	                		<div class="cont-left">
+	                        	{{ form_label(form.content,'Conteúdo', { attr: { 'class': 'item_desc' } }) }}
+	                        </div>
+						     <div class="cont-right">
+						     	<div class="estados">
+									{{ form_errors(form.content) }}
+									{{ form_widget(form.content) }}
+								</div>
+							</div>
+						</div>
+
+						<div class="cont" id="">
+	                		<div class="cont-left">
+	                        	{{ form_label(form.price,'Preço', { attr: { 'class': 'item_desc' } }) }}
+	                        </div>
+						     <div class="cont-right">
+						     	<div class="estados">
+									{{ form_errors(form.price) }}
+									{{ form_widget(form.price) }}
+								</div>
+							</div>
+						</div>
+
+						<div class="cont" id="">
+	                		<div class="cont-left">
+	                        	{{ form_label(form.state,'Estado', { attr: { 'class': 'item_desc' } }) }}
+	                        </div>
+						     <div class="cont-right">
+						     	<div class="estados">
+									{{ form_errors(form.state) }}
+									{{ form_widget(form.state) }}
+								</div>
+							</div>
+						</div>
+
+						<div class="cont" id="">
+	                		<div class="cont-left">
+	                        	{{ form_label(form.city,'Cidade', { attr: { 'class': 'item_desc' } }) }}
+	                        </div>
+						     <div class="cont-right">
+						     	<div class="estados">
+									{{ form_errors(form.city) }}
+									{{ form_widget(form.city) }}
+								</div>
+							</div>
+						</div>
+
+
+						<div class="cont" id="">
+	                		<div class="cont-left">
+	                        	{{ form_label(form.zipcode,'CEP', { attr: { 'class': 'item_desc' } }) }}
+	                        </div>
+						     <div class="cont-right">
+						     	<div class="estados">
+									{{ form_errors(form.zipcode) }}
+									{{ form_widget(form.zipcode) }}
+								</div>
+							</div>
+						</div>
+
+						<div class="cont" id="">
+	                		<div class="cont-left">
+	                        	{{ form_label(form.street,'Rua', { attr: { 'class': 'item_desc' } }) }}
+	                        </div>
+						     <div class="cont-right">
+						     	<div class="estados">
+									{{ form_errors(form.street) }}
+									{{ form_widget(form.street) }}
+								</div>
+							</div>
+						</div>
+
+						<div class="cont" id="">
+	                		<div class="cont-left">
+	                        	{{ form_label(form.complement,'Complemento', { attr: { 'class': 'item_desc' } }) }}
+	                        </div>
+						     <div class="cont-right">
+						     	<div class="estados">
+									{{ form_errors(form.complement) }}
+									{{ form_widget(form.complement) }}
+								</div>
+							</div>
+						</div>
+
+
+								{{ form_widget(form.submit, { label: 'Criar' })}}
+
+					{{ form_end(form) }}
+
+				
+                <div class="titleMenu">
+                   <p class="titleStyle">Informações sobre o produto</p>
+               </div>
+               <div class="cont" id="">
+                    	<div class="cont-left">
+                        	<label class="item_desc">Nome</label>
+                        </div>
+                        <div class="cont-right">
+                        	
+                      </div>    
+					</div>
+                      
+                    
+            </div>
+            
+{% endblock %}

@@ -22,8 +22,11 @@ class DefaultController extends Controller
         $userManager = $this->container->get('fos_user.user_manager');
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->container->get('event_dispatcher');
-    
-        $user = $userManager->createUser();
+    	
+    	$user = $this->get('security.context')->getToken()->getUser();
+        
+        if ($user == "anon.")
+			$user = $userManager->createUser();
         $user->setEnabled(true);
 
     

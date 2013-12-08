@@ -1,23 +1,54 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
+{% extends 'iListFrontendBundle::layout.html.twig' %}
 
-{% if error %}
-    <div>{{ error|trans }}</div>
-{% endif %}
+{% block body %}
 
-<form action="{{ path("fos_user_security_check") }}" method="post">
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
-    <label for="username">{{ 'security.login.username'|trans }}</label>
-    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+<div class="content-left">
+	<h3>Digite seu login e senha</h3>
+		
+	<form action="{{ path("fos_user_security_check") }}" method="post">
+	    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
-    <label for="password">{{ 'security.login.password'|trans }}</label>
-    <input type="password" id="password" name="_password" required="required" />
+	    {% if error %}
+			<div class="alert">
+				<p class="alert-text">{{ error|trans }}</p>
+			</div>
+		{% endif %}
 
-    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+	    <div class="inputLabel">
+	    	<input type="text" id="username" placeholder="digite seu email" name="_username" value="{{ last_username }}" required="required" />
+		</div>
+ 
+	    <div class="inputLabel">
+	    	<input type="password" placeholder="digite sua senha" id="password" name="_password" required="required" />
+		</div>
 
-    <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
-</form>
+		<div class="space">                      
+			<a href="#" class="link-generico">Esqueci minha senha</a><br/>
+		</div>
+
+	    <input type="hidden" id="remember_me" name="_remember_me" value="on" />
+
+	    <input class="ButtonRegister" type="submit" id="_submit" name="_submit" value="Entrar">
+	</form>
+</div>
+
+<div class="content-left">
+	<h3 style="width: 320px; text-align: center; font-size: 30px; margin-top: 50%;">OU</h3>
+</div>
+
+<div class="content-right">
+    <h3>Crie uma conta e comece agora.</h3>
+
+        {% include "FOSUserBundle:Registration:register_content.html.twig" %}
+
+    	<p class="fconnect-text">ou cadastre-se com:</p>
+        <a href="#" class="fconnect"></a>
+    
+</div>
+
+{% endblock %}
 

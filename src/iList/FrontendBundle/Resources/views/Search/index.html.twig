@@ -1,0 +1,112 @@
+{% extends 'iListFrontendBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    {% stylesheets 
+        'bundles/ilistfrontend/css/style-listing.css'
+    filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+
+                <div class="filtersUp">
+                    <div class="selectPrice">Preço</div>
+                </div>
+                <div class="right-menu">
+                    <div class="titleMenu">
+                            <p>Escolha uma localização</p>
+                        </div>
+                    <div class="estados">
+                        <select name="uf" class="uf">
+                        <option selected="selected" value="" >UF - Selecione o Estado</option>
+                        <option value="1">AC - Acre</option>
+                        <option value="2">AL - Alagoas</option>
+                        <option value="3">AM - Amazonas</option>
+                        <option value="4">AP - Amapá</option>
+                        <option value="5">BA - Bahia</option>
+                        <option value="6">CE - Ceará</option>
+                        <option value="7">DF - Distrito Federal</option>
+                        <option value="8">ES - Espírito Santo</option>
+                        <option value="9">GO - Goiás</option>
+                        <option value="10">MA - Maranhão</option>
+                        <option value="11">MG - Minas Gerais</option>
+                        <option value="12">MS - Mato Grosso do Sul</option>
+                        <option value="13">MT - Mato Grosso</option>
+                        <option value="14">PA - Pará</option>
+                        <option value="15">PB - Paraíba</option>
+                        <option value="16">PE - Pernambuco</option>
+                        <option value="17">PI - Piauí</option>
+                        <option value="18">PR - Paraná</option>
+                        <option value="19">RJ - Rio de Janeiro</option>
+                        <option value="20">RN - Rio Grande do Norte</option>
+                        <option value="21">RO - Rondônia</option>
+                        <option value="22">RR - Roraima</option>
+                        <option value="23">RS - Rio Grande do Sul</option>
+                        <option value="24">SC - Santa Catarina</option>
+                        <option value="25">SE - Sergipe</option>
+                        <option value="26">SP - São Paulo</option>
+                        <option value="27">TO - Tocantins</option>
+                      </select>
+                      </div>
+                    <ul class="list">
+                        <div class="titleMenu">
+                            <p>Escolha um Apple</p>
+                        </div>
+                        {% if (state == 'brasil') %}
+                            <li class="item iphone ">
+                                <a href="{{ path('brasil_search', {'category_name': 'iphone'}) }}" class="btn-product">iPhone</a>
+                                <p class="text-bt"></p>
+                            </li>
+                            <li class="item ipad">
+                                <a href="{{ path('brasil_search', {'category_name': 'ipad' }) }}" class="btn-product">iPad</a>
+                            </li>
+                            <li class="item ipod">
+                                <a href="{{ path('brasil_search', {'category_name': 'ipod' }) }}" class="btn-product">iPod</a>
+                            </li>
+                            <li class="item macbook">
+                                <a href="{{ path('brasil_search', {'category_name': 'macbook' }) }}" class="btn-product">MacBook</a>
+                            </li>
+                            <li class="item imac">
+                                <a href="{{ path('brasil_search', {'category_name': 'imac' }) }}" class="btn-product">iMac</a>
+                            </li>
+                            <li class="item others">
+                                <a href="{{ path('brasil_search', {'category_name': 'acessorios' }) }}" class="btn-product">Acessórios</a>
+                            </li>
+                        {% else %}
+                            <li class="item iphone ">
+                                <a href="{{ path('subdomain_search', {'state': state, 'category_name': 'iphone', 'domain': domain}) }}" class="btn-product">iPhone</a>
+                                <p class="text-bt"></p>
+                            </li>
+                            <li class="item ipad">
+                                <a href="{{ path('subdomain_search', {'state': state, 'category_name': 'ipad', 'domain': domain}) }}" class="btn-product">iPad</a>
+                            </li>
+                            <li class="item ipod">
+                                <a href="{{ path('subdomain_search', {'state': state, 'category_name': 'ipod', 'domain': domain}) }}" class="btn-product">iPod</a>
+                            </li>
+                            <li class="item macbook">
+                                <a href="{{ path('subdomain_search', {'state': state, 'category_name': 'macbook', 'domain': domain}) }}" class="btn-product">MacBook</a>
+                            </li>
+                            <li class="item imac">
+                                <a href="{{ path('subdomain_search', {'state': state, 'category_name': 'imac', 'domain': domain}) }}" class="btn-product">iMac</a>
+                            </li>
+                            <li class="item others">
+                                <a href="{{ path('subdomain_search', {'state': state, 'category_name': 'acessorios', 'domain': domain}) }}" class="btn-product">Acessórios</a>
+                            </li>
+                        {% endif %}
+                </div>
+                
+                <div class="listing">
+                    {% for ad in ads %}
+                        <div class="box">
+                            <div class="photo">
+                                <img src="/images/ipod-suffle.jpg" width="300" height="200" />
+                            </div>
+                            <p class="title">{{ ad.title }}</p>
+                            <p class="price">{{ ad.price|price }}</p>
+                            <p class="detail">{% if (ad.productType == 1) %}Novo{% else %}Usado{% endif %} | {{ ad.city }}-{{ ad.state }}</p>
+                        </div>
+                    {% endfor %}
+                    
+                </div>
+{% endblock %}

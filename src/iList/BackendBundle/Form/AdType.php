@@ -69,11 +69,18 @@ class AdType extends AbstractType
                 'choices' => array('1' => 'Novo', '2' => 'Usado'),
                 'expanded' => true
             ))
+            //->add('ad_images', 'file')
+            //->add('ad_images', 'file', array(
+            //    'data_class' => null,
+            //))
+            ->add('ad_images', 'collection', array('type' => new AdImageType()))
             
             
             
             
         ;
+
+
     }
     
     /**

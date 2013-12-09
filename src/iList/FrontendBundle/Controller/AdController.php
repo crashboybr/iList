@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use iList\BackendBundle\Entity\Ad;
+use iList\BackendBundle\Entity\AdImage;
 use iList\BackendBundle\Form\AdType;
 
 /**
@@ -29,6 +30,23 @@ class AdController extends Controller
             'entities' => $entities,
         ));
     }
+
+
+    public function viewAdAction($city, $category_name, $slug)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $category = $em->getRepository('iListBackendBundle:Category')
+            ->findOneBy(array('name' => $category_name));
+
+        $ad = $em->getRepository('iListBackendBundle:Ad')
+            ->findOneBy(array('category' => $category, 'city' => $city, 'slug' => $slug));
+        //echo "<pre>";
+        //\Doctrine\Common\Util\Debug::dump($ad);exit;
+
+        return $this->render('iListFrontendBundle:Ad:viewAd.html.twig', array('ad' => $ad));
+    }
+
     /**
      * Creates a new Ad entity.
      *
@@ -39,18 +57,54 @@ class AdController extends Controller
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
+
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             
-
             $user = $this->get('security.context')->getToken()->getUser();
             
             $entity->setUser($user);
             $entity->setStatus(-1); //revisao
             $entity->setSlug($entity->getTitle());
+           
+            
+            $i = 1;
+            $date = date('Y-m-d H:i:s');
+            foreach ($entity->getAdImages() as $adImage)
+            {
+                
+                
+                $adImage->setAds($entity);
+                $adImage->setPosition($i++);
+                $file = $adImage->getPic();
+                $adImage->setPic(null);
+                $adImage->setFile($file);
+                
+                
+                //$adImage->setCreatedAt(new \DateTime($date));
+                //$adImage->setUpdatedAt(new \DateTime($date));
+
+              
+                
+               
+                //$em->persist($adImage);
+                //$em->flush();
+                
+
+            }
+            //exit;
+
+             //echo "<pre>";
+            //\Doctrine\Common\Util\Debug::dump($entity->getAdImages());exit;
+
 
             $em->persist($entity);
             $em->flush();
+
+            
+
+
+            
 
             return $this->redirect($this->generateUrl('anuncio_show', array('id' => $entity->getId())));
         }
@@ -70,6 +124,20 @@ class AdController extends Controller
     */
     private function createCreateForm(Ad $entity)
     {
+
+        $ad_image = new AdImage();
+        $entity->addAdImage($ad_image);
+
+        $ad_image = new AdImage();
+        $entity->addAdImage($ad_image);
+
+        $ad_image = new AdImage();
+        $entity->addAdImage($ad_image);
+
+        //echo "<pre>";
+        //\Doctrine\Common\Util\Debug::dump($entity);exit;
+
+
         $form = $this->createForm(new AdType(), $entity, array(
             'action' => $this->generateUrl('anuncio_create'),
             'method' => 'POST',
@@ -88,6 +156,8 @@ class AdController extends Controller
     {
         $entity = new Ad();
         $form   = $this->createCreateForm($entity);
+        //echo "<pre>";
+        //\Doctrine\Common\Util\Debug::dump($form);exit;
 
         return $this->render('iListFrontendBundle:Ad:new.html.twig', array(
             'entity' => $entity,

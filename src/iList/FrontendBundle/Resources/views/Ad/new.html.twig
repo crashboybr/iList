@@ -35,10 +35,6 @@
 						</div>
 
 
-                		
-	                		
-						   
-
 						<div class="cont" id="">
 	                		<div class="cont-left">
 	                        	{{ form_label(form.productType,'Tipo do Anúncio', { attr: { 'class': 'item_desc' } }) }}
@@ -212,23 +208,24 @@
 							</div>
 						</div>
 
+						<div class="cont" id="">
+	                		<div class="cont-left">
+	                			
+	                        	{{ form_label(form.ad_images,'Imagens', { attr: { 'class': 'item_desc' } }) }}
+	                        </div>
+						     <div class="cont-right">
+						     	<div class="estados">
+									{{ form_errors(form.ad_images) }}
+									{{ form_widget(form.ad_images, { 'attr': { 'multiple': 'multiple' } }) }}
+								</div>
+							</div>
+						</div>
 
-								{{ form_widget(form.submit, { label: 'Criar' })}}
+
+					{{ form_widget(form.submit, { label: 'Criar' })}}
 
 					{{ form_end(form) }}
 
-				
-                <div class="titleMenu">
-                   <p class="titleStyle">Informações sobre o produto</p>
-               </div>
-               <div class="cont" id="">
-                    	<div class="cont-left">
-                        	<label class="item_desc">Nome</label>
-                        </div>
-                        <div class="cont-right">
-                        	
-                      </div>    
-					</div>
                       
                     
             </div>

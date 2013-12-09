@@ -3,12 +3,13 @@
 namespace iList\BackendBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Ad
  *
  * @ORM\Table(name="ads")
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="iList\BackendBundle\Entity\AdRepository")
  */
 class Ad
@@ -58,40 +59,40 @@ class Ad
     /**
      * @var integer
      *
-     * @ORM\Column(name="subcategory_id", type="integer")
+     * @ORM\Column(name="subcategory_id", type="integer", nullable=true)
      */
     private $subcategoryId;
 
     /**
      * @ORM\ManyToOne(targetEntity="SubCategory", inversedBy="ads")
-     * @ORM\JoinColumn(name="subcategory_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="subcategory_id", referencedColumnName="id", nullable=true)
      */
     protected $subcategory;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="product_id", type="integer")
+     * @ORM\Column(name="product_id", type="integer", nullable=true)
      */
     private $productId;
 
     /**
      * @ORM\ManyToOne(targetEntity="Product", inversedBy="ads")
-     * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=true)
      */
     protected $product;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="size", type="string", length=255)
+     * @ORM\Column(name="size", type="string", length=255, nullable=true)
      */
     private $size;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="color", type="string", length=255)
+     * @ORM\Column(name="color", type="string", length=255, nullable=true)
      */
     private $color;
 
@@ -161,7 +162,7 @@ class Ad
     /**
      * @var integer
      *
-     * @ORM\Column(name="product_type", type="integer")
+     * @ORM\Column(name="product_type", type="integer", nullable=true)
      */
     private $productType;
 
@@ -187,6 +188,15 @@ class Ad
      */
     private $slug;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AdImage", mappedBy="ads")
+     */
+    protected $ad_images;
+
+    public function __construct()
+    {
+        $this->ad_images = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -597,10 +607,18 @@ class Ad
      */
     public function setSlug($slug)
     {
-        $this->slug = $slug;
-    
+        global $kernel;
+
+        if ('AppCache' == get_class($kernel)) {
+            $kernel = $kernel->getKernel();
+        }
+
+        $service = $kernel->getContainer()->get('slug.helper');
+        $this->slug = $service->modifySlug($slug);
+
         return $this;
     }
+
 
     /**
      * Get slug
@@ -703,4 +721,69 @@ class Ad
     {
         return $this->product;
     }
+
+    /**
+     * Set adType
+     *
+     * @param integer $adType
+     * @return Ad
+     */
+    public function setAdType($adType)
+    {
+        $this->adType = $adType;
+    
+        return $this;
+    }
+
+    /**
+     * Get adType
+     *
+     * @return integer 
+     */
+    public function getAdType()
+    {
+        return $this->adType;
+    }
+
+    /**
+     * Set productType
+     *
+     * @param integer $productType
+     * @return Ad
+     */
+    public function setProductType($productType)
+    {
+        $this->productType = $productType;
+    
+        return $this;
+    }
+
+    /**
+     * Get productType
+     *
+     * @return integer 
+     */
+    public function getProductType()
+    {
+        return $this->productType;
+    }
+
+
+    /**
+     * Now we tell doctrine that before we persist or update we call the updatedTimestamps() function.
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+        $this->setUpdatedAt(new \DateTime(date('Y-m-d H:i:s')));
+
+        if($this->getCreatedAt() == null)
+        {
+            $this->setCreatedAt(new \DateTime(date('Y-m-d H:i:s')));
+        }
+    }
+
+
 }

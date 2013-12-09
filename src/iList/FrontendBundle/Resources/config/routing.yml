@@ -1,12 +1,6 @@
-
-
-
-
 iListFrontendBundle_anuncio:
         resource: "@iListFrontendBundle/Resources/config/routing/ad.yml"
         prefix:   /anuncio
-
-
 
 subdomain_search:
     path:     /{category_name}/{subcategory_name}
@@ -15,11 +9,16 @@ subdomain_search:
     requirements:
         domain: "%domain%"
 
-i_list_frontend_homepage:
+subdomain_vi:
+    path:     /{city}/{category_name}/{slug}
+    host:     "{state}.{domain}"
+    defaults: { _controller: iListFrontendBundle:Ad:viewAd }
+    requirements:
+        domain: "%domain%"
+
+home:
     path:  /
     defaults: { _controller: iListFrontendBundle:Default:index }
-
-
 
 
 brasil_search:

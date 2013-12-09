@@ -3,7 +3,7 @@
 namespace iList\BackendBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Ad
@@ -188,6 +188,15 @@ class Ad
      */
     private $slug;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AdImage", mappedBy="ads", cascade={"ALL"})
+     */
+    protected $ad_images;
+
+    public function __construct()
+    {
+        $this->ad_images = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -777,4 +786,40 @@ class Ad
     }
 
 
+
+    /**
+     * Add ad_images
+     *
+     * @param \iList\BackendBundle\Entity\AdImage $adImages
+     * @return Ad
+     */
+    public function addAdImage(\iList\BackendBundle\Entity\AdImage $adImages)
+    {
+        $this->ad_images[] = $adImages;
+
+        $adImages->setAd($this);
+        //var_dump($adImages);exit;
+    
+        return $this;
+    }
+
+    /**
+     * Remove ad_images
+     *
+     * @param \iList\BackendBundle\Entity\AdImage $adImages
+     */
+    public function removeAdImage(\iList\BackendBundle\Entity\AdImage $adImages)
+    {
+        $this->ad_images->removeElement($adImages);
+    }
+
+    /**
+     * Get ad_images
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAdImages()
+    {
+        return $this->ad_images;
+    }
 }

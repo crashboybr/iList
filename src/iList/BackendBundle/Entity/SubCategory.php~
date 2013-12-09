@@ -50,7 +50,7 @@ class SubCategory
 
 
     /**
-     * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="subcategory")
      */
     protected $products;
 

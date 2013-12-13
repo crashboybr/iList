@@ -9,7 +9,89 @@
 {% endblock %}
 
 {% block body %}
+<script type="text/javascript">
+    
 
+    function changeZipcode()
+    {
+        //alert($("#ilist_frontendbundle_ad_zipcode").val());
+        
+
+        var url = 'http://cep.correiocontrol.com.br/' + $("#ilist_frontendbundle_ad_zipcode").val() + '.json';
+
+        var jqxhr = $.getJSON( url, {
+    		format: "json"
+  		})
+	    .done(function( data ) {
+	    	
+			$.each( data, function( key, item ) {
+		        
+		        switch(key)
+				{
+					case "uf":
+					  $('#ilist_frontendbundle_ad_state').find('option[value=' + item+ ']').attr('selected',true);
+					  break;
+					case "localidade":
+						$('#ilist_frontendbundle_ad_city').val(item);
+						break;
+					case "logradouro":
+						$('#ilist_frontendbundle_ad_street').val(item);
+						break;
+					case "bairro":
+						$('#ilist_frontendbundle_ad_neighbourhood').val(item);
+						break;		
+				}
+		    });
+	    });
+    }
+    
+$(document).ready(function()
+{
+	
+
+	$('#ilist_frontendbundle_ad_category').change( function() {
+		//alert('aa');
+    $.ajax({
+        type: "GET",
+        data: "data=" + $(this).val(),
+        url:"{{ path('find_subcategory_by_category_id') }}",
+        success: function(msg){
+            if (msg != ''){
+               	$('#ilist_frontendbundle_ad_subcategory').html(msg);
+               	$('#div_models').show();
+               }
+               else
+               {
+                   $('#div_models').hide();
+               }
+           }
+       });
+  });
+
+
+
+	$('#ilist_frontendbundle_ad_subcategory').change( function() {
+		//alert('aa');
+    $.ajax({
+        type: "GET",
+        data: "data=" + $(this).val(),
+        url:"{{ path('find_product_by_subcategory_id') }}",
+        success: function(msg){
+            if (msg != ''){
+               	$('#ilist_frontendbundle_ad_product').html(msg);
+               	$('#div_product').show();
+               }
+               else
+               {
+                   $('#div_product').hide();
+               }
+           }
+       });
+  });
+
+});
+
+</script>
 
            		<div class="content-ad">
                 	<div class="titleMenu">
@@ -63,7 +145,7 @@
 							</div>
 						</div>
 
-						<div class="cont" id="">
+						<div class="cont" id="div_models" style='display:none;'>
 	                		<div class="cont-left">
 	                        	{{ form_label(form.subcategory,'SubCategoria', { attr: { 'class': 'item_desc' } }) }}
 	                        </div>
@@ -72,10 +154,14 @@
 									{{ form_errors(form.subcategory) }}
 									{{ form_widget(form.subcategory) }}
 								</div>
+								<div style="text-align: center; width: 40%; margin-top: 10px; display:none;">
+									<img src="{{ asset('images/loading.gif') }}" />
+								</div>
+
 							</div>
 						</div>
 
-						<div class="cont" id="">
+						<div class="cont" id="div_product" style='display:none;'>
 	                		<div class="cont-left">
 	                        	{{ form_label(form.product,'Produto', { attr: { 'class': 'item_desc' } }) }}
 	                        </div>
@@ -149,6 +235,19 @@
 
 						<div class="cont" id="">
 	                		<div class="cont-left">
+	                        	{{ form_label(form.zipcode,'CEP', { attr: { 'class': 'item_desc' } }) }}
+	                        </div>
+						     <div class="cont-right">
+						     	<div class="estados">
+									{{ form_errors(form.zipcode) }}
+									{{ form_widget(form.zipcode) }}
+								</div>
+							</div>
+						</div>
+
+
+						<div class="cont" id="">
+	                		<div class="cont-left">
 	                        	{{ form_label(form.state,'Estado', { attr: { 'class': 'item_desc' } }) }}
 	                        </div>
 						     <div class="cont-right">
@@ -171,22 +270,21 @@
 							</div>
 						</div>
 
-
 						<div class="cont" id="">
 	                		<div class="cont-left">
-	                        	{{ form_label(form.zipcode,'CEP', { attr: { 'class': 'item_desc' } }) }}
+	                        	{{ form_label(form.neighbourhood,'Bairro', { attr: { 'class': 'item_desc' } }) }}
 	                        </div>
 						     <div class="cont-right">
 						     	<div class="estados">
-									{{ form_errors(form.zipcode) }}
-									{{ form_widget(form.zipcode) }}
+									{{ form_errors(form.neighbourhood) }}
+									{{ form_widget(form.neighbourhood) }}
 								</div>
 							</div>
 						</div>
-
+						
 						<div class="cont" id="">
 	                		<div class="cont-left">
-	                        	{{ form_label(form.street,'Rua', { attr: { 'class': 'item_desc' } }) }}
+	                        	{{ form_label(form.street,'Logradouro', { attr: { 'class': 'item_desc' } }) }}
 	                        </div>
 						     <div class="cont-right">
 						     	<div class="estados">

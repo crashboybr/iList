@@ -11,6 +11,7 @@
 
 {% block body %}
 
+
 	<div class="content-adview">
 		<h3>Ipod Suffle em ótimo estado</h3>
 		<div class="product-image">
@@ -19,9 +20,9 @@
 			<div id="banner-fade">
 				<!-- start Basic Jquery Slider -->
 				<ul class="bjqs">
-				<li><img src="/images/banner01.jpg" title=""></li>
-				<li><img src="/images/banner02.jpg" title=""></li>
-				<li><img src="/images/banner03.jpg" title=""></li>
+                {% for img in ad.adImages %}
+				    <li><img src="{{ asset(img.pic) }} " title=""></li>
+				{% endfor %}
 				</ul>
 				<!-- end Basic jQuery Slider -->
 
@@ -46,7 +47,7 @@
     <div class="product-info">
     	<div class="product-content">
         	<p class="text">
-            	orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            	{{ ad.content }}
             </p>
         </div>
     	<div class="product-detail">
@@ -57,7 +58,7 @@
                     	<p class="text">Produto</p>
                     </div>
                 	<div class="detail-rigth">
-                    	<p class="text">Ipod Sufle 2 geração</p>
+                    	<p class="text">{{ ad.product }}</p>
                     </div>
                 </li>
                 <li class="list-detail">
@@ -73,7 +74,7 @@
                     	<p class="text">Condição</p>
                     </div>
                 	<div class="detail-rigth">
-                    	<p class="text"><strong>Usado</strong></p>
+                    	<p class="text"><strong>{{ ad.productType }}</strong></p>
                     </div>
                 </li>
             </ul>

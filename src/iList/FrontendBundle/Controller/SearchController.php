@@ -9,6 +9,8 @@ use FOS\UserBundle\Controller\RegistrationController as BaseController;
 use Symfony\Component\HttpFoundation\Request;
 use iList\BackendBundle\Entity\Product;
 
+use iList\BackendBundle\Classes\Tools;
+
 class SearchController extends Controller
 {
     public function indexAction($category_name, $state, $subcategory_name)
@@ -59,5 +61,12 @@ class SearchController extends Controller
         return $this->render('iListFrontendBundle:Search:index.html.twig', 
         	array('ads' => $ads, 'state' => $state, 'domain' => $domain)
         	);
+    }
+
+    public function searchZipcodeAction($zipcode)
+    {
+        $html = new Tools();
+        //Tools::slugify($html);
+        var_dump($zipcode);exit;
     }
 }

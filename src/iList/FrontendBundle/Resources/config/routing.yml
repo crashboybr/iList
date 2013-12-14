@@ -2,6 +2,22 @@ iListFrontendBundle_anuncio:
         resource: "@iListFrontendBundle/Resources/config/routing/ad.yml"
         prefix:   /anuncio
 
+find_subcategory_by_category_id:
+    path:  /buscaSubCategoria
+    defaults: { _controller: iListFrontendBundle:Ad:getByCategoryId }
+
+find_product_by_subcategory_id:
+    path:  /buscaProduto
+    defaults: { _controller: iListFrontendBundle:Ad:getBySubCategoryId }
+
+ad_msg_send:
+    path:  /enviar
+    defaults: { _controller: iListFrontendBundle:Ad:sendAdMsg }
+
+find_address_by_zipcode:
+    path:  /buscaCep/{zipcode}
+    defaults: { _controller: iListFrontendBundle:Search:searchZipcode }
+
 subdomain_search:
     path:     /{category_name}/{subcategory_name}
     host:     "{state}.{domain}"
@@ -24,3 +40,5 @@ home:
 brasil_search:
     path:  /{category_name}/{subcategory_name}
     defaults: { _controller: iListFrontendBundle:Search:index, category_name: '', state: 'brasil', subcategory_name: '' }
+
+

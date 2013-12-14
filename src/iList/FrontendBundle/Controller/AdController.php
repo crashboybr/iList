@@ -6,8 +6,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use iList\BackendBundle\Entity\Ad;
+use iList\BackendBundle\Entity\AdMsg;
 use iList\BackendBundle\Entity\AdImage;
 use iList\BackendBundle\Form\AdType;
+use iList\BackendBundle\Form\AdMsgType;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Ad controller.
@@ -32,19 +35,142 @@ class AdController extends Controller
     }
 
 
-    public function viewAdAction($city, $category_name, $slug)
+    public function viewAdAction($city, $category_name, $slug, $state)
     {
 
-        $em = $this->getDoctrine()->getManager();
+
+        $em = $this->getDoctrine()->getManager();   
+
         $category = $em->getRepository('iListBackendBundle:Category')
             ->findOneBy(array('name' => $category_name));
 
         $ad = $em->getRepository('iListBackendBundle:Ad')
-            ->findOneBy(array('category' => $category, 'city' => $city, 'slug' => $slug));
-        //echo "<pre>";
-        //\Doctrine\Common\Util\Debug::dump($ad);exit;
+            ->findOneBy(array('category' => $category, 'city' => $city, 'slug' => $slug, 'state' => $state));
+        
+        if (!$ad)
+            throw $this->createNotFoundException('Oops! Não encontramos este anúncio! :(');
 
-        return $this->render('iListFrontendBundle:Ad:viewAd.html.twig', array('ad' => $ad));
+        $entity = new AdMsg();
+        $entity->setAd($ad);
+        $form   = $this->createAdMsgForm($entity);
+
+        //echo "<pre>";
+        //\Doctrine\Common\Util\Debug::dump($this->getUser());exit;
+    
+
+        return $this->render('iListFrontendBundle:Ad:viewAd.html.twig', array(
+            'ad' => $ad, 
+            'form' => $form->createView()
+            ));
+    }
+
+
+
+    public function getByCategoryIdAction()
+    {
+        $this->em = $this->get('doctrine')->getEntityManager();
+        $this->repository = $this->em->getRepository('iListBackendBundle:SubCategory');
+     
+        $categoryId = $this->get('request')->query->get('data');
+
+        
+     
+        $subcategories = $this->repository->findByCategory($categoryId);
+        //echo "<pre>";
+        //\Doctrine\Common\Util\Debug::dump($subcategories);exit;
+     
+        $html = '';
+        foreach($subcategories as $subcategory)
+        {
+            $html = $html . sprintf("<option value=\"%d\">%s</option>",$subcategory->getId(), $subcategory->getName());
+        }
+     
+        return new Response($html);
+    }
+
+
+    public function getBySubCategoryIdAction()
+    {
+        $this->em = $this->get('doctrine')->getEntityManager();
+        $this->repository = $this->em->getRepository('iListBackendBundle:Product');
+     
+        $subcategoryId = $this->get('request')->query->get('data');
+
+        
+     
+        $products = $this->repository->findByCategory($subcategoryId);
+        //echo "<pre>";
+        //\Doctrine\Common\Util\Debug::dump($products);exit;
+     
+        $html = '';
+        foreach($products as $product)
+        {
+            $html = $html . sprintf("<option value=\"%d\">%s</option>",$product->getId(), $product->getName());
+        }
+     
+        return new Response($html);
+    }
+
+    /**
+     * Creates a new Ad entity.
+     *
+     */
+  
+
+    public function sendAdMsgAction(Request $request)
+    {
+
+        $entity = new AdMsg();
+        
+        $form = $this->createAdMsgForm($entity);
+        
+        $form->handleRequest($request);
+
+        
+        //var_dump($form->isValid());exit;
+
+        $ad = $form->getData()->getAd();
+        //echo "<pre>";
+        //\Doctrine\Common\Util\Debug::dump($form->getData()->getAd());exit;
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            
+            $user = $this->getUser();
+
+            if ($user)
+                $entity->setFromUser($user);
+            
+            $entity->setTitle("Nova Mensagem - " . $ad->getTitle());
+            $entity->setStatus(-1); //nao lido
+            //echo "<pre>";
+            //\Doctrine\Common\Util\Debug::dump($entity);exit;
+            $em->persist($entity);
+            $em->flush($entity);
+
+            $this->get('session')->getFlashBag()->add(
+            'notice',
+            'Mensagem enviada com sucesso!');
+
+            return $this->redirect($this->generateUrl('subdomain_vi', 
+                array(
+                    'city' => $ad->getCity(),
+                    'category_name' => strtolower($ad->getCategory()),
+                    'slug' => $ad->getSlug(),
+                    'state' => $ad->getState(),
+                    'domain' => 'ilist'
+                    
+                    )
+                ));
+            
+
+
+
+        }
+ 
+        return $this->render('iListFrontendBundle:Ad:viewAd.html.twig', array(
+            'ad' => $ad, 
+            'form' => $form->createView()
+            ));
     }
 
     /**
@@ -54,7 +180,9 @@ class AdController extends Controller
     public function createAction(Request $request)
     {
         $entity = new Ad();
+        
         $form = $this->createCreateForm($entity);
+        
         $form->handleRequest($request);
 
 
@@ -148,6 +276,19 @@ class AdController extends Controller
         return $form;
     }
 
+    private function createAdMsgForm(AdMsg $entity)
+    {
+
+        $form = $this->createForm(new AdMsgType(), $entity, array(
+            'action' => $this->generateUrl('ad_msg_send'),
+            'method' => 'POST',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Enviar Email'));
+
+        return $form;
+    }
+
     /**
      * Displays a form to create a new Ad entity.
      *
@@ -164,6 +305,24 @@ class AdController extends Controller
             'form'   => $form->createView(),
         ));
     }
+
+    /**
+     * Displays a form to create a new Ad entity.
+     *
+     */
+    public function newWizardAction()
+    {
+        $entity = new Ad();
+        $form   = $this->createCreateForm($entity);
+        //echo "<pre>";
+        //\Doctrine\Common\Util\Debug::dump($form);exit;
+
+        return $this->render('iListFrontendBundle:Ad:new_wizard.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        ));
+    }
+
 
     /**
      * Finds and displays a Ad entity.

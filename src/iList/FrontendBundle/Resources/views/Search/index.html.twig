@@ -102,9 +102,9 @@
                             <div class="photo">
                                 <img src="/images/ipod-suffle.jpg" width="300" height="200" />
                             </div>
-                            <p class="title">{{ ad.title }}</p>
+                            <a class="title" href="{{ path('subdomain_vi', { 'state': ad.state, 'domain': domain, 'city': ad.city, 'category_name': ad.category|lower, 'slug': ad.slug }) }}">{{ ad.title }}</a>
                             <p class="price">{{ ad.price|price }}</p>
-                            <p class="detail">{% if (ad.productType == 1) %}Novo{% else %}Usado{% endif %} | {{ ad.city }}-{{ ad.state }}</p>
+                            <p class="detail">{{ ad.productType }} | {{ ad.city }}-{{ ad.state }}</p>
                         </div>
                     {% endfor %}
                     

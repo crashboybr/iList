@@ -39,16 +39,37 @@ class User extends BaseUser
     protected $name;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     *     pattern="/^\(\d{2}\)\s{0,1}\d{4,5}-\d{4}$/",
+     *     match=true,
+     *     message="Telefone Inválido. Formato: (99) 9999-9999"
+     * )
+     * @Assert\Length(
+     *     min=3,
+     *     max="255",
+     *     minMessage="Nome muito pequeno",
+     *     maxMessage="Nome muito longo",
+     *     groups={"Registration", "Profile"}
+     * )
+     */
+    protected $phone;
+
+    /**
      * @ORM\OneToMany(targetEntity="Ad", mappedBy="user")
      */
     protected $ads;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AdMsg", mappedBy="fromUser")
+     */
+    protected $admsgs;
 
     public function __construct()
     {
         parent::__construct();
 
         $this->ads = new ArrayCollection();
+        $this->admsgs = new ArrayCollection();
     }
 
     /**
@@ -119,5 +140,61 @@ class User extends BaseUser
     public function getAds()
     {
         return $this->ads;
+    }
+
+    /**
+     * Add admsgs
+     *
+     * @param \iList\BackendBundle\Entity\AdMsg $admsgs
+     * @return User
+     */
+    public function addAdmsg(\iList\BackendBundle\Entity\AdMsg $admsgs)
+    {
+        $this->admsgs[] = $admsgs;
+    
+        return $this;
+    }
+
+    /**
+     * Remove admsgs
+     *
+     * @param \iList\BackendBundle\Entity\AdMsg $admsgs
+     */
+    public function removeAdmsg(\iList\BackendBundle\Entity\AdMsg $admsgs)
+    {
+        $this->admsgs->removeElement($admsgs);
+    }
+
+    /**
+     * Get admsgs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAdmsgs()
+    {
+        return $this->admsgs;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     * @return User
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+    
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string 
+     */
+    public function getPhone()
+    {
+        return $this->phone;
     }
 }

@@ -10,6 +10,10 @@ anuncio_new:
     pattern:  /novo
     defaults: { _controller: "iListFrontendBundle:Ad:new" }
 
+anuncio_new_wizard:
+    pattern:  /wizard
+    defaults: { _controller: "iListFrontendBundle:Ad:newWizard" }
+
 anuncio_create:
     pattern:  /create
     defaults: { _controller: "iListFrontendBundle:Ad:create" }

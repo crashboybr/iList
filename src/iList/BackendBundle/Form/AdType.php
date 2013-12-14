@@ -6,16 +6,22 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+
 class AdType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
+
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
    
-
+        $states[''] = 'Digite seu CEP';
         $states['AC'] = 'AC - Acre';
         $states['AL'] = 'AL - Alagoas';
         $states['AM'] = 'AM - Amazonas';
@@ -44,6 +50,7 @@ class AdType extends AbstractType
         $states['SP'] = 'SP - São Paulo';
         $states['TO'] = 'TO - Tocantins';
         
+        $factory = $builder->getFormFactory();
 
         $builder
             ->add('adType', 'choice', array(
@@ -60,10 +67,20 @@ class AdType extends AbstractType
             ->add('price')
             ->add('state', 'choice', array(
                 'choices' => $states,
+                'attr' => array('disabled' => 'true')
             ))
-            ->add('city')
-            ->add('zipcode')
-            ->add('street')
+            ->add('city','text', array(
+                'attr' => array('disabled' => 'true')
+                ))
+            ->add('zipcode','text', array(
+                'attr' => array('onchange' => 'changeZipcode()'),
+                ))
+            ->add('neighbourhood','text', array(
+                'attr' => array('disabled' => 'true')
+                ))
+            ->add('street','text', array(
+                'attr' => array('disabled' => 'true')
+                ))
             ->add('complement')
             ->add('productType', 'choice', array(
                 'choices' => array('1' => 'Novo', '2' => 'Usado'),
@@ -74,11 +91,9 @@ class AdType extends AbstractType
             //    'data_class' => null,
             //))
             ->add('ad_images', 'collection', array('type' => new AdImageType()))
-            
-            
-            
-            
         ;
+
+
 
 
     }

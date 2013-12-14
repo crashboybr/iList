@@ -12,6 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * AdImage
  *
  * @ORM\Table(name="ad_images")
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Entity
  */
 class AdImage
@@ -42,7 +43,7 @@ class AdImage
     /**
      * @var integer
      *
-     * @ORM\Column(name="position", type="integer")
+     * @ORM\Column(name="position", type="integer", nullable=true)
      */
     private $position;
 
@@ -68,7 +69,7 @@ class AdImage
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Ad", inversedBy="ad_images")
+     * @ORM\ManyToOne(targetEntity="Ad", inversedBy="ad_images", cascade={"persist"})
      * @ORM\JoinColumn(name="ad_id", referencedColumnName="id")
      */
     protected $ads;
@@ -91,6 +92,7 @@ class AdImage
     {
         $this->file = $file;
 
+        
         // check if we have an old image path
         if (isset($this->pic)) {
             // store the old name to delete after the update
@@ -129,7 +131,7 @@ class AdImage
         // be automatically thrown by move(). This will properly prevent
         // the entity from being persisted to the database on error
         $this->getFile()->move($this->getUploadRootDir(), $this->pic);
-
+     
         // check if we have an old image
         if (isset($this->temp)) {
             // delete the old image
@@ -339,5 +341,43 @@ class AdImage
     public function getAd()
     {
         return $this->ad;
+    }
+
+    /**
+     * Set ads
+     *
+     * @param \iList\BackendBundle\Entity\Ad $ads
+     * @return AdImage
+     */
+    public function setAds(\iList\BackendBundle\Entity\Ad $ads = null)
+    {
+        $this->ads = $ads;
+    
+        return $this;
+    }
+
+    /**
+     * Get ads
+     *
+     * @return \iList\BackendBundle\Entity\Ad 
+     */
+    public function getAds()
+    {
+        return $this->ads;
+    }
+
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+        $this->setUpdatedAt(new \DateTime(date('Y-m-d H:i:s')));
+
+        if($this->getCreatedAt() == null)
+        {
+            $this->setCreatedAt(new \DateTime(date('Y-m-d H:i:s')));
+        }
     }
 }

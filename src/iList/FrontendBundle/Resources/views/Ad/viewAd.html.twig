@@ -109,23 +109,51 @@
 
 <div class="content-right">
 	<h3>Falar com o anunciante</h3>
-    <form accept-charset="UTF-8" action="/pessoal/cadastre-se/basico" class="new_entity_factories_free_entity_factory" id="signupForm" method="post">
-    <input name="utf8" type="hidden" value="✓">
-    <input name="authenticity_token" type="hidden" value="">
-      <div class="inputLabel">
-        <input class="rounder" placeholder="Nome" id="#" name="" size="30" type="text">
-      </div>
-      <div class="inputLabel">
-        <input class="rounder" placeholder="Email" id="#" name="" size="30" type="email">
-      </div>
-      <div class="inputLabel">
-        <input class="rounder" placeholder="Telefone" id="#" name="" size="30" type="email">
-      </div>
-      <div class="inputLabel">
-        <textarea class="rounder" rows="4" cols="150"></textarea>
-      </div>
-      <input class="ButtonRegister" name="commit" type="submit" value="Enviar email">
-    </form>
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="flash-notice">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    {{ form_start(form, { attr: { 'novalidate': 'novalidate', 'class': 'new_entity_factories_free_entity_factory'}}) }}
+        {% set name = null %}
+        {% set email = null %}
+        {% set phone = null %}
+        {% if app.user %}
+            {% set name = app.user.name %}
+            {% set email = app.user.email %}
+            {% set phone = app.user.phone %}
+        {% endif %}
+        <div class="inputLabel">
+            {{ form_errors(form.name) }}
+            {% if (name) %}
+                {{ form_widget(form.name, { attr: { 'class': 'rounder', 'placeholder': form.name.vars.label, 'value': name }}) }}
+            {% else %}
+                {{ form_widget(form.name, { attr: { 'class': 'rounder', 'placeholder': form.name.vars.label }}) }}
+            {% endif %}
+        </div>
+        <div class="inputLabel">
+            {{ form_errors(form.email) }}
+            {% if (email) %}
+                {{ form_widget(form.email, { attr: { 'class': 'rounder', 'placeholder': form.email.vars.label, 'value': email }}) }}
+            {% else %}
+                {{ form_widget(form.email, { attr: { 'class': 'rounder', 'placeholder': form.email.vars.label }}) }}
+            {% endif %}
+        </div>
+        <div class="inputLabel">
+            {{ form_errors(form.phone) }}
+            {% if (phone) %}
+                {{ form_widget(form.phone, { attr: { 'class': 'rounder', 'placeholder': form.phone.vars.label, 'value': phone }}) }}
+            {% else %}
+                {{ form_widget(form.phone, { attr: { 'class': 'rounder', 'placeholder': form.phone.vars.label }}) }}
+            {% endif %}
+        </div>
+        <div class="inputLabel">
+            {{ form_errors(form.content) }}
+            {{ form_widget(form.content, { attr: { 'class': 'rounder', 'placeholder': form.content.vars.label, 'rows': 4, 'cols': 150 }}) }}
+        </div>
+      {{ form_widget(form.submit, { attr: { 'class': 'ButtonRegister', 'style': 'margin-top:5px;'}}) }}
+
+    {{ form_end(form) }}
     
 <div class="ad-banner-sidebar">
 	  <img src="/images/guga-ad.jpg" width="300" height="250" /></div>                 

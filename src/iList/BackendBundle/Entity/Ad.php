@@ -141,6 +141,13 @@ class Ad
     /**
      * @var string
      *
+     * @ORM\Column(name="neighbourhood", type="string", length=255)
+     */
+    private $neighbourhood;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="street", type="string", length=255)
      */
     private $street;
@@ -193,9 +200,15 @@ class Ad
      */
     protected $ad_images;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AdMsg", mappedBy="ad")
+     */
+    protected $admsgs;
+
     public function __construct()
     {
         $this->ad_images = new ArrayCollection();
+        $this->admsgs = new ArrayCollection();
     }
 
     /**
@@ -765,7 +778,9 @@ class Ad
      */
     public function getProductType()
     {
-        return $this->productType;
+        if ($this->productType == 1) return "Novo"; 
+        else return "Usado";
+        //return $this->productType;
     }
 
 
@@ -821,5 +836,61 @@ class Ad
     public function getAdImages()
     {
         return $this->ad_images;
+    }
+
+    /**
+     * Set neighbourhood
+     *
+     * @param string $neighbourhood
+     * @return Ad
+     */
+    public function setNeighbourhood($neighbourhood)
+    {
+        $this->neighbourhood = $neighbourhood;
+    
+        return $this;
+    }
+
+    /**
+     * Get neighbourhood
+     *
+     * @return string 
+     */
+    public function getNeighbourhood()
+    {
+        return $this->neighbourhood;
+    }
+
+    /**
+     * Add admsgs
+     *
+     * @param \iList\BackendBundle\Entity\AdMsg $admsgs
+     * @return Ad
+     */
+    public function addAdmsg(\iList\BackendBundle\Entity\AdMsg $admsgs)
+    {
+        $this->admsgs[] = $admsgs;
+    
+        return $this;
+    }
+
+    /**
+     * Remove admsgs
+     *
+     * @param \iList\BackendBundle\Entity\AdMsg $admsgs
+     */
+    public function removeAdmsg(\iList\BackendBundle\Entity\AdMsg $admsgs)
+    {
+        $this->admsgs->removeElement($admsgs);
+    }
+
+    /**
+     * Get admsgs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAdmsgs()
+    {
+        return $this->admsgs;
     }
 }

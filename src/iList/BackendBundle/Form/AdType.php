@@ -60,26 +60,34 @@ class AdType extends AbstractType
             ->add('category')
             ->add('subcategory')
             ->add('product')
-            ->add('size')
-            ->add('color')
+            ->add('size' , 'entity' , array(
+                      'class'    => 'iListBackendBundle:Size' ,
+                      'property' => 'size' ,
+                      'expanded' => false ,
+                      'multiple' => false , ))
+            ->add('color' , 'entity' , array(
+                      'class'    => 'iListBackendBundle:Color' ,
+                      'property' => 'name' ,
+                      'expanded' => false ,
+                      'multiple' => false , ))
             ->add('title')
             ->add('content')
             ->add('price')
             ->add('state', 'choice', array(
                 'choices' => $states,
-                'attr' => array('disabled' => 'true')
+                'attr' => array('readonly' => 'readonly')
             ))
             ->add('city','text', array(
-                'attr' => array('disabled' => 'true')
+                'attr' => array('readonly' => 'readonly')
                 ))
             ->add('zipcode','text', array(
                 'attr' => array('onchange' => 'changeZipcode()'),
                 ))
             ->add('neighbourhood','text', array(
-                'attr' => array('disabled' => 'true')
+                'attr' => array('readonly' => 'readonly')
                 ))
             ->add('street','text', array(
-                'attr' => array('disabled' => 'true')
+                'attr' => array('readonly' => 'readonly')
                 ))
             ->add('complement')
             ->add('productType', 'choice', array(

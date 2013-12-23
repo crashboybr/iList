@@ -3,7 +3,7 @@
 namespace iList\BackendBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Product
  *
@@ -28,26 +28,8 @@ class Product
      */
     private $name;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="gen", type="string", length=255)
-     */
-    private $gen;
+ 
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="size", type="string", length=30)
-     */
-    private $size;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="color", type="string", length=255)
-     */
-    private $color;
 
     /**
      * @var boolean
@@ -87,11 +69,25 @@ class Product
      */
     protected $ads;
 
-    public function __construct()
-    {
-        $this->ads = new ArrayCollection();
-    }
+    /**
+     * @ORM\ManyToMany(targetEntity="Size", inversedBy="sizes")
+     * @ORM\JoinTable(name="product_sizes")
+     */
+    private $sizes;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Color", inversedBy="colors")
+     * @ORM\JoinTable(name="product_colors")
+     */
+    private $colors;
+
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Generation", inversedBy="generations")
+     * @ORM\JoinTable(name="product_generations")
+     */
+    private $generations;
+  
 
     /**
      * Get id
@@ -346,5 +342,118 @@ class Product
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * Add sizes
+     *
+     * @param \iList\BackendBundle\Entity\Size $sizes
+     * @return Product
+     */
+    public function addSize(\iList\BackendBundle\Entity\Size $sizes)
+    {
+        $this->sizes[] = $sizes;
+    
+        return $this;
+    }
+
+    /**
+     * Remove sizes
+     *
+     * @param \iList\BackendBundle\Entity\Size $sizes
+     */
+    public function removeSize(\iList\BackendBundle\Entity\Size $sizes)
+    {
+        $this->sizes->removeElement($sizes);
+    }
+
+    /**
+     * Get sizes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSizes()
+    {
+        return $this->sizes;
+    }
+    
+    
+
+    /**
+     * Add colors
+     *
+     * @param \iList\BackendBundle\Entity\Color $colors
+     * @return Product
+     */
+    public function addColor(\iList\BackendBundle\Entity\Color $colors)
+    {
+        $this->colors[] = $colors;
+    
+        return $this;
+    }
+
+    /**
+     * Remove colors
+     *
+     * @param \iList\BackendBundle\Entity\Color $colors
+     */
+    public function removeColor(\iList\BackendBundle\Entity\Color $colors)
+    {
+        $this->colors->removeElement($colors);
+    }
+
+    /**
+     * Get colors
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getColors()
+    {
+        return $this->colors;
+    }
+    
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ads = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->sizes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->colors = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->generations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add generations
+     *
+     * @param \iList\BackendBundle\Entity\Generation $generations
+     * @return Product
+     */
+    public function addGeneration(\iList\BackendBundle\Entity\Generation $generations)
+    {
+        $this->generations[] = $generations;
+    
+        return $this;
+    }
+
+    /**
+     * Remove generations
+     *
+     * @param \iList\BackendBundle\Entity\Generation $generations
+     */
+    public function removeGeneration(\iList\BackendBundle\Entity\Generation $generations)
+    {
+        $this->generations->removeElement($generations);
+    }
+
+    /**
+     * Get generations
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getGenerations()
+    {
+        return $this->generations;
     }
 }

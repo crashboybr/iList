@@ -1,0 +1,30 @@
+generation:
+    pattern:  /
+    defaults: { _controller: "iListBackendBundle:Generation:index" }
+
+generation_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "iListBackendBundle:Generation:show" }
+
+generation_new:
+    pattern:  /new
+    defaults: { _controller: "iListBackendBundle:Generation:new" }
+
+generation_create:
+    pattern:  /create
+    defaults: { _controller: "iListBackendBundle:Generation:create" }
+    requirements: { _method: post }
+
+generation_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "iListBackendBundle:Generation:edit" }
+
+generation_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "iListBackendBundle:Generation:update" }
+    requirements: { _method: post|put }
+
+generation_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "iListBackendBundle:Generation:delete" }
+    requirements: { _method: post|delete }

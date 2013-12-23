@@ -16,9 +16,21 @@ class ProductType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('gen')
-            ->add('size')
-            ->add('color')
+            ->add('generations' , 'entity' , array(
+                      'class'    => 'iListBackendBundle:Generation' ,
+                      'property' => 'name' ,
+                      'expanded' => true ,
+                      'multiple' => true , ))
+            ->add('sizes' , 'entity' , array(
+                      'class'    => 'iListBackendBundle:Size' ,
+                      'property' => 'size' ,
+                      'expanded' => true ,
+                      'multiple' => true , ))
+            ->add('colors' , 'entity' , array(
+                      'class'    => 'iListBackendBundle:Color' ,
+                      'property' => 'name' ,
+                      'expanded' => true ,
+                      'multiple' => true , ))
             ->add('isActive')
             ->add('category')
             ->add('subcategory')

@@ -7,7 +7,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * AdMsg
  *
- * @ORM\Table()
+ * @ORM\Table("ad_msgs")
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Entity
  */
 class AdMsg
@@ -31,7 +32,7 @@ class AdMsg
     /**
      * @var string
      * @Assert\NotBlank(
-     *      message = "Este campo não pode ser vazio"
+     *      message = "Digite sua mensagem!"
      *)
      * @Assert\Length(
      *      min = "5",
@@ -46,7 +47,7 @@ class AdMsg
     /**
      * @var string
      * @Assert\NotBlank(
-     *      message = "Este campo não pode ser vazio"
+     *      message = "Digite seu nome!"
      *)
      * @Assert\Length(
      *      min = "2",
@@ -66,7 +67,7 @@ class AdMsg
     /**
      * @var string
      * @Assert\NotBlank(
-     *      message = "Este campo não pode ser vazio"
+     *      message = "Digite seu email!"
      *)
      * @Assert\Email(
      *     message = "O email '{{ value }}' é inválido",
@@ -83,29 +84,35 @@ class AdMsg
      *     match=true,
      *     message="Telefone Inválido. Formato: (99) 9999-9999"
      * )
-     * @ORM\Column(name="phone", type="string", length=255)
+     * @ORM\Column(name="phone", type="string", length=255, nullable=true)
      */
     private $phone;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="from_user_id", type="integer")
+     * @ORM\Column(name="from_user_id", type="integer", nullable=true)
      */
     private $fromUserId;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="admsgs")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="sent_admsgs")
      * @ORM\JoinColumn(name="from_user_id", referencedColumnName="id")
      */
     protected $fromUser;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="to_user", type="integer")
+     * @ORM\Column(name="to_user_id", type="integer", nullable=true)
      */
-    private $toUser;
+    private $toUserId;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="my_admsgs")
+     * @ORM\JoinColumn(name="to_user_id", referencedColumnName="id")
+     */
+    protected $toUser;
 
     /**
      * @var integer
@@ -449,5 +456,44 @@ class AdMsg
     public function getFromUserId()
     {
         return $this->fromUserId;
+    }
+
+    /**
+     * Now we tell doctrine that before we persist or update we call the updatedTimestamps() function.
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+        $this->setUpdatedAt(new \DateTime(date('Y-m-d H:i:s')));
+
+        if($this->getCreatedAt() == null)
+        {
+            $this->setCreatedAt(new \DateTime(date('Y-m-d H:i:s')));
+        }
+    }
+
+    /**
+     * Set toUserId
+     *
+     * @param integer $toUserId
+     * @return AdMsg
+     */
+    public function setToUserId($toUserId)
+    {
+        $this->toUserId = $toUserId;
+    
+        return $this;
+    }
+
+    /**
+     * Get toUserId
+     *
+     * @return integer 
+     */
+    public function getToUserId()
+    {
+        return $this->toUserId;
     }
 }

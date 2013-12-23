@@ -1,0 +1,30 @@
+size:
+    pattern:  /
+    defaults: { _controller: "iListBackendBundle:Size:index" }
+
+size_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "iListBackendBundle:Size:show" }
+
+size_new:
+    pattern:  /new
+    defaults: { _controller: "iListBackendBundle:Size:new" }
+
+size_create:
+    pattern:  /create
+    defaults: { _controller: "iListBackendBundle:Size:create" }
+    requirements: { _method: post }
+
+size_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "iListBackendBundle:Size:edit" }
+
+size_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "iListBackendBundle:Size:update" }
+    requirements: { _method: post|put }
+
+size_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "iListBackendBundle:Size:delete" }
+    requirements: { _method: post|delete }

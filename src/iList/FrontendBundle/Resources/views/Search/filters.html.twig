@@ -1,0 +1,671 @@
+<script>
+function submitFilter()
+{
+    document.getElementById("filters").submit();
+}
+</script>
+<ul class="list">
+<div class="titleMenu">
+    <p>Escolha um Apple</p>
+</div>
+
+    <li class="item iphone ">
+        <a href="{{ path('brasil_search', {'category_name': 'iphone'}) }}" class="btn-product">iPhone</a>
+        <p class="text-bt"></p>
+        {% if (category == 'iphone') %}
+        <li class="filter">
+            {{ form_start(filterForm, { attr: { 'novalidate': 'novalidate' }}) }}
+                <ul class="filter-list">
+                    <p class="title-filter">Estado:</p>
+                    {% for adType in filterForm.adType %}
+
+                        <li class="filter-item">
+                            {{ form_widget(adType, { attr: { 'class': 'filtrosclick selectGenero' }}) }}
+                            <label class="text-filter" for="">{{ adType.vars.label }}</label>
+                        </li>
+                    {% endfor %}
+
+                </ul>
+                <ul class="filter-list">
+                    <p class="title-filter">Capacidade:</p>
+
+                    {% for size in filterForm.size %}
+
+                        <li class="filter-item">
+                            {{ form_widget(size, { attr: { 'class': 'filtrosclick selectGenero' }}) }}
+                            <label class="text-filter" for="">{{ size.vars.label }}G</label>
+                        </li>
+                    {% endfor %}
+
+                </ul>
+
+                <ul class="filter-list">
+                    <p class="title-filter">Modelo:</p>
+
+                    {% for subcategory in filterForm.subcategory %}
+
+                        <li class="filter-item">
+                            {{ form_widget(subcategory, { attr: { 'class': 'filtrosclick selectGenero' }}) }}
+                            <label class="text-filter" for="">{{ subcategory.vars.label }}</label>
+                        </li>
+                    {% endfor %}
+
+                </ul>
+
+                <ul class="filter-list">
+                    <p class="title-filter">Preço:</p>
+                    <li id="pricerange" class="filter-item">
+                        {{ form_widget(filterForm.price_min, { attr: { 'class': 'field-filter' }}) }}
+                        {{ form_widget(filterForm.price_max, { attr: { 'class': 'field-filter' }}) }}
+                        {{ form_widget(filterForm.price_submit, { attr: { 'class': 'search-bt'}}) }}
+                    
+                    </li> 
+                </ul>
+            {{ form_end(filterForm) }}
+        </li>
+        {% endif %}  
+    </li>   
+
+
+    <li class="item ipad">
+        <a href="{{ path('brasil_search', {'category_name': 'ipad' }) }}" class="btn-product">iPad</a>
+        {% if (category == 'ipad') %}
+        <li class="filter">
+            <ul class="filter-list">
+                <p class="title-filter">Estado:</p>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">Novo</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">Usado</label>
+                </li> 
+            </ul>
+            <ul class="filter-list">
+                <p class="title-filter">Ipad:</p>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">iPad 1</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">iPad 2</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">iPad 3rd</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">iPad 3rd</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">iPad Mini</label>
+                </li>
+                
+            </ul>
+            <ul class="filter-list">
+                <p class="title-filter">Capacidade:</p>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">32G</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">64G</label>
+                </li> 
+            </ul>
+            <ul class="filter-list">
+                <p class="title-filter">Preço:</p>
+                <li id="pricerange" class="filter-item">
+                <input class="field-filter" name="ps" id="ps" placeholder="Mín." value="" maxlength="13">
+                <input class="field-filter" name="pe" id="pe" placeholder="Máx." value="" maxlength="13">
+                <input type="submit" class="search-bt" value="ok" id="price_bt" disabled="disabled">
+                </li> 
+            </ul>
+        </li>
+        {% endif %}
+    </li>
+
+    <li class="item ipod">
+        
+        <a href="{{ path('brasil_search', {'category_name': 'ipod' }) }}" class="btn-product">iPod</a>
+        {% if (category == 'ipod') %}
+        <li class="filter">
+            <ul class="filter-list">
+                <select name="ipod" class="estilo-combo">
+                    <option selected="selected" value="" >Selecione o tipo</option>
+                    <option value="1">Classic</option>
+                    <option value="2">Mini</option>
+                    <option value="3">Shuffle</option>
+                    <option value="4">Nano</option>
+                    <option value="5">Touch</option>
+                    <option value="6">Miscellaneous</option>
+                </select>
+            </ul>
+            <ul class="filter-list">
+                <p class="title-filter">Estado:</p>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">Novo</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">Usado</label>
+                </li> 
+            </ul>
+            <ul class="filter-list">
+                <p class="title-filter">Capacidade:</p>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">2G</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">16</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">32G</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">64G</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">160G</label>
+                </li> 
+            </ul>
+            <ul class="filter-list">
+                <p class="title-filter">Classic:</p>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">iPod 1 Geração</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">iPod 2 Geração</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">iPod 3 Geração</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">iPod 4 Geração</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">iPod 5 Geração</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">iPod 6 Geração</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">Outros</label>
+                </li>
+            </ul>
+            <ul class="filter-list">
+                <p class="title-filter">Mini:</p>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">iPod Mini 1 Geração</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">iPod Mini 2 Geração</label>
+                </li>
+            </ul>
+            <ul class="filter-list">
+                <p class="title-filter">Suffle:</p>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">iPod shuffle 1 Geração</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">iPod shuffle 2 Geração</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">iPod shuffle 3 Geração</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">iPod shuffle 4 Geração</label>
+                </li>
+            </ul>
+            <ul class="filter-list">
+                <p class="title-filter">Nano:</p>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">iPod nano 1 Geração</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">iPod nano 2 Geração</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">iPod nano 3 Geração</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">iPod nano 4 Geração</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">iPod nano 5 Geração</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">iPod nano 6 Geração</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">Outros</label>
+                </li>
+            </ul>
+            <ul class="filter-list">
+                <p class="title-filter">Touch:</p>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">iPod touch 1 Geração</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">iPod touch 2 Geração</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">iPod touch 3 Geração</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">iPod touch 4 Geração</label>
+                </li>                            
+            </ul>
+            <ul class="filter-list">
+                <p class="title-filter">Cores:</p>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">Amarelo</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">Cinza</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">Azul</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">Verde</label>
+                </li> 
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">rosa</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">roxo</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">laranja</label>
+                </li>  
+            </ul> 
+            <ul class="filter-list">
+                <p class="title-filter">Preço:</p>
+                <li id="pricerange" class="filter-item">
+                <input class="field-filter" name="ps" id="ps" placeholder="Mín." value="" maxlength="13">
+                <input class="field-filter" name="pe" id="pe" placeholder="Máx." value="" maxlength="13">
+                <input type="submit" class="search-bt" value="ok" id="price_bt" disabled="disabled">
+                </li> 
+            </ul>
+        </li>
+        {% endif %}
+    </li>
+
+    <li class="item macbook">
+        <a href="{{ path('brasil_search', {'category_name': 'macbook' }) }}" class="btn-product">MacBook</a>
+        {% if (category == 'macbook') %}
+        <li class="filter" >
+            <ul class="filter-list">
+                <p class="title-filter">Modelos:</p>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">MacBook Pro</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">MacBook Air</label>
+                </li> 
+            </ul>
+            <ul class="filter-list">
+                <p class="title-filter">Tela:</p>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">11 polegadas</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">13 polegadas</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">15 polegadas</label>
+                </li>
+            </ul>
+            <ul class="filter-list">
+                <p class="title-filter">HD:</p>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">128G</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">256G</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">512G</label>
+                </li> 
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">1T</label>
+                </li>
+            </ul>
+            <ul class="filter-list">
+                <p class="title-filter">Memória:</p>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">4G</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">8G</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">16G</label>
+                </li> 
+            </ul> 
+            <ul class="filter-list">
+                <p class="title-filter">Processador:</p>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">i5</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">i7</label>
+                </li>
+            </ul> 
+            <ul class="filter-list">
+                <p class="title-filter">Preço:</p>
+                <li id="pricerange" class="filter-item">
+                <input class="field-filter" name="ps" id="ps" placeholder="Mín." value="" maxlength="13">
+                <input class="field-filter" name="pe" id="pe" placeholder="Máx." value="" maxlength="13">
+                <input type="submit" class="search-bt" value="ok" id="price_bt" disabled="disabled">
+                </li> 
+            </ul>
+        </li>
+        {% endif %}
+    </li>
+
+    <li class="item imac">
+        <a href="{{ path('brasil_search', {'category_name': 'imac' }) }}" class="btn-product">iMac</a>
+        {% if (category == 'imac') %}
+        <li class="filter">
+            <ul class="filter-list">
+                <select name="iMac" class="estilo-combo">
+                    <option selected="selected" value="" >Selecione o tipo</option>
+                    <option value="1">iMac clássico</option>
+                    <option value="2">Mac Pro</option>
+                    <option value="3">Mac Mini</option>
+                    <option value="4">Modelos antigos</option>
+                </select>
+            </ul>
+            <ul class="filter-list">
+                <p class="title-filter">Estado:</p>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">novo</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">usado</label>
+                </li>
+            </ul>
+            <ul class="filter-list">
+                <p class="title-filter">Tela:</p>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">15 polegadas</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">17 polegadas</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">20 polegadas</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">21,5 polegadas</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">27 polegadas</label>
+                </li>
+            </ul>
+            <ul class="filter-list">
+                <p class="title-filter">HD:</p>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">128G</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">256G</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">512G</label>
+                </li> 
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">1T</label>
+                </li>
+            </ul>
+            <ul class="filter-list">
+                <p class="title-filter">Memória:</p>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">4G</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">8G</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">12G</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">16G</label>
+                </li> 
+            </ul> 
+            <ul class="filter-list">
+                <p class="title-filter">Processador:</p>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">i5</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">i7</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">Dual Core</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">Quad Core</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">6 Core</label>
+                </li>
+            </ul> 
+            <ul class="filter-list">
+                <p class="title-filter">Preço:</p>
+                <li id="pricerange" class="filter-item">
+                <input class="field-filter" name="ps" id="ps" placeholder="Mín." value="" maxlength="13">
+                <input class="field-filter" name="pe" id="pe" placeholder="Máx." value="" maxlength="13">
+                <input type="submit" class="search-bt" value="ok" id="price_bt" disabled="disabled">
+                </li> 
+            </ul>
+        </li>  
+        {% endif %}
+    </li>
+
+    <li class="item others">
+        <a href="{{ path('brasil_search', {'category_name': 'acessorios' }) }}" class="btn-product">Acessórios</a>
+        {% if (category == 'acessorios') %}
+        <li class="filter">
+            <ul class="filter-list">
+                <select name="acessorios" class="estilo-combo">
+                    <option selected="selected" value="" >Escolha um acessório</option>
+                    <option value="1">Apple TV</option>
+                    <option value="2">Apple Modem</option>
+                    <option value="3">Carregadores</option>
+                    <option value="3">Cabos</option>
+                    <option value="4">Fone de ouvido</option>
+                    <option value="4">Impressoras</option>
+                    <option value="5">Memórias</option>
+                    <option value="6">Mouses</option>
+                    <option value="7">Servidores</option>
+                    <option value="8">Serviços</option>
+                    <option value="8">Softwares</option>
+                    <option value="8">Teclado</option>
+                    
+                </select>
+            </ul>
+            <ul class="filter-list">
+                <p class="title-filter">Estado:</p>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">novo</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">usado</label>
+                </li>
+            </ul>
+            <ul class="filter-list">
+                <p class="title-filter">Tela:</p>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">15 polegadas</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">17 polegadas</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">20 polegadas</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">21,5 polegadas</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">27 polegadas</label>
+                </li>
+            </ul>
+            <ul class="filter-list">
+                <p class="title-filter">HD:</p>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">128G</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">256G</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">512G</label>
+                </li> 
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">1T</label>
+                </li>
+            </ul>
+            <ul class="filter-list">
+                <p class="title-filter">Memória:</p>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">4G</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">8G</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">12G</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">16G</label>
+                </li> 
+            </ul> 
+            <ul class="filter-list">
+                <p class="title-filter">Processador:</p>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">i5</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">i7</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">Dual Core</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">Quad Core</label>
+                </li>
+                <li class="filter-item">
+                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
+                    <label class="text-filter" for="">6 Core</label>
+                </li>
+            </ul> 
+            <ul class="filter-list">
+                <p class="title-filter">Preço:</p>
+                <li id="pricerange" class="filter-item">
+                <input class="field-filter" name="ps" id="ps" placeholder="Mín." value="" maxlength="13">
+                <input class="field-filter" name="pe" id="pe" placeholder="Máx." value="" maxlength="13">
+                <input type="submit" class="search-bt" value="ok" id="price_bt" disabled="disabled">
+                </li> 
+            </ul>
+        </li>
+        {% endif %}
+    </li>
+</ul>

@@ -1,0 +1,11 @@
+account_home:
+    pattern:  /
+    defaults: { _controller: "iListFrontendBundle:Account:index" }
+
+
+account_2:
+    pattern:  /{id}/update
+    defaults: { _controller: "iListFrontendBundle:Ad:update" }
+    requirements: { _method: post|put }
+
+

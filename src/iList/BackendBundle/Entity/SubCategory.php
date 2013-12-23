@@ -59,11 +59,7 @@ class SubCategory
      */
     protected $ads;
 
-    public function __construct()
-    {
-        $this->products = new ArrayCollection();
-        $this->ads = new ArrayCollection();
-    }
+
 
 
 
@@ -239,4 +235,13 @@ class SubCategory
     {
         return $this->ads;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->ads = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
 }

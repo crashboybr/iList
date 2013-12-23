@@ -49,16 +49,73 @@ border: none;color: #FFF;cursor: pointer;display: inline-block;font-size: 15px;f
 #wrapper .container .content .right-menu .list .item.others{background-image: url(/images/sprite-listing.png);background-position: 10px -202px;}
 
 
+
+
+
+
+
+
+
 /* Content-listing */
-#wrapper .container .content .listing{float:left;width:710px;auto;margin:5px 0 0 20px;}
-#wrapper .container .content .listing .box{height:125px;border-bottom:1px #CCC dotted;margin:15px 0 0 0;}
-#wrapper .container .content .listing .box .photo img{width: 150px;height: 110px;float: left;margin: 0 20px 0 0;}
-#wrapper .container .content .listing .box .price{float:right;padding: 0;margin: 0;width:50px;}
+#wrapper .container .content .listing{float:left;width:680px;auto;margin:5px 0 0 20px;}
+#wrapper .container .content .listing .box{height:125px;border-bottom:1px #CCC dotted;padding: 10px 0 10px 0;}
+#wrapper .container .content .listing .box .photo img{width: 150px;height: 110px;float: left;margin: 0 15px 0 0;padding:5px;border:1px #CCC solid;}
+#wrapper .container .content .listing .box .price{float:right;padding: 0;margin: 0;width:50px;font-weight:bold;}
 #wrapper .container .content .listing .box .title{font-size:17px;float:left;padding: 0;margin: 0;width: 450px;color:#08c;}
 #wrapper .container .content .listing .box .detail{float:left;margin: 75px 0 0 0;font-size: 14px;}
-#wrapper .container .content .listing .maisResultados{background-color:#f7f7f7;width:auto;height:40px;border:1px #ccc solid;margin:25px 0 0 0;border-radius:3px;cursor:pointer;text-align:center;line-height:38px;}
+#wrapper .container .content .listing .maisResultados{float: left;background-color: #f7f7f7;width: auto;padding: 0px 15px 0px 15px;border: 1px #ccc solid;margin: 20px 10px 0 0;border-radius: 3px;cursor: pointer;text-align: center;line-height: 33px;}
 #wrapper .container .content .listing .maisResultados:hover{background-color:#ccc;}
-#wrapper .container .content .listing .maisResultados .verMais{color:#666;text-decoration:none;}
+#wrapper .container .content .listing .maisResultados .verMais{color:#666;text-decoration:none;font-size:12px;}
+
+#wrapper .container .filtersUp .selectPrice .price-high-low{float: left;background-color: #f7f7f7;width: auto;padding: 0 8px 0 8px;border: 1px #ccc solid;margin: 0 0 0 3px;border-radius: 3px;cursor: pointer;text-align: center;line-height: 23px;}
+#wrapper .container .filtersUp .selectPrice .price-list{padding:0;list-style:none;margin:5px 0 0 0;}
+#wrapper .container .filtersUp .selectPrice .price-list .price-label{float:left;}
+#wrapper .container .filtersUp .selectPrice .price-list .price-high-low:hover{background-color:#ccc;}
+#wrapper .container .filtersUp .selectPrice .price-list .price-high-low .price-change{color:#666;text-decoration:none;font-size:12px;}
+
+
+.estilo-combo{width:215px;font-size:18px;}
+
+#wrapper .container .content .right-menu .titleMenu{width: auto;height: 35px;border-bottom: 1px #ccc solid;line-height: 35px;padding: 0 0 0 16px;background-color: #FFF;color: #666;}
+#wrapper .container .content .right-menu .titleMenu p {padding: 0;margin: 0;"}
+#wrapper .container .content .right-menu{float:left;width:250px; height:auto;border:1px #CCC solid;border-radius:3px; margin:20px 0 0 0;}
+#wrapper .container .content .right-menu .estados{width:auto;height:auto;border-bottom:1px #CCC solid;padding:20px 0 0 0;background-color:#f7f7f7;}
+#wrapper .container .content .right-menu .estados .state-list{padding:0 0 0 20px;list-style:none;}
+#wrapper .container .content .right-menu .estados .state-list .state-item em{font-size:13px;font-style:normal;}
+#wrapper .container .content .right-menu .estados .state-list .state-item{}
+#wrapper .container .content .right-menu .estados .state-list .state-item .link-filter{color:#08c;font-size:14px;margin:0 5px 0 0;}
+#wrapper .container .content .right-menu .estados .uf{width:215px;height: 23px;font-size: 16px;margin:0 0 0 14px;}
+#wrapper .container .content .right-menu .list{list-style:none;padding: 0;margin:0;}
+#wrapper .container .content .right-menu .list .item{width:auto;height:40px;border-bottom:1px #ccc dotted;cursor:pointer;font-size:15px;}
+#wrapper .container .content .right-menu .list .filter{height:auto;padding:10px 0 10px 18px;border-bottom:1px #ccc solid;background:#F7F7F7}
+#wrapper .container .content .right-menu .list .filter .text-filter{padding:0;font-size:13px;margin:0;}
+#wrapper .container .content .right-menu .list .filter-list {list-style:none;padding:0;margin:0 0 20px 0;} 
+#wrapper .container .content .right-menu .list .filter-list .field-filter{width:70px;height:25px;border-radius:3px;border:1px #bbb solid;padding:0 0 0 5px;color:#666;font-size:14px;font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;}
+#wrapper .container .content .right-menu .list .filter-list .title-filter{margin:0 0 5px 0;padding:0;font-size:14px;}
+#wrapper .container .content .right-menu .list .filter-list .filter-item{width:250px; list-style:none;padding:0;}
+
+input[type="checkbox"] {-webkit-box-shadow: inset 0 1px 2px white, 0 1px 2px rgba(0, 0, 0, .2);
+-webkit-appearance: none;-webkit-margin-start: 0;-webkit-margin-end: 8px;
+background:#fff;border-radius: 3px;border: 1px solid #A0A0A0;display: inline-block;height: 16px;margin-bottom: 0;margin-top: 0;position: relative;top: 3px;vertical-align: baseline;width: 16px;background-color:#FFF;}
+
+
+input[type='checkbox']:checked::before {color: #808080;content: url(/images/tick.png);font-size: 13px;height: 16px;top: 2px;left: 2px;position: absolute;}
+
+#wrapper .container .content .right-menu .list .item:hover{background-color:#f7f7f7;color:#fff;}
+#wrapper .container .content .right-menu .list .item .btn-product{padding: 0 0 0 55px;line-height: 39px;color: #666;text-decoration: none;}
+
+.search-bt{width: auto;padding: 0px 15px 0px 15px;background-color:#999;color:#FFF;font-size:12pxpx;border: 1px #ccc solid;border-radius: 3px;cursor: pointer;text-align: center;line-height: 25px;font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;}
+
+#wrapper .container .content .right-menu .list .item.iphone{background-image: url(/images/sprite-listing.png);background-position: 10px 4px;}
+#wrapper .container .content .right-menu .list .item.ipad{background-image: url(/images/sprite-listing.png);background-position: 10px -39px;}
+#wrapper .container .content .right-menu .list .item.ipod{background-image: url(/images/sprite-listing.png);background-position: 10px -80px;}
+#wrapper .container .content .right-menu .list .item.macbook{background-image: url(/images/sprite-listing.png);background-position: 10px -122px;}
+#wrapper .container .content .right-menu .list .item.imac{background-image: url(/images/sprite-listing.png);background-position: 10px -161px;}
+#wrapper .container .content .right-menu .list .item.others{background-image: url(/images/sprite-listing.png);background-position: 10px -202px;}
+
+
+
+
 
 /* Footer */
 #wrapper .container .footer{width:950px;float:left;margin: 60px 0 0 0;border: 1px #e4e4e4 solid;border-radius: 4px;background-color: #f7f7f7;}

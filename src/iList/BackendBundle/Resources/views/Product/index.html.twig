@@ -8,10 +8,9 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Gen</th>
-                <th>Size</th>
-                <th>Color</th>
                 <th>Isactive</th>
+                <th>Categoryid</th>
+                <th>Subcategoryid</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -20,10 +19,9 @@
             <tr>
                 <td><a href="{{ path('produto_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.name }}</td>
-                <td>{{ entity.gen }}</td>
-                <td>{{ entity.size }}</td>
-                <td>{{ entity.color }}</td>
                 <td>{{ entity.isActive }}</td>
+                <td>{{ entity.categoryId }}</td>
+                <td>{{ entity.subcategoryId }}</td>
                 <td>
                 <ul>
                     <li>

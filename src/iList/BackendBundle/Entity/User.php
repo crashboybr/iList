@@ -62,14 +62,20 @@ class User extends BaseUser
     /**
      * @ORM\OneToMany(targetEntity="AdMsg", mappedBy="fromUser")
      */
-    protected $admsgs;
+    protected $sent_admsgs;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AdMsg", mappedBy="toUser")
+     */
+    protected $my_admsgs;
 
     public function __construct()
     {
         parent::__construct();
 
         $this->ads = new ArrayCollection();
-        $this->admsgs = new ArrayCollection();
+        $this->sent_admsgs = new ArrayCollection();
+        $this->my_admsgs = new ArrayCollection();
     }
 
     /**
@@ -196,5 +202,71 @@ class User extends BaseUser
     public function getPhone()
     {
         return $this->phone;
+    }
+
+    /**
+     * Add sent_admsgs
+     *
+     * @param \iList\BackendBundle\Entity\AdMsg $sentAdmsgs
+     * @return User
+     */
+    public function addSentAdmsg(\iList\BackendBundle\Entity\AdMsg $sentAdmsgs)
+    {
+        $this->sent_admsgs[] = $sentAdmsgs;
+    
+        return $this;
+    }
+
+    /**
+     * Remove sent_admsgs
+     *
+     * @param \iList\BackendBundle\Entity\AdMsg $sentAdmsgs
+     */
+    public function removeSentAdmsg(\iList\BackendBundle\Entity\AdMsg $sentAdmsgs)
+    {
+        $this->sent_admsgs->removeElement($sentAdmsgs);
+    }
+
+    /**
+     * Get sent_admsgs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSentAdmsgs()
+    {
+        return $this->sent_admsgs;
+    }
+
+    /**
+     * Add my_admsgs
+     *
+     * @param \iList\BackendBundle\Entity\AdMsg $myAdmsgs
+     * @return User
+     */
+    public function addMyAdmsg(\iList\BackendBundle\Entity\AdMsg $myAdmsgs)
+    {
+        $this->my_admsgs[] = $myAdmsgs;
+    
+        return $this;
+    }
+
+    /**
+     * Remove my_admsgs
+     *
+     * @param \iList\BackendBundle\Entity\AdMsg $myAdmsgs
+     */
+    public function removeMyAdmsg(\iList\BackendBundle\Entity\AdMsg $myAdmsgs)
+    {
+        $this->my_admsgs->removeElement($myAdmsgs);
+    }
+
+    /**
+     * Get my_admsgs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMyAdmsgs()
+    {
+        return $this->my_admsgs;
     }
 }

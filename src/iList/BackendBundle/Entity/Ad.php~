@@ -83,18 +83,30 @@ class Ad
     protected $product;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="size", type="string", length=255, nullable=true)
+     * @ORM\Column(name="size_id", type="integer", nullable=true)
      */
-    private $size;
+    private $sizeId;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="color", type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="Size", inversedBy="ads")
+     * @ORM\JoinColumn(name="size_id", referencedColumnName="id", nullable=true)
      */
-    private $color;
+    protected $size;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="color_id", type="integer", nullable=true)
+     */
+    private $colorId;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Color", inversedBy="ads")
+     * @ORM\JoinColumn(name="color_id", referencedColumnName="id", nullable=true)
+     */
+    protected $color;
 
     /**
      * @var string
@@ -194,6 +206,13 @@ class Ad
      * @ORM\Column(name="slug", type="string", length=255)
      */
     private $slug;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="default_img", type="string", length=255)
+     */
+    private $default_img;
 
     /**
      * @ORM\OneToMany(targetEntity="AdImage", mappedBy="ads", cascade={"ALL"})
@@ -800,6 +819,18 @@ class Ad
         }
     }
 
+    /**
+     *
+     * @ORM\PostPersist
+     * @ORM\PostUpdate
+     */
+    public function modifySlug()
+    {
+        $this->setSlug($this->slug . '-' . $this->id);
+        
+    }
+
+
 
 
     /**
@@ -892,5 +923,28 @@ class Ad
     public function getAdmsgs()
     {
         return $this->admsgs;
+    }
+
+    /**
+     * Set default_img
+     *
+     * @param string $defaultImg
+     * @return Ad
+     */
+    public function setDefaultImg($defaultImg)
+    {
+        $this->default_img = $defaultImg;
+    
+        return $this;
+    }
+
+    /**
+     * Get default_img
+     *
+     * @return string 
+     */
+    public function getDefaultImg()
+    {
+        return $this->default_img;
     }
 }

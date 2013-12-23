@@ -14,3 +14,15 @@ iListBackendBundle_subcategoria:
 iListBackendBundle_produto:
         resource: "@iListBackendBundle/Resources/config/routing/product.yml"
         prefix:   /produto
+
+iListBackendBundle_size:
+        resource: "@iListBackendBundle/Resources/config/routing/size.yml"
+        prefix:   /size
+
+iListBackendBundle_color:
+        resource: "@iListBackendBundle/Resources/config/routing/color.yml"
+        prefix:   /color
+
+iListBackendBundle_generation:
+        resource: "@iListBackendBundle/Resources/config/routing/generation.yml"
+        prefix:   /generation

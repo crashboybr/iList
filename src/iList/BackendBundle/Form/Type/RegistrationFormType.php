@@ -13,6 +13,7 @@ class RegistrationFormType extends BaseType
 
         // add your custom field
         $builder->add('name', 'text', array('label' => 'Nome'));
+        $builder->add('phone', 'text', array('label' => 'Telefone'));
     }
 
     public function getName()

@@ -35,7 +35,7 @@ class AdController extends Controller
     }
 
 
-    public function viewAdAction($city, $category_name, $slug, $state)
+    public function viewAdAction($city, $category_name, $slug, $state, $id)
     {
 
 
@@ -45,7 +45,7 @@ class AdController extends Controller
             ->findOneBy(array('name' => $category_name));
 
         $ad = $em->getRepository('iListBackendBundle:Ad')
-            ->findOneBy(array('category' => $category, 'city' => $city, 'slug' => $slug, 'state' => $state));
+            ->findOneBy(array('category' => $category, 'city' => $city, 'slug' => $slug, 'state' => $state, 'id' => $id));
         
         if (!$ad)
             throw $this->createNotFoundException('Oops! Não encontramos este anúncio! :(');
@@ -139,11 +139,16 @@ class AdController extends Controller
 
             if ($user)
                 $entity->setFromUser($user);
+
+
             
             $entity->setTitle("Nova Mensagem - " . $ad->getTitle());
             $entity->setStatus(-1); //nao lido
+
+            $toUser = $ad->getUser();
+            $entity->setToUser($toUser);
             //echo "<pre>";
-            //\Doctrine\Common\Util\Debug::dump($entity);exit;
+            //\Doctrine\Common\Util\Debug::dump($ad->getUser();exit;
             $em->persist($entity);
             $em->flush($entity);
 
@@ -194,14 +199,16 @@ class AdController extends Controller
             $entity->setUser($user);
             $entity->setStatus(-1); //revisao
             $entity->setSlug($entity->getTitle());
-           
+            //var_dump($entity->getSlug());exit;    
+            //echo "<pre>";
+            //\Doctrine\Common\Util\Debug::dump($entity);exit;
             
             $i = 1;
             $date = date('Y-m-d H:i:s');
             foreach ($entity->getAdImages() as $adImage)
             {
                 
-                
+                $entity->setDefaultImg('indo');
                 $adImage->setAds($entity);
                 $adImage->setPosition($i++);
                 $file = $adImage->getPic();
@@ -222,13 +229,21 @@ class AdController extends Controller
             }
             //exit;
 
-             //echo "<pre>";
-            //\Doctrine\Common\Util\Debug::dump($entity->getAdImages());exit;
+             
 
 
             $em->persist($entity);
             $em->flush();
 
+            
+            $img = $entity->getAdImages();
+            if ($img) 
+            {
+                $entity->setDefaultImg($img[0]->getPic());
+                $em->persist($entity);
+                $em->flush();
+            }
+           
             
 
 
@@ -362,9 +377,9 @@ class AdController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('iListFrontendBundle:Ad:edit.html.twig', array(
+        return $this->render('iListFrontendBundle:Ad:new.html.twig', array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }

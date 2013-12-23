@@ -20,7 +20,7 @@ anuncio_create:
     requirements: { _method: post }
 
 anuncio_edit:
-    pattern:  /{id}/edit
+    pattern:  /{id}/editar
     defaults: { _controller: "iListFrontendBundle:Ad:edit" }
 
 anuncio_update:

@@ -48,65 +48,48 @@
                         <option value="26">SP - São Paulo</option>
                         <option value="27">TO - Tocantins</option>
                       </select>
+                      <ul class="state-list">
+                            <li class="state-item">
+                                <a class="link-filter" href="#">Rio de Janeiro</a><em>(29)</em>
+                            </li>
+                            <li class="state-item">
+                                <a class="link-filter" href="#">Niterói</a><em>(29)</em>
+                            </li>
+                            <li class="state-item">
+                                <a class="link-filter" href="#">São Gonçalo</a><em>(29)</em>
+                            </li>
+                            <li class="state-item">
+                                <a class="link-filter" href="#">Nova Iguaçu</a><em>(232)</em>
+                            </li>
+                            <li class="state-item">
+                                <a class="link-filter" href="#">Outras cidades</a><em>(129)</em>
+                            </li>
+                        </ul>
                       </div>
-                    <ul class="list">
-                        <div class="titleMenu">
-                            <p>Escolha um Apple</p>
-                        </div>
-                        {% if (state == 'brasil') %}
-                            <li class="item iphone ">
-                                <a href="{{ path('brasil_search', {'category_name': 'iphone'}) }}" class="btn-product">iPhone</a>
-                                <p class="text-bt"></p>
-                            </li>
-                            <li class="item ipad">
-                                <a href="{{ path('brasil_search', {'category_name': 'ipad' }) }}" class="btn-product">iPad</a>
-                            </li>
-                            <li class="item ipod">
-                                <a href="{{ path('brasil_search', {'category_name': 'ipod' }) }}" class="btn-product">iPod</a>
-                            </li>
-                            <li class="item macbook">
-                                <a href="{{ path('brasil_search', {'category_name': 'macbook' }) }}" class="btn-product">MacBook</a>
-                            </li>
-                            <li class="item imac">
-                                <a href="{{ path('brasil_search', {'category_name': 'imac' }) }}" class="btn-product">iMac</a>
-                            </li>
-                            <li class="item others">
-                                <a href="{{ path('brasil_search', {'category_name': 'acessorios' }) }}" class="btn-product">Acessórios</a>
-                            </li>
-                        {% else %}
-                            <li class="item iphone ">
-                                <a href="{{ path('subdomain_search', {'state': state, 'category_name': 'iphone', 'domain': domain}) }}" class="btn-product">iPhone</a>
-                                <p class="text-bt"></p>
-                            </li>
-                            <li class="item ipad">
-                                <a href="{{ path('subdomain_search', {'state': state, 'category_name': 'ipad', 'domain': domain}) }}" class="btn-product">iPad</a>
-                            </li>
-                            <li class="item ipod">
-                                <a href="{{ path('subdomain_search', {'state': state, 'category_name': 'ipod', 'domain': domain}) }}" class="btn-product">iPod</a>
-                            </li>
-                            <li class="item macbook">
-                                <a href="{{ path('subdomain_search', {'state': state, 'category_name': 'macbook', 'domain': domain}) }}" class="btn-product">MacBook</a>
-                            </li>
-                            <li class="item imac">
-                                <a href="{{ path('subdomain_search', {'state': state, 'category_name': 'imac', 'domain': domain}) }}" class="btn-product">iMac</a>
-                            </li>
-                            <li class="item others">
-                                <a href="{{ path('subdomain_search', {'state': state, 'category_name': 'acessorios', 'domain': domain}) }}" class="btn-product">Acessórios</a>
-                            </li>
-                        {% endif %}
+                    {% include 'iListFrontendBundle:Search:filters.html.twig' %}
+                        
                 </div>
                 
-                <div class="listing">
-                    {% for ad in ads %}
+                <div class="listing">{# pagination.getTotalItemCount #}
+                    
+                    {{ knp_pagination_sortable(pagination, 'Title', 'a.title') }}
+
+                    {{ knp_pagination_sortable(pagination, 'Preço', 'a.price') }}
+                    {% for ad in pagination %}
                         <div class="box">
                             <div class="photo">
-                                <img src="/images/ipod-suffle.jpg" width="300" height="200" />
+                                <img src="{{ asset(ad.defaultImg) }}" width="300" height="200" />
                             </div>
-                            <a class="title" href="{{ path('subdomain_vi', { 'state': ad.state, 'domain': domain, 'city': ad.city, 'category_name': ad.category|lower, 'slug': ad.slug }) }}">{{ ad.title }}</a>
+                            <a class="title" href="{{ path('subdomain_vi', { 'state': ad.state, 'city': ad.city|sanitize, 'category_name': ad.category|sanitize, 'slug': ad.slug, 'id': ad.id }) }}">{{ ad.title }}</a>
                             <p class="price">{{ ad.price|price }}</p>
                             <p class="detail">{{ ad.productType }} | {{ ad.city }}-{{ ad.state }}</p>
                         </div>
                     {% endfor %}
-                    
+
+
+                    <div class="navigation">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+
                 </div>
 {% endblock %}

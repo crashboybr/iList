@@ -1,0 +1,30 @@
+color:
+    pattern:  /
+    defaults: { _controller: "iListBackendBundle:Color:index" }
+
+color_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "iListBackendBundle:Color:show" }
+
+color_new:
+    pattern:  /new
+    defaults: { _controller: "iListBackendBundle:Color:new" }
+
+color_create:
+    pattern:  /create
+    defaults: { _controller: "iListBackendBundle:Color:create" }
+    requirements: { _method: post }
+
+color_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "iListBackendBundle:Color:edit" }
+
+color_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "iListBackendBundle:Color:update" }
+    requirements: { _method: post|put }
+
+color_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "iListBackendBundle:Color:delete" }
+    requirements: { _method: post|delete }

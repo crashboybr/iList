@@ -96,17 +96,23 @@ class AdMsg
     private $fromUserId;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="admsgs")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="sent_admsgs")
      * @ORM\JoinColumn(name="from_user_id", referencedColumnName="id")
      */
     protected $fromUser;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="to_user", type="integer", nullable=true)
+     * @ORM\Column(name="to_user_id", type="integer", nullable=true)
      */
-    private $toUser;
+    private $toUserId;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="my_admsgs")
+     * @ORM\JoinColumn(name="to_user_id", referencedColumnName="id")
+     */
+    protected $toUser;
 
     /**
      * @var integer
@@ -466,5 +472,28 @@ class AdMsg
         {
             $this->setCreatedAt(new \DateTime(date('Y-m-d H:i:s')));
         }
+    }
+
+    /**
+     * Set toUserId
+     *
+     * @param integer $toUserId
+     * @return AdMsg
+     */
+    public function setToUserId($toUserId)
+    {
+        $this->toUserId = $toUserId;
+    
+        return $this;
+    }
+
+    /**
+     * Get toUserId
+     *
+     * @return integer 
+     */
+    public function getToUserId()
+    {
+        return $this->toUserId;
     }
 }

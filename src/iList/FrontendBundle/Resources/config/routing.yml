@@ -1,6 +1,12 @@
 iListFrontendBundle_anuncio:
         resource: "@iListFrontendBundle/Resources/config/routing/ad.yml"
         prefix:   /anuncio
+        host:     "%base_host%"
+
+iListFrontendBundle_account:
+        resource: "@iListFrontendBundle/Resources/config/routing/account.yml"
+        prefix:   /account
+        host:     "%base_host%"
 
 find_subcategory_by_category_id:
     path:  /buscaSubCategoria
@@ -20,17 +26,19 @@ find_address_by_zipcode:
 
 subdomain_search:
     path:     /{category_name}/{subcategory_name}
-    host:     "{state}.{domain}"
-    defaults: { _controller: iListFrontendBundle:Search:index, category_name: '', subcategory_name: ''}
-    requirements:
-        domain: "%domain%"
+    host:     "{state}.%base_host%"
+    defaults: { _controller: iListFrontendBundle:Search:index, category_name: '', subcategory_name: '', adtype: '', size: ''}
+    #requirements:
+    #    domain: "%domain%"
+    #requirements:
+    #    q: ".+"
 
 subdomain_vi:
-    path:     /{city}/{category_name}/{slug}
-    host:     "{state}.{domain}"
+    path:     /{city}/{category_name}/{slug}/{id}
+    host:     "{state}.%base_host%"
     defaults: { _controller: iListFrontendBundle:Ad:viewAd }
-    requirements:
-        domain: "%domain%"
+    #requirements:
+    #    domain: "%domain%"
 
 home:
     path:  /

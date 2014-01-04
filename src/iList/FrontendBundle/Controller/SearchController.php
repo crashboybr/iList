@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use iList\BackendBundle\Entity\Product;
 use iList\FrontendBundle\Form\iPhoneFilterType;
+use iList\FrontendBundle\Form\iPadFilterType;
+use iList\FrontendBundle\Form\iPodFilterType;
 
 use iList\BackendBundle\Classes\Tools;
 
@@ -50,8 +52,23 @@ class SearchController extends Controller
         }
 
         if ($category)
+        {
         	$filters['category'] = $category;
+            switch ($category_name)
+            {
+                case 'iphone':
+                    $filterForm = $this->createForm(new iPhoneFilterType());
+                    break;
+                case 'ipad':
+                    $filterForm = $this->createForm(new iPadFilterType());
+                    break;
+                case 'ipod':
+                    $filterForm = $this->createForm(new iPodFilterType());
+                    break;
 
+            }
+            
+        }
         //if ($subcategory)
         //	$filters['subcategory'] = $subcategory;
 
@@ -61,7 +78,7 @@ class SearchController extends Controller
             ->where('f.category = :category')
             ->orderBy('f.createdAt', 'desc');
 
-        $filterForm = $this->createForm(new iPhoneFilterType());
+        
         
         if ($this->getRequest()->getMethod() == 'POST') 
         {

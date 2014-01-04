@@ -27,15 +27,81 @@
   });
   </script>
 
+    <script>
+  $(function() {
+    $( "#accordion" ).accordion({ active: false, collapsible: true });
+  });
+  </script>
+
 <h3>Minha Conta</h3>
 <div class="tabs-style" id="tabs">
       <ul class="tabs-list">
-        <li><a href="#tabs-1">Meus dados cadastrais</a></li>
-        <li><a href="#tabs-2">Meus Anúncios</a></li>
-        <li><a href="#tabs-3">Mensagens</a></li>
+        <li><a href="#tabs-1">Mensagens</a></li>
+        <li><a href="#tabs-2">Meus dados cadastrais</a></li>
+        <li><a href="#tabs-3">Meus Anúncios</a></li>
+        
       </ul>
-      <!--incio tab1 -->
-      <div id="tabs-1">
+      
+       <div id="tabs-1">
+            {% for flashMessage in app.session.flashbag.get('notice') %}
+                <div class="flash-notice">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+            <div id="accordion" >
+
+                {% for msgs in all_msgs %}
+                    {% for msg in msgs %}
+                        <h3>{{ msg.msg_title }}</h3>
+                        <div class="tabs-content">
+                        {% for ms in msg %}
+                            {% for m in ms %}   
+                                {% if (loop.first) %}      
+                                    <p class="text">
+                                        <strong>De:</strong> {{ m.fromUser.name }}<br/>
+                                        <strong>Enviado:</strong> {{ m.createdAt|date('H:m - d/m/Y') }}<br/>
+                                        {% if (m.phone) %}<strong>Telefone:</strong> {{ m.phone }}<br/>{% endif %}
+                                        <br/>
+                                        {{ m.content }}
+                                    </p>
+
+                                    <br/>
+                                    <a href="javascript:void(0)" onclick="$('#reply-{{ m.id }}').toggle();" class="link-reply">Responder Mensagem</a>
+                                    
+                                    <div class="reply" id="reply-{{ m.id }}" style="display: none;">
+                                        <form method="post" action="{{ path('ad_reply_msg_send') }}">
+                                            <textarea class="text-reply" name="msg"></textarea>
+                                            <input type="submit" class="search-bt" value="Enviar" id="price_bt">
+                                            <input type="hidden" name="ad_id" value="{{ m.adId }}">
+                                            <input type="hidden" name="user_id" value="{{ m.fromUserId }}">
+                                        </form>
+                                    </div>
+
+                                {% else %}
+                                    <div class="reply-msg">
+                                        <p class="text">
+                                            <strong>De:</strong> {{ m.fromUser.name }}<br/>
+                                            <strong>Enviado:</strong> {{ m.createdAt|date('H:m - d/m/Y') }}<br/>
+                                            {% if (m.phone) %}<strong>Telefone:</strong> {{ m.phone }}<br/>{% endif %}
+                                            <br/>
+                                            {{ m.content }}
+                                        </p>
+                                    </div>
+
+                                {% endif %}
+                                
+                            {% endfor %}
+                        {% endfor %}
+
+                        
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+
+        </div>
+
+        <div id="tabs-2">
             <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="new_entity_factories_free_entity_factory" novalidate>
                 {{ form_errors(form) }}
                 {{ form_row(form._token) }} 
@@ -146,10 +212,10 @@
                 </div>
                 <input class="ButtonRegister-account" name="commit" type="submit" value="Finalizar">
             </form>
-      </div>
+        </div>
       
-        <!--incio tab2 -->
-        <div id="tabs-2">
+
+        <div id="tabs-3">
             {% for ad in ads %}
                 <div class="box">
                     <div class="photo">
@@ -166,9 +232,7 @@
             {% endfor %}
         </div>
       
-    	<div id="tabs-3">
-
-    	</div>
+    	
       
     
 </div>

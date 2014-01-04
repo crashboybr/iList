@@ -20,6 +20,10 @@ ad_msg_send:
     path:  /enviar
     defaults: { _controller: iListFrontendBundle:Ad:sendAdMsg }
 
+ad_reply_msg_send:
+    path:  /reply_msg
+    defaults: { _controller: iListFrontendBundle:Account:replyMsg }
+
 find_address_by_zipcode:
     path:  /buscaCep/{zipcode}
     defaults: { _controller: iListFrontendBundle:Search:searchZipcode }

@@ -39,7 +39,7 @@ class User extends BaseUser
     protected $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      *     pattern="/^\(\d{2}\)\s{0,1}\d{4,5}-\d{4}$/",
      *     match=true,
      *     message="Telefone Inválido. Formato: (99) 9999-9999"

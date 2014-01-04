@@ -142,7 +142,7 @@ class AdController extends Controller
 
 
             
-            $entity->setTitle("Nova Mensagem - " . $ad->getTitle());
+            $entity->setTitle("Nova Mensagem - Anúncio: " . $ad->getTitle());
             $entity->setStatus(-1); //nao lido
 
             $toUser = $ad->getUser();
@@ -162,7 +162,7 @@ class AdController extends Controller
                     'category_name' => strtolower($ad->getCategory()),
                     'slug' => $ad->getSlug(),
                     'state' => $ad->getState(),
-                    'domain' => 'ilist'
+                    'id' => $ad->getId()
                     
                     )
                 ));

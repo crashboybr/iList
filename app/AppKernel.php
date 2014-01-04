@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
             new iList\FrontendBundle\iListFrontendBundle(),
             new iList\BackendBundle\iListBackendBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

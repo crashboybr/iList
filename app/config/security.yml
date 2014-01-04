@@ -10,6 +10,8 @@ security:
     providers:
         fos_userbundle:
             id: fos_user.user_provider.username_email
+        #dao_provider_by_id:
+        #    entity: { class: YOUR_SECURITY_CLASS_NAME, property: id }
 
     firewalls:
         main:
@@ -19,10 +21,32 @@ security:
                 csrf_provider: form.csrf_provider
             logout:       true
             anonymous:    true
+            remember_me:
+                key:      "%secret%"
+                lifetime: 31536000 # 365 days in seconds
+                path:     /
+                domain:   ~ # Defaults to the current domain from $_SERVER
+                #http://symfony.com/doc/master/cookbook/security/remember_me.html
+       # crosslogin:
+       #     crosslogin: true
+       #     provider: fos_userbundle
+       #     request_matcher: crosslogin.session.matcher
+        #    logout:
+         #       path: /logout
+         #       target: /
+         #       invalidate_session: true
+         #       handlers: [crosslogin.handler.logout]
+
+
+    #factories:
+    #    CrossLoginFactory: "%kernel.root_dir%/../src/FrontendBundle/Resources/config/security_factories.xml"
 
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/cadastro, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        #- { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/account/, role: ROLE_USER }
+        - { path: ^/anuncio/, role: ROLE_USER }
+
+

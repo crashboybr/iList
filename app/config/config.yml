@@ -4,7 +4,13 @@ imports:
     - { resource: @iListBackendBundle/Resources/config/services.yml }
 
 parameters:
-    domain: ilist
+    #domain: ilist
+    base_host: ilist.dev
+    pdo.db_options:
+        db_table:    session
+        db_id_col:   session_id
+        db_data_col: session_value
+        db_time_col: session_time
 framework:
     #esi:             ~
     default_locale:  pt_BR
@@ -22,7 +28,9 @@ framework:
         #assets_version: SomeVersionScheme
     #default_locale:  "%locale%"
     trusted_proxies: ~
-    session:         ~
+    session: 
+        cookie_domain: .%base_host%
+        handler_id:     session.handler.pdo
     fragments:       ~
     http_method_override: true
 
@@ -96,4 +104,30 @@ services:
             - @doctrine.orm.entity_manager
         tags:
             - { name: form.type, alias: hidden_entity }
+    pdo:
+        class: PDO
+        arguments:
+            - "mysql:host=%database_host%;port=%database_port%;dbname=%database_name%"
+            - '%database_user%'
+            - '%database_password%'
+        calls:
+            - [setAttribute, [3, 2]] 
+
+
+    session.handler.pdo:
+        class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
+        arguments: ["@pdo", "%pdo.db_options%"]
+
+
+knp_paginator:
+    page_range: 5                     # default page range used in pagination control
+    default_options:
+        page_name: pagina                # page query parameter name
+        sort_field_name: por          # sort field query parameter name
+        sort_direction_name: order # sort direction query parameter name
+        distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
+    template:
+        pagination: iListFrontendBundle:Pagination:pagination.html.twig     # sliding pagination controls template
+        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig 
+
 

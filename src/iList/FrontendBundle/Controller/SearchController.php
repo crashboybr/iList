@@ -25,8 +25,6 @@ class SearchController extends Controller
 
     	$em = $this->getDoctrine()->getManager();
 
-        
-        
 
         /* posso melhorar aqui dps colocando a busca pelo id ipod=1, iphone=2 ... */
         $category = $em->getRepository('iListBackendBundle:Category')
@@ -133,7 +131,8 @@ class SearchController extends Controller
             ->getConfiguration()
             ->setSQLLogger($logger);
         
-        
+        $filters['status'] = 1;
+        $qb->andWhere('f.status = :status');
         $qb->setParameters($filters);
 
         $ads = $qb->getQuery()->getResult();

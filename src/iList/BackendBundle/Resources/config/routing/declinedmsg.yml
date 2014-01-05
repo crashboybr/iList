@@ -1,0 +1,30 @@
+declinedmsg:
+    pattern:  /
+    defaults: { _controller: "iListBackendBundle:DeclinedMsg:index" }
+
+declinedmsg_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "iListBackendBundle:DeclinedMsg:show" }
+
+declinedmsg_new:
+    pattern:  /new
+    defaults: { _controller: "iListBackendBundle:DeclinedMsg:new" }
+
+declinedmsg_create:
+    pattern:  /create
+    defaults: { _controller: "iListBackendBundle:DeclinedMsg:create" }
+    requirements: { _method: post }
+
+declinedmsg_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "iListBackendBundle:DeclinedMsg:edit" }
+
+declinedmsg_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "iListBackendBundle:DeclinedMsg:update" }
+    requirements: { _method: post|put }
+
+declinedmsg_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "iListBackendBundle:DeclinedMsg:delete" }
+    requirements: { _method: post|delete }

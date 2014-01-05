@@ -57,7 +57,13 @@ class AccountController extends Controller
         //$user = $this->get('security.context')->getToken()->getUser();
         
         $ads = $user->getAds();
-    
+        /*echo "<pre>";
+        foreach ($ads as $ad)
+        {
+            \Doctrine\Common\Util\Debug::dump($ad->getDeclinedAds());
+        }
+        exit;
+        */
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, new UserEvent($user, $request));
     
         $form = $formFactory->createForm();

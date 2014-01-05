@@ -1,0 +1,45 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    {% if (ad) %}
+    <h1>Para aprovar</h1>
+    
+    <div class="content-adview">
+        <p class="text">Título:  {{ ad.title }}</p>
+
+        {% for img in ad.adImages %}
+            <img src="{{ asset(img.pic) }}" style="width: 150px;" title="">
+        {% endfor %}
+            
+        <p class="text">Conteudo:  {{ ad.content }}</p>
+        <p class="text">Produto: {{ ad.category }}</p>
+        <p class="text">Modelo: {{ ad.subcategory }}</p>
+        <p class="text">Condição: {{ ad.productType }}</p>
+        <p class="text">Usuário: {{ ad.user }}</p>
+        <p class="text">Email: {{ ad.user.email }}</p>
+        <p class="text">Localização: {{ ad.city }} - {{ ad.state }}</p>
+            
+
+           
+            
+    </div>
+    <div>
+        <form method="POST">
+            Aprovar: <br />
+            <input type="radio" name="approve" value="1" checked onclick="$('#reason').hide();"> Sim 
+            <input type="radio" name="approve" value="0" onclick="$('#reason').show();"> Não
+            <select name="reason" id="reason" style="display: none">
+                {% for msg in declined_msgs %}
+                    <option value="{{ msg.id }}">{{ msg.msg }}</option>
+                {% endfor %}
+            </select>
+            <br />
+            <input type="hidden" name="ad_id" value="{{ ad.id }}" />
+            <input type="submit" value="Enviar" />
+        </form>
+    </div>
+    {% else %}
+        <h3>Não há nada para aprovar! :D</h3>
+    {% endif %}
+
+{% endblock %}

@@ -222,12 +222,22 @@
                         <img src="{{ asset(ad.defaultImg) }}" width="300" height="200">
                         
                     </div>
-                    <a href="{{ path('subdomain_vi', { 'state': ad.state, 'city': ad.city|sanitize, 'category_name': ad.category|sanitize, 'slug': ad.slug, 'id': ad.id }) }}" class="title">{{ ad.title }}</a>
+                    
+                    {% if (ad.status == 0) %}
+                        {{ ad.title }}
+                        <br />Este anúncio foi rejeitado
+                    {% elseif (ad.status == -1) %}
+                        {{ ad.title }}
+                        <br />Este anúncio está em revisão
+                    {% else %}
+                        <a href="{{ path('subdomain_vi', { 'state': ad.state, 'city': ad.city|sanitize, 'category_name': ad.category|sanitize, 'slug': ad.slug, 'id': ad.id }) }}" class="title">{{ ad.title }}</a>
+                    {% endif %}
                     <div class="edit"><br/><br/>
                         <!--<a href="#" class="link-msg-new"><strong>12 mensagens</strong></a>-->
                         <a href="{{ path('anuncio_edit', { id: ad.id }) }}" class="link-edit">Editar</a>
                         <a href="#" class="link-edit">Excluir</a>
                     </div>
+
                 </div>
             {% endfor %}
         </div>

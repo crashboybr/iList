@@ -26,3 +26,11 @@ iListBackendBundle_color:
 iListBackendBundle_generation:
         resource: "@iListBackendBundle/Resources/config/routing/generation.yml"
         prefix:   /generation
+
+iListBackendBundle_declinedmsg:
+        resource: "@iListBackendBundle/Resources/config/routing/declinedmsg.yml"
+        prefix:   /declinedmsg
+
+iListBackendBundle_fila:
+        resource: "@iListBackendBundle/Resources/config/routing/adqueue.yml"
+        prefix:   /fila

@@ -1,0 +1,254 @@
+<?php
+
+namespace iList\BackendBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * DeclinedAds
+ *
+ * @ORM\Table()
+ * @ORM\HasLifecycleCallbacks
+ * @ORM\Entity
+ */
+class DeclinedAds
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ad_id", type="integer")
+     */
+    private $adId;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Ad", inversedBy="declinedAds")
+     * @ORM\JoinColumn(name="ad_id", referencedColumnName="id")
+     */
+    protected $ad;
+
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="declined_msg_id", type="integer")
+     */
+    private $declinedMsgId;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="DeclinedMsg", inversedBy="declinedAds")
+     * @ORM\JoinColumn(name="declined_msg_id", referencedColumnName="id")
+     */
+    protected $declinedMsg;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    private $updatedAt;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set adId
+     *
+     * @param integer $adId
+     * @return DeclinedAds
+     */
+    public function setAdId($adId)
+    {
+        $this->adId = $adId;
+    
+        return $this;
+    }
+
+    /**
+     * Get adId
+     *
+     * @return integer 
+     */
+    public function getAdId()
+    {
+        return $this->adId;
+    }
+
+    /**
+     * Set declinedReasonId
+     *
+     * @param integer $declinedReasonId
+     * @return DeclinedAds
+     */
+    public function setDeclinedReasonId($declinedReasonId)
+    {
+        $this->declinedReasonId = $declinedReasonId;
+    
+        return $this;
+    }
+
+    /**
+     * Get declinedReasonId
+     *
+     * @return integer 
+     */
+    public function getDeclinedReasonId()
+    {
+        return $this->declinedReasonId;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return DeclinedAds
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return DeclinedAds
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set declinedMsgId
+     *
+     * @param integer $declinedMsgId
+     * @return DeclinedAds
+     */
+    public function setDeclinedMsgId($declinedMsgId)
+    {
+        $this->declinedMsgId = $declinedMsgId;
+    
+        return $this;
+    }
+
+    /**
+     * Get declinedMsgId
+     *
+     * @return integer 
+     */
+    public function getDeclinedMsgId()
+    {
+        return $this->declinedMsgId;
+    }
+
+    /**
+     * Set ad
+     *
+     * @param \iList\BackendBundle\Entity\Ad $ad
+     * @return DeclinedAds
+     */
+    public function setAd(\iList\BackendBundle\Entity\Ad $ad = null)
+    {
+        $this->ad = $ad;
+    
+        return $this;
+    }
+
+    /**
+     * Get ad
+     *
+     * @return \iList\BackendBundle\Entity\Ad 
+     */
+    public function getAd()
+    {
+        return $this->ad;
+    }
+
+    /**
+     * Set declinedMsg
+     *
+     * @param \iList\BackendBundle\Entity\DeclinedMsg $declinedMsg
+     * @return DeclinedAds
+     */
+    public function setDeclinedMsg(\iList\BackendBundle\Entity\DeclinedMsg $declinedMsg = null)
+    {
+        $this->declinedMsg = $declinedMsg;
+    
+        return $this;
+    }
+
+    /**
+     * Get declinedMsg
+     *
+     * @return \iList\BackendBundle\Entity\DeclinedMsg 
+     */
+    public function getDeclinedMsg()
+    {
+        return $this->declinedMsg;
+    }
+
+     /**
+     * Now we tell doctrine that before we persist or update we call the updatedTimestamps() function.
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+        $this->setUpdatedAt(new \DateTime(date('Y-m-d H:i:s')));
+
+        if($this->getCreatedAt() == null)
+        {
+            $this->setCreatedAt(new \DateTime(date('Y-m-d H:i:s')));
+        }
+    }
+
+}

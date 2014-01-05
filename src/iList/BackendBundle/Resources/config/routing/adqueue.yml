@@ -1,0 +1,30 @@
+fila:
+    pattern:  /
+    defaults: { _controller: "iListBackendBundle:AdQueue:index" }
+
+fila_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "iListBackendBundle:AdQueue:show" }
+
+fila_new:
+    pattern:  /new
+    defaults: { _controller: "iListBackendBundle:AdQueue:new" }
+
+fila_create:
+    pattern:  /create
+    defaults: { _controller: "iListBackendBundle:AdQueue:create" }
+    requirements: { _method: post }
+
+fila_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "iListBackendBundle:AdQueue:edit" }
+
+fila_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "iListBackendBundle:AdQueue:update" }
+    requirements: { _method: post|put }
+
+fila_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "iListBackendBundle:AdQueue:delete" }
+    requirements: { _method: post|delete }

@@ -9,11 +9,15 @@
 	{% endjavascripts %}
 {% endblock %}
 
+{% block title %}
+{{ ad.title }}
+{% endblock %}
+
 {% block body %}
 
 
 	<div class="content-adview">
-		<h3>Ipod Suffle em ótimo estado</h3>
+		<h3>{{ ad.title }}</h3>
 		<div class="product-image">
 
 			<!--  Outer wrapper for presentation only, this can be anything you like -->
@@ -58,7 +62,7 @@
                     	<p class="text">Produto</p>
                     </div>
                 	<div class="detail-rigth">
-                    	<p class="text">{{ ad.product }}</p>
+                    	<p class="text">{{ ad.category }} - {{ ad.subcategory }}</p>
                     </div>
                 </li>
                 <li class="list-detail">
@@ -66,7 +70,7 @@
                     	<p class="text">Capacidade</p>
                     </div>
                 	<div class="detail-rigth">
-                    	<p class="text"><strong>2G</strong></p>
+                    	<p class="text"><strong>{{ ad.size.size }}GB</strong></p>
                     </div>
                 </li>
                 <li class="list-detail">
@@ -84,21 +88,23 @@
                 	<div class="detail-left">
            	      		<img src="/images/mail.jpg" width="30" height="30" alt="email" /></div>
                 	<div class="detail-rigth">
-                    	<p class="text">glcavalcanti@gmail.com</p>
+                    	<p class="text">{{ ad.user.email }}</p>
                     </div>
                 </li>
+                {% if (ad.user.phone) %}
                 <li class="list-user">
                 	<div class="detail-left">
            	      		<img src="/images/phone.jpg" width="30" height="30" alt="phone" /></div>
                 	<div class="detail-rigth">
-                    	<p class="text"><strong>21 98182-7889</strong></p>
+                    	<p class="text"><strong>{{ ad.user.phone }}</strong></p>
                     </div>
                 </li>
+                {% endif %}
                 <li class="list-user">
                 	<div class="detail-left">
            	      		<img src="/images/location.jpg" width="30" height="30" alt="cidade" /></div>
                 	<div class="detail-rigth">
-                    	<p class="text"><strong>Rio de Janeiro-RJ</strong></p>
+                    	<p class="text"><strong>{{ ad.city }} - {{ ad.state }}</strong></p>
                     </div>
                 </li>
             </ul>

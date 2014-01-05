@@ -224,10 +224,16 @@ class Ad
      */
     protected $admsgs;
 
+    /**
+     * @ORM\OneToMany(targetEntity="DeclinedAds", mappedBy="ad")
+     */
+    protected $declinedAds;
+
     public function __construct()
     {
         $this->ad_images = new ArrayCollection();
         $this->admsgs = new ArrayCollection();
+        $this->declinedAds = new ArrayCollection();
     }
 
     /**
@@ -992,5 +998,38 @@ class Ad
     public function getColorId()
     {
         return $this->colorId;
+    }
+
+    /**
+     * Add declinedAds
+     *
+     * @param \iList\BackendBundle\Entity\DeclinedAds $declinedAds
+     * @return Ad
+     */
+    public function addDeclinedAd(\iList\BackendBundle\Entity\DeclinedAds $declinedAds)
+    {
+        $this->declinedAds[] = $declinedAds;
+    
+        return $this;
+    }
+
+    /**
+     * Remove declinedAds
+     *
+     * @param \iList\BackendBundle\Entity\DeclinedAds $declinedAds
+     */
+    public function removeDeclinedAd(\iList\BackendBundle\Entity\DeclinedAds $declinedAds)
+    {
+        $this->declinedAds->removeElement($declinedAds);
+    }
+
+    /**
+     * Get declinedAds
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDeclinedAds()
+    {
+        return $this->declinedAds;
     }
 }

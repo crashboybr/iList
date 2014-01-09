@@ -16,287 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `Ad`
---
-
-DROP TABLE IF EXISTS `Ad`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Ad` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL,
-  `subcategory_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `size` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `color` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `content` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `price` double NOT NULL,
-  `state` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `city` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `zipcode` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `street` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `complement` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `status` int(11) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  `slug` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Ad`
---
-
-LOCK TABLES `Ad` WRITE;
-/*!40000 ALTER TABLE `Ad` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Ad` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `AdMsg`
---
-
-DROP TABLE IF EXISTS `AdMsg`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `AdMsg` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `content` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `phone` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `from_user_id` int(11) NOT NULL,
-  `to_user` int(11) DEFAULT NULL,
-  `status` int(11) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  `ad_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `IDX_B87326ED2130303A` (`from_user_id`),
-  KEY `IDX_B87326ED4F34D596` (`ad_id`),
-  CONSTRAINT `FK_B87326ED2130303A` FOREIGN KEY (`from_user_id`) REFERENCES `fos_user` (`id`),
-  CONSTRAINT `FK_B87326ED4F34D596` FOREIGN KEY (`ad_id`) REFERENCES `ads` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `AdMsg`
---
-
-LOCK TABLES `AdMsg` WRITE;
-/*!40000 ALTER TABLE `AdMsg` DISABLE KEYS */;
-/*!40000 ALTER TABLE `AdMsg` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `AdQueue`
---
-
-DROP TABLE IF EXISTS `AdQueue`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `AdQueue` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ad_id` int(11) NOT NULL,
-  `status` int(11) NOT NULL,
-  `declined_msg_id` int(11) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `AdQueue`
---
-
-LOCK TABLES `AdQueue` WRITE;
-/*!40000 ALTER TABLE `AdQueue` DISABLE KEYS */;
-/*!40000 ALTER TABLE `AdQueue` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Category`
---
-
-DROP TABLE IF EXISTS `Category`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Category` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `isActive` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Category`
---
-
-LOCK TABLES `Category` WRITE;
-/*!40000 ALTER TABLE `Category` DISABLE KEYS */;
-INSERT INTO `Category` VALUES (1,'iPod',1),(2,'iPhone',1),(3,'iPad',1),(4,'MacBook',1),(5,'iMac',1),(6,'Acessórios',1);
-/*!40000 ALTER TABLE `Category` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `DeclinedAds`
---
-
-DROP TABLE IF EXISTS `DeclinedAds`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `DeclinedAds` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ad_id` int(11) NOT NULL,
-  `declined_msg_id` int(11) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `IDX_A8F18A874F34D596` (`ad_id`),
-  CONSTRAINT `FK_A8F18A874F34D596` FOREIGN KEY (`ad_id`) REFERENCES `ads` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `DeclinedAds`
---
-
-LOCK TABLES `DeclinedAds` WRITE;
-/*!40000 ALTER TABLE `DeclinedAds` DISABLE KEYS */;
-INSERT INTO `DeclinedAds` VALUES (1,58,2,'2014-01-05 20:03:31','2014-01-05 20:03:31'),(2,58,2,'2014-01-05 20:03:50','2014-01-05 20:03:50');
-/*!40000 ALTER TABLE `DeclinedAds` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `DeclinedMsg`
---
-
-DROP TABLE IF EXISTS `DeclinedMsg`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `DeclinedMsg` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `msg` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `DeclinedMsg`
---
-
-LOCK TABLES `DeclinedMsg` WRITE;
-/*!40000 ALTER TABLE `DeclinedMsg` DISABLE KEYS */;
-INSERT INTO `DeclinedMsg` VALUES (1,'Nao eh um produto apple'),(2,'Texto ofensivo');
-/*!40000 ALTER TABLE `DeclinedMsg` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Generation`
---
-
-DROP TABLE IF EXISTS `Generation`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Generation` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Generation`
---
-
-LOCK TABLES `Generation` WRITE;
-/*!40000 ALTER TABLE `Generation` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Generation` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `ProductSize`
---
-
-DROP TABLE IF EXISTS `ProductSize`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ProductSize` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `size_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `ProductSize`
---
-
-LOCK TABLES `ProductSize` WRITE;
-/*!40000 ALTER TABLE `ProductSize` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ProductSize` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Size`
---
-
-DROP TABLE IF EXISTS `Size`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Size` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `size` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Size`
---
-
-LOCK TABLES `Size` WRITE;
-/*!40000 ALTER TABLE `Size` DISABLE KEYS */;
-INSERT INTO `Size` VALUES (1,'32'),(2,'64');
-/*!40000 ALTER TABLE `Size` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `SubCategory`
---
-
-DROP TABLE IF EXISTS `SubCategory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `SubCategory` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `isActive` tinyint(1) NOT NULL,
-  `category_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `IDX_723649C912469DE2` (`category_id`),
-  CONSTRAINT `FK_723649C912469DE2` FOREIGN KEY (`category_id`) REFERENCES `Category` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `SubCategory`
---
-
-LOCK TABLES `SubCategory` WRITE;
-/*!40000 ALTER TABLE `SubCategory` DISABLE KEYS */;
-INSERT INTO `SubCategory` VALUES (1,'Classic',1,1),(2,'Mini',1,1),(3,'Shuffle',1,1),(4,'Nano',1,1),(5,'Touch',1,1),(6,'Outros',1,1),(7,'1a Geração',1,2),(8,'3G',1,2),(9,'3GS',1,2),(10,'4',1,2),(11,'4S',1,2),(12,'5',1,2),(13,'5S',1,2),(14,'5C',1,2),(15,'1',1,3),(16,'2',1,3),(17,'3',1,3),(18,'4',1,3),(19,'Mini',1,3);
-/*!40000 ALTER TABLE `SubCategory` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `ad_images`
 --
 
@@ -367,6 +86,33 @@ INSERT INTO `ad_msgs` VALUES (1,9,60,'Nova Mensagem - Gusmao vende rapido','Oi g
 UNLOCK TABLES;
 
 --
+-- Table structure for table `ad_queues`
+--
+
+DROP TABLE IF EXISTS `ad_queues`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ad_queues` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ad_id` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
+  `declined_msg_id` int(11) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ad_queues`
+--
+
+LOCK TABLES `ad_queues` WRITE;
+/*!40000 ALTER TABLE `ad_queues` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ad_queues` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `ads`
 --
 
@@ -424,6 +170,31 @@ INSERT INTO `ads` VALUES (58,9,2,9,1,'Testando iPhone','bla bla bla',200,'RJ','N
 UNLOCK TABLES;
 
 --
+-- Table structure for table `category`
+--
+
+DROP TABLE IF EXISTS `category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `isActive` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `category`
+--
+
+LOCK TABLES `category` WRITE;
+/*!40000 ALTER TABLE `category` DISABLE KEYS */;
+INSERT INTO `category` VALUES (1,'iPod',1),(2,'iPhone',1),(3,'iPad',1),(4,'MacBook',1),(5,'iMac',1),(6,'Acessorios',1);
+/*!40000 ALTER TABLE `category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `colors`
 --
 
@@ -445,6 +216,59 @@ LOCK TABLES `colors` WRITE;
 /*!40000 ALTER TABLE `colors` DISABLE KEYS */;
 INSERT INTO `colors` VALUES (1,'Branco'),(2,'Preto'),(3,'Amarelo');
 /*!40000 ALTER TABLE `colors` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `declined_ads`
+--
+
+DROP TABLE IF EXISTS `declined_ads`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `declined_ads` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ad_id` int(11) NOT NULL,
+  `declined_msg_id` int(11) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_C3C5952B4F34D596` (`ad_id`),
+  KEY `IDX_C3C5952BCF186FB3` (`declined_msg_id`),
+  CONSTRAINT `FK_C3C5952BCF186FB3` FOREIGN KEY (`declined_msg_id`) REFERENCES `declined_msgs` (`id`),
+  CONSTRAINT `FK_C3C5952B4F34D596` FOREIGN KEY (`ad_id`) REFERENCES `ads` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `declined_ads`
+--
+
+LOCK TABLES `declined_ads` WRITE;
+/*!40000 ALTER TABLE `declined_ads` DISABLE KEYS */;
+/*!40000 ALTER TABLE `declined_ads` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `declined_msgs`
+--
+
+DROP TABLE IF EXISTS `declined_msgs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `declined_msgs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `msg` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `declined_msgs`
+--
+
+LOCK TABLES `declined_msgs` WRITE;
+/*!40000 ALTER TABLE `declined_msgs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `declined_msgs` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -650,7 +474,7 @@ CREATE TABLE `session` (
 
 LOCK TABLES `session` WRITE;
 /*!40000 ALTER TABLE `session` DISABLE KEYS */;
-INSERT INTO `session` VALUES ('3o8v8plhij1cmto236btldpu50','X3NmMl9hdHRyaWJ1dGVzfGE6MTp7czoxNDoiX3NlY3VyaXR5X21haW4iO3M6NTc0OiJDOjc0OiJTeW1mb255XENvbXBvbmVudFxTZWN1cml0eVxDb3JlXEF1dGhlbnRpY2F0aW9uXFRva2VuXFVzZXJuYW1lUGFzc3dvcmRUb2tlbiI6NDg2OnthOjM6e2k6MDtOO2k6MTtzOjQ6Im1haW4iO2k6MjtzOjQ0NjoiYTo0OntpOjA7QzozMToiaUxpc3RcQmFja2VuZEJ1bmRsZVxFbnRpdHlcVXNlciI6MjM1OnthOjk6e2k6MDtzOjg4OiJWTjVHV3ZOU1NPaE9qYUlpQk5mNVFudjdVb1lLUGVZRE1ibnJyYmlHSDFtYkdGL1ZQTDJoWDhuQTczNDl3Y2RHSi81enIvZ1F6bnM2c2pob01XMTZRUT09IjtpOjE7czozMToibWR2MGVhdXJob2d3ZzR3Y2dvb3dnMGNnYzBvNDRnMCI7aToyO3M6MTE6ImJlcm5hcmRvMTIzIjtpOjM7czoxMToiYmVybmFyZG8xMjMiO2k6NDtiOjA7aTo1O2I6MDtpOjY7YjowO2k6NztiOjE7aTo4O2k6OTt9fWk6MTtiOjE7aToyO2E6MTp7aTowO086NDE6IlN5bWZvbnlcQ29tcG9uZW50XFNlY3VyaXR5XENvcmVcUm9sZVxSb2xlIjoxOntzOjQ3OiIAU3ltZm9ueVxDb21wb25lbnRcU2VjdXJpdHlcQ29yZVxSb2xlXFJvbGUAcm9sZSI7czo5OiJST0xFX1VTRVIiO319aTozO2E6MDp7fX0iO319Ijt9X3NmMl9mbGFzaGVzfGE6MDp7fV9zZjJfbWV0YXxhOjM6e3M6MToidSI7aToxMzg4OTYxNDYwO3M6MToiYyI7aToxMzg4OTYwNzcwO3M6MToibCI7czoxOiIwIjt9',1388961460),('45qb4642os13g7o66pobgekr46','X3NmMl9hdHRyaWJ1dGVzfGE6MTp7czoyNjoiX3NlY3VyaXR5Lm1haW4udGFyZ2V0X3BhdGgiO3M6Mzc6Imh0dHA6Ly9pbGlzdC5kZXYvYXBwX2Rldi5waHAvYWNjb3VudC8iO31fc2YyX2ZsYXNoZXN8YTowOnt9X3NmMl9tZXRhfGE6Mzp7czoxOiJ1IjtpOjEzODg5NjA3ODQ7czoxOiJjIjtpOjEzODg5NjA3NzA7czoxOiJsIjtzOjE6IjAiO30=',1388960784),('8dvjdqc24uvcf7e3fjeech5b43','X3NmMl9hdHRyaWJ1dGVzfGE6MTp7czoyNjoiX3NlY3VyaXR5Lm1haW4udGFyZ2V0X3BhdGgiO3M6Mzc6Imh0dHA6Ly9pbGlzdC5kZXYvYXBwX2Rldi5waHAvYWNjb3VudC8iO31fc2YyX2ZsYXNoZXN8YTowOnt9X3NmMl9tZXRhfGE6Mzp7czoxOiJ1IjtpOjEzODg3OTczODQ7czoxOiJjIjtpOjEzODg3OTczODI7czoxOiJsIjtzOjE6IjAiO30=',1388797384),('bcjhig99ubik6cnt0fndffm9v5','X3NmMl9hdHRyaWJ1dGVzfGE6MTp7czozODoiZm9zX3VzZXJfc2VuZF9jb25maXJtYXRpb25fZW1haWwvZW1haWwiO3M6MjY6ImJlcm5hcmRvLmQuYWx2ZXNAZ21haWwuY29tIjt9X3NmMl9mbGFzaGVzfGE6MTp7czo3OiJzdWNjZXNzIjthOjE6e2k6MDtzOjM0OiJPIHVzdcOhcmlvIGZvaSBjcmlhZG8gY29tIHN1Y2Vzc28uIjt9fV9zZjJfbWV0YXxhOjM6e3M6MToidSI7aToxMzg4NzA0MDAwO3M6MToiYyI7aToxMzg4NzAzNzYzO3M6MToibCI7czoxOiIwIjt9',1388704004),('g3slitm8pnpuhure2vsqdl3n81','X3NmMl9hdHRyaWJ1dGVzfGE6MTp7czoxNDoiX3NlY3VyaXR5X21haW4iO3M6NTYzOiJDOjc0OiJTeW1mb255XENvbXBvbmVudFxTZWN1cml0eVxDb3JlXEF1dGhlbnRpY2F0aW9uXFRva2VuXFVzZXJuYW1lUGFzc3dvcmRUb2tlbiI6NDc1OnthOjM6e2k6MDtOO2k6MTtzOjQ6Im1haW4iO2k6MjtzOjQzNToiYTo0OntpOjA7QzozMToiaUxpc3RcQmFja2VuZEJ1bmRsZVxFbnRpdHlcVXNlciI6MjI0OnthOjk6e2k6MDtzOjg4OiJIOS9lR2hDVXhmN0hxV2d6alZXL1NrRUdwcEZ6bnlzVjdUVkNNR0Q2TFgvYXBNd2R3YUNVRE5UbmFhY0psUjQ2cEVNaDZjYnpvSWVDZTNTdTNMUU96UT09IjtpOjE7czozMToiZnZ6emJjbHdkNjhzYzQ0ZzRvazRjYzg4OGtjY3d3byI7aToyO3M6NjoiZ3VzbWFvIjtpOjM7czo2OiJndXNtYW8iO2k6NDtiOjA7aTo1O2I6MDtpOjY7YjowO2k6NztiOjE7aTo4O2k6MTA7fX1pOjE7YjoxO2k6MjthOjE6e2k6MDtPOjQxOiJTeW1mb255XENvbXBvbmVudFxTZWN1cml0eVxDb3JlXFJvbGVcUm9sZSI6MTp7czo0NzoiAFN5bWZvbnlcQ29tcG9uZW50XFNlY3VyaXR5XENvcmVcUm9sZVxSb2xlAHJvbGUiO3M6OToiUk9MRV9VU0VSIjt9fWk6MzthOjA6e319Ijt9fSI7fV9zZjJfZmxhc2hlc3xhOjA6e31fc2YyX21ldGF8YTozOntzOjE6InUiO2k6MTM4ODgwMTA0NztzOjE6ImMiO2k6MTM4ODc5NzM4MjtzOjE6ImwiO3M6MToiMCI7fQ==',1388801047),('v016lfu3e68o4ki4jjhhspu4o7','X3NmMl9hdHRyaWJ1dGVzfGE6Mjp7czozODoiZm9zX3VzZXJfc2VuZF9jb25maXJtYXRpb25fZW1haWwvZW1haWwiO3M6MjY6ImJlcm5hcmRvLmQuYWx2ZXNAZ21haWwuY29tIjtzOjE0OiJfc2VjdXJpdHlfbWFpbiI7czo1NjM6IkM6NzQ6IlN5bWZvbnlcQ29tcG9uZW50XFNlY3VyaXR5XENvcmVcQXV0aGVudGljYXRpb25cVG9rZW5cVXNlcm5hbWVQYXNzd29yZFRva2VuIjo0NzU6e2E6Mzp7aTowO047aToxO3M6NDoibWFpbiI7aToyO3M6NDM1OiJhOjQ6e2k6MDtDOjMxOiJpTGlzdFxCYWNrZW5kQnVuZGxlXEVudGl0eVxVc2VyIjoyMjQ6e2E6OTp7aTowO3M6ODg6Ikg5L2VHaENVeGY3SHFXZ3pqVlcvU2tFR3BwRnpueXNWN1RWQ01HRDZMWC9hcE13ZHdhQ1VETlRuYWFjSmxSNDZwRU1oNmNiem9JZUNlM1N1M0xRT3pRPT0iO2k6MTtzOjMxOiJmdnp6YmNsd2Q2OHNjNDRnNG9rNGNjODg4a2Njd3dvIjtpOjI7czo2OiJndXNtYW8iO2k6MztzOjY6Imd1c21hbyI7aTo0O2I6MDtpOjU7YjowO2k6NjtiOjA7aTo3O2I6MTtpOjg7aToxMDt9fWk6MTtiOjE7aToyO2E6MTp7aTowO086NDE6IlN5bWZvbnlcQ29tcG9uZW50XFNlY3VyaXR5XENvcmVcUm9sZVxSb2xlIjoxOntzOjQ3OiIAU3ltZm9ueVxDb21wb25lbnRcU2VjdXJpdHlcQ29yZVxSb2xlXFJvbGUAcm9sZSI7czo5OiJST0xFX1VTRVIiO319aTozO2E6MDp7fX0iO319Ijt9X3NmMl9mbGFzaGVzfGE6MDp7fV9zZjJfbWV0YXxhOjM6e3M6MToidSI7aToxMzg4NzEwODUzO3M6MToiYyI7aToxMzg4NzAzNzYzO3M6MToibCI7czoxOiIwIjt9',1388710853);
+INSERT INTO `session` VALUES ('3o8v8plhij1cmto236btldpu50','X3NmMl9hdHRyaWJ1dGVzfGE6MTp7czoxNDoiX3NlY3VyaXR5X21haW4iO3M6NTc0OiJDOjc0OiJTeW1mb255XENvbXBvbmVudFxTZWN1cml0eVxDb3JlXEF1dGhlbnRpY2F0aW9uXFRva2VuXFVzZXJuYW1lUGFzc3dvcmRUb2tlbiI6NDg2OnthOjM6e2k6MDtOO2k6MTtzOjQ6Im1haW4iO2k6MjtzOjQ0NjoiYTo0OntpOjA7QzozMToiaUxpc3RcQmFja2VuZEJ1bmRsZVxFbnRpdHlcVXNlciI6MjM1OnthOjk6e2k6MDtzOjg4OiJWTjVHV3ZOU1NPaE9qYUlpQk5mNVFudjdVb1lLUGVZRE1ibnJyYmlHSDFtYkdGL1ZQTDJoWDhuQTczNDl3Y2RHSi81enIvZ1F6bnM2c2pob01XMTZRUT09IjtpOjE7czozMToibWR2MGVhdXJob2d3ZzR3Y2dvb3dnMGNnYzBvNDRnMCI7aToyO3M6MTE6ImJlcm5hcmRvMTIzIjtpOjM7czoxMToiYmVybmFyZG8xMjMiO2k6NDtiOjA7aTo1O2I6MDtpOjY7YjowO2k6NztiOjE7aTo4O2k6OTt9fWk6MTtiOjE7aToyO2E6MTp7aTowO086NDE6IlN5bWZvbnlcQ29tcG9uZW50XFNlY3VyaXR5XENvcmVcUm9sZVxSb2xlIjoxOntzOjQ3OiIAU3ltZm9ueVxDb21wb25lbnRcU2VjdXJpdHlcQ29yZVxSb2xlXFJvbGUAcm9sZSI7czo5OiJST0xFX1VTRVIiO319aTozO2E6MDp7fX0iO319Ijt9X3NmMl9mbGFzaGVzfGE6MDp7fV9zZjJfbWV0YXxhOjM6e3M6MToidSI7aToxMzg5MjcwMTQ3O3M6MToiYyI7aToxMzg4OTYwNzcwO3M6MToibCI7czoxOiIwIjt9',1389270147),('45qb4642os13g7o66pobgekr46','X3NmMl9hdHRyaWJ1dGVzfGE6MTp7czoyNjoiX3NlY3VyaXR5Lm1haW4udGFyZ2V0X3BhdGgiO3M6Mzc6Imh0dHA6Ly9pbGlzdC5kZXYvYXBwX2Rldi5waHAvYWNjb3VudC8iO31fc2YyX2ZsYXNoZXN8YTowOnt9X3NmMl9tZXRhfGE6Mzp7czoxOiJ1IjtpOjEzODg5NjA3ODQ7czoxOiJjIjtpOjEzODg5NjA3NzA7czoxOiJsIjtzOjE6IjAiO30=',1388960784),('8dvjdqc24uvcf7e3fjeech5b43','X3NmMl9hdHRyaWJ1dGVzfGE6MTp7czoyNjoiX3NlY3VyaXR5Lm1haW4udGFyZ2V0X3BhdGgiO3M6Mzc6Imh0dHA6Ly9pbGlzdC5kZXYvYXBwX2Rldi5waHAvYWNjb3VudC8iO31fc2YyX2ZsYXNoZXN8YTowOnt9X3NmMl9tZXRhfGE6Mzp7czoxOiJ1IjtpOjEzODg3OTczODQ7czoxOiJjIjtpOjEzODg3OTczODI7czoxOiJsIjtzOjE6IjAiO30=',1388797384),('bcjhig99ubik6cnt0fndffm9v5','X3NmMl9hdHRyaWJ1dGVzfGE6MTp7czozODoiZm9zX3VzZXJfc2VuZF9jb25maXJtYXRpb25fZW1haWwvZW1haWwiO3M6MjY6ImJlcm5hcmRvLmQuYWx2ZXNAZ21haWwuY29tIjt9X3NmMl9mbGFzaGVzfGE6MTp7czo3OiJzdWNjZXNzIjthOjE6e2k6MDtzOjM0OiJPIHVzdcOhcmlvIGZvaSBjcmlhZG8gY29tIHN1Y2Vzc28uIjt9fV9zZjJfbWV0YXxhOjM6e3M6MToidSI7aToxMzg4NzA0MDAwO3M6MToiYyI7aToxMzg4NzAzNzYzO3M6MToibCI7czoxOiIwIjt9',1388704004),('g3slitm8pnpuhure2vsqdl3n81','X3NmMl9hdHRyaWJ1dGVzfGE6MTp7czoxNDoiX3NlY3VyaXR5X21haW4iO3M6NTYzOiJDOjc0OiJTeW1mb255XENvbXBvbmVudFxTZWN1cml0eVxDb3JlXEF1dGhlbnRpY2F0aW9uXFRva2VuXFVzZXJuYW1lUGFzc3dvcmRUb2tlbiI6NDc1OnthOjM6e2k6MDtOO2k6MTtzOjQ6Im1haW4iO2k6MjtzOjQzNToiYTo0OntpOjA7QzozMToiaUxpc3RcQmFja2VuZEJ1bmRsZVxFbnRpdHlcVXNlciI6MjI0OnthOjk6e2k6MDtzOjg4OiJIOS9lR2hDVXhmN0hxV2d6alZXL1NrRUdwcEZ6bnlzVjdUVkNNR0Q2TFgvYXBNd2R3YUNVRE5UbmFhY0psUjQ2cEVNaDZjYnpvSWVDZTNTdTNMUU96UT09IjtpOjE7czozMToiZnZ6emJjbHdkNjhzYzQ0ZzRvazRjYzg4OGtjY3d3byI7aToyO3M6NjoiZ3VzbWFvIjtpOjM7czo2OiJndXNtYW8iO2k6NDtiOjA7aTo1O2I6MDtpOjY7YjowO2k6NztiOjE7aTo4O2k6MTA7fX1pOjE7YjoxO2k6MjthOjE6e2k6MDtPOjQxOiJTeW1mb255XENvbXBvbmVudFxTZWN1cml0eVxDb3JlXFJvbGVcUm9sZSI6MTp7czo0NzoiAFN5bWZvbnlcQ29tcG9uZW50XFNlY3VyaXR5XENvcmVcUm9sZVxSb2xlAHJvbGUiO3M6OToiUk9MRV9VU0VSIjt9fWk6MzthOjA6e319Ijt9fSI7fV9zZjJfZmxhc2hlc3xhOjA6e31fc2YyX21ldGF8YTozOntzOjE6InUiO2k6MTM4ODgwMTA0NztzOjE6ImMiO2k6MTM4ODc5NzM4MjtzOjE6ImwiO3M6MToiMCI7fQ==',1388801047),('v016lfu3e68o4ki4jjhhspu4o7','X3NmMl9hdHRyaWJ1dGVzfGE6Mjp7czozODoiZm9zX3VzZXJfc2VuZF9jb25maXJtYXRpb25fZW1haWwvZW1haWwiO3M6MjY6ImJlcm5hcmRvLmQuYWx2ZXNAZ21haWwuY29tIjtzOjE0OiJfc2VjdXJpdHlfbWFpbiI7czo1NjM6IkM6NzQ6IlN5bWZvbnlcQ29tcG9uZW50XFNlY3VyaXR5XENvcmVcQXV0aGVudGljYXRpb25cVG9rZW5cVXNlcm5hbWVQYXNzd29yZFRva2VuIjo0NzU6e2E6Mzp7aTowO047aToxO3M6NDoibWFpbiI7aToyO3M6NDM1OiJhOjQ6e2k6MDtDOjMxOiJpTGlzdFxCYWNrZW5kQnVuZGxlXEVudGl0eVxVc2VyIjoyMjQ6e2E6OTp7aTowO3M6ODg6Ikg5L2VHaENVeGY3SHFXZ3pqVlcvU2tFR3BwRnpueXNWN1RWQ01HRDZMWC9hcE13ZHdhQ1VETlRuYWFjSmxSNDZwRU1oNmNiem9JZUNlM1N1M0xRT3pRPT0iO2k6MTtzOjMxOiJmdnp6YmNsd2Q2OHNjNDRnNG9rNGNjODg4a2Njd3dvIjtpOjI7czo2OiJndXNtYW8iO2k6MztzOjY6Imd1c21hbyI7aTo0O2I6MDtpOjU7YjowO2k6NjtiOjA7aTo3O2I6MTtpOjg7aToxMDt9fWk6MTtiOjE7aToyO2E6MTp7aTowO086NDE6IlN5bWZvbnlcQ29tcG9uZW50XFNlY3VyaXR5XENvcmVcUm9sZVxSb2xlIjoxOntzOjQ3OiIAU3ltZm9ueVxDb21wb25lbnRcU2VjdXJpdHlcQ29yZVxSb2xlXFJvbGUAcm9sZSI7czo5OiJST0xFX1VTRVIiO319aTozO2E6MDp7fX0iO319Ijt9X3NmMl9mbGFzaGVzfGE6MDp7fV9zZjJfbWV0YXxhOjM6e3M6MToidSI7aToxMzg4NzEwODUzO3M6MToiYyI7aToxMzg4NzAzNzYzO3M6MToibCI7czoxOiIwIjt9',1388710853);
 /*!40000 ALTER TABLE `session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -677,6 +501,34 @@ LOCK TABLES `sizes` WRITE;
 INSERT INTO `sizes` VALUES (1,'16'),(2,'32'),(3,'64');
 /*!40000 ALTER TABLE `sizes` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `subcategory`
+--
+
+DROP TABLE IF EXISTS `subcategory`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `subcategory` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `isActive` tinyint(1) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_723649C912469DE2` (`category_id`),
+  CONSTRAINT `FK_723649C912469DE2` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `subcategory`
+--
+
+LOCK TABLES `subcategory` WRITE;
+/*!40000 ALTER TABLE `subcategory` DISABLE KEYS */;
+INSERT INTO `subcategory` VALUES (1,'Classic',1,1),(2,'Mini',1,1),(3,'Shuffle',1,1),(4,'Nano',1,1),(5,'Touch',1,1),(6,'Outros',1,1),(7,'1a Geração',1,2),(8,'3G',1,2),(9,'3GS',1,2),(10,'4',1,2),(11,'4S',1,2),(12,'5',1,2),(13,'5S',1,2),(14,'5C',1,2),(15,'1',1,3),(16,'2',1,3),(17,'3',1,3),(18,'4',1,3),(19,'Mini',1,3);
+/*!40000 ALTER TABLE `subcategory` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -687,4 +539,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-01-09 10:13:03
+-- Dump completed on 2014-01-09 10:38:00

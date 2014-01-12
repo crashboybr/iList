@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * AdQueue
  *
- * @ORM\Table()
+ * @ORM\Table(name="ad_queues")
  * @ORM\Entity
  */
 class AdQueue

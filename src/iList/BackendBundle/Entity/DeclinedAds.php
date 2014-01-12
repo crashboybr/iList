@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * DeclinedAds
  *
- * @ORM\Table()
+ * @ORM\Table(name="declined_ads")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity
  */

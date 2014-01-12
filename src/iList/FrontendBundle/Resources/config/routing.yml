@@ -41,6 +41,8 @@ subdomain_vi:
     path:     /{city}/{category_name}/{slug}/{id}
     host:     "{state}.%base_host%"
     defaults: { _controller: iListFrontendBundle:Ad:viewAd }
+    requirements:
+        state:  rj|mg
     #requirements:
     #    domain: "%domain%"
 

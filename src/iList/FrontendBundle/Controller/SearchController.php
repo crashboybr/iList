@@ -19,7 +19,7 @@ class SearchController extends Controller
 {
     public function indexAction($category_name, $state, $subcategory_name)
     {	
-        //var_dump($subcategory_name);
+        
 
         $domain = $this->container->parameters['base_host'];
 
@@ -134,15 +134,17 @@ class SearchController extends Controller
         $filters['status'] = 1;
         $qb->andWhere('f.status = :status');
         $qb->setParameters($filters);
+        if ($state != "brasil")
+            $qb->andWhere('f.state = :state');
 
-        $ads = $qb->getQuery()->getResult();
+        
 
         //var_dump();
         //echo "<pre>";
         //\Doctrine\Common\Util\Debug::dump($logger->queries);
-        //\Doctrine\Common\Util\Debug::dump($ads);exit;
-        //\Doctrine\Common\Util\Debug::dump($filters);exit;
-
+        //\Doctrine\Common\Util\Debug::dump($filters);
+        //\Doctrine\Common\Util\Debug::dump($qb->getQuery());exit;
+        $ads = $qb->getQuery()->getResult();
 
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(

@@ -32,17 +32,15 @@ subdomain_search:
     path:     /{category_name}/{subcategory_name}
     host:     "{state}.%base_host%"
     defaults: { _controller: iListFrontendBundle:Search:index, category_name: '', subcategory_name: '', adtype: '', size: ''}
-    #requirements:
-    #    domain: "%domain%"
-    #requirements:
-    #    q: ".+"
+    requirements:
+        state:  rj|mg
 
 subdomain_vi:
     path:     /{city}/{category_name}/{slug}/{id}
     host:     "{state}.%base_host%"
     defaults: { _controller: iListFrontendBundle:Ad:viewAd }
-    requirements:
-        state:  rj|mg
+    #requirements:
+        #state:  rj|mg
     #requirements:
     #    domain: "%domain%"
 

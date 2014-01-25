@@ -8,6 +8,31 @@ iListFrontendBundle_account:
         prefix:   /account
         #host:     "%base_host%"
 
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+    #host:     "%base_host%"
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+    #host:     "%base_host%"
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /cadastro
+    #host:     "%base_host%"
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.yml"
+    prefix: /esqueci
+    #host:     "%base_host%"
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profile
+    #host:     "%base_host%"
+
+
 find_subcategory_by_category_id:
     path:  /buscaSubCategoria
     defaults: { _controller: iListFrontendBundle:Ad:getByCategoryId }
@@ -52,5 +77,5 @@ home:
 brasil_search:
     path:  /{category_name}/{subcategory_name}
     defaults: { _controller: iListFrontendBundle:Search:index, category_name: '', state: 'brasil', subcategory_name: '' }
-    #host:     "%base_host%"
+    host:     "www.%base_host%"
 

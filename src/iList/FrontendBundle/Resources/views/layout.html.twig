@@ -39,7 +39,7 @@
                 <div class="breadcrumb">
                     <div class="account">
                    	<img src="{{ asset('images/sec.gif') }}" width="23" height="24" alt="security" class="iconSec"/> 
-                    <a href="{{ path('account_home') }}" class="security">Acesse sua conta</a>
+                    <a href="{{ path('account_home') }}" class="security"> {% if app.user %}Olá {{ app.user.name }} - {% endif %}Acesse sua conta</a>
                     
                     </div>
                 </div>

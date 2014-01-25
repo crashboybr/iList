@@ -1,12 +1,12 @@
 iListFrontendBundle_anuncio:
         resource: "@iListFrontendBundle/Resources/config/routing/ad.yml"
         prefix:   /anuncio
-        host:     "%base_host%"
+        #host:     "%base_host%"
 
 iListFrontendBundle_account:
         resource: "@iListFrontendBundle/Resources/config/routing/account.yml"
         prefix:   /account
-        host:     "%base_host%"
+        #host:     "%base_host%"
 
 find_subcategory_by_category_id:
     path:  /buscaSubCategoria
@@ -52,5 +52,5 @@ home:
 brasil_search:
     path:  /{category_name}/{subcategory_name}
     defaults: { _controller: iListFrontendBundle:Search:index, category_name: '', state: 'brasil', subcategory_name: '' }
-
+    #host:     "%base_host%"
 

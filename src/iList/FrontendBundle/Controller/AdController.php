@@ -88,7 +88,7 @@ class AdController extends Controller
         return new Response($html);
     }
 
-
+    /*
     public function getBySubCategoryIdAction()
     {
         $this->em = $this->get('doctrine')->getEntityManager();
@@ -110,7 +110,7 @@ class AdController extends Controller
      
         return new Response($html);
     }
-
+*/
     /**
      * Creates a new Ad entity.
      *
@@ -311,7 +311,9 @@ class AdController extends Controller
     public function newAction()
     {
         $entity = new Ad();
+        
         $form   = $this->createCreateForm($entity);
+
         //echo "<pre>";
         //\Doctrine\Common\Util\Debug::dump($form);exit;
 

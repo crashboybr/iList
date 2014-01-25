@@ -3,7 +3,7 @@
 {% block javascripts %}
 	{{ parent() }}
 	{% javascripts
-		'@iListFrontendBundle/Resources/public/js/bjqs-1.3.min.js'
+		'@iListFrontendBundle/Resources/public/js/jquery.cycle.all.js'
 	 %}
 	    <script src="{{ asset_url }}"></script>
 	{% endjavascripts %}
@@ -14,36 +14,123 @@
 {% endblock %}
 
 {% block body %}
+<style>
+
+
+.slider{
+ margin: 0 auto;
+ width: 625px;
+ height: 345px; 
+ 
+ border: 8px solid #FFFFFF;
+ border-radius:5px;
+ box-shadow: 2px 2px 4px #333333;
+ 
+ position: relative;
+}
+
+.slider_next{
+    width: 62px;
+    height: 62px;
+    background: #f8f8f8;
+    border-radius: 70px;
+    position: absolute;
+    z-index: 99;
+    top: 130px;
+    left: 595px;
+    padding: 5px 0 0 5px;   
+    cursor: pointer;    
+}
+
+.slider_prev{
+    width: 62px;
+    height: 62px;
+    background: #f8f8f8;
+    border-radius: 70px;
+    position: absolute;
+    z-index: 99;
+    top: 130px;
+    left: -35px;
+    padding: 5px 0 0 5px;   
+    cursor: pointer;
+}
+
+#thumb { 
+    width: 100%; 
+    height: 80px; 
+    margin: 20px 5px;  
+}
+
+#thumb li { 
+    width: 60px; 
+    float: left; 
+    margin: 12px; 
+    list-style: none 
+}
+
+#thumb a { 
+    width: 60px; 
+    padding: 3px; 
+    display: block; 
+    border: 3px solid #FFFFFF;
+    border-radius:3px;
+    box-shadow: 1px 1px 3px #333333;
+}
+
+#thumb li.activeSlide a { 
+    border: 3px solid #0a526f;
+    border-radius:3px;
+    box-shadow: 1px 1px 3px #333333;
+}
+
+#thumb a:focus { 
+    outline: none; 
+}
+
+#thumb img { 
+    border: none; 
+    display: block 
+}
+
+</style>
+<script language="javascript">
+$(document).ready(function(){
+
+    $('#slider1').cycle({
+        fx: 'scrollHorz', //'scrollLeft,scrollDown,scrollRight,scrollUp',blindX, blindY, blindZ, cover, curtainX, curtainY, fade, fadeZoom, growX, growY, none, scrollUp,scrollDown,scrollLeft,scrollRight,scrollHorz,scrollVert,shuffle,slideX,slideY,toss,turnUp,turnDown,turnLeft,turnRight,uncover,ipe ,zoom
+        speed:  'slow', 
+        timeout: 0,
+        next:   '#next', 
+        prev:   '#prev',
+        pager:  '#thumb',
+         
+        pagerAnchorBuilder: function(idx, slide) { 
+            return '<li><a href="#"><img src="' + slide.src + '" width="60" height="60" /></a></li>'; 
+        }  
+    });
+
+
+}); 
+</script>
 
 
 	<div class="content-adview">
 		<h3>{{ ad.title }}</h3>
 		<div class="product-image">
 
-			<!--  Outer wrapper for presentation only, this can be anything you like -->
-			<div id="banner-fade">
-				<!-- start Basic Jquery Slider -->
-				<ul class="bjqs">
+
+            <div class="slider">
+
+            <div id="slider1">
                 {% for img in ad.adImages %}
-				    <li><img src="{{ asset(img.pic) }} " title=""></li>
-				{% endfor %}
-				</ul>
-				<!-- end Basic jQuery Slider -->
+                    <img border="0" src="{{ asset(img.pic) }}" width="625" height="345" alt="" title="" />
 
-			</div>
-			<!-- End outer wrapper -->
-
-			<script class="secret-source">
-				jQuery(document).ready(function($) {
-
-				$('#banner-fade').bjqs({
-				height      : 320,
-				width       : 620,
-				responsive  : true
-				});
-
-				});
-			</script>
+                {% endfor %}
+            </div>
+            <ul id="thumb"> </ul>
+            <div id='next' class="slider_next"><img border="0" src="/images/next.png" width="57" height="57" alt="next image" /></div>
+            <div id='prev' class="slider_prev"><img border="0" src="/images/prev.png" width="57" height="57" alt="previous image" /></div>
+            </div>
 
 		</div>
 
@@ -130,32 +217,34 @@
             {% set phone = app.user.phone %}
         {% endif %}
         <div class="inputLabel">
-            {{ form_errors(form.name) }}
             {% if (name) %}
                 {{ form_widget(form.name, { attr: { 'class': 'rounder', 'placeholder': form.name.vars.label, 'value': name }}) }}
             {% else %}
                 {{ form_widget(form.name, { attr: { 'class': 'rounder', 'placeholder': form.name.vars.label }}) }}
             {% endif %}
+            {{ form_errors(form.name) }}
         </div>
         <div class="inputLabel">
-            {{ form_errors(form.email) }}
             {% if (email) %}
                 {{ form_widget(form.email, { attr: { 'class': 'rounder', 'placeholder': form.email.vars.label, 'value': email }}) }}
             {% else %}
                 {{ form_widget(form.email, { attr: { 'class': 'rounder', 'placeholder': form.email.vars.label }}) }}
             {% endif %}
+            {{ form_errors(form.email) }}
         </div>
         <div class="inputLabel">
-            {{ form_errors(form.phone) }}
             {% if (phone) %}
                 {{ form_widget(form.phone, { attr: { 'class': 'rounder', 'placeholder': form.phone.vars.label, 'value': phone }}) }}
             {% else %}
                 {{ form_widget(form.phone, { attr: { 'class': 'rounder', 'placeholder': form.phone.vars.label }}) }}
             {% endif %}
+            {{ form_errors(form.phone) }}
         </div>
         <div class="inputLabel">
-            {{ form_errors(form.content) }}
+            
             {{ form_widget(form.content, { attr: { 'class': 'rounder', 'placeholder': form.content.vars.label, 'rows': 4, 'cols': 150 }}) }}
+            {{ form_errors(form.content) }}
+            
         </div>
       {{ form_widget(form.submit, { attr: { 'class': 'ButtonRegister', 'style': 'margin-top:5px;'}}) }}
 

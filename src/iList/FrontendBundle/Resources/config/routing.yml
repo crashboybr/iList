@@ -52,5 +52,5 @@ home:
 brasil_search:
     path:  /{category_name}/{subcategory_name}
     defaults: { _controller: iListFrontendBundle:Search:index, category_name: '', state: 'brasil', subcategory_name: '' }
-
+    #host:     "%base_host%"
 

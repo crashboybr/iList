@@ -13,6 +13,7 @@ group:
 
 # Security
 "Bad credentials": Usuário ou senha inválida
+"User account is disabled.": Sua conta ainda não foi validada. Por favor, clique no link que foi recebido por email.
 
 security:
     login:

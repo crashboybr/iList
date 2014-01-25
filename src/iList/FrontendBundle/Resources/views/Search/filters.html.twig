@@ -9,7 +9,7 @@ function submitFilter()
     <p>Escolha um Apple</p>
 </div>
 
-    <li class="item iphone ">
+    <li class="item iphone" onclick="location.href = '{{ path('brasil_search', {'category_name': 'iphone'}) }}';">
         <a href="{{ path('brasil_search', {'category_name': 'iphone'}) }}" class="btn-product">iPhone</a>
         <p class="text-bt"></p>
         {% if (category == 'iphone') %}
@@ -67,7 +67,7 @@ function submitFilter()
     </li>   
 
 
-    <li class="item ipad">
+    <li class="item ipad" onclick="location.href = '{{ path('brasil_search', {'category_name': 'ipad'}) }}';">
         <a href="{{ path('brasil_search', {'category_name': 'ipad' }) }}" class="btn-product">iPad</a>
         {% if (category == 'ipad') %}
             <li class="filter">
@@ -123,7 +123,7 @@ function submitFilter()
         {% endif %}
     </li>
 
-    <li class="item ipod">
+    <li class="item ipod" onclick="location.href = '{{ path('brasil_search', {'category_name': 'ipod'}) }}';">
         
         <a href="{{ path('brasil_search', {'category_name': 'ipod' }) }}" class="btn-product">iPod</a>
         {% if (category == 'ipod') %}
@@ -180,7 +180,7 @@ function submitFilter()
         {% endif %}
     </li>
 
-    <li class="item macbook">
+    <li class="item macbook" onclick="location.href = '{{ path('brasil_search', {'category_name': 'macbook'}) }}';">
         <a href="{{ path('brasil_search', {'category_name': 'macbook' }) }}" class="btn-product">MacBook</a>
         {% if (category == 'macbook') %}
         <li class="filter" >
@@ -267,7 +267,7 @@ function submitFilter()
         {% endif %}
     </li>
 
-    <li class="item imac">
+    <li class="item imac" onclick="location.href = '{{ path('brasil_search', {'category_name': 'imac'}) }}';">
         <a href="{{ path('brasil_search', {'category_name': 'imac' }) }}" class="btn-product">iMac</a>
         {% if (category == 'imac') %}
         <li class="filter">
@@ -387,7 +387,7 @@ function submitFilter()
         {% endif %}
     </li>
 
-    <li class="item others">
+    <li class="item others" onclick="location.href = '{{ path('brasil_search', {'category_name': 'others'}) }}';">
         <a href="{{ path('brasil_search', {'category_name': 'acessorios' }) }}" class="btn-product">Acessórios</a>
         {% if (category == 'acessorios') %}
         <li class="filter">

@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new iList\FrontendBundle\iListFrontendBundle(),
             new iList\BackendBundle\iListBackendBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

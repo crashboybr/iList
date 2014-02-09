@@ -5,12 +5,12 @@ namespace iList\BackendBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Color
+ * Processor
  *
- * @ORM\Table(name="colors")
+ * @ORM\Table()
  * @ORM\Entity
  */
-class Color
+class Processor
 {
     /**
      * @var integer
@@ -29,19 +29,14 @@ class Color
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Product", mappedBy="colors")
-     */
-    private $products; 
-
-    /**
-     * @ORM\OneToMany(targetEntity="Ad", mappedBy="color")
-     */
-    protected $ads;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Category", mappedBy="colors")
+     * @ORM\ManyToMany(targetEntity="Category", mappedBy="processors")
      */
     private $categories;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Ad", mappedBy="processors")
+     */
+    protected $ads;
 
 
     /**
@@ -58,7 +53,7 @@ class Color
      * Set name
      *
      * @param string $name
-     * @return Color
+     * @return Processor
      */
     public function setName($name)
     {
@@ -81,80 +76,14 @@ class Color
      */
     public function __construct()
     {
-        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
-    /**
-     * Add products
-     *
-     * @param \iList\BackendBundle\Entity\Product $products
-     * @return Color
-     */
-    public function addProduct(\iList\BackendBundle\Entity\Product $products)
-    {
-        $this->products[] = $products;
-    
-        return $this;
-    }
-
-    /**
-     * Remove products
-     *
-     * @param \iList\BackendBundle\Entity\Product $products
-     */
-    public function removeProduct(\iList\BackendBundle\Entity\Product $products)
-    {
-        $this->products->removeElement($products);
-    }
-
-    /**
-     * Get products
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getProducts()
-    {
-        return $this->products;
-    }
-
-    /**
-     * Add ads
-     *
-     * @param \iList\BackendBundle\Entity\Ad $ads
-     * @return Color
-     */
-    public function addAd(\iList\BackendBundle\Entity\Ad $ads)
-    {
-        $this->ads[] = $ads;
-    
-        return $this;
-    }
-
-    /**
-     * Remove ads
-     *
-     * @param \iList\BackendBundle\Entity\Ad $ads
-     */
-    public function removeAd(\iList\BackendBundle\Entity\Ad $ads)
-    {
-        $this->ads->removeElement($ads);
-    }
-
-    /**
-     * Get ads
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getAds()
-    {
-        return $this->ads;
-    }
-
     /**
      * Add categories
      *
      * @param \iList\BackendBundle\Entity\Category $categories
-     * @return Color
+     * @return Processor
      */
     public function addCategorie(\iList\BackendBundle\Entity\Category $categories)
     {
@@ -181,5 +110,38 @@ class Color
     public function getCategories()
     {
         return $this->categories;
+    }
+
+    /**
+     * Add ads
+     *
+     * @param \iList\BackendBundle\Entity\Ad $ads
+     * @return Processor
+     */
+    public function addAd(\iList\BackendBundle\Entity\Ad $ads)
+    {
+        $this->ads[] = $ads;
+    
+        return $this;
+    }
+
+    /**
+     * Remove ads
+     *
+     * @param \iList\BackendBundle\Entity\Ad $ads
+     */
+    public function removeAd(\iList\BackendBundle\Entity\Ad $ads)
+    {
+        $this->ads->removeElement($ads);
+    }
+
+    /**
+     * Get ads
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAds()
+    {
+        return $this->ads;
     }
 }

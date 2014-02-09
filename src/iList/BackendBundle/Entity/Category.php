@@ -47,6 +47,36 @@ class Category
      */
     protected $products;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Size", inversedBy="sizes")
+     * @ORM\JoinTable(name="category_sizes")
+     */
+    private $sizes;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Color", inversedBy="colors")
+     * @ORM\JoinTable(name="category_colors")
+     */
+    private $colors;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Processor", inversedBy="processors")
+     * @ORM\JoinTable(name="category_processors")
+     */
+    private $processors;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="ScreenSize", inversedBy="screens")
+     * @ORM\JoinTable(name="category_screens")
+     */
+    private $screens;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="MemoryRam", inversedBy="memories")
+     * @ORM\JoinTable(name="category_memories")
+     */
+    private $memories;
+
      /**
      * @ORM\OneToMany(targetEntity="Ad", mappedBy="category")
      */
@@ -218,5 +248,170 @@ class Category
     public function getAds()
     {
         return $this->ads;
+    }
+
+    /**
+     * Add sizes
+     *
+     * @param \iList\BackendBundle\Entity\Size $sizes
+     * @return Category
+     */
+    public function addSize(\iList\BackendBundle\Entity\Size $sizes)
+    {
+        $this->sizes[] = $sizes;
+    
+        return $this;
+    }
+
+    /**
+     * Remove sizes
+     *
+     * @param \iList\BackendBundle\Entity\Size $sizes
+     */
+    public function removeSize(\iList\BackendBundle\Entity\Size $sizes)
+    {
+        $this->sizes->removeElement($sizes);
+    }
+
+    /**
+     * Get sizes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSizes()
+    {
+        return $this->sizes;
+    }
+
+    /**
+     * Add colors
+     *
+     * @param \iList\BackendBundle\Entity\Color $colors
+     * @return Category
+     */
+    public function addColor(\iList\BackendBundle\Entity\Color $colors)
+    {
+        $this->colors[] = $colors;
+    
+        return $this;
+    }
+
+    /**
+     * Remove colors
+     *
+     * @param \iList\BackendBundle\Entity\Color $colors
+     */
+    public function removeColor(\iList\BackendBundle\Entity\Color $colors)
+    {
+        $this->colors->removeElement($colors);
+    }
+
+    /**
+     * Get colors
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getColors()
+    {
+        return $this->colors;
+    }
+
+    /**
+     * Add processors
+     *
+     * @param \iList\BackendBundle\Entity\Processor $processors
+     * @return Category
+     */
+    public function addProcessor(\iList\BackendBundle\Entity\Processor $processors)
+    {
+        $this->processors[] = $processors;
+    
+        return $this;
+    }
+
+    /**
+     * Remove processors
+     *
+     * @param \iList\BackendBundle\Entity\Processor $processors
+     */
+    public function removeProcessor(\iList\BackendBundle\Entity\Processor $processors)
+    {
+        $this->processors->removeElement($processors);
+    }
+
+    /**
+     * Get processors
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProcessors()
+    {
+        return $this->processors;
+    }
+
+    /**
+     * Add screens
+     *
+     * @param \iList\BackendBundle\Entity\ScreenSize $screens
+     * @return Category
+     */
+    public function addScreen(\iList\BackendBundle\Entity\ScreenSize $screens)
+    {
+        $this->screens[] = $screens;
+    
+        return $this;
+    }
+
+    /**
+     * Remove screens
+     *
+     * @param \iList\BackendBundle\Entity\ScreenSize $screens
+     */
+    public function removeScreen(\iList\BackendBundle\Entity\ScreenSize $screens)
+    {
+        $this->screens->removeElement($screens);
+    }
+
+    /**
+     * Get screens
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getScreens()
+    {
+        return $this->screens;
+    }
+
+    /**
+     * Add memories
+     *
+     * @param \iList\BackendBundle\Entity\MemoryRam $memories
+     * @return Category
+     */
+    public function addMemorie(\iList\BackendBundle\Entity\MemoryRam $memories)
+    {
+        $this->memories[] = $memories;
+    
+        return $this;
+    }
+
+    /**
+     * Remove memories
+     *
+     * @param \iList\BackendBundle\Entity\MemoryRam $memories
+     */
+    public function removeMemorie(\iList\BackendBundle\Entity\MemoryRam $memories)
+    {
+        $this->memories->removeElement($memories);
+    }
+
+    /**
+     * Get memories
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMemories()
+    {
+        return $this->memories;
     }
 }

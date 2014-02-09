@@ -1,0 +1,22 @@
+{% extends 'iListFrontendBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+	{% stylesheets 
+		'bundles/ilistfrontend/css/style-sell-apple.css'
+	filter='cssrewrite' %}
+	    <link rel="stylesheet" href="{{ asset_url }}" />
+	{% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+
+
+           		<div class="content-ad">
+                	<div class="titleMenu">
+                        <p class="titleStyle">Anúncio criado com sucesso!</p>
+                        Em breve iremos revisar o seu anúncio.
+                    </div>
+                    
+            </div>
+            
+{% endblock %}

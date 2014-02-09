@@ -16,6 +16,31 @@ class CategoryType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('sizes' , 'entity' , array(
+                      'class'    => 'iListBackendBundle:Size' ,
+                      'property' => 'size' ,
+                      'expanded' => true ,
+                      'multiple' => true , ))
+            ->add('colors' , 'entity' , array(
+                      'class'    => 'iListBackendBundle:Color' ,
+                      'property' => 'name' ,
+                      'expanded' => true ,
+                      'multiple' => true , ))
+            ->add('screens' , 'entity' , array(
+                      'class'    => 'iListBackendBundle:ScreenSize' ,
+                      'property' => 'size' ,
+                      'expanded' => true ,
+                      'multiple' => true , ))
+            ->add('processors' , 'entity' , array(
+                      'class'    => 'iListBackendBundle:Processor' ,
+                      'property' => 'name' ,
+                      'expanded' => true ,
+                      'multiple' => true , ))
+            ->add('memories' , 'entity' , array(
+                      'class'    => 'iListBackendBundle:MemoryRam' ,
+                      'property' => 'name' ,
+                      'expanded' => true ,
+                      'multiple' => true , ))
             ->add('isActive')
         ;
     }

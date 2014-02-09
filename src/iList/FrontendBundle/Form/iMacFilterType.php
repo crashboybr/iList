@@ -11,7 +11,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Doctrine\ORM\EntityRepository;
 
-class iPodFilterType extends AbstractType
+class iMacFilterType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -36,20 +36,46 @@ class iPodFilterType extends AbstractType
                           return $er->createQueryBuilder('u')
                                 ->innerJoin('u.categories', 's', 'WITH', 's.id = :category_id')
                                 ->orderBy('u.size', 'ASC')
-                                ->setParameter('category_id', 1);
+                                ->setParameter('category_id', 5);
                           
                           },
                       'property' => 'size' ,
                       'expanded' => true ,
                       'multiple' => true , ))
-            ->add('color' , 'entity' , array(
-                      'class'    => 'iListBackendBundle:Color' ,
+            ->add('screen' , 'entity' , array(
+                      'class'    => 'iListBackendBundle:ScreenSize' ,
+                      'query_builder' => function(EntityRepository $er) {
+
+                          return $er->createQueryBuilder('u')
+                                ->innerJoin('u.categories', 's', 'WITH', 's.id = :category_id')
+                                ->orderBy('u.size', 'ASC')
+                                ->setParameter('category_id', 5);
+                          
+                          },
+                      'property' => 'size' ,
+                      'expanded' => true ,
+                      'multiple' => true , ))
+             ->add('processor' , 'entity' , array(
+                      'class'    => 'iListBackendBundle:Processor' ,
                       'query_builder' => function(EntityRepository $er) {
 
                           return $er->createQueryBuilder('u')
                                 ->innerJoin('u.categories', 's', 'WITH', 's.id = :category_id')
                                 ->orderBy('u.name', 'ASC')
-                                ->setParameter('category_id', 1);
+                                ->setParameter('category_id', 5);
+                          
+                          },
+                      'property' => 'name' ,
+                      'expanded' => true ,
+                      'multiple' => true , ))
+             ->add('memory' , 'entity' , array(
+                      'class'    => 'iListBackendBundle:MemoryRam' ,
+                      'query_builder' => function(EntityRepository $er) {
+
+                          return $er->createQueryBuilder('u')
+                                ->innerJoin('u.categories', 's', 'WITH', 's.id = :category_id')
+                                ->orderBy('u.name', 'ASC')
+                                ->setParameter('category_id', 5);
                           
                           },
                       'property' => 'name' ,
@@ -62,7 +88,7 @@ class iPodFilterType extends AbstractType
                           return $er->createQueryBuilder('u')
                                 ->innerJoin('u.category', 's', 'WITH', 's.id = :category_id')
                                 ->orderBy('u.name', 'ASC')
-                                ->setParameter('category_id', 1);
+                                ->setParameter('category_id', 5);
                           
                           },
                       'property' => 'name' ,
@@ -85,6 +111,6 @@ class iPodFilterType extends AbstractType
      */
     public function getName()
     {
-        return 'ilist_frontendbundle_ipad_filter';
+        return 'ilist_frontendbundle_imac_filter';
     }
 }

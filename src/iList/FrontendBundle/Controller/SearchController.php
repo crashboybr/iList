@@ -12,6 +12,9 @@ use iList\BackendBundle\Entity\Product;
 use iList\FrontendBundle\Form\iPhoneFilterType;
 use iList\FrontendBundle\Form\iPadFilterType;
 use iList\FrontendBundle\Form\iPodFilterType;
+use iList\FrontendBundle\Form\MacBookFilterType;
+use iList\FrontendBundle\Form\iMacFilterType;
+use iList\FrontendBundle\Form\AcessoriesFilterType;
 
 use iList\BackendBundle\Classes\Tools;
 
@@ -64,11 +67,23 @@ class SearchController extends Controller
                     $filterForm = $this->createForm(new iPodFilterType());
                     break;
 
+                case 'macbook':
+                    $filterForm = $this->createForm(new MacBookFilterType());
+                    break;
+                case 'imac':
+                    $filterForm = $this->createForm(new iMacFilterType());
+                    break;
+                case 'acessorios':
+                    $filterForm = $this->createForm(new AcessoriesFilterType());
+                    break;
             }
             
         }
         //if ($subcategory)
         //	$filters['subcategory'] = $subcategory;
+
+        //echo "<pre>";
+        //\Doctrine\Common\Util\Debug::dump($filterForm->createView());exit;
 
         $qb = $em->createQueryBuilder();
         $qb->select('f')
@@ -107,6 +122,30 @@ class SearchController extends Controller
             {   
                 $qb->andWhere('f.price <= (:price_max)');
                 $filters['price_max'] = $data['price_max'];
+            }
+
+            if (!$data['screen']->isEmpty())
+            {
+                foreach ($data['screen'] as $screen)
+                    $filters['screen'][] = $screen;
+
+                $qb->andWhere('f.screen in (:screen)');
+            }
+
+            if (!$data['processor']->isEmpty())
+            {
+                foreach ($data['processor'] as $processor)
+                    $filters['processor'][] = $processor;
+
+                $qb->andWhere('f.processor in (:processor)');
+            }
+
+            if (!$data['memory']->isEmpty())
+            {
+                foreach ($data['memory'] as $memory)
+                    $filters['memory'][] = $memory;
+
+                $qb->andWhere('f.memory in (:memory)');
             }
 
             //unset($filters['price_min'], $filters['price_max']);
@@ -152,6 +191,13 @@ class SearchController extends Controller
             $this->get('request')->query->get('page', 1)/*page number*/,
             5
         );
+
+
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        // Simple example
+        //$breadcrumbs->addItem("Home", $this->get("router")->generate("i_list_backend_homepage"));
+
+
 
  
          //echo "<pre>";

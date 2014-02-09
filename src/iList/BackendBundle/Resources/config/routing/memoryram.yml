@@ -1,0 +1,30 @@
+memoriaram:
+    pattern:  /
+    defaults: { _controller: "iListBackendBundle:MemoryRam:index" }
+
+memoriaram_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "iListBackendBundle:MemoryRam:show" }
+
+memoriaram_new:
+    pattern:  /new
+    defaults: { _controller: "iListBackendBundle:MemoryRam:new" }
+
+memoriaram_create:
+    pattern:  /create
+    defaults: { _controller: "iListBackendBundle:MemoryRam:create" }
+    requirements: { _method: post }
+
+memoriaram_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "iListBackendBundle:MemoryRam:edit" }
+
+memoriaram_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "iListBackendBundle:MemoryRam:update" }
+    requirements: { _method: post|put }
+
+memoriaram_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "iListBackendBundle:MemoryRam:delete" }
+    requirements: { _method: post|delete }

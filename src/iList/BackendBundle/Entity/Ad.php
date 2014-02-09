@@ -108,6 +108,47 @@ class Ad
      */
     protected $color;
 
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="screen_id", type="integer", nullable=true)
+     */
+    private $screenId;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ScreenSize", inversedBy="ads")
+     * @ORM\JoinColumn(name="screen_id", referencedColumnName="id", nullable=true)
+     */
+    protected $screen;
+
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="processor_id", type="integer", nullable=true)
+     */
+    private $processorId;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Processor", inversedBy="ads")
+     * @ORM\JoinColumn(name="processor_id", referencedColumnName="id", nullable=true)
+     */
+    protected $processor;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="memory_id", type="integer", nullable=true)
+     */
+    private $memoryId;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="MemoryRam", inversedBy="ads")
+     * @ORM\JoinColumn(name="memory_id", referencedColumnName="id", nullable=true)
+     */
+    protected $memory;
+
     /**
      * @var string
      *
@@ -1031,5 +1072,143 @@ class Ad
     public function getDeclinedAds()
     {
         return $this->declinedAds;
+    }
+
+    /**
+     * Set screenId
+     *
+     * @param integer $screenId
+     * @return Ad
+     */
+    public function setScreenId($screenId)
+    {
+        $this->screenId = $screenId;
+    
+        return $this;
+    }
+
+    /**
+     * Get screenId
+     *
+     * @return integer 
+     */
+    public function getScreenId()
+    {
+        return $this->screenId;
+    }
+
+    /**
+     * Set screen
+     *
+     * @param \iList\BackendBundle\Entity\ScreenSize $screen
+     * @return Ad
+     */
+    public function setScreen(\iList\BackendBundle\Entity\ScreenSize $screen = null)
+    {
+        $this->screen = $screen;
+    
+        return $this;
+    }
+
+    /**
+     * Get screen
+     *
+     * @return \iList\BackendBundle\Entity\ScreenSize 
+     */
+    public function getScreen()
+    {
+        return $this->screen;
+    }
+
+    /**
+     * Set processorId
+     *
+     * @param integer $processorId
+     * @return Ad
+     */
+    public function setProcessorId($processorId)
+    {
+        $this->processorId = $processorId;
+    
+        return $this;
+    }
+
+    /**
+     * Get processorId
+     *
+     * @return integer 
+     */
+    public function getProcessorId()
+    {
+        return $this->processorId;
+    }
+
+    /**
+     * Set memoryId
+     *
+     * @param integer $memoryId
+     * @return Ad
+     */
+    public function setMemoryId($memoryId)
+    {
+        $this->memoryId = $memoryId;
+    
+        return $this;
+    }
+
+    /**
+     * Get memoryId
+     *
+     * @return integer 
+     */
+    public function getMemoryId()
+    {
+        return $this->memoryId;
+    }
+
+    /**
+     * Set processor
+     *
+     * @param \iList\BackendBundle\Entity\Processor $processor
+     * @return Ad
+     */
+    public function setProcessor(\iList\BackendBundle\Entity\Processor $processor = null)
+    {
+        $this->processor = $processor;
+    
+        return $this;
+    }
+
+    /**
+     * Get processor
+     *
+     * @return \iList\BackendBundle\Entity\Processor 
+     */
+    public function getProcessor()
+    {
+        return $this->processor;
+    }
+
+    /**
+     * Set memory
+     *
+     * @param \iList\BackendBundle\Entity\MemoryRam $memory
+     * @return Ad
+     */
+    public function setMemory(\iList\BackendBundle\Entity\MemoryRam $memory = null)
+    {
+        $this->memory = $memory;
+    
+        return $this;
+    }
+
+    /**
+     * Get memory
+     *
+     * @return \iList\BackendBundle\Entity\MemoryRam 
+     */
+    public function getMemory()
+    {
+        return $this->memory;
     }
 }

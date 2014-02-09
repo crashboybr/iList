@@ -38,6 +38,11 @@ class Color
      */
     protected $ads;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Category", mappedBy="colors")
+     */
+    private $categories;
+
 
     /**
      * Get id
@@ -143,5 +148,38 @@ class Color
     public function getAds()
     {
         return $this->ads;
+    }
+
+    /**
+     * Add categories
+     *
+     * @param \iList\BackendBundle\Entity\Category $categories
+     * @return Color
+     */
+    public function addCategorie(\iList\BackendBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+    
+        return $this;
+    }
+
+    /**
+     * Remove categories
+     *
+     * @param \iList\BackendBundle\Entity\Category $categories
+     */
+    public function removeCategorie(\iList\BackendBundle\Entity\Category $categories)
+    {
+        $this->categories->removeElement($categories);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCategories()
+    {
+        return $this->categories;
     }
 }

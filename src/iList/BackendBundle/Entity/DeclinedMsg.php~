@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * DeclinedMsg
  *
- * @ORM\Table()
+ * @ORM\Table(name="declined_msgs")
  * @ORM\Entity
  */
 class DeclinedMsg
@@ -65,5 +65,45 @@ class DeclinedMsg
     public function getMsg()
     {
         return $this->msg;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->declinedAds = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add declinedAds
+     *
+     * @param \iList\BackendBundle\Entity\DeclinedAds $declinedAds
+     * @return DeclinedMsg
+     */
+    public function addDeclinedAd(\iList\BackendBundle\Entity\DeclinedAds $declinedAds)
+    {
+        $this->declinedAds[] = $declinedAds;
+    
+        return $this;
+    }
+
+    /**
+     * Remove declinedAds
+     *
+     * @param \iList\BackendBundle\Entity\DeclinedAds $declinedAds
+     */
+    public function removeDeclinedAd(\iList\BackendBundle\Entity\DeclinedAds $declinedAds)
+    {
+        $this->declinedAds->removeElement($declinedAds);
+    }
+
+    /**
+     * Get declinedAds
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDeclinedAds()
+    {
+        return $this->declinedAds;
     }
 }

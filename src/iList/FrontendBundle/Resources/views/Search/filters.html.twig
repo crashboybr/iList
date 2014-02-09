@@ -154,6 +154,19 @@ function submitFilter()
                         </ul>
 
                         <ul class="filter-list">
+                            <p class="title-filter">Cores:</p>
+
+                            {% for color in filterForm.color %}
+
+                                <li class="filter-item">
+                                    {{ form_widget(color, { attr: { 'class': 'filtrosclick selectGenero', 'onclick': 'submitFilter()' }}) }}
+                                    <label class="text-filter" for="">{{ color.vars.label }}</label>
+                                </li>
+                            {% endfor %}
+
+                        </ul>
+
+                        <ul class="filter-list">
                             <p class="title-filter">Modelo:</p>
 
                             {% for subcategory in filterForm.subcategory %}
@@ -183,87 +196,95 @@ function submitFilter()
     <li class="item macbook" onclick="location.href = '{{ path('brasil_search', {'category_name': 'macbook'}) }}';">
         <a href="{{ path('brasil_search', {'category_name': 'macbook' }) }}" class="btn-product">MacBook</a>
         {% if (category == 'macbook') %}
-        <li class="filter" >
-            <ul class="filter-list">
-                <p class="title-filter">Modelos:</p>
-                <li class="filter-item">
-                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
-                    <label class="text-filter" for="">MacBook Pro</label>
+            <li class="filter">
+                    {{ form_start(filterForm, { attr: { 'novalidate': 'novalidate', 'id': 'filters' }}) }}
+                        <ul class="filter-list">
+                            <p class="title-filter">Estado:</p>
+                            {% for adType in filterForm.adType %}
+
+                                <li class="filter-item">
+                                    {{ form_widget(adType, { attr: { 'class': 'filtrosclick selectGenero', 'onclick': 'submitFilter()' }}) }}
+                                    <label class="text-filter" for="">{{ adType.vars.label }}</label>
+                                </li>
+                            {% endfor %}
+
+                        </ul>
+                        <ul class="filter-list">
+                            <p class="title-filter">Capacidade:</p>
+
+                            {% for size in filterForm.size %}
+
+                                <li class="filter-item">
+                                    {{ form_widget(size, { attr: { 'class': 'filtrosclick selectGenero', 'onclick': 'submitFilter()' }}) }}
+                                    <label class="text-filter" for="">{{ size.vars.label }}G</label>
+                                </li>
+                            {% endfor %}
+
+                        </ul>
+
+                        <ul class="filter-list">
+                            <p class="title-filter">Polegadas:</p>
+
+                            {% for screen in filterForm.screen %}
+
+                                <li class="filter-item">
+                                    {{ form_widget(screen, { attr: { 'class': 'filtrosclick selectGenero', 'onclick': 'submitFilter()' }}) }}
+                                    <label class="text-filter" for="">{{ screen.vars.label }}</label>
+                                </li>
+                            {% endfor %}
+
+                        </ul>
+
+                        <ul class="filter-list">
+                            <p class="title-filter">Memória Ram:</p>
+
+                            {% for memory in filterForm.memory %}
+
+                                <li class="filter-item">
+                                    {{ form_widget(memory, { attr: { 'class': 'filtrosclick selectGenero', 'onclick': 'submitFilter()' }}) }}
+                                    <label class="text-filter" for="">{{ memory.vars.label }}</label>
+                                </li>
+                            {% endfor %}
+
+                        </ul> 
+
+                        <ul class="filter-list">
+                            <p class="title-filter">Processador:</p>
+
+                            {% for processor in filterForm.processor %}
+
+                                <li class="filter-item">
+                                    {{ form_widget(processor, { attr: { 'class': 'filtrosclick selectGenero', 'onclick': 'submitFilter()' }}) }}
+                                    <label class="text-filter" for="">{{ processor.vars.label }}</label>
+                                </li>
+                            {% endfor %}
+
+                        </ul>
+
+                        <ul class="filter-list">
+                            <p class="title-filter">Modelo:</p>
+
+                            {% for subcategory in filterForm.subcategory %}
+
+                                <li class="filter-item">
+                                    {{ form_widget(subcategory, { attr: { 'class': 'filtrosclick selectGenero', 'onclick': 'submitFilter()' }}) }}
+                                    <label class="text-filter" for="">MacBook {{ subcategory.vars.label }}</label>
+                                </li>
+                            {% endfor %}
+
+                        </ul>
+
+                        <ul class="filter-list">
+                            <p class="title-filter">Preço:</p>
+                            <li id="pricerange" class="filter-item">
+                                {{ form_widget(filterForm.price_min, { attr: { 'class': 'field-filter' }}) }}
+                                {{ form_widget(filterForm.price_max, { attr: { 'class': 'field-filter' }}) }}
+                                {{ form_widget(filterForm.price_submit, { attr: { 'class': 'search-bt'}}) }}
+                            
+                            </li> 
+                        </ul>
+                    {{ form_end(filterForm) }}
                 </li>
-                <li class="filter-item">
-                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
-                    <label class="text-filter" for="">MacBook Air</label>
-                </li> 
-            </ul>
-            <ul class="filter-list">
-                <p class="title-filter">Tela:</p>
-                <li class="filter-item">
-                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
-                    <label class="text-filter" for="">11 polegadas</label>
-                </li>
-                <li class="filter-item">
-                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
-                    <label class="text-filter" for="">13 polegadas</label>
-                </li>
-                <li class="filter-item">
-                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
-                    <label class="text-filter" for="">15 polegadas</label>
-                </li>
-            </ul>
-            <ul class="filter-list">
-                <p class="title-filter">HD:</p>
-                <li class="filter-item">
-                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
-                    <label class="text-filter" for="">128G</label>
-                </li>
-                <li class="filter-item">
-                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
-                    <label class="text-filter" for="">256G</label>
-                </li>
-                <li class="filter-item">
-                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
-                    <label class="text-filter" for="">512G</label>
-                </li> 
-                <li class="filter-item">
-                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
-                    <label class="text-filter" for="">1T</label>
-                </li>
-            </ul>
-            <ul class="filter-list">
-                <p class="title-filter">Memória:</p>
-                <li class="filter-item">
-                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
-                    <label class="text-filter" for="">4G</label>
-                </li>
-                <li class="filter-item">
-                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
-                    <label class="text-filter" for="">8G</label>
-                </li>
-                <li class="filter-item">
-                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
-                    <label class="text-filter" for="">16G</label>
-                </li> 
-            </ul> 
-            <ul class="filter-list">
-                <p class="title-filter">Processador:</p>
-                <li class="filter-item">
-                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
-                    <label class="text-filter" for="">i5</label>
-                </li>
-                <li class="filter-item">
-                    <input value="Concerto" type="checkbox" name="filtroSecao" class="filtrosclick selectGenero">
-                    <label class="text-filter" for="">i7</label>
-                </li>
-            </ul> 
-            <ul class="filter-list">
-                <p class="title-filter">Preço:</p>
-                <li id="pricerange" class="filter-item">
-                <input class="field-filter" name="ps" id="ps" placeholder="Mín." value="" maxlength="13">
-                <input class="field-filter" name="pe" id="pe" placeholder="Máx." value="" maxlength="13">
-                <input type="submit" class="search-bt" value="ok" id="price_bt" disabled="disabled">
-                </li> 
-            </ul>
-        </li>
         {% endif %}
     </li>
 

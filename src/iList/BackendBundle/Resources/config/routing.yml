@@ -34,3 +34,15 @@ iListBackendBundle_declinedmsg:
 iListBackendBundle_fila:
         resource: "@iListBackendBundle/Resources/config/routing/adqueue.yml"
         prefix:   /fila
+
+iListBackendBundle_polegadas:
+        resource: "@iListBackendBundle/Resources/config/routing/screensize.yml"
+        prefix:   /polegadas
+
+iListBackendBundle_processadores:
+        resource: "@iListBackendBundle/Resources/config/routing/processor.yml"
+        prefix:   /processadores
+
+iListBackendBundle_memoriaram:
+        resource: "@iListBackendBundle/Resources/config/routing/memoryram.yml"
+        prefix:   /memoriaram

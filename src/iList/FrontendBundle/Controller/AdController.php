@@ -249,7 +249,7 @@ class AdController extends Controller
 
             
 
-            return $this->redirect($this->generateUrl('anuncio_show', array('id' => $entity->getId())));
+            return $this->render('iListFrontendBundle:Ad:review.html.twig');
         }
 
         return $this->render('iListFrontendBundle:Ad:new.html.twig', array(

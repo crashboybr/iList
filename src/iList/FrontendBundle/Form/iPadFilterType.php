@@ -47,7 +47,7 @@ class iPadFilterType extends AbstractType
                       'query_builder' => function(EntityRepository $er) {
 
                           return $er->createQueryBuilder('u')
-                                ->innerJoin('u.products', 's', 'WITH', 's.categoryId = :category_id')
+                                ->innerJoin('u.category', 's', 'WITH', 's.id = :category_id')
                                 ->orderBy('u.name', 'ASC')
                                 ->setParameter('category_id', 3);
                           

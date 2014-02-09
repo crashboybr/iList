@@ -34,6 +34,11 @@ class Size
     private $products;  
 
     /**
+     * @ORM\ManyToMany(targetEntity="Category", mappedBy="sizes")
+     */
+    private $categories;  
+
+    /**
      * @ORM\OneToMany(targetEntity="Ad", mappedBy="size")
      */
     protected $ads;  
@@ -143,5 +148,38 @@ class Size
     public function getAds()
     {
         return $this->ads;
+    }
+
+    /**
+     * Add categories
+     *
+     * @param \iList\BackendBundle\Entity\Category $categories
+     * @return Size
+     */
+    public function addCategorie(\iList\BackendBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+    
+        return $this;
+    }
+
+    /**
+     * Remove categories
+     *
+     * @param \iList\BackendBundle\Entity\Category $categories
+     */
+    public function removeCategorie(\iList\BackendBundle\Entity\Category $categories)
+    {
+        $this->categories->removeElement($categories);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCategories()
+    {
+        return $this->categories;
     }
 }

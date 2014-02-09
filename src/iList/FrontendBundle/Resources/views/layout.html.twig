@@ -28,7 +28,7 @@
     <div id="wrapper">
     	<div class="container">
             <div class="header">
-                <div class="logo" onclick="http://www.ilist.dev">
+                <div class="logo" onclick="location.href = '{{ path('home') }}';">
                 	<h3>
 						
 					</h3>
@@ -37,14 +37,17 @@
                 	<a href="{{ path('anuncio_new') }}" class="mainButton">Venda seu Apple</a>
                 </div>
                 <div class="breadcrumb">
+                    <div class="breadcrumb-left">{{ wo_render_breadcrumbs() }}</div>
+                    
                     <div class="account">
-                   	<img src="{{ asset('images/sec.gif') }}" width="23" height="24" alt="security" class="iconSec"/> 
-                    <a href="{{ path('account_home') }}" class="security"> {% if app.user %}Olá {{ app.user.name }} {% else %}Acesse sua conta{% endif %}</a>
+                       	<img src="{{ asset('images/sec.gif') }}" width="23" height="24" alt="security" class="iconSec"/> 
+                        <a href="{{ path('account_home') }}" class="security"> {% if app.user %}Olá {{ app.user.name }} {% else %}Acesse sua conta{% endif %}</a>
                     
                     </div>
                 </div>
             </div>
             <div class="content">
+
             	{% block body %}{% endblock %}
            		
             </div>

@@ -1,0 +1,30 @@
+processadores:
+    pattern:  /
+    defaults: { _controller: "iListBackendBundle:Processor:index" }
+
+processadores_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "iListBackendBundle:Processor:show" }
+
+processadores_new:
+    pattern:  /new
+    defaults: { _controller: "iListBackendBundle:Processor:new" }
+
+processadores_create:
+    pattern:  /create
+    defaults: { _controller: "iListBackendBundle:Processor:create" }
+    requirements: { _method: post }
+
+processadores_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "iListBackendBundle:Processor:edit" }
+
+processadores_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "iListBackendBundle:Processor:update" }
+    requirements: { _method: post|put }
+
+processadores_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "iListBackendBundle:Processor:delete" }
+    requirements: { _method: post|delete }

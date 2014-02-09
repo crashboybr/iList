@@ -7,7 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * DeclinedAds
  *
- * @ORM\Table()
+ * @ORM\Table(name="declined_ads")
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Entity
  */
 class DeclinedAds
@@ -210,4 +211,44 @@ class DeclinedAds
     {
         return $this->ad;
     }
+
+    /**
+     * Set declinedMsg
+     *
+     * @param \iList\BackendBundle\Entity\DeclinedMsg $declinedMsg
+     * @return DeclinedAds
+     */
+    public function setDeclinedMsg(\iList\BackendBundle\Entity\DeclinedMsg $declinedMsg = null)
+    {
+        $this->declinedMsg = $declinedMsg;
+    
+        return $this;
+    }
+
+    /**
+     * Get declinedMsg
+     *
+     * @return \iList\BackendBundle\Entity\DeclinedMsg 
+     */
+    public function getDeclinedMsg()
+    {
+        return $this->declinedMsg;
+    }
+
+     /**
+     * Now we tell doctrine that before we persist or update we call the updatedTimestamps() function.
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+        $this->setUpdatedAt(new \DateTime(date('Y-m-d H:i:s')));
+
+        if($this->getCreatedAt() == null)
+        {
+            $this->setCreatedAt(new \DateTime(date('Y-m-d H:i:s')));
+        }
+    }
+
 }

@@ -1,0 +1,30 @@
+polegadas:
+    pattern:  /
+    defaults: { _controller: "iListBackendBundle:ScreenSize:index" }
+
+polegadas_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "iListBackendBundle:ScreenSize:show" }
+
+polegadas_new:
+    pattern:  /new
+    defaults: { _controller: "iListBackendBundle:ScreenSize:new" }
+
+polegadas_create:
+    pattern:  /create
+    defaults: { _controller: "iListBackendBundle:ScreenSize:create" }
+    requirements: { _method: post }
+
+polegadas_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "iListBackendBundle:ScreenSize:edit" }
+
+polegadas_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "iListBackendBundle:ScreenSize:update" }
+    requirements: { _method: post|put }
+
+polegadas_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "iListBackendBundle:ScreenSize:delete" }
+    requirements: { _method: post|delete }

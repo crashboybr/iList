@@ -20,12 +20,9 @@
 .slider{
  margin: 0 auto;
  width: 625px;
- height: 345px; 
- 
+ height: 345px;
  border: 8px solid #FFFFFF;
  border-radius:5px;
- box-shadow: 2px 2px 4px #333333;
- 
  position: relative;
 }
 
@@ -58,23 +55,23 @@
 #thumb { 
     width: 100%; 
     height: 80px; 
-    margin: 20px 5px;  
+    margin:10px 0 0 0;
+	padding:0;  
 }
 
 #thumb li { 
     width: 60px; 
     float: left; 
-    margin: 12px; 
+    margin: 8px; 
     list-style: none 
 }
 
 #thumb a { 
-    width: 60px; 
-    padding: 3px; 
+    width: 60px;
     display: block; 
     border: 3px solid #FFFFFF;
     border-radius:3px;
-    box-shadow: 1px 1px 3px #333333;
+    
 }
 
 #thumb li.activeSlide a { 
@@ -127,9 +124,13 @@ $(document).ready(function(){
 
                 {% endfor %}
             </div>
-            <ul id="thumb"> </ul>
-            <div id='next' class="slider_next"><img border="0" src="/images/next.png" width="57" height="57" alt="next image" /></div>
-            <div id='prev' class="slider_prev"><img border="0" src="/images/prev.png" width="57" height="57" alt="previous image" /></div>
+            <ul id="thumb"></ul>
+            
+			<!--
+			<div id='next' class="slider_next"><img border="0" src="/images/next.png" width="57" height="57" alt="next image" /></div>
+            <div id='prev' class="slider_prev"><img border="0" src="/images/prev.png" width="57" height="57" alt="previous image" /></div>-->
+			
+			
             </div>
 
 		</div>
@@ -200,7 +201,7 @@ $(document).ready(function(){
     </div>
     </div>
 
-<div class="content-right">
+<div class="content-right new	">
 	<h3>Falar com o anunciante</h3>
     {% for flashMessage in app.session.flashbag.get('notice') %}
         <div class="flash-notice">
@@ -216,7 +217,7 @@ $(document).ready(function(){
             {% set email = app.user.email %}
             {% set phone = app.user.phone %}
         {% endif %}
-        <div class="inputLabel">
+        <div class="inputLabel product">
             {% if (name) %}
                 {{ form_widget(form.name, { attr: { 'class': 'rounder', 'placeholder': form.name.vars.label, 'value': name }}) }}
             {% else %}
@@ -224,7 +225,7 @@ $(document).ready(function(){
             {% endif %}
             {{ form_errors(form.name) }}
         </div>
-        <div class="inputLabel">
+        <div class="inputLabel product">
             {% if (email) %}
                 {{ form_widget(form.email, { attr: { 'class': 'rounder', 'placeholder': form.email.vars.label, 'value': email }}) }}
             {% else %}
@@ -232,7 +233,7 @@ $(document).ready(function(){
             {% endif %}
             {{ form_errors(form.email) }}
         </div>
-        <div class="inputLabel">
+        <div class="inputLabel product">
             {% if (phone) %}
                 {{ form_widget(form.phone, { attr: { 'class': 'rounder', 'placeholder': form.phone.vars.label, 'value': phone }}) }}
             {% else %}
@@ -246,7 +247,7 @@ $(document).ready(function(){
             {{ form_errors(form.content) }}
             
         </div>
-      {{ form_widget(form.submit, { attr: { 'class': 'ButtonRegister', 'style': 'margin-top:5px;'}}) }}
+      {{ form_widget(form.submit, { attr: { 'class': 'ButtonRegister adv', 'style': 'margin-top:5px;'}}) }}
 
     {{ form_end(form) }}
     

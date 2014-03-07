@@ -6,3 +6,10 @@ services:
         class: iList\FrontendBundle\Twig\FrontendExtension
         tags:
             - { name: twig.extension }
+
+    fos_facebook.user.login:
+        class: iList\FrontendBundle\Security\User\Provider\FacebookProvider
+        arguments:
+            facebook: "@fos_facebook.api"
+            userManager: "@fos_user.user_manager"
+            validator: "@validator"

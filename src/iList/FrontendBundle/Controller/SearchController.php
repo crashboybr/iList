@@ -124,29 +124,31 @@ class SearchController extends Controller
                 $filters['price_max'] = $data['price_max'];
             }
 
-            if (!$data['screen']->isEmpty())
-            {
-                foreach ($data['screen'] as $screen)
-                    $filters['screen'][] = $screen;
+            if (isset($data['screen']))
+                if (!$data['screen']->isEmpty())
+                {
+                    foreach ($data['screen'] as $screen)
+                        $filters['screen'][] = $screen;
 
-                $qb->andWhere('f.screen in (:screen)');
-            }
+                    $qb->andWhere('f.screen in (:screen)');
+                }
+            if (isset($data['processor']))
+                if (!$data['processor']->isEmpty())
+                {
+                    foreach ($data['processor'] as $processor)
+                        $filters['processor'][] = $processor;
 
-            if (!$data['processor']->isEmpty())
-            {
-                foreach ($data['processor'] as $processor)
-                    $filters['processor'][] = $processor;
+                    $qb->andWhere('f.processor in (:processor)');
+                }
+            
+            if (isset($data['memory']))
+                if (!$data['memory']->isEmpty())
+                {
+                    foreach ($data['memory'] as $memory)
+                        $filters['memory'][] = $memory;
 
-                $qb->andWhere('f.processor in (:processor)');
-            }
-
-            if (!$data['memory']->isEmpty())
-            {
-                foreach ($data['memory'] as $memory)
-                    $filters['memory'][] = $memory;
-
-                $qb->andWhere('f.memory in (:memory)');
-            }
+                    $qb->andWhere('f.memory in (:memory)');
+                }
 
             //unset($filters['price_min'], $filters['price_max']);
             

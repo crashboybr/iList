@@ -29,10 +29,10 @@ class DefaultController extends Controller
     	$user = $this->get('security.context')->getToken()->getUser();
 
 
-        
+        //var_dump($user);exit;
         if ($user == "anon.")
 			$user = $userManager->createUser();
-        $user->setEnabled(true);
+        //$user->setEnabled(true);
 
     
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, new UserEvent($user, $request));
@@ -42,4 +42,6 @@ class DefaultController extends Controller
 
         return $this->render('iListFrontendBundle:Default:index.html.twig',array('form' => $form->createView()));
     }
+
+
 }

@@ -11,7 +11,7 @@
 {% block body %}
 
                 <div class="filtersUp">
-                    <div class="selectPrice">Preço</div>
+                    <!--<div class="selectPrice">Preço</div>-->
                 </div>
                 <div class="right-menu">
                     <div class="titleMenu">
@@ -48,6 +48,7 @@
                         <option value="26">SP - São Paulo</option>
                         <option value="27">TO - Tocantins</option>
                       </select>
+                      <!--
                       <ul class="state-list">
                             <li class="state-item">
                                 <a class="link-filter" href="#">Rio de Janeiro</a><em>(29)</em>
@@ -64,7 +65,8 @@
                             <li class="state-item">
                                 <a class="link-filter" href="#">Outras cidades</a><em>(129)</em>
                             </li>
-                        </ul>
+                        </ul>-->
+
                       </div>
                     {% include 'iListFrontendBundle:Search:filters.html.twig' %}
                         
@@ -72,9 +74,9 @@
                 
                 <div class="listing">{# pagination.getTotalItemCount #}
                     
-                    {{ knp_pagination_sortable(pagination, 'Title', 'a.title') }}
+                    {# knp_pagination_sortable(pagination, 'Title', 'a.title') #}
 
-                    {{ knp_pagination_sortable(pagination, 'Preço', 'a.price') }}
+                    {# knp_pagination_sortable(pagination, 'Preço', 'a.price') #}
                     {% for ad in pagination %}
                         <div class="box">
                             <div class="photo">

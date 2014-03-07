@@ -133,4 +133,13 @@ knp_paginator:
 white_october_breadcrumbs: 
     separator:          ' > '
 
+fos_facebook:
+    alias:  facebook
+    app_id: 606068709480269
+    secret: 33b7ed621560568e6fcbde0229f098f7
+    cookie: true
+    permissions: [email, user_birthday, user_location]
+
+
+
 

@@ -2,6 +2,22 @@ i_list_backend:
     resource: "@iListBackendBundle/Resources/config/routing.yml"
     prefix:   /admin
 
+
+_security_check:
+    pattern:  /fb_check
+
+_security_logout:
+    pattern:  /logout
+
+_security_login:
+    pattern: /fb_login
+
+
+
+
+fos_facebook_channel:
+    resource: "@FOSFacebookBundle/Resources/config/routing.xml"
+
 i_list_frontend:
     resource: "@iListFrontendBundle/Resources/config/routing.yml"
     prefix:   /

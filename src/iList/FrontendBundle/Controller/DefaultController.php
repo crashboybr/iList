@@ -19,6 +19,8 @@ class DefaultController extends Controller
 {
     public function indexAction(Request $request)
     {	
+
+        //var_dump($this->get('mailer_helper')->sendEmail('a','b','c'));exit;
     	/** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
         $formFactory = $this->container->get('fos_user.registration.form.factory');
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */

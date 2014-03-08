@@ -110,6 +110,8 @@ class AccountController extends Controller
         'notice',
         'Resposta enviada com sucesso!');
 
+        $this->get('send_mail')->sendEmail($user->getEmail(), 'Vc teve uma resposta na sua caixa de entrada', 'Nova Msg');
+
         return $this->redirect($this->generateUrl('account_home'));
  
     }

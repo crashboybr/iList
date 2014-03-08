@@ -152,9 +152,13 @@ class AdController extends Controller
             $em->persist($entity);
             $em->flush($entity);
 
+            $this->get('send_mail')->sendEmail($toUser->getEmail(), 'Nova mensagem chegou', 'Assunto');
+
             $this->get('session')->getFlashBag()->add(
             'notice',
             'Mensagem enviada com sucesso!');
+
+
 
             return $this->redirect($this->generateUrl('subdomain_vi', 
                 array(
@@ -246,7 +250,7 @@ class AdController extends Controller
            
             
 
-
+            $this->get('send_mail')->sendEmail($user->getEmail(), 'Seu anuncio esta em revisao', 'Revisao');
             
 
             return $this->render('iListFrontendBundle:Ad:review.html.twig');

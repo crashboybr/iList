@@ -118,6 +118,10 @@ services:
         class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
         arguments: ["@pdo", "%pdo.db_options%"]
 
+    send_mail:
+        class:        iList\FrontendBundle\Util\Mailer
+        arguments: ['@mailer']
+
 
 knp_paginator:
     page_range: 5                     # default page range used in pagination control

@@ -61,6 +61,6 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/account/, role: ROLE_USER }
         - { path: ^/anuncio/, role: ROLE_USER }
-        - { path: ^/, role: ROLE_USER }
+        #- { path: ^/, role: ROLE_USER }
 
 

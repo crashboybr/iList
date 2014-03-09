@@ -36,12 +36,14 @@ class SearchController extends Controller
         //$subcategory = $em->getRepository('iListBackendBundle:SubCategory')
         //    ->findOneBy(array('name' => $subcategory_name));
 
-        if (!$category)
-        {
+        //if (!$category)
+        //{
         	//return $this->redirect($this->generateUrl('i_list_frontend_homepage'));
-        } 
 
-       
+        //} 
+
+        $filterForm = null;
+        
         if ($state == "brasil")
         {
         
@@ -54,7 +56,9 @@ class SearchController extends Controller
 
         if ($category)
         {
+
         	$filters['category'] = $category;
+            
             switch ($category_name)
             {
                 case 'iphone':
@@ -79,6 +83,10 @@ class SearchController extends Controller
             }
             
         }
+        else
+        {
+            //$filters['category'] = null;
+        }
         //if ($subcategory)
         //	$filters['subcategory'] = $subcategory;
 
@@ -88,8 +96,10 @@ class SearchController extends Controller
         $qb = $em->createQueryBuilder();
         $qb->select('f')
             ->from('iListBackendBundle:Ad', 'f')
-            ->where('f.category = :category')
+            //->where('f.category = :category')
             ->orderBy('f.createdAt', 'desc');
+        if ($category)
+            $qb->andWhere('f.category = :category');
 
         
         
@@ -173,11 +183,14 @@ class SearchController extends Controller
             ->setSQLLogger($logger);
         
         $filters['status'] = 1;
+
         $qb->andWhere('f.status = :status');
-        $qb->setParameters($filters);
+        
         if ($state != "brasil")
             $qb->andWhere('f.state = :state');
 
+        $qb->setParameters($filters);
+        
         
 
         //var_dump();
@@ -185,8 +198,9 @@ class SearchController extends Controller
         //\Doctrine\Common\Util\Debug::dump($logger->queries);
         //\Doctrine\Common\Util\Debug::dump($filters);
         //\Doctrine\Common\Util\Debug::dump($qb->getQuery());exit;
+        //exit;
         $ads = $qb->getQuery()->getResult();
-
+//var_dump($ads);exit;
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $ads,
@@ -205,13 +219,19 @@ class SearchController extends Controller
          //echo "<pre>";
         // var_dump($state);
         //\Doctrine\Common\Util\Debug::dump($pagination);exit;
+        
+        if ($filterForm)
+            $filterForm = $filterForm->createView();
+
+
+
         return $this->render('iListFrontendBundle:Search:index.html.twig', 
         	array('ads' => $ads, 
                 'state' => $state, 
                 'domain' => $domain, 
                 'pagination' => $pagination,
                 'category' => $category_name,
-                'filterForm' => $filterForm->createView()
+                'filterForm' => $filterForm
         	));
     }
 

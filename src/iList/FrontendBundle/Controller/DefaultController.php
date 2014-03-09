@@ -15,6 +15,7 @@ use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use Symfony\Component\HttpFoundation\Session\Session;
 
+
 class DefaultController extends Controller
 {
     public function indexAction(Request $request)
@@ -43,6 +44,23 @@ class DefaultController extends Controller
         $form->setData($user);
 
         return $this->render('iListFrontendBundle:Default:index.html.twig',array('form' => $form->createView()));
+    }
+
+
+    public function bomAction(Request $request)
+    {   
+
+        $html = file_get_contents('http://rj.bomnegocio.com/rio-de-janeiro-e-regiao/computadores-e-acessorios/macbook-air-a1369-i5-29888575');
+        
+
+        $t = preg_match('#\\<h1 id="ad_title" class="title">\\(.+)\\</h1>\\}#s',$html,$matches);
+        
+        var_dump($t);exit;
+        
+
+        echo ($html);exit;
+        exit;
+            
     }
 
 

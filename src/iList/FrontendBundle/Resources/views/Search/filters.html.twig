@@ -10,7 +10,13 @@ function submitFilter()
 </div>
 
     <li class="item iphone" onclick="location.href = '{{ path('brasil_search', {'category_name': 'iphone'}) }}';">
-        <a href="{{ path('brasil_search', {'category_name': 'iphone'}) }}" class="btn-product">iPhone</a>
+        
+        {% if (state != 'brasil') %}
+            <a href="{{ path('subdomain_search', {'state': state, 'category_name': 'iphone' }) }}" class="btn-product">iPhone</a>
+        {% else %}
+            <a href="{{ path('brasil_search', {'category_name': 'iphone' }) }}" class="btn-product">iPhone</a>
+        {% endif %}
+
         <p class="text-bt"></p>
         {% if (category == 'iphone') %}
         <li class="filter">
@@ -68,7 +74,13 @@ function submitFilter()
 
 
     <li class="item ipad" onclick="location.href = '{{ path('brasil_search', {'category_name': 'ipad'}) }}';">
-        <a href="{{ path('brasil_search', {'category_name': 'ipad' }) }}" class="btn-product">iPad</a>
+
+        {% if (state != 'brasil') %}
+            <a href="{{ path('subdomain_search', {'state': state, 'category_name': 'ipad' }) }}" class="btn-product">iPad</a>
+        {% else %}
+            <a href="{{ path('brasil_search', {'category_name': 'ipad' }) }}" class="btn-product">iPad</a>
+        {% endif %}
+
         {% if (category == 'ipad') %}
             <li class="filter">
                 {{ form_start(filterForm, { attr: { 'novalidate': 'novalidate', 'id': 'filters' }}) }}
@@ -125,7 +137,11 @@ function submitFilter()
 
     <li class="item ipod" onclick="location.href = '{{ path('brasil_search', {'category_name': 'ipod'}) }}';">
         
-        <a href="{{ path('brasil_search', {'category_name': 'ipod' }) }}" class="btn-product">iPod</a>
+        {% if (state != 'brasil') %}
+            <a href="{{ path('subdomain_search', {'state': state, 'category_name': 'ipod' }) }}" class="btn-product">iPod</a>
+        {% else %}
+            <a href="{{ path('brasil_search', {'category_name': 'ipod' }) }}" class="btn-product">iPod</a>
+        {% endif %}
         {% if (category == 'ipod') %}
             <li class="filter">
                     {{ form_start(filterForm, { attr: { 'novalidate': 'novalidate', 'id': 'filters' }}) }}
@@ -194,7 +210,13 @@ function submitFilter()
     </li>
 
     <li class="item macbook" onclick="location.href = '{{ path('brasil_search', {'category_name': 'macbook'}) }}';">
-        <a href="{{ path('brasil_search', {'category_name': 'macbook' }) }}" class="btn-product">MacBook</a>
+        
+        {% if (state != 'brasil') %}
+            <a href="{{ path('subdomain_search', {'state': state, 'category_name': 'macbook' }) }}" class="btn-product">MacBook</a>
+        {% else %}
+            <a href="{{ path('brasil_search', {'category_name': 'macbook' }) }}" class="btn-product">MacBook</a>
+        {% endif %}
+
         {% if (category == 'macbook') %}
             <li class="filter">
                     {{ form_start(filterForm, { attr: { 'novalidate': 'novalidate', 'id': 'filters' }}) }}
@@ -289,7 +311,13 @@ function submitFilter()
     </li>
 
     <li class="item imac" onclick="location.href = '{{ path('brasil_search', {'category_name': 'imac'}) }}';">
-        <a href="{{ path('brasil_search', {'category_name': 'imac' }) }}" class="btn-product">iMac</a>
+        
+        {% if (state != 'brasil') %}
+            <a href="{{ path('subdomain_search', {'state': state, 'category_name': 'imac' }) }}" class="btn-product">iMac</a>
+        {% else %}
+            <a href="{{ path('brasil_search', {'category_name': 'imac' }) }}" class="btn-product">iMac</a>
+        {% endif %}
+        
         {% if (category == 'imac') %}
         <li class="filter">
             <ul class="filter-list">
@@ -409,7 +437,12 @@ function submitFilter()
     </li>
 
     <li class="item others" onclick="location.href = '{{ path('brasil_search', {'category_name': 'others'}) }}';">
-        <a href="{{ path('brasil_search', {'category_name': 'acessorios' }) }}" class="btn-product">Acessórios</a>
+        
+        {% if (state != 'brasil') %}
+            <a href="{{ path('subdomain_search', {'state': state, 'category_name': 'acessorios' }) }}" class="btn-product">Acessórios</a>
+        {% else %}
+            <a href="{{ path('brasil_search', {'category_name': 'acessorios' }) }}" class="btn-product">Acessórios</a>
+        {% endif %}
         {% if (category == 'acessorios') %}
         <li class="filter">
             <ul class="filter-list">

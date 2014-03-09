@@ -33,6 +33,10 @@ fos_user_change_password:
     #host:     "%base_host%"
 
 
+bomnegocio:
+    path:  /bom
+    defaults: { _controller: iListFrontendBundle:Default:bom }
+
 find_subcategory_by_category_id:
     path:  /buscaSubCategoria
     defaults: { _controller: iListFrontendBundle:Ad:getByCategoryId }

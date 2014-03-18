@@ -54,22 +54,46 @@ class AdType extends AbstractType
 
         $builder
             ->add('adType', 'choice', array(
-                'choices' => array('1' => 'Venda', '2' => 'Compra', '3' => 'Troca'),
-                'expanded' => true
+                'choices' => array('1' => 'Venda', '2' => 'Compra'),
+                'expanded' => true,
+                'data' => '1',
             ))
-            ->add('category')
+            ->add('category', 'entity', array(
+                'class'    => 'iListBackendBundle:Category',
+                'empty_value' => 'Escolha um produto'
+                ))
             ->add('subcategory')
             ->add('product')
             ->add('size' , 'entity' , array(
                       'class'    => 'iListBackendBundle:Size' ,
                       'property' => 'size' ,
                       'expanded' => false ,
-                      'multiple' => false , ))
+                      'multiple' => false ,
+                      'empty_value' => 'Escolha a capacidade' ))
             ->add('color' , 'entity' , array(
                       'class'    => 'iListBackendBundle:Color' ,
                       'property' => 'name' ,
                       'expanded' => false ,
-                      'multiple' => false , ))
+                      'multiple' => false ,
+                      'empty_value' => 'Escolha a cor' ))
+            ->add('memory' , 'entity' , array(
+                      'class'    => 'iListBackendBundle:MemoryRam' ,
+                      'property' => 'name' ,
+                      'expanded' => false ,
+                      'multiple' => false ,
+                      'empty_value' => 'Escolha a memória' ))
+            ->add('screen' , 'choice' , array(
+                      //'class'    => 'iListBackendBundle:ScreenSize' ,
+                      //'property' => 'size' ,
+                      'expanded' => false ,
+                      'multiple' => false ,
+                      'empty_value' => 'Escolha o tamanho da tela' ))
+            ->add('processor' , 'entity' , array(
+                      'class'    => 'iListBackendBundle:Processor' ,
+                      'property' => 'name' ,
+                      'expanded' => false ,
+                      'multiple' => false ,
+                      'empty_value' => 'Escolha o Processador' ))
             ->add('title')
             ->add('content')
             ->add('price')
@@ -92,7 +116,8 @@ class AdType extends AbstractType
             ->add('complement')
             ->add('productType', 'choice', array(
                 'choices' => array('1' => 'Novo', '2' => 'Usado'),
-                'expanded' => true
+                'expanded' => true,
+                'data' => '1',
             ))
             //->add('ad_images', 'file')
             //->add('ad_images', 'file', array(
@@ -101,6 +126,10 @@ class AdType extends AbstractType
             ->add('ad_images', 'collection', array('type' => new AdImageType()))
         ;
 
+
+
+
+        
 
 
 

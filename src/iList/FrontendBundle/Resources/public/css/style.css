@@ -44,7 +44,7 @@ border: none;color: #FFF;cursor: pointer;display: inline-block;font-size: 15px;f
 
 /* Content-rigth */
 #wrapper .container .content-right {float:right;}
-#wrapper .container .content-right .ButtonRegister{width: 297px;height: 41px;border: none;color: #FFF;cursor: pointer;display: inline-block;font-size: 15px;font-weight: bold;line-height:3px;padding:0 17px 0 0px;text-align: center;text-shadow: 0 1px 0 rgba(0,0,0,0.3);background-image: url(/images/btn-venda-seu-apple.png);background-repeat: no-repeat;background-position: -222px 0px;margin: 8px 0 0 20px;}
+#wrapper .container .content-right .ButtonRegister{width: 297px;height: 41px;border: none;color: #FFF;cursor: pointer;display: inline-block;font-size: 15px;font-weight: bold;line-height:3px;padding:0 17px 0 0px;text-align: center;text-shadow: 0 1px 0 rgba(0,0,0,0.3);background-image: url(/images/btn-venda-seu-apple.png);background-repeat: no-repeat;background-position: -222px 0px;background-color:#fff; margin: 8px 0 0 20px;}
 #wrapper .container .content-right .ButtonRegister:hover{background-position: -222px -41px;}
 #wrapper .container .content-right .fconnect{float:left;width: 138px;height:35px;background-image: url(/images/btn-venda-seu-apple.png);background-repeat: no-repeat;background-position: -528px 0px;border: none;display: block;margin: 0 0 0 80px;}
 #wrapper .container .content-right .fconnect:hover{background-position: -528px -35px;}
@@ -95,13 +95,12 @@ border: none;color: #FFF;cursor: pointer;display: inline-block;font-size: 15px;f
 
 /* Adview */
 #wrapper .container .content-adview {float:left;width:640px;}
-#wrapper .container .content-adview .product-image{width:640px;height:480px;}
-#wrapper .container .content-adview .product-detail{float:left;width:300px;}
-#wrapper .container .content-adview .product-detail .list-product{list-style:none;padding:0;}
+
+
+
 #wrapper .container .content-adview .product-detail .list-product .list-detail{width:300px;height:30px;}
 #wrapper .container .content-adview .product-detail .list-product .list-detail .detail-left{width:80px;float:left;}
 #wrapper .container .content-adview .product-detail .list-product .list-detail .detail-rigth{width:150px;float:right;}
-#wrapper .container .content-adview .product-detail .user-info{list-style:none;padding:0;margin:40px 0 0 0;}
 #wrapper .container .content-adview .product-detail .user-info .list-user {height:30px;}
 #wrapper .container .content-adview .product-detail .user-info .list-user .detail-left{width:40px;float:left;}
 #wrapper .container .content-adview .product-detail .user-info .list-user .detail-rigth{width:150px;float:left;}
@@ -216,8 +215,13 @@ input[type='checkbox']:checked::before {color: #808080;content: url(/images/tick
 
 .flash-notice{color:#3A7E00;}
 
+/*comp */
+#wrapper .container .content .content-ad .cont .cont-right .estados textarea{width:284px;background: #FFF none;display: inline-block;border: 1px solid #cacaca;border-radius:3px;height: 175px;margin:8px 0 0 0;padding: 5px 4px 3px;color: #666;font-size: 16px;line-height: 1.143em;resize:none; }
 
-
-
+#wrapper .container .content-adview .product-detail{float:left;width:600px;}
+#wrapper .container .content-adview .product-detail .user-info{width:300px;float:right;list-style:none;padding:0;margin:8px 0 0 0;}
+#wrapper .container .content-adview .product-detail .list-product{float:left;list-style:none;padding:0;}
+#wrapper .container .content-adview .price-detail{width:160px;background-color:#F7F7F7;color:#F60;margin:0 0 20px 0;padding:10px;border-radius:3px;border:1px #e4e4e4 solid;}
+#wrapper .container .content-adview .product-image{width:640px;height:465px;}
 
 

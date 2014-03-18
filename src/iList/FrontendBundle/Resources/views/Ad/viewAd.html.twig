@@ -17,11 +17,12 @@
 <style>
 
 
+
 .slider{
  margin: 0 auto;
  width: 625px;
  height: 345px;
- border: 8px solid #FFFFFF;
+ border: 8px solid #e1e1e1;
  border-radius:5px;
  position: relative;
 }
@@ -56,7 +57,7 @@
     width: 100%; 
     height: 80px; 
     margin:10px 0 0 0;
-	padding:0;  
+    padding:0;  
 }
 
 #thumb li { 
@@ -75,9 +76,10 @@
 }
 
 #thumb li.activeSlide a { 
-    border: 3px solid #0a526f;
+    border: 3px solid #e1e1e1;
     border-radius:3px;
     box-shadow: 1px 1px 3px #333333;
+    padding:1px;
 }
 
 #thumb a:focus { 
@@ -118,13 +120,13 @@ $(document).ready(function(){
 
             <div class="slider">
 
-            <div id="slider1">
-                {% for img in ad.adImages %}
-                    <img border="0" src="{{ asset(img.pic) }}" width="625" height="345" alt="" title="" />
+                <div id="slider1">
+                    {% for img in ad.adImages %}
+                        <img border="0" src="{{ asset(img.pic) }}" width="625" height="345" alt="" title="" />
 
-                {% endfor %}
-            </div>
-            <ul id="thumb"></ul>
+                    {% endfor %}
+                </div>
+                <ul id="thumb"></ul>
             
 			<!--
 			<div id='next' class="slider_next"><img border="0" src="/images/next.png" width="57" height="57" alt="next image" /></div>
@@ -137,6 +139,7 @@ $(document).ready(function(){
 
     <!--inicio detalhes anuncio-->
     <div class="product-info">
+        <div class="price-detail"><span style="color:#666;">Preço:</span> R$ {{ ad.price }}</div>
     	<div class="product-content">
         	<p class="text">
             	{{ ad.content }}
@@ -144,6 +147,7 @@ $(document).ready(function(){
         </div>
     	<div class="product-detail">
         	
+
             <ul class="list-product">
             	<li class="list-detail">
                 	<div class="detail-left">
@@ -153,22 +157,71 @@ $(document).ready(function(){
                     	<p class="text">{{ ad.category }} - {{ ad.subcategory }}</p>
                     </div>
                 </li>
+
                 <li class="list-detail">
-                	<div class="detail-left">
-                    	<p class="text">Capacidade</p>
+                    <div class="detail-left">
+                        <p class="text">Condição</p>
                     </div>
-                	<div class="detail-rigth">
-                    	<p class="text"><strong>{{ ad.size.size }}GB</strong></p>
+                    <div class="detail-rigth">
+                        <p class="text"><strong>{{ ad.productType }}</strong></p>
                     </div>
                 </li>
+
+                {% if ad.size %}
                 <li class="list-detail">
-                	<div class="detail-left">
-                    	<p class="text">Condição</p>
+                    <div class="detail-left">
+                        <p class="text">Capacidade</p>
                     </div>
-                	<div class="detail-rigth">
-                    	<p class="text"><strong>{{ ad.productType }}</strong></p>
+                    <div class="detail-rigth">
+                        <p class="text"><strong>{{ ad.size.size }} GB</strong></p>
                     </div>
                 </li>
+                {% endif %}
+
+                {% if ad.size %}
+                <li class="list-detail">
+                    <div class="detail-left">
+                        <p class="text">Cor</p>
+                    </div>
+                    <div class="detail-rigth">
+                        <p class="text"><strong>{{ ad.color.name }}</strong></p>
+                    </div>
+                </li>
+                {% endif %}
+
+                {% if ad.screen %}
+                 <li class="list-detail">
+                    <div class="detail-left">
+                        <p class="text">Tela</p>
+                    </div>
+                    <div class="detail-rigth">
+                        <p class="text"><strong>{{ ad.screen.name }} polegadas</strong></p>
+                    </div>
+                </li>
+                {% endif %}
+                
+                {% if ad.memory %}
+                 <li class="list-detail">
+                    <div class="detail-left">
+                        <p class="text">Memória</p>
+                    </div>
+                    <div class="detail-rigth">
+                        <p class="text"><strong>{{ ad.memory.name }}GB</strong></p>
+                    </div>
+                </li>
+                {% endif %}
+
+                {% if ad.processor %}
+                <li class="list-detail">
+                    <div class="detail-left">
+                        <p class="text">Processador</p>
+                    </div>
+                    <div class="detail-rigth">
+                        <p class="text"><strong>{{ ad.processor.name }}</strong></p>
+                    </div>
+                </li>
+                {% endif %}
+
             </ul>
            
             <ul class="user-info">

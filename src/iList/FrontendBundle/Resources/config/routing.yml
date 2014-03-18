@@ -41,6 +41,26 @@ find_subcategory_by_category_id:
     path:  /buscaSubCategoria
     defaults: { _controller: iListFrontendBundle:Ad:getByCategoryId }
 
+find_color_by_category_id:
+    path:  /buscaCor
+    defaults: { _controller: iListFrontendBundle:Ad:getColorByCategoryId } 
+
+find_size_by_category_id:
+    path: /buscaSize
+    defaults: { _controller: iListFrontendBundle:Ad:getSizeByCategoryId }
+
+find_screen_by_category_id:
+    path: /buscaScreen
+    defaults: { _controller: iListFrontendBundle:Ad:getScreenByCategoryId }
+
+find_processor_by_category_id:
+    path: /buscaProcessador
+    defaults: { _controller: iListFrontendBundle:Ad:getProcessorByCategoryId }
+
+find_memory_by_category_id:
+    path: /buscaMemory
+    defaults: { _controller: iListFrontendBundle:Ad:getMemoryByCategoryId }
+
 find_product_by_subcategory_id:
     path:  /buscaProduto
     defaults: { _controller: iListFrontendBundle:Ad:getBySubCategoryId }

@@ -12,7 +12,10 @@ class AdImageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
-        $builder->add('pic');
+        $builder->add('pic', 'file', array(
+                'attr' => array('class' => 'img-pics'),
+                'label' => false
+                ));
     }
     
     /**

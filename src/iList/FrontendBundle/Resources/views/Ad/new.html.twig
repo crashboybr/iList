@@ -50,45 +50,109 @@ $(document).ready(function()
 	
 
 	$('#ilist_frontendbundle_ad_category').change( function() {
-		//alert('aa');
-    $.ajax({
-        type: "GET",
-        data: "data=" + $(this).val(),
-        url:"{{ path('find_subcategory_by_category_id') }}",
-        success: function(msg){
-            if (msg != ''){
-               	$('#ilist_frontendbundle_ad_subcategory').html(msg);
-               	$('#div_models').show();
-               }
-               else
-               {
-                   $('#div_models').hide();
-               }
-           }
-       });
+		$('#loading').show();
+
+	    $.ajax({
+	        type: "GET",
+	        data: "data=" + $(this).val(),
+	        url:"{{ path('find_color_by_category_id') }}",
+	        success: function(msg){
+	            if (msg != ''){
+	               	$('#ilist_frontendbundle_ad_color').html(msg);
+	               	$('#div_color').show();
+	               }
+	               else
+	               {
+	                   $('#div_color').hide();
+	               }
+	           }
+	       });
+
+	    $.ajax({
+	        type: "GET",
+	        data: "data=" + $(this).val(),
+	        url:"{{ path('find_size_by_category_id') }}",
+	        success: function(msg){
+	            if (msg != ''){
+	               	$('#ilist_frontendbundle_ad_size').html(msg);
+	               	$('#div_size').show();
+	               }
+	               else
+	               {
+	                   $('#div_size').hide();
+	               }
+	           }
+	       });
+
+	    $.ajax({
+	        type: "GET",
+	        data: "data=" + $(this).val(),
+	        url:"{{ path('find_memory_by_category_id') }}",
+	        success: function(msg){
+	            if (msg != ''){
+	               	$('#ilist_frontendbundle_ad_memory').html(msg);
+	               	$('#div_memory').show();
+	               }
+	               else
+	               {
+	                   $('#div_memory').hide();
+	               }
+	           }
+	       });
+
+	    $.ajax({
+	        type: "GET",
+	        data: "data=" + $(this).val(),
+	        url:"{{ path('find_screen_by_category_id') }}",
+	        success: function(msg){
+	            if (msg != ''){
+	               	$('#ilist_frontendbundle_ad_screen').html(msg);
+	               	$('#div_screen').show();
+	               }
+	               else
+	               {
+	                   $('#div_screen').hide();
+	               }
+	           }
+	       });
+
+	    $.ajax({
+	        type: "GET",
+	        data: "data=" + $(this).val(),
+	        url:"{{ path('find_processor_by_category_id') }}",
+	        success: function(msg){
+	            if (msg != ''){
+	               	$('#ilist_frontendbundle_ad_processor').html(msg);
+	               	$('#div_processor').show();
+	               }
+	               else
+	               {
+	                   $('#div_processor').hide();
+	               }
+	           }
+	       });
+
+	    $.ajax({
+	        type: "GET",
+	        data: "data=" + $(this).val(),
+	        url:"{{ path('find_subcategory_by_category_id') }}",
+	        success: function(msg){
+	            if (msg != ''){
+	               	$('#ilist_frontendbundle_ad_subcategory').html(msg);
+	               	$('#div_models').show();
+
+	               }
+	               else
+	               {
+	                   $('#div_models').hide();
+
+	               }
+	               $('#loading').hide();
+	           }
+	       });
   });
 
 
-
-	$('#ilist_frontendbundle_ad_subcategory').change( function() {
-	//alert('aa');
-    /*
-    $.ajax({
-        type: "GET",
-        data: "data=" + $(this).val(),
-        url:"{{ path('find_product_by_subcategory_id') }}",
-        success: function(msg){
-            if (msg != ''){
-               	$('#ilist_frontendbundle_ad_product').html(msg);
-               	$('#div_product').show();
-               }
-               else
-               {
-                   $('#div_product').hide();
-               }
-           }
-       });*/
-  });
 
 });
 
@@ -101,6 +165,8 @@ $(document).ready(function()
                     
 
                 	{{ form_start(form, { attr: { 'novalidate': 'novalidate' }}) }}
+                		
+
                 		<div class="cont" id="">
 	                		<div class="cont-left">
 	                        	{{ form_label(form.adType,'Tipo do Anúncio', { attr: { 'class': 'item_desc' } }) }}
@@ -120,7 +186,7 @@ $(document).ready(function()
 
 						<div class="cont" id="">
 	                		<div class="cont-left">
-	                        	{{ form_label(form.productType,'Tipo do Anúncio', { attr: { 'class': 'item_desc' } }) }}
+	                        	{{ form_label(form.productType,'Tipo do Produto', { attr: { 'class': 'item_desc' } }) }}
 	                        </div>
                 			<div class="cont-right">
 		                		{% for productType in form.productType %}
@@ -134,6 +200,7 @@ $(document).ready(function()
 							</div>
 						</div>
 
+
                 		<div class="cont" id="">
 	                		<div class="cont-left">
 	                        	{{ form_label(form.category,'Produto', { attr: { 'class': 'item_desc' } }) }}
@@ -143,8 +210,14 @@ $(document).ready(function()
 									{{ form_errors(form.category) }}
 									{{ form_widget(form.category) }}
 								</div>
+							
+								<div id="loading" style="text-align: center; width: 40%; margin-top:5 px; display:none;">
+									<img src="{{ asset('images/loading.gif') }}" />
+								</div>
 							</div>
 						</div>
+
+						
 
 						<div class="cont" id="div_models" style='display:none;'>
 	                		<div class="cont-left">
@@ -154,9 +227,6 @@ $(document).ready(function()
 						     	<div class="estados">
 									{{ form_errors(form.subcategory) }}
 									{{ form_widget(form.subcategory) }}
-								</div>
-								<div style="text-align: center; width: 40%; margin-top: 10px; display:none;">
-									<img src="{{ asset('images/loading.gif') }}" />
 								</div>
 
 							</div>
@@ -174,7 +244,7 @@ $(document).ready(function()
 							</div>
 						</div>
 
-						<div class="cont" id="">
+						<div class="cont" id="div_size" style="display: none;">
 	                		<div class="cont-left">
 	                        	{{ form_label(form.size,'Capacidade', { attr: { 'class': 'item_desc' } }) }}
 	                        </div>
@@ -186,7 +256,43 @@ $(document).ready(function()
 							</div>
 						</div>
 
-						<div class="cont" id="">
+						<div class="cont" id="div_memory" style="display: none;">
+	                		<div class="cont-left">
+	                        	{{ form_label(form.memory,'Memória', { attr: { 'class': 'item_desc' } }) }}
+	                        </div>
+						     <div class="cont-right">
+						     	<div class="estados">
+									{{ form_errors(form.memory) }}
+									{{ form_widget(form.memory) }}
+								</div>
+							</div>
+						</div>
+
+						<div class="cont" id="div_screen" style="display: none;">
+	                		<div class="cont-left">
+	                        	{{ form_label(form.screen,'Tela', { attr: { 'class': 'item_desc' } }) }}
+	                        </div>
+						     <div class="cont-right">
+						     	<div class="estados">
+									{{ form_errors(form.screen) }}
+									{{ form_widget(form.screen) }}
+								</div>
+							</div>
+						</div>
+
+						<div class="cont" id="div_processor" style="display: none;">
+	                		<div class="cont-left">
+	                        	{{ form_label(form.processor,'Processador', { attr: { 'class': 'item_desc' } }) }}
+	                        </div>
+						     <div class="cont-right">
+						     	<div class="estados">
+									{{ form_errors(form.processor) }}
+									{{ form_widget(form.processor) }}
+								</div>
+							</div>
+						</div>
+
+						<div class="cont" id="div_color" style="display: none;">
 	                		<div class="cont-left">
 	                        	{{ form_label(form.color,'Cor', { attr: { 'class': 'item_desc' } }) }}
 	                        </div>
@@ -198,9 +304,10 @@ $(document).ready(function()
 							</div>
 						</div>
 
+				
 						<div class="cont" id="">
 	                		<div class="cont-left">
-	                        	{{ form_label(form.title,'Título', { attr: { 'class': 'item_desc' } }) }}
+	                        	{{ form_label(form.title,'Título do Anúncio', { attr: { 'class': 'item_desc' } }) }}
 	                        </div>
 						     <div class="cont-right">
 						     	<div class="estados">
@@ -210,12 +317,12 @@ $(document).ready(function()
 							</div>
 						</div>
 
-						<div class="cont" id="">
+						<div class="cont text-ad" id="">
 	                		<div class="cont-left">
 	                        	{{ form_label(form.content,'Conteúdo', { attr: { 'class': 'item_desc' } }) }}
 	                        </div>
 						     <div class="cont-right">
-						     	<div class="estados">
+						     	<div class="text-ad">
 									{{ form_errors(form.content) }}
 									{{ form_widget(form.content) }}
 								</div>
@@ -229,7 +336,7 @@ $(document).ready(function()
 						     <div class="cont-right">
 						     	<div class="estados">
 									{{ form_errors(form.price) }}
-									{{ form_widget(form.price) }}
+									{{ form_widget(form.price, { attr: { 'class': 'price' } }) }}
 								</div>
 							</div>
 						</div>
@@ -241,7 +348,7 @@ $(document).ready(function()
 						     <div class="cont-right">
 						     	<div class="estados">
 									{{ form_errors(form.zipcode) }}
-									{{ form_widget(form.zipcode) }}
+									{{ form_widget(form.zipcode, { attr: { 'class': 'cep' } }) }}
 								</div>
 							</div>
 						</div>
@@ -295,6 +402,9 @@ $(document).ready(function()
 							</div>
 						</div>
 
+						
+						
+
 						<div class="cont" id="">
 	                		<div class="cont-left">
 	                        	{{ form_label(form.complement,'Complemento', { attr: { 'class': 'item_desc' } }) }}
@@ -307,21 +417,27 @@ $(document).ready(function()
 							</div>
 						</div>
 
-						<div class="cont" id="">
+						
+						<div class="cont pics" id="">
 	                		<div class="cont-left">
 	                			
 	                        	{{ form_label(form.ad_images,'Imagens', { attr: { 'class': 'item_desc' } }) }}
 	                        </div>
 						     <div class="cont-right">
 						     	<div class="estados">
-									{{ form_errors(form.ad_images) }}
-									{{ form_widget(form.ad_images, { 'attr': { 'multiple': 'multiple' } }) }}
+						     		{% for adImage in form.ad_images %}
+								        	{{ form_errors(adImage) }}
+								        	{{ form_widget(adImage) }}
+									{% endfor %}
+
 								</div>
+								{{ form_widget(form.submit, { label: 'Publicar Anúncio', attr: { 'class': 'ButtonRegister'} } )}}
 							</div>
 						</div>
 
 
-					{{ form_widget(form.submit, { label: 'Criar' })}}
+					
+
 
 					{{ form_end(form) }}
 

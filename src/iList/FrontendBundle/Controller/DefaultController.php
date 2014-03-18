@@ -52,11 +52,29 @@ class DefaultController extends Controller
 
         $html = file_get_contents('http://rj.bomnegocio.com/rio-de-janeiro-e-regiao/computadores-e-acessorios/macbook-air-a1369-i5-29888575');
         
+        $html = preg_replace( "/\r|\n/", "", $html );
+        //var_dump($html);exit;
+        
 
-        $t = preg_match('#\\<h1 id="ad_title" class="title">\\(.+)\\</h1>\\}#s',$html,$matches);
+        preg_match('#<h1 id="ad_title" class="title">(.+)- <span class#s',$html,$match_title);
+
+        preg_match('#<p class="description">(.+)<div class="ad_details_section">#s',$html,$match_desc);
+
+        preg_match('#<span class="price highlight"> (.+)<span class="type">#s',$html,$match_price);
+
+        preg_match('#<li id="thumb1" class="item ">(.+)<a class="link" href="(.+)</li>#s',$html,$match_pic1);
+
         
-        var_dump($t);exit;
         
+        var_dump($match_pic1);exit;
+        
+        $title = trim($match_title[1]);
+
+        $desc = trim(preg_replace( "#<\/p>|<\/div>#", "", trim($match_desc[1])));
+
+        $price = trim(preg_replace( "#<\/span>|<\/h1>#", "", trim($match_price[1])));
+        
+        //var_dump($price);exit;
 
         echo ($html);exit;
         exit;

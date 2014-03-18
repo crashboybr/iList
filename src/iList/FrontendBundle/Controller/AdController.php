@@ -70,21 +70,189 @@ class AdController extends Controller
     {
         $this->em = $this->get('doctrine')->getEntityManager();
         $this->repository = $this->em->getRepository('iListBackendBundle:SubCategory');
+        $category_repo = $this->em->getRepository('iListBackendBundle:Category');
      
         $categoryId = $this->get('request')->query->get('data');
 
-        
+
+        //echo "<pre>";
+        //\Doctrine\Common\Util\Debug::dump($category);exit;
      
         $subcategories = $this->repository->findByCategory($categoryId);
+        
         //echo "<pre>";
-        //\Doctrine\Common\Util\Debug::dump($subcategories);exit;
-     
+        //\Doctrine\Common\Util\Debug::dump($category);exit;
+        
+
         $html = '';
+
         foreach($subcategories as $subcategory)
         {
             $html = $html . sprintf("<option value=\"%d\">%s</option>",$subcategory->getId(), $subcategory->getName());
+
         }
+
+        if ($html)
+            $html = sprintf("<option value=\"%d\">%s</option>","", "Escolha o Modelo") . $html;
+
+        return new Response($html);
+    }
+
+    public function getColorByCategoryIdAction()
+    {
+        $this->em = $this->get('doctrine')->getEntityManager();
+        //$this->repository = $this->em->getRepository('iListBackendBundle:Color');
+        $category_repo = $this->em->getRepository('iListBackendBundle:Category');
      
+        $categoryId = $this->get('request')->query->get('data');
+
+        $category = $category_repo->findOneById($categoryId);
+
+        //echo "<pre>";
+        //\Doctrine\Common\Util\Debug::dump($category);exit;
+     
+
+        $colors = $category->getColors();
+
+        
+        $html = '';
+
+
+        foreach ($colors as $color)
+        {
+            $html = $html . sprintf("<option value=\"%d\">%s</option>",$color->getId(), $color->getName());
+        }
+        
+        if ($html)
+            $html = sprintf("<option value=\"%d\">%s</option>","", "Escolha a Cor") . $html;
+
+        return new Response($html);
+    }
+
+
+    public function getSizeByCategoryIdAction()
+    {
+        $this->em = $this->get('doctrine')->getEntityManager();
+        //$this->repository = $this->em->getRepository('iListBackendBundle:Color');
+        $category_repo = $this->em->getRepository('iListBackendBundle:Category');
+     
+        $categoryId = $this->get('request')->query->get('data');
+
+        $category = $category_repo->findOneById($categoryId);
+
+        //echo "<pre>";
+        //\Doctrine\Common\Util\Debug::dump($category);exit;
+     
+
+        $sizes = $category->getSizes();
+
+        
+        $html = '';
+
+        
+
+        foreach ($sizes as $size)
+        {
+            $html = $html . sprintf("<option value=\"%d\">%s</option>",$size->getId(), $size->getSize());
+        }
+        
+        if ($html)
+            $html = sprintf("<option value=\"%d\">%s</option>","", "Escolha a Capacidade") . $html;
+
+
+        return new Response($html);
+    }
+
+    public function getMemoryByCategoryIdAction()
+    {
+        $this->em = $this->get('doctrine')->getEntityManager();
+        //$this->repository = $this->em->getRepository('iListBackendBundle:Color');
+        $category_repo = $this->em->getRepository('iListBackendBundle:Category');
+     
+        $categoryId = $this->get('request')->query->get('data');
+
+        $category = $category_repo->findOneById($categoryId);
+
+        //echo "<pre>";
+        //\Doctrine\Common\Util\Debug::dump($category);exit;
+     
+
+        $memorys = $category->getMemories();
+
+        
+        $html = '';
+
+        foreach ($memorys as $memory)
+        {
+            $html = $html . sprintf("<option value=\"%d\">%s</option>",$memory->getId(), $memory->getName());
+        }
+
+        if ($html)
+            $html = sprintf("<option value=\"%d\">%s</option>","", "Escolha a Memória") . $html;
+
+        //var_dump($html);exit;
+        return new Response($html);
+    }
+
+    public function getScreenByCategoryIdAction()
+    {
+        $this->em = $this->get('doctrine')->getEntityManager();
+        //$this->repository = $this->em->getRepository('iListBackendBundle:Color');
+        $category_repo = $this->em->getRepository('iListBackendBundle:Category');
+     
+        $categoryId = $this->get('request')->query->get('data');
+
+        $category = $category_repo->findOneById($categoryId);
+
+        //echo "<pre>";
+        //\Doctrine\Common\Util\Debug::dump($category);exit;
+     
+
+        $screens = $category->getScreens();
+
+        
+        $html = '';
+
+        foreach ($screens as $screen)
+        {
+            $html = $html . sprintf("<option value=\"%d\">%s</option>",$screen->getId(), $screen->getSize());
+        }
+        if ($html)
+            $html = sprintf("<option value=\"%d\">%s</option>","", "Escolha a Tela") . $html;
+        
+        return new Response($html);
+    }
+
+    public function getProcessorByCategoryIdAction()
+    {
+        $this->em = $this->get('doctrine')->getEntityManager();
+        //$this->repository = $this->em->getRepository('iListBackendBundle:Color');
+        $category_repo = $this->em->getRepository('iListBackendBundle:Category');
+     
+        $categoryId = $this->get('request')->query->get('data');
+
+        $category = $category_repo->findOneById($categoryId);
+
+        //echo "<pre>";
+        //\Doctrine\Common\Util\Debug::dump($category);exit;
+     
+
+        $processors = $category->getProcessors();
+
+        
+        $html = '';
+
+
+        
+
+        foreach ($processors as $processor)
+        {
+            $html = $html . sprintf("<option value=\"%d\">%s</option>",$processor->getId(), $processor->getName());
+        }
+        if ($html)
+            $html = sprintf("<option value=\"%d\">%s</option>","", "Escolha o Processador") . $html;
+
+        //var_dump($html);exit;
         return new Response($html);
     }
 
@@ -222,9 +390,6 @@ class AdController extends Controller
                 
                 //$adImage->setCreatedAt(new \DateTime($date));
                 //$adImage->setUpdatedAt(new \DateTime($date));
-
-              
-                
                
                 //$em->persist($adImage);
                 //$em->flush();
@@ -232,8 +397,6 @@ class AdController extends Controller
 
             }
             //exit;
-
-             
 
 
             $em->persist($entity);

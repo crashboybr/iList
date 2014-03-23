@@ -34,7 +34,7 @@ class MemoryRam
     private $categories;
 
     /**
-     * @ORM\OneToMany(targetEntity="Ad", mappedBy="memories")
+     * @ORM\OneToMany(targetEntity="Ad", mappedBy="memory")
      */
     protected $ads;
 

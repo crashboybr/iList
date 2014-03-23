@@ -1,125 +1,164 @@
 {% extends 'iListFrontendBundle::layout.html.twig' %}
-{% block stylesheets %}
-	{{ parent() }}
-    {% stylesheets 
-        'bundles/ilistfrontend/css/bootstrap.min.css'
-    filter='cssrewrite' %}
-        <link rel="stylesheet" href="{{ asset_url }}" />
-    {% endstylesheets %}
-{% endblock %}
-
 {% block javascripts %}
-	 {{ parent() }}
-	 {% javascripts
-	 '@iListFrontendBundle/Resources/public/js/jquery.validate.min.js'
-	 '@iListFrontendBundle/Resources/public/js/bootstrap.min.js'
-	 '@iListFrontendBundle/Resources/public/js/jquery.bootstrap.wizard.js'
+	{% javascripts
+		'@iListFrontendBundle/Resources/public/js/jquery-1.10.2.min.js'
+		
 	 %}
-	  <script src="{{ asset_url }}"></script>
-      {% endjavascripts %}
-  {% endblock %}
+	    <script src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+{% endblock %}
 
 {% block body %}
 <script>
-	$(document).ready(function() {
-	  	var $validator = $("#commentForm").validate({
-		  rules: {
-		    emailfield: {
-		      required: true,
-		      email: true,
-		      minlength: 3
-		    },
-		    namefield: {
-		      required: true,
-		      minlength: 3
-		    },
-		    urlfield: {
-		      required: true,
-		      minlength: 3,
-		      url: true
-		    }
-		  }
-		});
- 
-	  	$('#rootwizard').bootstrapWizard({
-	  		'tabClass': 'nav nav-pills',
-	  		'onNext': function(tab, navigation, index) {
-	  			var $valid = $("#commentForm").valid();
-	  			if(!$valid) {
-	  				$validator.focusInvalid();
-	  				return false;
-	  			}
-	  		},
-	  		onTabShow: function(tab, navigation, index) {
-				var $total = navigation.find('li').length;
-				var $current = index+1;
-				var $percent = ($current/$total) * 100;
-				$('#rootwizard').find('.bar').css({width:$percent+'%'});
+$(document).ready(function () {
+var $sport = $('#ilist_frontendbundle_ad_teste_category');
+// When sport gets selected ...
+$sport.change(function(){
+  // ... retrieve the corresponding form.
+  var $form = $(this).closest('form');
+  // Simulate form data, but only include the selected sport value.
+  var data = {};
+  data[$sport.attr('name')] = $sport.val();
+  // Submit data via AJAX to the form's action path.
+  $.ajax({
+    url : $form.attr('action'),
+    type: $form.attr('method'),
+    data : data,
+    success: function(html) {
+      // Replace current position field ...
+      $('#ilist_frontendbundle_ad_teste_subcategory').replaceWith(
+        // ... with the returned one from the AJAX response.
+        $(html).find('#ilist_frontendbundle_ad_teste_subcategory')
+      );
+      $('#ilist_frontendbundle_ad_teste_color').replaceWith(
+        // ... with the returned one from the AJAX response.
+        $(html).find('#ilist_frontendbundle_ad_teste_color')
+      );
+      $('#ilist_frontendbundle_ad_teste_size').replaceWith(
+        // ... with the returned one from the AJAX response.
+        $(html).find('#ilist_frontendbundle_ad_teste_size')
+      );
+      $('#ilist_frontendbundle_ad_teste_screen').replaceWith(
+        // ... with the returned one from the AJAX response.
+        $(html).find('#ilist_frontendbundle_ad_teste_screen')
+      );
+      $('#ilist_frontendbundle_ad_teste_memory').replaceWith(
+        // ... with the returned one from the AJAX response.
+        $(html).find('#ilist_frontendbundle_ad_teste_memory')
+      );
+      $('#ilist_frontendbundle_ad_teste_processor').replaceWith(
+        // ... with the returned one from the AJAX response.
+        $(html).find('#ilist_frontendbundle_ad_teste_processor')
+      );
+      // Position field now displays the appropriate positions.
+    }
+  });
+});
 
-						// If it's the last tab then hide the last button and show the finish instead
-				if($current >= $total) {
-					$('#rootwizard').find('.pager .next').hide();
-					$('#rootwizard').find('.pager .finish').show();
-					$('#rootwizard').find('.pager .finish').removeClass('disabled');
-				} else {
-					$('#rootwizard').find('.pager .next').show();
-					$('#rootwizard').find('.pager .finish').hide();
-				}
-			}
-	  	});	
-	  	$('#rootwizard .finish').click(function() {
-			alert('Finished!, Starting over!');
-			$('#rootwizard').find("a[href*='tab1']").trigger('click');
-		});
-
-	});	
+});
 </script>
-<form id="commentForm" method="get" action="" class="form-horizontal">
-<div id="rootwizard">
-	<ul>
-	  	<li><a href="#tab1" data-toggle="tab">First</a></li>
-		<li><a href="#tab2" data-toggle="tab">Second</a></li>
-		<li><a href="#tab3" data-toggle="tab">Third</a></li>
-	</ul>
-	<div id="bar" class="progress progress-success active">
-	  <div class="bar" style=""></div>
+
+{{ form_start(form, { attr: { 'novalidate': 'novalidate', 'id': 'formwizard' }}) }}
+
+	<div class="cont" id="">
+		<div class="cont-left">
+        	{{ form_label(form.category,'Produto', { attr: { 'class': 'item_desc' } }) }}
+        </div>
+	     <div class="cont-right">
+	     	<div class="estados">
+				
+				{{ form_widget(form.category) }}
+				{{ form_errors(form.category) }}
+			</div>
+			{{ form_errors(form.category) }}
+			
+		</div>
 	</div>
-	<div class="tab-content">
-	    <div class="tab-pane" id="tab1">
-	    	<div class="control-group">
-			    <label class="control-label" for="email">Email</label>
-			    <div class="controls">
-			      <input type="text" id="emailfield" name="emailfield" class="required email">
-			    </div>
-			  </div>
- 
-			  <div class="control-group">
-			    <label class="control-label" for="name">Name</label>
-			    <div class="controls">
-			      <input type="text" id="namefield" name="namefield" class="required">
-			    </div>
-			  </div>
-	    </div>
-	    <div class="tab-pane" id="tab2">
-	      <div class="control-group">
-			    <label class="control-label" for="url">URL</label>
-			    <div class="controls">
-			      <input type="text" id="urlfield" name="urlfield" class="required url">
-			    </div>
-			  </div>
-	    </div>
-		<div class="tab-pane" id="tab3">
-			3
-	    </div>
-		<ul class="pager wizard">
-			<li class="previous"><a href="#">Previous</a></li>
-		  	<li class="next"><a href="#">Next</a></li>
-		  	<li class="next finish" style="display:none;"><a href="javascript:;">Finish</a></li>
-		</ul>
-	</div>	
-</div>
-</form>
+	<div class="cont" id="">
+		<div class="cont-left">
+        	{{ form_label(form.subcategory,'SubProduto', { attr: { 'class': 'item_desc' } }) }}
+        </div>
+	     <div class="cont-right">
+	     	<div class="estados">
+				
+				{{ form_widget(form.subcategory) }}
+				{{ form_errors(form.subcategory) }}
+			</div>
+			{{ form_errors(form.subcategory) }}
+			
+		</div>
+	</div>
 
-
-
+	<div class="cont" id="">
+		<div class="cont-left">
+        	{{ form_label(form.color,'Cor', { attr: { 'class': 'item_desc' } }) }}
+        </div>
+	     <div class="cont-right">
+	     	<div class="estados">
+				
+				{{ form_widget(form.color) }}
+				{{ form_errors(form.color) }}
+			</div>
+			{{ form_errors(form.color) }}
+			
+		</div>
+	</div>
+	<div class="cont" id="">
+		<div class="cont-left">
+        	{{ form_label(form.size,'Capacidade', { attr: { 'class': 'item_desc' } }) }}
+        </div>
+	     <div class="cont-right">
+	     	<div class="estados">
+				
+				{{ form_widget(form.size) }}
+				{{ form_errors(form.size) }}
+			</div>
+			{{ form_errors(form.size) }}
+			
+		</div>
+	</div>
+	<div class="cont" id="">
+		<div class="cont-left">
+        	{{ form_label(form.memory,'Memória', { attr: { 'class': 'item_desc' } }) }}
+        </div>
+	     <div class="cont-right">
+	     	<div class="estados">
+				
+				{{ form_widget(form.memory) }}
+				{{ form_errors(form.memory) }}
+			</div>
+			{{ form_errors(form.memory) }}
+			
+		</div>
+	</div>
+	<div class="cont" id="">
+		<div class="cont-left">
+        	{{ form_label(form.screen,'Tamanho da Tela', { attr: { 'class': 'item_desc' } }) }}
+        </div>
+	     <div class="cont-right">
+	     	<div class="estados">
+				
+				{{ form_widget(form.screen) }}
+				{{ form_errors(form.screen) }}
+			</div>
+			{{ form_errors(form.screen) }}
+			
+		</div>
+	</div>
+	<div class="cont" id="">
+		<div class="cont-left">
+        	{{ form_label(form.processor,'Processador', { attr: { 'class': 'item_desc' } }) }}
+        </div>
+	     <div class="cont-right">
+	     	<div class="estados">
+				
+				{{ form_widget(form.processor) }}
+				{{ form_errors(form.processor) }}
+			</div>
+			{{ form_errors(form.processor) }}
+			
+		</div>
+	</div>
+	<input type='submit' value='vai'/>
+{{ form_end(form) }}
 {% endblock %}

@@ -23,7 +23,9 @@ class SearchController extends Controller
     public function indexAction($category_name, $state, $subcategory_name)
     {	
         
-
+        
+        $q = $this->get('request')->query->get('q');
+        
         $domain = $this->container->parameters['base_host'];
 
     	$em = $this->getDoctrine()->getManager();
@@ -92,6 +94,8 @@ class SearchController extends Controller
 
         //echo "<pre>";
         //\Doctrine\Common\Util\Debug::dump($filterForm->createView());exit;
+        $q = "%" . $q . "%";
+        $filters['q'] = $q;
 
         $qb = $em->createQueryBuilder();
         $qb->select('f')
@@ -100,6 +104,8 @@ class SearchController extends Controller
             ->orderBy('f.createdAt', 'desc');
         if ($category)
             $qb->andWhere('f.category = :category');
+        if ($q)
+            $qb->andWhere('f.title like :q');
 
         
         

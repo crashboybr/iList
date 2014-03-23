@@ -67,20 +67,20 @@ class Product
     protected $ads;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Size", inversedBy="sizes")
+     * @ORM\ManyToMany(targetEntity="Size", inversedBy="products")
      * @ORM\JoinTable(name="product_sizes")
      */
     private $sizes;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Color", inversedBy="colors")
+     * @ORM\ManyToMany(targetEntity="Color", inversedBy="products")
      * @ORM\JoinTable(name="product_colors")
      */
     private $colors;
 
 
     /**
-     * @ORM\ManyToMany(targetEntity="Generation", inversedBy="generations")
+     * @ORM\ManyToMany(targetEntity="Generation", inversedBy="products")
      * @ORM\JoinTable(name="product_generations")
      */
     private $generations;

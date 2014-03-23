@@ -11,6 +11,9 @@ use iList\BackendBundle\Entity\AdImage;
 use iList\BackendBundle\Form\AdType;
 use iList\BackendBundle\Form\AdMsgType;
 use Symfony\Component\HttpFoundation\Response;
+use iList\BackendBundle\Entity\Category;
+
+use iList\BackendBundle\Form\NewAdType;
 
 /**
  * Ad controller.
@@ -35,7 +38,7 @@ class AdController extends Controller
     }
 
 
-    public function viewAdAction($city, $category_name, $slug, $state, $id)
+    public function viewAdAction($city, $category_name, $slug, $state)
     {
 
 
@@ -45,7 +48,7 @@ class AdController extends Controller
             ->findOneBy(array('name' => $category_name));
 
         $ad = $em->getRepository('iListBackendBundle:Ad')
-            ->findOneBy(array('category' => $category, 'city' => $city, 'slug' => $slug, 'state' => $state, 'id' => $id));
+            ->findOneBy(array('category' => $category, 'city' => $city, 'slug' => $slug, 'state' => $state));
         
         if (!$ad)
             throw $this->createNotFoundException('Oops! Não encontramos este anúncio! :(');
@@ -92,8 +95,8 @@ class AdController extends Controller
 
         }
 
-        if ($html)
-            $html = sprintf("<option value=\"%d\">%s</option>","", "Escolha o Modelo") . $html;
+        //if ($html)
+            //$html = sprintf("<option value=\"%d\">%s</option>","", "Escolha o Modelo") . $html;
 
         return new Response($html);
     }
@@ -362,7 +365,8 @@ class AdController extends Controller
         
         $form->handleRequest($request);
 
-
+        //echo "<pre>";
+        //\Doctrine\Common\Util\Debug::dump($form->isValid());exit;
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             
@@ -448,7 +452,7 @@ class AdController extends Controller
         //\Doctrine\Common\Util\Debug::dump($entity);exit;
 
 
-        $form = $this->createForm(new AdType(), $entity, array(
+        $form = $this->createForm(new NewAdType(), $entity, array(
             'action' => $this->generateUrl('anuncio_create'),
             'method' => 'POST',
         ));
@@ -494,16 +498,53 @@ class AdController extends Controller
      * Displays a form to create a new Ad entity.
      *
      */
-    public function newWizardAction()
+    public function newWizardAction(Request $request)
     {
+
+        /*$em = $this->get('doctrine')->getManager();
+        $category_repo = $em->getRepository('iListBackendBundle:Category');
+     
+        $categoryId = 1;
+
+        $category = $category_repo->findOneById($categoryId);
+        //$entity->setCategory();
+        //$form = new NewAdType();*/
+
         $entity = new Ad();
+        
         $form   = $this->createCreateForm($entity);
+
+        //$form = $this->createForm(new NewAdType(), $entity, array(
+        //    'action' => $this->generateUrl('anuncio_new_wizard'),
+        //    'method' => 'POST',
+        //));
+
+        $form->handleRequest($request);
         //echo "<pre>";
         //\Doctrine\Common\Util\Debug::dump($form);exit;
+        if ($form->isValid()) {
+            die('a');
+        }
 
-        return $this->render('iListFrontendBundle:Ad:new_wizard.html.twig', array(
+
+        //$form   = $this->createCreateForm($entity);
+        //echo "<pre>";
+        //\Doctrine\Common\Util\Debug::dump($request);exit;
+
+        return $this->render('iListFrontendBundle:Ad:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+        ));
+    }
+
+    public function newWizardA2ction(Request $request) {
+        $subcategories = new SubCategory();
+
+        $form = $this->createForm(new SubCategoryType(), $subcategories);
+        $form->handleRequest($request);
+
+        return $this->render('iListFrontendBundle:Ad:wizard2.html.twig', array(
+                    'form' => $form->createView(),
         ));
     }
 

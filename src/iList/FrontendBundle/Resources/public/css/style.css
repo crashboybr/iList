@@ -224,4 +224,7 @@ input[type='checkbox']:checked::before {color: #808080;content: url(/images/tick
 #wrapper .container .content-adview .price-detail{width:160px;background-color:#F7F7F7;color:#F60;margin:0 0 20px 0;padding:10px;border-radius:3px;border:1px #e4e4e4 solid;}
 #wrapper .container .content-adview .product-image{width:640px;height:465px;}
 
+.required:after {
+    content: "*";
+}
 

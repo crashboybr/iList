@@ -48,31 +48,31 @@ class Category
     protected $products;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Size", inversedBy="sizes")
+     * @ORM\ManyToMany(targetEntity="Size", inversedBy="categories")
      * @ORM\JoinTable(name="category_sizes")
      */
     private $sizes;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Color", inversedBy="colors")
+     * @ORM\ManyToMany(targetEntity="Color", inversedBy="categories")
      * @ORM\JoinTable(name="category_colors")
      */
     private $colors;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Processor", inversedBy="processors")
+     * @ORM\ManyToMany(targetEntity="Processor", inversedBy="categories")
      * @ORM\JoinTable(name="category_processors")
      */
     private $processors;
 
     /**
-     * @ORM\ManyToMany(targetEntity="ScreenSize", inversedBy="screens")
+     * @ORM\ManyToMany(targetEntity="ScreenSize", inversedBy="categories")
      * @ORM\JoinTable(name="category_screens")
      */
     private $screens;
 
     /**
-     * @ORM\ManyToMany(targetEntity="MemoryRam", inversedBy="memories")
+     * @ORM\ManyToMany(targetEntity="MemoryRam", inversedBy="categories")
      * @ORM\JoinTable(name="category_memories")
      */
     private $memories;

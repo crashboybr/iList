@@ -60,9 +60,16 @@ class AdType extends AbstractType
             ))
             ->add('category', 'entity', array(
                 'class'    => 'iListBackendBundle:Category',
-                'empty_value' => 'Escolha um produto'
+                'empty_value' => 'Escolha o Produto'
                 ))
-            ->add('subcategory')
+            ->add('subcategory', 'entity', array(
+                      'class'    => 'iListBackendBundle:SubCategory' ,
+                      'property' => 'name' ,
+                      'expanded' => false ,
+                      'multiple' => false ,
+                      'empty_value' => 'Escolha o Modelo'
+              )
+              )
             ->add('product')
             ->add('size' , 'entity' , array(
                       'class'    => 'iListBackendBundle:Size' ,
@@ -82,9 +89,9 @@ class AdType extends AbstractType
                       'expanded' => false ,
                       'multiple' => false ,
                       'empty_value' => 'Escolha a memória' ))
-            ->add('screen' , 'choice' , array(
-                      //'class'    => 'iListBackendBundle:ScreenSize' ,
-                      //'property' => 'size' ,
+            ->add('screen' , 'entity' , array(
+                      'class'    => 'iListBackendBundle:ScreenSize' ,
+                      'property' => 'size' ,
                       'expanded' => false ,
                       'multiple' => false ,
                       'empty_value' => 'Escolha o tamanho da tela' ))

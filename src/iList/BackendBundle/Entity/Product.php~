@@ -28,9 +28,6 @@ class Product
      */
     private $name;
 
- 
-
-
     /**
      * @var boolean
      *

@@ -34,15 +34,15 @@
 					</h3>
                 </div>
                 <div class="search">
-                    <form class="" action="" method="post">
+                    <form class="" action="" method="get">
                         <fieldset>                              
-                        <input autocomplete="off" placeholder="Busque seu Apple" class="" type="text" value="" name="Procure um apple" id="">           
+                        <input autocomplete="off" placeholder="Busque seu Apple" class="" type="text" value="" name="q" id="q">           
                         <input class="searchButton" type="image" src="/images/lupa.png" alt="Buscar">
                         </fieldset>
                     </form>
                 </div>    
                 <div class="sell-apple">
-                	<a href="{{ path('anuncio_new') }}" class="mainButton">Venda seu Apple</a>
+                	<a href="{{ path('anuncio_new_wizard') }}" class="mainButton">Venda seu Apple</a>
                 </div>
                 <div class="breadcrumb">
                     <div class="breadcrumb-left">{{ wo_render_breadcrumbs() }}</div>

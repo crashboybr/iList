@@ -121,10 +121,16 @@ $(document).ready(function(){
             <div class="slider">
 
                 <div id="slider1">
-                    {% for img in ad.adImages %}
-                        <img border="0" src="{{ asset(img.pic) }}" width="625" height="345" alt="" title="" />
-
-                    {% endfor %}
+                    {% if (ad.defaultImg == "initial") %}
+                        <div style="text-align:center; margin-top:15px;"><img src="/images/noimage.png" /></div>
+                    {% else %}
+                    
+                        {% for img in ad.adImages %}
+                            {% if (img.pic != "initial") %}
+                                <img border="0" src="{{ asset(img.pic) }}" width="625" height="345" alt="" title="" />
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
                 </div>
                 <ul id="thumb"></ul>
             

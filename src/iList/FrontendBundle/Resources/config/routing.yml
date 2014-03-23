@@ -85,7 +85,7 @@ subdomain_search:
         state:  rj|mg
 
 subdomain_vi:
-    path:     /{city}/{category_name}/{slug}/{id}
+    path:     /{city}/{category_name}/{slug}
     host:     "{state}.%base_host%"
     defaults: { _controller: iListFrontendBundle:Ad:viewAd }
     #requirements:

@@ -4,6 +4,7 @@ namespace iList\BackendBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Ad
@@ -25,7 +26,9 @@ class Ad
 
     /**
      * @var integer
-     *
+     * @Assert\NotBlank(
+     *      message = "Escolha o Tipo do Produto"
+     *)
      * @ORM\Column(name="ad_type", type="integer")
      */
     private $adType;
@@ -45,6 +48,9 @@ class Ad
 
     /**
      * @var integer
+     * @Assert\NotBlank(
+     *      message = "Escolha o Produto"
+     *)
      *
      * @ORM\Column(name="category_id", type="integer")
      */
@@ -59,7 +65,10 @@ class Ad
     /**
      * @var integer
      *
-     * @ORM\Column(name="subcategory_id", type="integer", nullable=true)
+     * @Assert\NotBlank(
+     *      message = "Escolha o Produto"
+     *)
+     * @ORM\Column(name="subcategory_id", type="integer")
      */
     private $subcategoryId;
 
@@ -152,20 +161,39 @@ class Ad
     /**
      * @var string
      *
+     * @Assert\NotBlank(
+     *      message = "Escreva o título do seu anúncio"
+     *)
+     * @Assert\Length(
+     *      min = "10",
+     *      max = "80",
+     *      minMessage = "Mínimo de {{ limit }} caracteres",
+     *      maxMessage = "Máximo de {{ limit }} caracteres"
+     * )
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(
+     *      message = "Escreva a descrição do seu anúncio"
+     *)
+     * @Assert\Length(
+     *      min = "10",
+     *      max = "300",
+     *      minMessage = "Mínimo de {{ limit }} caracteres",
+     *      maxMessage = "Máximo de {{ limit }} caracteres"
+     * )
      * @ORM\Column(name="content", type="text")
      */
     private $content;
 
     /**
      * @var float
-     *
+     * @Assert\NotBlank(
+     *      message = "Digite o Preço"
+     *)
      * @ORM\Column(name="price", type="float")
      */
     private $price;
@@ -173,6 +201,9 @@ class Ad
     /**
      * @var string
      *
+     * @Assert\NotBlank(
+     *      message = "Escolha o Estado"
+     *)
      * @ORM\Column(name="state", type="string", length=30)
      */
     private $state;
@@ -180,13 +211,18 @@ class Ad
     /**
      * @var string
      *
+     * @Assert\NotBlank(
+     *      message = "Escolha a cidade"
+     *)
      * @ORM\Column(name="city", type="string", length=100)
      */
     private $city;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(
+     *      message = "Digite o CEP"
+     *)
      * @ORM\Column(name="zipcode", type="string", length=30)
      */
     private $zipcode;
@@ -194,6 +230,9 @@ class Ad
     /**
      * @var string
      *
+     * @Assert\NotBlank(
+     *      message = "Digite o Bairro"
+     *)
      * @ORM\Column(name="neighbourhood", type="string", length=255)
      */
     private $neighbourhood;
@@ -201,6 +240,9 @@ class Ad
     /**
      * @var string
      *
+     * @Assert\NotBlank(
+     *      message = "Digite a Rua"
+     *)
      * @ORM\Column(name="street", type="string", length=255)
      */
     private $street;
@@ -208,7 +250,7 @@ class Ad
     /**
      * @var string
      *
-     * @ORM\Column(name="complement", type="string", length=255)
+     * @ORM\Column(name="complement", type="string", length=255, nullable=true)
      */
     private $complement;
 
@@ -1118,5 +1160,97 @@ class Ad
     public function getScreen()
     {
         return $this->screen;
+    }
+
+    /**
+     * Set processorId
+     *
+     * @param integer $processorId
+     * @return Ad
+     */
+    public function setProcessorId($processorId)
+    {
+        $this->processorId = $processorId;
+    
+        return $this;
+    }
+
+    /**
+     * Get processorId
+     *
+     * @return integer 
+     */
+    public function getProcessorId()
+    {
+        return $this->processorId;
+    }
+
+    /**
+     * Set memoryId
+     *
+     * @param integer $memoryId
+     * @return Ad
+     */
+    public function setMemoryId($memoryId)
+    {
+        $this->memoryId = $memoryId;
+    
+        return $this;
+    }
+
+    /**
+     * Get memoryId
+     *
+     * @return integer 
+     */
+    public function getMemoryId()
+    {
+        return $this->memoryId;
+    }
+
+    /**
+     * Set processor
+     *
+     * @param \iList\BackendBundle\Entity\Processor $processor
+     * @return Ad
+     */
+    public function setProcessor(\iList\BackendBundle\Entity\Processor $processor = null)
+    {
+        $this->processor = $processor;
+    
+        return $this;
+    }
+
+    /**
+     * Get processor
+     *
+     * @return \iList\BackendBundle\Entity\Processor 
+     */
+    public function getProcessor()
+    {
+        return $this->processor;
+    }
+
+    /**
+     * Set memory
+     *
+     * @param \iList\BackendBundle\Entity\MemoryRam $memory
+     * @return Ad
+     */
+    public function setMemory(\iList\BackendBundle\Entity\MemoryRam $memory = null)
+    {
+        $this->memory = $memory;
+    
+        return $this;
+    }
+
+    /**
+     * Get memory
+     *
+     * @return \iList\BackendBundle\Entity\MemoryRam 
+     */
+    public function getMemory()
+    {
+        return $this->memory;
     }
 }

@@ -34,7 +34,7 @@ class MemoryRam
     private $categories;
 
     /**
-     * @ORM\OneToMany(targetEntity="Ad", mappedBy="memories")
+     * @ORM\OneToMany(targetEntity="Ad", mappedBy="memory")
      */
     protected $ads;
 
@@ -109,5 +109,38 @@ class MemoryRam
     public function getCategories()
     {
         return $this->categories;
+    }
+
+    /**
+     * Add ads
+     *
+     * @param \iList\BackendBundle\Entity\Ad $ads
+     * @return MemoryRam
+     */
+    public function addAd(\iList\BackendBundle\Entity\Ad $ads)
+    {
+        $this->ads[] = $ads;
+    
+        return $this;
+    }
+
+    /**
+     * Remove ads
+     *
+     * @param \iList\BackendBundle\Entity\Ad $ads
+     */
+    public function removeAd(\iList\BackendBundle\Entity\Ad $ads)
+    {
+        $this->ads->removeElement($ads);
+    }
+
+    /**
+     * Get ads
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAds()
+    {
+        return $this->ads;
     }
 }

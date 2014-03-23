@@ -7,15 +7,19 @@ anuncio_show:
     defaults: { _controller: "iListFrontendBundle:Ad:show" }
 
 anuncio_new:
-    pattern:  /novo
+    pattern:  /novoold
     defaults: { _controller: "iListFrontendBundle:Ad:new" }
 
 anuncio_new_wizard:
-    pattern:  /wizard
+    pattern:  /novo
     defaults: { _controller: "iListFrontendBundle:Ad:newWizard" }
 
+anuncio_new_wizard_2:
+    pattern:  /wizard2
+    defaults: { _controller: "iListFrontendBundle:Ad:newWizard2" }
+
 anuncio_create:
-    pattern:  /create
+    pattern:  /criar
     defaults: { _controller: "iListFrontendBundle:Ad:create" }
     requirements: { _method: post }
 

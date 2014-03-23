@@ -34,7 +34,7 @@ class ScreenSize
     private $categories;
 
     /**
-     * @ORM\OneToMany(targetEntity="Ad", mappedBy="screens")
+     * @ORM\OneToMany(targetEntity="Ad", mappedBy="screen")
      */
     protected $ads;
 

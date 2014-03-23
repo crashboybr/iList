@@ -4,6 +4,7 @@ namespace iList\BackendBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Ad
@@ -25,14 +26,15 @@ class Ad
 
     /**
      * @var integer
-     *
+     * @Assert\NotBlank(
+     *      message = "Escolha o tipo do anúncio"
+     *)
      * @ORM\Column(name="ad_type", type="integer")
      */
     private $adType;
 
     /**
      * @var integer
-     *
      * @ORM\Column(name="user_id", type="integer")
      */
     private $userId;
@@ -51,6 +53,9 @@ class Ad
     private $categoryId;
 
     /**
+    * @Assert\NotBlank(
+     *      message = "Escolha o Produto"
+     *)
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="ads")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
@@ -59,11 +64,14 @@ class Ad
     /**
      * @var integer
      *
-     * @ORM\Column(name="subcategory_id", type="integer", nullable=true)
+     * @ORM\Column(name="subcategory_id", type="integer")
      */
     private $subcategoryId;
 
     /**
+     * @Assert\NotBlank(
+     *      message = "Escolha o Modelo"
+     *)
      * @ORM\ManyToOne(targetEntity="SubCategory", inversedBy="ads")
      * @ORM\JoinColumn(name="subcategory_id", referencedColumnName="id", nullable=true)
      */
@@ -152,20 +160,39 @@ class Ad
     /**
      * @var string
      *
+     * @Assert\NotBlank(
+     *      message = "Escreva o título do seu anúncio"
+     *)
+     * @Assert\Length(
+     *      min = "10",
+     *      max = "80",
+     *      minMessage = "Mínimo de {{ limit }} caracteres",
+     *      maxMessage = "Máximo de {{ limit }} caracteres"
+     * )
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(
+     *      message = "Escreva a descrição do seu anúncio"
+     *)
+     * @Assert\Length(
+     *      min = "10",
+     *      max = "300",
+     *      minMessage = "Mínimo de {{ limit }} caracteres",
+     *      maxMessage = "Máximo de {{ limit }} caracteres"
+     * )
      * @ORM\Column(name="content", type="text")
      */
     private $content;
 
     /**
      * @var float
-     *
+     * @Assert\NotBlank(
+     *      message = "Digite o Preço"
+     *)
      * @ORM\Column(name="price", type="float")
      */
     private $price;
@@ -173,6 +200,9 @@ class Ad
     /**
      * @var string
      *
+     * @Assert\NotBlank(
+     *      message = "Escolha o Estado"
+     *)
      * @ORM\Column(name="state", type="string", length=30)
      */
     private $state;
@@ -180,13 +210,18 @@ class Ad
     /**
      * @var string
      *
+     * @Assert\NotBlank(
+     *      message = "Escolha a cidade"
+     *)
      * @ORM\Column(name="city", type="string", length=100)
      */
     private $city;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(
+     *      message = "Digite o CEP"
+     *)
      * @ORM\Column(name="zipcode", type="string", length=30)
      */
     private $zipcode;
@@ -194,6 +229,9 @@ class Ad
     /**
      * @var string
      *
+     * @Assert\NotBlank(
+     *      message = "Digite o Bairro"
+     *)
      * @ORM\Column(name="neighbourhood", type="string", length=255)
      */
     private $neighbourhood;
@@ -201,6 +239,9 @@ class Ad
     /**
      * @var string
      *
+     * @Assert\NotBlank(
+     *      message = "Digite a Rua"
+     *)
      * @ORM\Column(name="street", type="string", length=255)
      */
     private $street;
@@ -221,7 +262,9 @@ class Ad
 
     /**
      * @var integer
-     *
+     * * @Assert\NotBlank(
+     *      message = "Escolha o Tipo do Produto"
+     *)
      * @ORM\Column(name="product_type", type="integer", nullable=true)
      */
     private $productType;

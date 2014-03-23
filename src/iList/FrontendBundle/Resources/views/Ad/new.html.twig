@@ -9,6 +9,83 @@
 {% endblock %}
 
 {% block body %}
+<script>
+$(document).ready(function () {
+var $sport = $('#ilist_frontendbundle_ad_category');
+// When sport gets selected ...
+$sport.change(function(){
+	$('#loading').show();
+	// ... retrieve the corresponding form.
+	var $form = $(this).closest('form');
+	// Simulate form data, but only include the selected sport value.
+	var data = {};
+	data[$sport.attr('name')] = $sport.val();
+	// Submit data via AJAX to the form's action path.
+	$.ajax({
+	url : $form.attr('action'),
+	type: $form.attr('method'),
+	data : data,
+	success: function(html) {
+	  // Replace current position field ...
+	  $('#ilist_frontendbundle_ad_subcategory').replaceWith(
+	    // ... with the returned one from the AJAX response.
+	    $(html).find('#ilist_frontendbundle_ad_subcategory')
+	  );
+	  $('#ilist_frontendbundle_ad_color').replaceWith(
+	    // ... with the returned one from the AJAX response.
+	    $(html).find('#ilist_frontendbundle_ad_color')
+	  );
+	  $('#ilist_frontendbundle_ad_size').replaceWith(
+	    // ... with the returned one from the AJAX response.
+	    $(html).find('#ilist_frontendbundle_ad_size')
+	    
+	  );
+	  $('#ilist_frontendbundle_ad_screen').replaceWith(
+	    // ... with the returned one from the AJAX response.
+	    $(html).find('#ilist_frontendbundle_ad_screen')
+	  );
+	  $('#ilist_frontendbundle_ad_memory').replaceWith(
+	    // ... with the returned one from the AJAX response.
+	    $(html).find('#ilist_frontendbundle_ad_memory')
+	  );
+	  $('#ilist_frontendbundle_ad_processor').replaceWith(
+	    // ... with the returned one from the AJAX response.
+	    $(html).find('#ilist_frontendbundle_ad_processor')
+	  );
+	  $('#loading').hide();
+      
+      if ($('#ilist_frontendbundle_ad_color option').size() > 1)
+	  	$('#div_color').show();
+	  else
+	  	$('#div_color').hide();
+
+	  if ($('#ilist_frontendbundle_ad_size option').size() > 1)
+	  	$('#div_size').show();
+	  else
+	  	$('#div_size').hide();
+
+	  if ($('#ilist_frontendbundle_ad_screen option').size() > 1)
+	  	$('#div_screen').show();
+	  else
+	  	$('#div_screen').hide();
+
+	  if ($('#ilist_frontendbundle_ad_memory option').size() > 1)
+	  	$('#div_memory').show();
+	  else
+	  	$('#div_memory').hide();
+
+	  if ($('#ilist_frontendbundle_ad_processor option').size() > 1)
+	  	$('#div_processor').show();
+	  else
+	  	$('#div_processor').hide();
+
+    }
+  });
+});
+
+});
+</script>
+
 <script type="text/javascript">
     
 
@@ -48,7 +125,7 @@
 $(document).ready(function()
 {
 	
-
+/*
 	$('#ilist_frontendbundle_ad_category').change( function() {
 		$('#loading').show();
 
@@ -151,7 +228,7 @@ $(document).ready(function()
 	           }
 	       });
   });
-
+*/
 
 
 });
@@ -166,7 +243,7 @@ $(document).ready(function()
 
                 	{{ form_start(form, { attr: { 'novalidate': 'novalidate' }}) }}
                 		
-
+                		{{ form_errors(form) }}
                 		<div class="cont" id="">
 	                		<div class="cont-left">
 	                        	{{ form_label(form.adType,'Tipo do Anúncio', { attr: { 'class': 'item_desc' } }) }}
@@ -179,6 +256,9 @@ $(document).ready(function()
                             		<label class="ipt_label">{{ adType.vars.label }}</label>
 
 								{% endfor %}
+								
+							</div>
+							<div class="inputLabel">
 								{{ form_errors(form.adType) }}
 							</div>
 						</div>
@@ -207,19 +287,20 @@ $(document).ready(function()
 	                        </div>
 						     <div class="cont-right">
 						     	<div class="estados">
-									{{ form_errors(form.category) }}
+									
 									{{ form_widget(form.category) }}
-								</div>
-							
-								<div id="loading" style="text-align: center; width: 40%; margin-top:5 px; display:none;">
+									<div id="loading" style="display:none;">
 									<img src="{{ asset('images/loading.gif') }}" />
 								</div>
+								</div>
+								{{ form_errors(form.category) }}
+								
 							</div>
 						</div>
 
 						
 
-						<div class="cont" id="div_models" style='display:none;'>
+						<div class="cont" id="div_models" style='display:block;'>
 	                		<div class="cont-left">
 	                        	{{ form_label(form.subcategory,'Modelo', { attr: { 'class': 'item_desc' } }) }}
 	                        </div>
@@ -232,17 +313,6 @@ $(document).ready(function()
 							</div>
 						</div>
 
-						<div class="cont" id="div_product" style='display:none;'>
-	                		<div class="cont-left">
-	                        	{{ form_label(form.product,'Geração', { attr: { 'class': 'item_desc' } }) }}
-	                        </div>
-						     <div class="cont-right">
-						     	<div class="estados">
-									{{ form_errors(form.product) }}
-									{{ form_widget(form.product) }}
-								</div>
-							</div>
-						</div>
 
 						<div class="cont" id="div_size" style="display: none;">
 	                		<div class="cont-left">

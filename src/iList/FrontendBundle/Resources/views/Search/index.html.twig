@@ -80,9 +80,13 @@
                     {% for ad in pagination %}
                         <div class="box">
                             <div class="photo">
-                                <img src="{{ asset(ad.defaultImg) }}" width="300" height="200" />
+                                {% if (ad.defaultImg == "initial") %}
+                                    <img src="/images/noimage.png" width="300" height="200" />
+                                {% else %}
+                                    <img src="{{ asset(ad.defaultImg) }}" width="300" height="200" />
+                                {% endif %}
                             </div>
-                            <a class="title" href="{{ path('subdomain_vi', { 'state': ad.state, 'city': ad.city|sanitize, 'category_name': ad.category|sanitize, 'slug': ad.slug, 'id': ad.id }) }}">{{ ad.title }}</a>
+                            <a class="title" href="{{ path('subdomain_vi', { 'state': ad.state, 'city': ad.city|sanitize, 'category_name': ad.category|sanitize, 'slug': ad.slug }) }}">{{ ad.title }}</a>
                             <p class="price">{{ ad.price|price }}</p>
                             <p class="detail">{{ ad.productType }} | {{ ad.city }}-{{ ad.state }}</p>
                         </div>

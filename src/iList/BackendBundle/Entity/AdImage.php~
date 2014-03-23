@@ -32,6 +32,9 @@ class AdImage
      *
      * @ORM\Column(name="pic", type="string", length=255, nullable=true)
      * 
+     * @Assert\NotBlank(
+     *      message = "Escolha uma imagem"
+     *)
      * @Assert\Image(
      *      mimeTypesMessage = "Este arquivo não é uma imagem válida.",
      *      maxSize = "5M",

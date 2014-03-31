@@ -68,3 +68,19 @@ font-weight: bold;line-height: 3px;padding: 0 17px 0 0px;text-align: center;text
 .required:after {
     content: "*";
 }
+
+/* new 23/03/2014 */
+#wrapper .container .content .content-ad .cont .cont-right{float:left;width:700px;height:40px;line-height:33px;}
+.ipt_label.iphone{margin:0 10px 0 17px;}
+.ipt_label.ipad{margin:0 10px 0 19px;}
+.ipt_label.macbook{margin:0 12px 0 27px;}
+.ipt_label.imac{margin:0 12px 0 25px;}
+.ipt_label.ace{margin:0 12px 0 18px;}
+#wrapper .container .content .content-ad .cont.pics{height:230px;}
+#wrapper .container .content .content-ad .cont .cont-right.products{background-image: url(../images/icon-products.png);background-repeat: no-repeat;background-position: -7px -7px;}
+
+/* alert */
+.conte.alert{margin:0 0 0 220px; height:35px;}
+.conte.alert.imgs{margin:0;}
+.alert-text{display:block;font-size:14px;color:#C00;margin:-8px 0 0 0;}
+

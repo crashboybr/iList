@@ -48,7 +48,7 @@ class AdController extends Controller
             ->findOneBy(array('name' => $category_name));
 
         $ad = $em->getRepository('iListBackendBundle:Ad')
-            ->findOneBy(array('category' => $category, 'city' => $city, 'slug' => $slug, 'state' => $state));
+            ->findOneBy(array('status' => 1, 'category' => $category, 'city' => $city, 'slug' => $slug, 'state' => $state));
         
         if (!$ad)
             throw $this->createNotFoundException('Oops! Não encontramos este anúncio! :(');
@@ -323,7 +323,7 @@ class AdController extends Controller
             $em->persist($entity);
             $em->flush($entity);
 
-            $this->get('send_mail')->sendEmail($toUser->getEmail(), 'Nova mensagem chegou', 'Assunto');
+            $this->get('send_mail')->sendEmail($ad, 'newmsg');
 
             $this->get('session')->getFlashBag()->add(
             'notice',
@@ -417,7 +417,7 @@ class AdController extends Controller
            
             
 
-            $this->get('send_mail')->sendEmail($user->getEmail(), 'Seu anuncio esta em revisao', 'Revisao');
+            $this->get('send_mail')->sendEmail($entity, 'revision');
             
 
             return $this->render('iListFrontendBundle:Ad:review.html.twig');
@@ -578,10 +578,17 @@ class AdController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('iListBackendBundle:Ad')->find($id);
+        $user = $this->get('security.context')->getToken()->getUser();
+
+        if (!$user)
+            return $this->redirect($this->generateUrl('home'));
+
+        $entity = $em->getRepository('iListBackendBundle:Ad')->findOneBy(
+            array( 'id' => $id, 'user' => $user)
+        );
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Ad entity.');
+            return $this->redirect($this->generateUrl('account_home'));
         }
 
         $editForm = $this->createEditForm($entity);
@@ -603,7 +610,7 @@ class AdController extends Controller
     */
     private function createEditForm(Ad $entity)
     {
-        $form = $this->createForm(new AdType(), $entity, array(
+        $form = $this->createForm(new NewAdType(), $entity, array(
             'action' => $this->generateUrl('anuncio_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
@@ -622,8 +629,13 @@ class AdController extends Controller
 
         $entity = $em->getRepository('iListBackendBundle:Ad')->find($id);
 
+        $user = $this->get('security.context')->getToken()->getUser();
+
+        if (!$user)
+            return $this->redirect($this->generateUrl('home'));
+
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Ad entity.');
+            return $this->redirect($this->generateUrl('home'));
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -638,12 +650,16 @@ class AdController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('anuncio_edit', array('id' => $id)));
+            //return $this->redirect($this->generateUrl('anuncio_edit', array('id' => $id)));
+            $this->get('send_mail')->sendEmail($entity, 'revision');
+            
+
+            return $this->render('iListFrontendBundle:Ad:review.html.twig');
         }
 
-        return $this->render('iListFrontendBundle:Ad:edit.html.twig', array(
+        return $this->render('iListFrontendBundle:Ad:new.html.twig', array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -653,22 +669,32 @@ class AdController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        //$form = $this->createDeleteForm($id);
+        //$form->handleRequest($request);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('iListBackendBundle:Ad')->find($id);
+        //if ($form->isValid()) {
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Ad entity.');
-            }
+        $em = $this->getDoctrine()->getManager();
+        //$entity = $em->getRepository('iListBackendBundle:Ad')->find($id);
+        $user = $this->get('security.context')->getToken()->getUser();
 
-            $em->remove($entity);
-            $em->flush();
+        if (!$user)
+            return $this->redirect($this->generateUrl('home'));
+
+        $entity = $em->getRepository('iListBackendBundle:Ad')->findOneBy(
+            array( 'id' => $id, 'user' => $user)
+        );
+
+        if (!$entity) {
+            return $this->redirect($this->generateUrl('home'));
         }
 
-        return $this->redirect($this->generateUrl('anuncio'));
+        //$em->remove($entity);
+        $entity->setStatus(-1000); //deleted
+        $em->flush();
+        //}
+
+        return $this->redirect($this->generateUrl('account_home'));
     }
 
     /**

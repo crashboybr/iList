@@ -1,0 +1,84 @@
+{% extends 'iListFrontendBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+{{ parent() }}
+	{% stylesheets 
+		'bundles/ilistfrontend/css/style-tabs.css'
+	filter='cssrewrite' %}
+	    <link rel="stylesheet" href="{{ asset_url }}" />
+	{% endstylesheets %}
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+	{% javascripts
+		'@iListFrontendBundle/Resources/public/js/jquery-ui.js'
+		
+	 %}
+	    <script src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+{% endblock %}
+
+{% block body %}
+
+  <script>
+  $(function() {
+    $( "#tabs" ).tabs();
+
+   // $("li #profile a").unbind('click');
+    $('#tabs-2').click(function(){
+        window.location = "youtube.com";//hardcoded link but you could pull this from the tab
+    });
+  });
+  </script>
+
+    <script>
+  $(function() {
+    $( "#accordion" ).accordion({ active: false, collapsible: true });
+  });
+  </script>
+
+<h3>Minha Conta</h3>
+    <div class="menu-caixa">
+      <ul class="menu-conta">
+        <li class="menu-aba">
+            <a class="link-aba" href="{{ path('account_home') }}">Mensagens</a></li>
+        <li class="menu-aba">
+            <a class="link-aba" href="{{ path('account_profile') }}">Meus dados cadastrais</a></li>
+        <li class="menu-aba select">
+            <a class="link-aba" href="{{ path('account_ads') }}">Meus Anúncios</a></li></br></br>
+      </ul>
+    </div>
+    <div class="my-account-container" id="tabs-1">
+        <div id="tabs-1">
+            {% for ad in ads %}
+                {% if (ad.status != -1000) %}
+                    <div class="box">
+                        <div class="photo">
+                            <img src="{{ asset(ad.defaultImg) }}" width="300" height="200">
+                            
+                        </div>
+                        
+                        {% if (ad.status == 0) %}
+                            {{ ad.title }}
+                            <br />Este anúncio foi rejeitado
+                        {% elseif (ad.status == -1) %}
+                            {{ ad.title }}
+                            <br />Este anúncio está em revisão
+                        {% else %}
+                            <a href="{{ path('subdomain_vi', { 'state': ad.state, 'city': ad.city|sanitize, 'category_name': ad.category|sanitize, 'slug': ad.slug }) }}" class="title">{{ ad.title }}</a>
+                        {% endif %}
+                        <div class="edit"><br/><br/>
+                            <!--<a href="#" class="link-msg-new"><strong>12 mensagens</strong></a>-->
+                            <a href="{{ path('anuncio_edit', { id: ad.id }) }}" class="link-edit">Editar</a>
+                            <a href="{{ path('anuncio_delete', { id: ad.id }) }}" class="link-edit">Excluir</a>
+                        </div>
+
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>        
+    </div>
+  
+            
+{% endblock %}

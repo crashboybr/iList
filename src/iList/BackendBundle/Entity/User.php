@@ -6,12 +6,17 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
  * User
  *
  * @ORM\Table()
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
+ * @UniqueEntity(fields="email", message="Este email já está sendo utilizado.")
+ * @UniqueEntity(fields="cpf", message="Este CPF já está sendo utilizado.")
+ * @UniqueEntity(fields="username", message="Este usuário já está sendo utilizado.")
  */
 class User extends BaseUser
 {
@@ -27,29 +32,29 @@ class User extends BaseUser
     /**
      * @ORM\Column(type="string", length=255)
      *
-     * @Assert\NotBlank(message="É necessário preencher o seu nome", groups={"Registration", "Profile"})
+     * @Assert\NotBlank(message="É necessário preencher o seu nome")
      * @Assert\Length(
      *     min=3,
-     *     max="255",
+     *     max="30",
      *     minMessage="Nome muito pequeno",
-     *     maxMessage="Nome muito longo",
-     *     groups={"Registration", "Profile"}
+     *     maxMessage="Nome muito longo"
+     *     
+     * )
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Caracteres inválidos"
      * )
      */
     protected $name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255,nullable=true)
+     *    
+     * @Assert\Regex(
      *     pattern="/^\(\d{2}\)\s{0,1}\d{4,5}-\d{4}$/",
      *     match=true,
      *     message="Telefone Inválido. Formato: (99) 9999-9999"
-     * )
-     * @Assert\Length(
-     *     min=3,
-     *     max="255",
-     *     minMessage="Nome muito pequeno",
-     *     maxMessage="Nome muito longo",
-     *     groups={"Registration", "Profile"}
      * )
      */
     protected $phone;
@@ -88,7 +93,62 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="facebookId", type="string", length=255)
+     * @ORM\Column(name="state", type="string", length=255, nullable=true)
+     */
+    protected $state;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="city", type="string", length=255, nullable=true)
+     */
+    protected $city;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="street", type="string", length=255, nullable=true)
+     */
+    protected $street;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="complement", type="string", length=255, nullable=true)
+     */
+    protected $complement;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="neighbourhood", type="string", length=255, nullable=true)
+     */
+    private $neighbourhood;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cpf", type="string", length=255, nullable=true)
+     *
+     * @Assert\Regex(
+     *     pattern="/(^\d{3}\.\d{3}\.\d{3}\-\d{2}$)|(^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$)/",
+     *     match=true,
+     *     message="Formato Inválido. CPF: 111.111.111-11"
+     * )
+     */
+    protected $cpf;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="zipcode", type="string", length=255, nullable=true)
+     */
+    protected $zipcode;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="facebookId", type="string", length=255, nullable=true)
      */
     protected $facebookId;
 
@@ -382,5 +442,166 @@ class User extends BaseUser
     public function getMyAdmsgs()
     {
         return $this->my_admsgs;
+    }
+
+    /**
+     * Set state
+     *
+     * @param string $state
+     * @return User
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+    
+        return $this;
+    }
+
+    /**
+     * Get state
+     *
+     * @return string 
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     * @return User
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+    
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string 
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Set zipcode
+     *
+     * @param string $zipcode
+     * @return User
+     */
+    public function setZipcode($zipcode)
+    {
+        $this->zipcode = $zipcode;
+    
+        return $this;
+    }
+
+    /**
+     * Get zipcode
+     *
+     * @return string 
+     */
+    public function getZipcode()
+    {
+        return $this->zipcode;
+    }
+
+    /**
+     * Set cpf
+     *
+     * @param string $cpf
+     * @return User
+     */
+    public function setCpf($cpf)
+    {
+        $this->cpf = $cpf;
+    
+        return $this;
+    }
+
+    /**
+     * Get cpf
+     *
+     * @return string 
+     */
+    public function getCpf()
+    {
+        return $this->cpf;
+    }
+
+    /**
+     * Set street
+     *
+     * @param string $street
+     * @return User
+     */
+    public function setStreet($street)
+    {
+        $this->street = $street;
+    
+        return $this;
+    }
+
+    /**
+     * Get street
+     *
+     * @return string 
+     */
+    public function getStreet()
+    {
+        return $this->street;
+    }
+
+    /**
+     * Set complement
+     *
+     * @param string $complement
+     * @return User
+     */
+    public function setComplement($complement)
+    {
+        $this->complement = $complement;
+    
+        return $this;
+    }
+
+    /**
+     * Get complement
+     *
+     * @return string 
+     */
+    public function getComplement()
+    {
+        return $this->complement;
+    }
+
+    /**
+     * Set neighbourhood
+     *
+     * @param string $neighbourhood
+     * @return User
+     */
+    public function setNeighbourhood($neighbourhood)
+    {
+        $this->neighbourhood = $neighbourhood;
+    
+        return $this;
+    }
+
+    /**
+     * Get neighbourhood
+     *
+     * @return string 
+     */
+    public function getNeighbourhood()
+    {
+        return $this->neighbourhood;
     }
 }

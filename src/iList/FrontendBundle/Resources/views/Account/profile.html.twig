@@ -1,0 +1,157 @@
+{% extends 'iListFrontendBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+{{ parent() }}
+	{% stylesheets 
+		'bundles/ilistfrontend/css/style-tabs.css'
+	filter='cssrewrite' %}
+	    <link rel="stylesheet" href="{{ asset_url }}" />
+	{% endstylesheets %}
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+	{% javascripts
+		'@iListFrontendBundle/Resources/public/js/jquery-ui.js'
+        '@iListFrontendBundle/Resources/public/js/jquery.maskedinput.min.js'
+        
+		
+	 %}
+	    <script src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+{% endblock %}
+
+{% block body %}
+
+
+<script>
+  $(function() {
+    $("#ilist_frontendbundle_user_phone").mask("(99) 9999?9-9999");
+
+    $("#ilist_frontendbundle_user_cpf").mask("999.999.999-99");
+
+    $("#ilist_frontendbundle_user_phone").on("blur", function() {
+        var last = $(this).val().substr( $(this).val().indexOf("-") + 1 );
+
+        if( last.length == 3 ) {
+            var move = $(this).val().substr( $(this).val().indexOf("-") - 1, 1 );
+            var lastfour = move + last;
+            var first = $(this).val().substr( 0, 9 );
+
+            $(this).val( first + '-' + lastfour );
+        }
+    });
+
+    $("ilist_frontendbundle_user_phone").trigger("focus");
+  });
+  </script>
+
+<h3>Minha Conta</h3>
+    <div class="menu-caixa">
+      <ul class="menu-conta">
+        <li class="menu-aba">
+            <a class="link-aba" href="{{ path('account_home') }}">Mensagens</a></li>
+        <li class="menu-aba select">
+            <a class="link-aba" href="{{ path('account_profile') }}">Meus dados cadastrais</a></li>
+        <li class="menu-aba">
+            <a class="link-aba" href="{{ path('account_ads') }}">Meus Anúncios</a></li></br></br>
+      </ul>
+    </div>
+    <div class="my-account-container" id="tabs-1">
+        <div id="tabs-1">
+            <form action="{{ path('account_profile') }}" {{ form_enctype(form) }} method="POST" class="new_entity_factories_free_entity_factory" novalidate>
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+                    <div class="flash-notice">
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
+                {{ form_errors(form) }}
+                {{ form_row(form._token) }} 
+                <div class="inputLabel-account">
+                    <p class="text">Nome</p>
+                    {{ form_widget(form.name, { 'attr': {'class': 'rounder', 'placeholder': form.name.vars.label } }) }}
+                </div>
+                {% if (form.name.vars.errors|length > 0) %}
+                    <div class="conte alert">
+                        <p class="alert-text">{{ form.name.vars.errors[0].message }}</p>
+                    </div>
+                {% endif %}
+
+                <div class="inputLabel-account">
+                    <p class="text">Usuário</p>
+                    {{ form_widget(form.username, { 'attr': {'class': 'rounder', 'placeholder': form.username.vars.label } }) }}
+                </div>
+                {% if (form.username.vars.errors|length > 0) %}
+                    <div class="conte alert">
+                        <p class="alert-text">{{ form.username.vars.errors[0].message }}</p>
+                    </div>
+                {% endif %}
+
+                <div class="inputLabel-account">
+                    <p class="text">Email</p>
+                    {{ form_widget(form.email, { 'attr': {'class': 'rounder', 'placeholder': form.email.vars.label } }) }}
+                </div>
+                {% if (form.email.vars.errors|length > 0) %}
+                    <div class="conte alert">
+                        <p class="alert-text">{{ form.email.vars.errors[0].message }}</p>
+                    </div>
+                {% endif %}
+
+                <div class="inputLabel-account">
+                    <p class="text">Telefone</p>
+                    {{ form_widget(form.phone, { 'attr': {'class': 'rounder', 'placeholder': form.phone.vars.label } }) }}
+                </div>
+                {% if (form.phone.vars.errors|length > 0) %}
+                    <div class="conte alert">
+                        <p class="alert-text">{{ form.phone.vars.errors[0].message }}</p>
+                    </div>
+                {% endif %}
+
+                <div class="inputLabel-account">
+                    <p class="text">CEP</p>
+                    {{ form_widget(form.zipcode, { 'attr': {'class': 'rounder', 'placeholder': form.zipcode.vars.label } }) }}
+                </div>
+                {% if (form.zipcode.vars.errors|length > 0) %}
+                    <div class="conte alert">
+                        <p class="alert-text">{{ form.zipcode.vars.errors[0].message }}</p>
+                    </div>
+                {% endif %}
+
+                <div class="inputLabel-account">
+                    <p class="text">Estado</p>
+                    {{ form_widget(form.state, { 'attr': {'class': 'rounder', 'placeholder': form.state.vars.label } }) }}
+                </div>
+                {% if (form.state.vars.errors|length > 0) %}
+                    <div class="conte alert">
+                        <p class="alert-text">{{ form.state.vars.errors[0].message }}</p>
+                    </div>
+                {% endif %}
+
+                <div class="inputLabel-account">
+                    <p class="text">Cidade</p>
+                    {{ form_widget(form.city, { 'attr': {'class': 'rounder', 'placeholder': form.city.vars.label } }) }}
+                </div>
+                {% if (form.city.vars.errors|length > 0) %}
+                    <div class="conte alert">
+                        <p class="alert-text">{{ form.city.vars.errors[0].message }}</p>
+                    </div>
+                {% endif %}
+
+                <div class="inputLabel-account">
+                    <p class="text">CPF</p>
+                    {{ form_widget(form.cpf, { 'attr': {'class': 'rounder', 'placeholder': form.cpf.vars.label } }) }}
+                </div>
+                {% if (form.cpf.vars.errors|length > 0) %}
+                    <div class="conte alert">
+                        <p class="alert-text">{{ form.cpf.vars.errors[0].message }}</p>
+                    </div>
+                {% endif %}
+
+                <input class="ButtonRegister-account" name="commit" type="submit" value="Finalizar">
+            </form>
+
+        </div>        
+    </div>
+  
+            
+{% endblock %}

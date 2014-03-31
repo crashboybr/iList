@@ -35,4 +35,4 @@ anuncio_update:
 anuncio_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "iListFrontendBundle:Ad:delete" }
-    requirements: { _method: post|delete }
+    #requirements: { _method: post|delete }

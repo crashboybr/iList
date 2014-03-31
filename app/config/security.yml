@@ -4,6 +4,11 @@ security:
     encoders:
         #Symfony\Component\Security\Core\User\User: plaintext
         FOS\UserBundle\Model\UserInterface: sha512
+        entity_admin:
+            class: iList\BackendBundle\Entity\AdminUser
+            algorithm: sha1
+            iterations: 1
+            encode_as_base64: false
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
@@ -12,22 +17,37 @@ security:
     providers:
         chainprovider:
                 chain:
-                    providers: [fos_userbundle, fos_facebook_provider]
+                    providers: [fos_userbundle]
+                    #, fos_facebook_provider]
         fos_userbundle:
             id: fos_user.user_provider.username_email
-        fos_facebook_provider:
-            id: fos_facebook.user.login
+        #fos_facebook_provider:
+        #    id: fos_facebook.user.login
+        entity_admin:
+            entity:
+                class: iList\BackendBundle\Entity\AdminUser
+                property: username
         #dao_provider_by_id:
         #    entity: { class: YOUR_SECURITY_CLASS_NAME, property: id }
 
     firewalls:
+        admin_secured_area:
+            pattern: /admin/.*
+            provider: entity_admin
+            anonymous: ~
+            form_login:
+                check_path: admin_login_check
+                login_path: admin_login
+            logout:
+                path:   /admin/logout
+                target: /
         main:
             pattern: ^/
-            fos_facebook:
-                app_url: "http://apps.facebook.com/iList/"
-                server_url: "http://www.ilist.dev/"
-                login_path: /fb_login
-                check_path: /fb_check
+            #fos_facebook:
+            #    app_url: "http://apps.facebook.com/iList/"
+            #    server_url: "http://www.ilist.dev/"
+            #    login_path: /fb_login
+            #    check_path: /fb_check
                 #default_target_path: /login
             form_login:
                 provider: fos_userbundle
@@ -40,15 +60,7 @@ security:
                 path:     /
                 domain:   ~ # Defaults to the current domain from $_SERVER
                 #http://symfony.com/doc/master/cookbook/security/remember_me.html
-       # crosslogin:
-       #     crosslogin: true
-       #     provider: fos_userbundle
-       #     request_matcher: crosslogin.session.matcher
-        #    logout:
-         #       path: /logout
-         #       target: /
-         #       invalidate_session: true
-         #       handlers: [crosslogin.handler.logout]
+        
 
 
     #factories:
@@ -61,6 +73,8 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/account/, role: ROLE_USER }
         - { path: ^/anuncio/, role: ROLE_USER }
+        - { path: /admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: /admin/.*, roles: ROLE_ADMIN }
         #- { path: ^/, role: ROLE_USER }
 
 

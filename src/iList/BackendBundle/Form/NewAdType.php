@@ -62,8 +62,10 @@ class NewAdType extends AbstractType
 
         $builder
             ->add('category', 'entity', array(
-                'class'    => 'iListBackendBundle:Category',
-                'empty_value' => 'Escolha o Produto'
+                'class'       => 'iListBackendBundle:Category',
+                'empty_value' => 'Escolha o Produto',
+                'expanded'    => false,
+                'multiple'    => false
 
                 ))
             ->add('adType', 'choice', array(
@@ -82,7 +84,7 @@ class NewAdType extends AbstractType
                 'attr' => array('readonly' => 'readonly')
                 ))
             ->add('zipcode','text', array(
-                'attr' => array('onchange' => 'changeZipcode()'),
+                'attr' => array('onchange' => 'changeZipcode("ad")', 'maxlength' => 8),
                 ))
             ->add('neighbourhood','text', array(
                 'attr' => array('readonly' => 'readonly')

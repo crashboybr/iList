@@ -14,8 +14,17 @@ use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use Symfony\Component\HttpFoundation\Session\Session;
 use iList\BackendBundle\Entity\AdMsg;
+use iList\BackendBundle\Entity\User;
+use iList\BackendBundle\Form\UserType;
 
 use iList\BackendBundle\Classes\Tools;
+
+use FOS\UserBundle\Event\GetResponseUserEvent;
+use FOS\UserBundle\Model\UserInterface;
+use Symfony\Component\DependencyInjection\ContainerAware;
+
+
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class AccountController extends Controller
 {
@@ -41,42 +50,106 @@ class AccountController extends Controller
             $all_msgs[$msg->getAdId()][$msg->getFromUserId()]['msg'][] = $msg;
             
         }
-        foreach ($all_msgs as $msgs)
-            foreach ($msgs as $msg)
-        {
-            //\Doctrine\Common\Util\Debug::dump($msg);exit;
-        }
-        //\Doctrine\Common\Util\Debug::dump($all_msgs);exit;
-        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
-        $formFactory = $this->container->get('fos_user.registration.form.factory');
-        /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
-        $userManager = $this->container->get('fos_user.user_manager');
-        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
-        $dispatcher = $this->container->get('event_dispatcher');
         
-        //$user = $this->get('security.context')->getToken()->getUser();
         
-        $ads = $user->getAds();
-        /*echo "<pre>";
-        foreach ($ads as $ad)
-        {
-            \Doctrine\Common\Util\Debug::dump($ad->getDeclinedAds());
-        }
-        exit;
-        */
-        $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, new UserEvent($user, $request));
-    
-        $form = $formFactory->createForm();
-        $form->setData($user);
 
-    	
+        
         return $this->render('iListFrontendBundle:Account:index.html.twig',array(
-            'form' => $form->createView(),
-            'ads' => $ads,
             'all_msgs' => $all_msgs
 
             ));
     }
+    /*public function profileAction(Request $request)
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(new UserType(), $user, array(
+            'action' => $this->generateUrl('account_profile'),
+            'method' => 'POST',
+        ));
+
+        return $this->render('iListFrontendBundle:Account:profile.html.twig',array(
+            'form' => $form->createView()
+
+            ));
+    }*/
+
+    public function adsAction(Request $request)
+    {
+        $user = $this->getUser();
+
+        $ads = $user->getAds();
+
+        return $this->render('iListFrontendBundle:Account:ads.html.twig',array(
+            'ads' => $ads
+
+            ));
+    }
+
+    public function profileAction(Request $request)
+    {
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+
+        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+        $dispatcher = $this->container->get('event_dispatcher');
+
+        $event = new GetResponseUserEvent($user, $request);
+        $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_INITIALIZE, $event);
+
+        if (null !== $event->getResponse()) {
+            return $event->getResponse();
+        }
+
+        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
+        $formFactory = $this->container->get('fos_user.profile.form.factory');
+
+        $form = $formFactory->createForm();
+        $form->setData($user);
+
+        $form = $this->createForm(new UserType(), $user, array(
+            'action' => $this->generateUrl('account_home'),
+            'method' => 'POST',
+        ));
+
+        if ('POST' === $request->getMethod()) {
+            $form->bind($request);
+
+            if ($form->isValid()) {
+                /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+                $userManager = $this->container->get('fos_user.user_manager');
+
+                $event = new FormEvent($form, $request);
+                $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_SUCCESS, $event);
+
+                $userManager->updateUser($user);
+
+                if (null === $response = $event->getResponse()) {
+                    $url = $this->container->get('router')->generate('fos_user_profile_show');
+                    $response = new RedirectResponse($url);
+                }
+
+                $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    'Dados alterados com sucesso!');
+
+                //return $response;
+                return $this->container->get('templating')->renderResponse(
+                    'iListFrontendBundle:Account:profile.html.twig', array('form' => $form->createView())
+                );
+            }
+        }
+
+        return $this->container->get('templating')->renderResponse(
+            'iListFrontendBundle:Account:profile.html.twig', array('form' => $form->createView())
+        );
+    }
+
+
+
 
     public function replyMsgAction(Request $request)
     {
@@ -110,7 +183,8 @@ class AccountController extends Controller
         'notice',
         'Resposta enviada com sucesso!');
 
-        $this->get('send_mail')->sendEmail($user->getEmail(), 'Vc teve uma resposta na sua caixa de entrada', 'Nova Msg');
+        //$this->get('send_mail')->sendEmail($user->getEmail(), 'Vc teve uma resposta na sua caixa de entrada', 'Nova Msg');
+        $this->get('send_mail')->sendEmail($ad, 'newmsg');
 
         return $this->redirect($this->generateUrl('account_home'));
  

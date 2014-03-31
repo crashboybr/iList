@@ -120,7 +120,7 @@ services:
 
     send_mail:
         class:        iList\FrontendBundle\Util\Mailer
-        arguments: ['@mailer']
+        arguments: ['@mailer', '@twig']
 
 
 knp_paginator:

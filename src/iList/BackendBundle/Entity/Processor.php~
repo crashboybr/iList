@@ -34,7 +34,7 @@ class Processor
     private $categories;
 
     /**
-     * @ORM\OneToMany(targetEntity="Ad", mappedBy="processors")
+     * @ORM\OneToMany(targetEntity="Ad", mappedBy="processor")
      */
     protected $ads;
 

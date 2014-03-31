@@ -8,9 +8,30 @@
 	{% endstylesheets %}
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+    	'@iListFrontendBundle/Resources/public/js/jquery.maskedinput.min.js'
+    	'@iListFrontendBundle/Resources/public/js/jquery.number.min.js'
+        '@iListFrontendBundle/Resources/public/js/changeZipcode.js'
+        
+     %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
 {% block body %}
 <script>
 $(document).ready(function () {
+
+    $('#ilist_frontendbundle_ad_price').on('change',function(){
+		var val = $('#ilist_frontendbundle_ad_price').val();
+		$('#the_number').text( val !== '' ? val : '(empty)' );
+	});
+	
+	$('#ilist_frontendbundle_ad_price').number( true, 2, ",", ".");
+
+
 var $sport = $('#ilist_frontendbundle_ad_category');
 // When sport gets selected ...
 $sport.change(function(){
@@ -86,154 +107,7 @@ $sport.change(function(){
 });
 </script>
 
-<script type="text/javascript">
-    
 
-    function changeZipcode()
-    {
-        //alert($("#ilist_frontendbundle_ad_zipcode").val());
-        
-
-        var url = 'http://cep.correiocontrol.com.br/' + $("#ilist_frontendbundle_ad_zipcode").val() + '.json';
-
-        var jqxhr = $.getJSON( url, {
-    		format: "json"
-  		})
-	    .done(function( data ) {
-	    	
-			$.each( data, function( key, item ) {
-		        
-		        switch(key)
-				{
-					case "uf":
-					  $('#ilist_frontendbundle_ad_state').find('option[value=' + item+ ']').attr('selected',true);
-					  break;
-					case "localidade":
-						$('#ilist_frontendbundle_ad_city').val(item);
-						break;
-					case "logradouro":
-						$('#ilist_frontendbundle_ad_street').val(item);
-						break;
-					case "bairro":
-						$('#ilist_frontendbundle_ad_neighbourhood').val(item);
-						break;		
-				}
-		    });
-	    });
-    }
-    
-$(document).ready(function()
-{
-	
-/*
-	$('#ilist_frontendbundle_ad_category').change( function() {
-		$('#loading').show();
-
-	    $.ajax({
-	        type: "GET",
-	        data: "data=" + $(this).val(),
-	        url:"{{ path('find_color_by_category_id') }}",
-	        success: function(msg){
-	            if (msg != ''){
-	               	$('#ilist_frontendbundle_ad_color').html(msg);
-	               	$('#div_color').show();
-	               }
-	               else
-	               {
-	                   $('#div_color').hide();
-	               }
-	           }
-	       });
-
-	    $.ajax({
-	        type: "GET",
-	        data: "data=" + $(this).val(),
-	        url:"{{ path('find_size_by_category_id') }}",
-	        success: function(msg){
-	            if (msg != ''){
-	               	$('#ilist_frontendbundle_ad_size').html(msg);
-	               	$('#div_size').show();
-	               }
-	               else
-	               {
-	                   $('#div_size').hide();
-	               }
-	           }
-	       });
-
-	    $.ajax({
-	        type: "GET",
-	        data: "data=" + $(this).val(),
-	        url:"{{ path('find_memory_by_category_id') }}",
-	        success: function(msg){
-	            if (msg != ''){
-	               	$('#ilist_frontendbundle_ad_memory').html(msg);
-	               	$('#div_memory').show();
-	               }
-	               else
-	               {
-	                   $('#div_memory').hide();
-	               }
-	           }
-	       });
-
-	    $.ajax({
-	        type: "GET",
-	        data: "data=" + $(this).val(),
-	        url:"{{ path('find_screen_by_category_id') }}",
-	        success: function(msg){
-	            if (msg != ''){
-	               	$('#ilist_frontendbundle_ad_screen').html(msg);
-	               	$('#div_screen').show();
-	               }
-	               else
-	               {
-	                   $('#div_screen').hide();
-	               }
-	           }
-	       });
-
-	    $.ajax({
-	        type: "GET",
-	        data: "data=" + $(this).val(),
-	        url:"{{ path('find_processor_by_category_id') }}",
-	        success: function(msg){
-	            if (msg != ''){
-	               	$('#ilist_frontendbundle_ad_processor').html(msg);
-	               	$('#div_processor').show();
-	               }
-	               else
-	               {
-	                   $('#div_processor').hide();
-	               }
-	           }
-	       });
-
-	    $.ajax({
-	        type: "GET",
-	        data: "data=" + $(this).val(),
-	        url:"{{ path('find_subcategory_by_category_id') }}",
-	        success: function(msg){
-	            if (msg != ''){
-	               	$('#ilist_frontendbundle_ad_subcategory').html(msg);
-	               	$('#div_models').show();
-
-	               }
-	               else
-	               {
-	                   $('#div_models').hide();
-
-	               }
-	               $('#loading').hide();
-	           }
-	       });
-  });
-*/
-
-
-});
-
-</script>
 
            		<div class="content-ad">
                 	<div class="titleMenu">
@@ -258,10 +132,12 @@ $(document).ready(function()
 								{% endfor %}
 								
 							</div>
-							<div class="inputLabel">
-								{{ form_errors(form.adType) }}
-							</div>
 						</div>
+						{% if (form.adType.vars.errors|length > 0) %}
+							<div class="conte alert">
+	                        	<p class="alert-text">{{ form.adType.vars.errors[0].message }}</p>
+	                        </div>
+                        {% endif %}
 
 
 						<div class="cont" id="">
@@ -276,10 +152,14 @@ $(document).ready(function()
                             		<label class="ipt_label">{{ productType.vars.label }}</label>
 
 								{% endfor %}
-								{{ form_errors(form.productType) }}
+								
 							</div>
 						</div>
-
+						{% if (form.productType.vars.errors|length > 0) %}
+							<div class="conte alert">
+	                        	<p class="alert-text">{{ form.productType.vars.errors[0].message }}</p>
+	                        </div>
+                        {% endif %}
 
                 		<div class="cont" id="">
 	                		<div class="cont-left">
@@ -288,16 +168,21 @@ $(document).ready(function()
 						     <div class="cont-right">
 						     	<div class="estados">
 									
-									{{ form_widget(form.category) }}
+										{{ form_widget(form.category) }}
+										
 									<div id="loading" style="display:none;">
 									<img src="{{ asset('images/loading.gif') }}" />
 								</div>
 								</div>
-								{{ form_errors(form.category) }}
+								
 								
 							</div>
 						</div>
-
+						{% if (form.category.vars.errors|length > 0) %}
+							<div class="conte alert">
+	                        	<p class="alert-text">{{ form.category.vars.errors[0].message }}</p>
+	                        </div>
+                        {% endif %}
 						
 
 						<div class="cont" id="div_models" style='display:block;'>
@@ -306,12 +191,16 @@ $(document).ready(function()
 	                        </div>
 						     <div class="cont-right">
 						     	<div class="estados">
-									{{ form_errors(form.subcategory) }}
 									{{ form_widget(form.subcategory) }}
 								</div>
 
 							</div>
 						</div>
+						{% if (form.subcategory.vars.errors|length > 0) %}
+							<div class="conte alert">
+	                        	<p class="alert-text">{{ form.subcategory.vars.errors[0].message }}</p>
+	                        </div>
+                        {% endif %}
 
 
 						<div class="cont" id="div_size" style="display: none;">
@@ -320,7 +209,6 @@ $(document).ready(function()
 	                        </div>
 						     <div class="cont-right">
 						     	<div class="estados">
-									{{ form_errors(form.size) }}
 									{{ form_widget(form.size) }}
 								</div>
 							</div>
@@ -332,11 +220,11 @@ $(document).ready(function()
 	                        </div>
 						     <div class="cont-right">
 						     	<div class="estados">
-									{{ form_errors(form.memory) }}
 									{{ form_widget(form.memory) }}
 								</div>
 							</div>
 						</div>
+						
 
 						<div class="cont" id="div_screen" style="display: none;">
 	                		<div class="cont-left">
@@ -381,11 +269,15 @@ $(document).ready(function()
 	                        </div>
 						     <div class="cont-right">
 						     	<div class="estados">
-									{{ form_errors(form.title) }}
 									{{ form_widget(form.title) }}
 								</div>
 							</div>
 						</div>
+						{% if (form.title.vars.errors|length > 0) %}
+							<div class="conte alert">
+	                        	<p class="alert-text">{{ form.title.vars.errors[0].message }}</p>
+	                        </div>
+                        {% endif %}
 
 						<div class="cont text-ad" id="">
 	                		<div class="cont-left">
@@ -393,11 +285,15 @@ $(document).ready(function()
 	                        </div>
 						     <div class="cont-right">
 						     	<div class="text-ad">
-									{{ form_errors(form.content) }}
 									{{ form_widget(form.content) }}
 								</div>
 							</div>
 						</div>
+						{% if (form.content.vars.errors|length > 0) %}
+							<div class="conte alert">
+	                        	<p class="alert-text">{{ form.content.vars.errors[0].message }}</p>
+	                        </div>
+                        {% endif %}
 
 						<div class="cont" id="">
 	                		<div class="cont-left">
@@ -405,11 +301,16 @@ $(document).ready(function()
 	                        </div>
 						     <div class="cont-right">
 						     	<div class="estados">
-									{{ form_errors(form.price) }}
 									{{ form_widget(form.price, { attr: { 'class': 'price' } }) }}
 								</div>
 							</div>
 						</div>
+						{% if (form.price.vars.errors|length > 0) %}
+							<div class="conte alert">
+	                        	<p class="alert-text">{{ form.price.vars.errors[0].message }}</p>
+	                        </div>
+                        {% endif %}
+
 
 						<div class="cont" id="">
 	                		<div class="cont-left">
@@ -417,11 +318,15 @@ $(document).ready(function()
 	                        </div>
 						     <div class="cont-right">
 						     	<div class="estados">
-									{{ form_errors(form.zipcode) }}
 									{{ form_widget(form.zipcode, { attr: { 'class': 'cep' } }) }}
 								</div>
 							</div>
 						</div>
+						{% if (form.zipcode.vars.errors|length > 0) %}
+							<div class="conte alert">
+	                        	<p class="alert-text">{{ form.zipcode.vars.errors[0].message }}</p>
+	                        </div>
+                        {% endif %}
 
 
 						<div class="cont" id="">
@@ -430,11 +335,15 @@ $(document).ready(function()
 	                        </div>
 						     <div class="cont-right">
 						     	<div class="estados">
-									{{ form_errors(form.state) }}
 									{{ form_widget(form.state) }}
 								</div>
 							</div>
 						</div>
+						{% if (form.state.vars.errors|length > 0) %}
+							<div class="conte alert">
+	                        	<p class="alert-text">{{ form.state.vars.errors[0].message }}</p>
+	                        </div>
+                        {% endif %}
 
 						<div class="cont" id="">
 	                		<div class="cont-left">
@@ -442,11 +351,15 @@ $(document).ready(function()
 	                        </div>
 						     <div class="cont-right">
 						     	<div class="estados">
-									{{ form_errors(form.city) }}
 									{{ form_widget(form.city) }}
 								</div>
 							</div>
 						</div>
+						{% if (form.city.vars.errors|length > 0) %}
+							<div class="conte alert">
+	                        	<p class="alert-text">{{ form.city.vars.errors[0].message }}</p>
+	                        </div>
+                        {% endif %}
 
 						<div class="cont" id="">
 	                		<div class="cont-left">
@@ -454,11 +367,15 @@ $(document).ready(function()
 	                        </div>
 						     <div class="cont-right">
 						     	<div class="estados">
-									{{ form_errors(form.neighbourhood) }}
 									{{ form_widget(form.neighbourhood) }}
 								</div>
 							</div>
 						</div>
+						{% if (form.neighbourhood.vars.errors|length > 0) %}
+							<div class="conte alert">
+	                        	<p class="alert-text">{{ form.neighbourhood.vars.errors[0].message }}</p>
+	                        </div>
+                        {% endif %}
 						
 						<div class="cont" id="">
 	                		<div class="cont-left">
@@ -466,14 +383,16 @@ $(document).ready(function()
 	                        </div>
 						     <div class="cont-right">
 						     	<div class="estados">
-									{{ form_errors(form.street) }}
 									{{ form_widget(form.street) }}
 								</div>
 							</div>
 						</div>
 
-						
-						
+						{% if (form.street.vars.errors|length > 0) %}
+							<div class="conte alert">
+	                        	<p class="alert-text">{{ form.street.vars.errors[0].message }}</p>
+	                        </div>
+                        {% endif %}
 
 						<div class="cont" id="">
 	                		<div class="cont-left">

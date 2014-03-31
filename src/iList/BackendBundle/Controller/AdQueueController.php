@@ -45,11 +45,11 @@ class AdQueueController extends Controller
                 $em->persist($declined_ad);
                 $em->flush();
 
-                $this->get('send_mail')->sendEmail($ad->getUser()->getEmail(), 'Seu anuncio foi recusado', 'Revisao');
+                $this->get('send_mail')->sendEmail($ad, 'refused');
             }
             else
             {
-                $this->get('send_mail')->sendEmail($ad->getUser()->getEmail(), 'Seu anuncio foi aprovado', 'Revisao');
+                $this->get('send_mail')->sendEmail($ad, 'published');
             }
             //echo "<pre>";
             //\Doctrine\Common\Util\Debug::dump($declined_ad);exit;

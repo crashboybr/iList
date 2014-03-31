@@ -2,6 +2,17 @@ account_home:
     pattern:  /
     defaults: { _controller: "iListFrontendBundle:Account:index" }
 
+account_edit:
+    pattern:  /edit
+    defaults: { _controller: "iListFrontendBundle:Account:edit" }
+
+account_profile:
+    pattern:  /perfil
+    defaults: { _controller: "iListFrontendBundle:Account:profile" }
+
+account_ads:
+    pattern:  /meusanuncios
+    defaults: { _controller: "iListFrontendBundle:Account:ads" }
 
 account_2:
     pattern:  /{id}/update

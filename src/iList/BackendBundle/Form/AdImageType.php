@@ -14,7 +14,8 @@ class AdImageType extends AbstractType
 
         $builder->add('pic', 'file', array(
                 'attr' => array('class' => 'img-pics'),
-                'label' => false
+                'label' => false,
+                'data_class' => null
                 ));
     }
     

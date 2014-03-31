@@ -27,7 +27,7 @@ class Ad
     /**
      * @var integer
      * @Assert\NotBlank(
-     *      message = "Escolha o Tipo do Produto"
+     *      message = "Escolha o tipo do anúncio"
      *)
      * @ORM\Column(name="ad_type", type="integer")
      */
@@ -35,7 +35,6 @@ class Ad
 
     /**
      * @var integer
-     *
      * @ORM\Column(name="user_id", type="integer")
      */
     private $userId;
@@ -48,15 +47,15 @@ class Ad
 
     /**
      * @var integer
-     * @Assert\NotBlank(
-     *      message = "Escolha o Produto"
-     *)
      *
      * @ORM\Column(name="category_id", type="integer")
      */
     private $categoryId;
 
     /**
+    * @Assert\NotBlank(
+     *      message = "Escolha o Produto"
+     *)
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="ads")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
@@ -65,14 +64,14 @@ class Ad
     /**
      * @var integer
      *
-     * @Assert\NotBlank(
-     *      message = "Escolha o Produto"
-     *)
      * @ORM\Column(name="subcategory_id", type="integer")
      */
     private $subcategoryId;
 
     /**
+     * @Assert\NotBlank(
+     *      message = "Escolha o Modelo"
+     *)
      * @ORM\ManyToOne(targetEntity="SubCategory", inversedBy="ads")
      * @ORM\JoinColumn(name="subcategory_id", referencedColumnName="id", nullable=true)
      */
@@ -223,6 +222,12 @@ class Ad
      * @Assert\NotBlank(
      *      message = "Digite o CEP"
      *)
+     * @Assert\Length(
+     *      min = "8",
+     *      max = "8",
+     *      minMessage = "CEP inválido",
+     *      maxMessage = "CEP inválido"
+     * )
      * @ORM\Column(name="zipcode", type="string", length=30)
      */
     private $zipcode;
@@ -263,7 +268,9 @@ class Ad
 
     /**
      * @var integer
-     *
+     * * @Assert\NotBlank(
+     *      message = "Escolha o Tipo do Produto"
+     *)
      * @ORM\Column(name="product_type", type="integer", nullable=true)
      */
     private $productType;
@@ -735,7 +742,7 @@ class Ad
         }
 
         $service = $kernel->getContainer()->get('slug.helper');
-        $this->slug = $service->modifySlug($slug);
+        $this->slug = $service->modifySlug($slug) . '-' . $this->id;
 
         return $this;
     }
@@ -915,7 +922,8 @@ class Ad
      */
     public function modifySlug()
     {
-        $this->setSlug($this->slug . '-' . $this->id);
+        //$this->slug = $this->slug . '-' . $this->id;
+        //var_dump($this->getSlug());exit;
         
     }
 

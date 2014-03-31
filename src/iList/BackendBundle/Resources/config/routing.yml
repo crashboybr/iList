@@ -2,6 +2,15 @@ i_list_backend_homepage:
     pattern:  /
     defaults: { _controller: iListBackendBundle:Default:index }
 
+admin_login:
+    pattern:   /login
+    defaults:  { _controller: iListBackendBundle:Default:login }
+
+admin_login_check:
+    pattern:   /login_check
+
+admin_logout:
+    path:   /logout
 
 iListBackendBundle_categoria:
         resource: "@iListBackendBundle/Resources/config/routing/category.yml"

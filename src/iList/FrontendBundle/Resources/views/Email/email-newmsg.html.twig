@@ -1,0 +1,59 @@
+{% block body %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<div style="font-family:'Trebuchet MS', Arial, Helvetica, sans-serif;font-size:14px;color:#666;">
+		
+		<table width="710" cellspacing="0" cellpadding="0" border="0" style="width:710px;margin-bottom:10px">
+            <tbody><tr>
+				<td style="height:64px;vertical-align:middle;width:400px"><img src="images/maniac.gif" width="202" height="86" /></td>
+				<td align="right" style="white-space:nowrap;font-size:14px;">Seu anúncio foi publicado com sucesso!</td>
+            </tr>
+		</tbody></table>
+		<table cellspacing="0" cellpadding="0" border="0" width="710" style="width:710px;margin-bottom:10px">
+			<tbody><tr>
+				<td>
+					<div style="width:710px">
+						<hr style="border:none;min-height:1px;width:100%;background-color:#ececec">
+					</div>
+				</td>
+			</tr>
+		</tbody></table>
+
+
+<table width="710" style="width:710px;margin-bottom:10px">
+	<tbody><tr>
+		<td>
+			<p style="font-size:14px;line-height:14px;margin:10px 0 25px 0;padding:0">Olá, {{ name }}</p>
+			<p style="font-size:14px;line-height:14px;margin:0 0 15px 0;padding:0">Você recebeu uma nova mensagem do anúncio {{ ad.title }}</p>
+            <p style="font-size:14px;line-height:20px;margin:0 0 25px 0;padding:0;">Para visualizar acesse agora sua conta</p>
+			
+
+			<p style="font-size:14px;line-height:14px;margin:0 0 25px 0;padding:0">Atenciosamente,</p>
+			<p style="font-size:14px;line-height:14px;font-weight:bold;margin:0 0 20px 0;padding:0">Equipe <a href="#" title="" style="color:#222222;text-decoration:none" target="_blank">www.maniac.com</a></p> 
+		</td>
+	</tr>
+</tbody>
+</table>
+		
+  <table style="background-color:#ececec;border:1px solid #dddddd;border-radius:5px" cellpadding="0" cellspacing="0">
+	<tbody>
+    <tr>
+	</tr>
+</tbody></table>
+		
+        </div>
+</body>
+</html>
+
+{% endblock %}
+
+{% block subject -%}
+Seu anúncio foi publicado
+{% endblock %}
+

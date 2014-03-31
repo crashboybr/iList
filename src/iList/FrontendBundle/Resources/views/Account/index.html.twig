@@ -24,6 +24,11 @@
   <script>
   $(function() {
     $( "#tabs" ).tabs();
+
+   // $("li #profile a").unbind('click');
+    $('#tabs-2').click(function(){
+        window.location = "youtube.com";//hardcoded link but you could pull this from the tab
+    });
   });
   </script>
 
@@ -34,15 +39,18 @@
   </script>
 
 <h3>Minha Conta</h3>
-<div class="tabs-style" id="tabs">
-      <ul class="tabs-list">
-        <li><a href="#tabs-1">Mensagens</a></li>
-        <li><a href="#tabs-2">Meus dados cadastrais</a></li>
-        <li><a href="#tabs-3">Meus Anúncios</a></li>
-        
+    <div class="menu-caixa">
+      <ul class="menu-conta">
+        <li class="menu-aba select">
+            <a class="link-aba" href="{{ path('account_home') }}">Mensagens</a></li>
+        <li class="menu-aba">
+            <a class="link-aba" href="{{ path('account_profile') }}">Meus dados cadastrais</a></li>
+        <li class="menu-aba">
+            <a class="link-aba" href="{{ path('account_ads') }}">Meus Anúncios</a></li></br></br>
       </ul>
-      
-       <div id="tabs-1">
+    </div>
+    <div class="my-account-container" id="tabs-1">
+        <div id="tabs-1">
             {% for flashMessage in app.session.flashbag.get('notice') %}
                 <div class="flash-notice">
                     {{ flashMessage }}
@@ -99,153 +107,8 @@
                 {% endfor %}
             </div>
 
-        </div>
-
-        <div id="tabs-2">
-            <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="new_entity_factories_free_entity_factory" novalidate>
-                {{ form_errors(form) }}
-                {{ form_row(form._token) }} 
-                <div class="inputLabel-account">
-                    <p class="text">Nome</p>
-                    {% if (form.name.vars.errors|length > 0) %}
-                        <div class="alert">
-                            <p class="alert-text">{{ form.name.vars.errors[0].message }}</p>
-                        </div>
-                    {% endif %}
-                    {{ form_widget(form.name, { 'attr': {'class': 'rounder', 'placeholder': form.name.vars.label } }) }}
-                </div>
-
-                <div class="inputLabel-account">
-                    <p class="text">Usuário</p>
-                    {% if (form.username.vars.errors|length > 0) %}
-                        <div class="alert">
-                            <p class="alert-text">{{ form.username.vars.errors[0].message }}</p>
-                        </div>
-                    {% endif %}
-                    {{ form_widget(form.username, { 'attr': {'class': 'rounder', 'placeholder': form.username.vars.label } }) }}
-                </div>
-
-                <div class="inputLabel-account">
-                    <p class="text">Email</p>
-                    {% if (form.email.vars.errors|length > 0) %}
-                        <div class="alert">
-                            <p class="alert-text">{{ form.email.vars.errors[0].message }}</p>
-                        </div>
-                    {% endif %}
-                    {{ form_widget(form.email, { 'attr': {'class': 'rounder', 'placeholder': form.email.vars.label } }) }}
-                </div>
-
-                <div class="inputLabel-account">
-                    <p class="text">Telefone</p>
-                    {% if (form.phone.vars.errors|length > 0) %}
-                        <div class="alert">
-                            <p class="alert-text">{{ form.phone.vars.errors[0].message }}</p>
-                        </div>
-                    {% endif %}
-                    {{ form_widget(form.phone, { 'attr': {'class': 'rounder', 'placeholder': form.phone.vars.label } }) }}
-                </div>
-            </form>
-
-                <div class="inputLabel-account">
-                    <p class="text">Estado</p>
-                         <select name="uf">
-                    <option selected="selected" value="">UF - Selecione o Estado</option>
-                    <option value="1">AC - Acre</option>
-                    <option value="2">AL - Alagoas</option>
-                    <option value="3">AM - Amazonas</option>
-                    <option value="4">AP - Amapá</option>
-                    <option value="5">BA - Bahia</option>
-                    <option value="6">CE - Ceará</option>
-                    <option value="7">DF - Distrito Federal</option>
-                    <option value="8">ES - Espírito Santo</option>
-                    <option value="9">GO - Goiás</option>
-                    <option value="10">MA - Maranhão</option>
-                    <option value="11">MG - Minas Gerais</option>
-                    <option value="12">MS - Mato Grosso do Sul</option>
-                    <option value="13">MT - Mato Grosso</option>
-                    <option value="14">PA - Pará</option>
-                    <option value="15">PB - Paraíba</option>
-                    <option value="16">PE - Pernambuco</option>
-                    <option value="17">PI - Piauí</option>
-                    <option value="18">PR - Paraná</option>
-                    <option value="19">RJ - Rio de Janeiro</option>
-                    <option value="20">RN - Rio Grande do Norte</option>
-                    <option value="21">RO - Rondônia</option>
-                    <option value="22">RR - Roraima</option>
-                    <option value="23">RS - Rio Grande do Sul</option>
-                    <option value="24">SC - Santa Catarina</option>
-                    <option value="25">SE - Sergipe</option>
-                    <option value="26">SP - São Paulo</option>
-                    <option value="27">TO - Tocantins</option>
-                  </select>
-                </div>
-                <div class="alert">
-                    <p class="alert-text"; style="display:none"	>Selecione um estado</p>
-                </div>
-                <div class="inputLabel-account">
-                    <p class="text">Cidade</p>
-                        <select name="uf">
-                        <option selected="selected" value="">Selecione uma cidade</option>
-                            <option value="1">AC - Acre</option>
-                            <option value="25">SE - Sergipe</option>
-                            <option value="26">SP - São Paulo</option>
-                            <option value="27">TO - Tocantins</option>
-                  		</select>
-                </div>
-                <div class="alert">
-                    <p class="alert-text"; style="display:none"	>Selecione um estado</p>
-                </div>
-                <div class="inputLabel-account">
-                    <p class="text">Telefone</p>
-                	<input class="" placeholder="opcional" id="#" name="" size="30" type="email">
-                 </div>
-                <div class="alert">
-                    <p class="alert-text"; style="display:none"	>Digite um telefone válido</p>
-                </div>
-                <div class="inputLabel-account">
-                    <p class="text">CEP:</p>
-                	<input class="" placeholder="opcional" id="#" name="" size="30" type="email">
-                    
-                 </div>
-                <div class="alert">
-                    <p class="alert-text"; style="display:none"	>Digite um CPF válido</p>
-                </div>
-                <input class="ButtonRegister-account" name="commit" type="submit" value="Finalizar">
-            </form>
-        </div>
-      
-
-        <div id="tabs-3">
-            {% for ad in ads %}
-                <div class="box">
-                    <div class="photo">
-                        <img src="{{ asset(ad.defaultImg) }}" width="300" height="200">
-                        
-                    </div>
-                    
-                    {% if (ad.status == 0) %}
-                        {{ ad.title }}
-                        <br />Este anúncio foi rejeitado
-                    {% elseif (ad.status == -1) %}
-                        {{ ad.title }}
-                        <br />Este anúncio está em revisão
-                    {% else %}
-                        <a href="{{ path('subdomain_vi', { 'state': ad.state, 'city': ad.city|sanitize, 'category_name': ad.category|sanitize, 'slug': ad.slug, 'id': ad.id }) }}" class="title">{{ ad.title }}</a>
-                    {% endif %}
-                    <div class="edit"><br/><br/>
-                        <!--<a href="#" class="link-msg-new"><strong>12 mensagens</strong></a>-->
-                        <a href="{{ path('anuncio_edit', { id: ad.id }) }}" class="link-edit">Editar</a>
-                        <a href="#" class="link-edit">Excluir</a>
-                    </div>
-
-                </div>
-            {% endfor %}
-        </div>
-      
-    	
-      
-    
-</div>
+        </div>        
+    </div>
   
             
 {% endblock %}

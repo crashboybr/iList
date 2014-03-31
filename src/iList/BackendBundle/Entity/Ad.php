@@ -193,6 +193,11 @@ class Ad
      * @Assert\NotBlank(
      *      message = "Digite o Preço"
      *)
+     * @Assert\Regex(
+     *     pattern="/\d+(?:,\d{1,2})?/",
+     *     match=true,
+     *     message="Formato Inválido."
+     * )
      * @ORM\Column(name="price", type="float")
      */
     private $price;
@@ -222,6 +227,12 @@ class Ad
      * @Assert\NotBlank(
      *      message = "Digite o CEP"
      *)
+     * @Assert\Length(
+     *      min = "8",
+     *      max = "8",
+     *      minMessage = "CEP inválido",
+     *      maxMessage = "CEP inválido"
+     * )
      * @ORM\Column(name="zipcode", type="string", length=30)
      */
     private $zipcode;
@@ -736,7 +747,7 @@ class Ad
         }
 
         $service = $kernel->getContainer()->get('slug.helper');
-        $this->slug = $service->modifySlug($slug);
+        $this->slug = $service->modifySlug($slug) . '-' . $this->id;
 
         return $this;
     }
@@ -916,7 +927,8 @@ class Ad
      */
     public function modifySlug()
     {
-        $this->setSlug($this->slug . '-' . $this->id);
+        //$this->slug = $this->slug . '-' . $this->id;
+        //var_dump($this->getSlug());exit;
         
     }
 

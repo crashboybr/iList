@@ -1,31 +1,112 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-    </head>
-    <body>
-        <div>
-            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
-                <a href="{{ path('fos_user_security_logout') }}">
-                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                </a>
-            {% else %}
-                <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-            {% endif %}
-        </div>
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>{% block title %}Apple List, Compra e Venda Apple por todo Brasil - iPhone, iPad, iPod, iMac entre outros.{% endblock %}</title>
+<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
-        {% for type, messages in app.session.flashbag.all() %}
-            {% for message in messages %}
-                <div class="flash-{{ type }}">
-                    {{ message }}
+{% block javascripts %}
+    {% javascripts
+        '@iListFrontendBundle/Resources/public/js/jquery-1.10.2.min.js'
+        
+     %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block stylesheets %}
+    {% stylesheets 
+        'bundles/ilistfrontend/css/style.css'
+    filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <div class="container">
+            <div class="header">
+                <div class="logo" onclick="location.href = '{{ path('home') }}';">
+                    <h3>
+                        
+                    </h3>
                 </div>
-            {% endfor %}
-        {% endfor %}
+                {% if (app.request.get('_route') == "brasil_search" or app.request.get('_route') == "subdomain_search") %}
+                    <div class="search">
+                        <form class="" action="" method="get">
+                            <fieldset>                              
+                            <input autocomplete="off" placeholder="Busque seu Apple" class="" type="text" value="" name="q" id="q">           
+                            <input class="searchButton" type="image" src="/images/lupa.png" alt="Buscar">
+                            </fieldset>
 
-        <div>
-            {% block fos_user_content %}
-            {% endblock fos_user_content %}
+                        </form>
+                    </div>    
+                {% endif %}
+                <div class="sell-apple">
+                    <a href="{{ path('anuncio_new_wizard') }}" class="mainButton">Venda seu Apple</a>
+                </div>
+                <div class="breadcrumb">
+                    <div class="breadcrumb-left">{{ wo_render_breadcrumbs() }}</div>
+                    
+                    <div class="account">
+                        <img src="{{ asset('images/sec.gif') }}" width="23" height="24" alt="security" class="iconSec"/> 
+                        <a href="{{ path('account_home') }}" class="security"> {% if app.user %}Olá {{ app.user.name }} {% else %}Acesse sua conta{% endif %}</a>
+                    
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+
+                {% block fos_user_content %}{% endblock %}
+                
+            </div>
+            <div class="footer">
+                <ul class="list">
+                    <li class="item">
+                        <a href="#" class="btn-footer">Iphone</a>
+                    </li>
+                    <li class="item">
+                        <a href="#" class="btn-footer">Ipad</a>
+                    </li>
+                    <li class="item">
+                        <a href="#" class="btn-footer">Ipod</a>
+                    </li>
+                    <li class="item">
+                        <a href="#" class="btn-footer">Macbook</a>
+                    </li>
+                    <li class="item">
+                        <a href="#" class="btn-footer">Imac</a>
+                    </li>
+                    <li class="item">
+                        <a href="#" class="btn-footer">Acessórios</a>
+                    </li>
+                </ul>
+                <ul class="list">
+                    <li class="item">
+                        <a href="#" class="btn-footer">Venda seu Apple</a>
+                    </li>
+                    <li class="item">
+                        <a href="#" class="btn-footer">Cadastre-se</a>
+                    </li>
+                    <li class="item">
+                        <a href="#" class="btn-footer">Concectar pelo Facebook</a>
+                    </li>
+                    <li class="item">
+                        <a href="#" class="btn-footer">Login</a>
+                    </li>
+                    <li class="item">
+                        <a href="#" class="btn-footer">Esqueci Minha Senha</a>
+                    </li>
+                    <li class="item">
+                        <a href="#" class="btn-footer"></a>
+                    </li>
+                </ul>
+                <div class="facebook"></div>
+            </div>
         </div>
-    </body>
+        
+    </div>
+</body>
 </html>

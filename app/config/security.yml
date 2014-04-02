@@ -69,7 +69,7 @@ security:
 
     access_control:
         - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/cadastro, role: ROLE_USER }
+        - { path: ^/cadastro, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/account/, role: ROLE_USER }
         - { path: ^/anuncio/, role: ROLE_USER }

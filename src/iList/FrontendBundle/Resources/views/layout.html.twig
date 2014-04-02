@@ -51,8 +51,21 @@
                     <div class="breadcrumb-left">{{ wo_render_breadcrumbs() }}</div>
                     
                     <div class="account">
-                       	<img src="{{ asset('images/sec.gif') }}" width="23" height="24" alt="security" class="iconSec"/> 
-                        <a href="{{ path('account_home') }}" class="security"> {% if app.user %}Olá {{ app.user.name }} {% else %}Acesse sua conta{% endif %}</a>
+                       	<img src="{{ asset('images/sec.gif') }}" width="23" height="24" alt="security" class="iconSec"/>
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <a href="{{ path('account_home') }}" class="security">
+                            Olá {{ app.user.username }}
+                        </a>
+                        |
+                        <a href="{{ path('fos_user_security_logout') }}" class="security">
+                            {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                        </a>
+                        {% else %}
+                            
+                            <a href="{{ path('account_home') }}" class="security">
+                                Acesse sua conta
+                            </a>
+                        {% endif %}
                     
                     </div>
                 </div>

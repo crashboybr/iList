@@ -206,20 +206,24 @@ class SearchController extends Controller
 
         $qb->andWhere('f.status = :status');
         
-        if ($state != "brasil")
-            $qb->andWhere('f.state in (:state)');
+        $all_states = array(
+                "ac","al","am","ap","ba","ce","df","es","go","ma","mg","ms","mt","pa","pb","pe","pi","pr","rj","rn","ro","rr","rs","sc","se","sp","to"
+            );
+        
+        if ($state == "brasil")
+            $filters['state'] = $all_states;
+        
+        $qb->andWhere('f.state in (:state)');
 
         $qb->setParameters($filters);
         
-    
+        //var_dump($filters);exit;
         
         $ads = $qb->getQuery()->getResult();
 
-        if (count($ads) == 0)
+        if (count($ads) == 0 && $state != "brasil")
         {
-            $filters['state'] = array(
-                "ac","al","am","ap","ba","ce","df","es","go","ma","mg","ms","mt","pa","pb","pe","pi","pr","rj","rn","ro","rr","rs","sc","se","sp","to"
-            );
+            $filters['state'] = $all_states;
             //var_dump($filters);exit;
             $qb->setParameters($filters);
             //$qb->andWhere('f.state != :state');

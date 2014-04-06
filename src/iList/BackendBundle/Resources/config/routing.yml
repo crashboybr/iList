@@ -55,3 +55,7 @@ iListBackendBundle_processadores:
 iListBackendBundle_memoriaram:
         resource: "@iListBackendBundle/Resources/config/routing/memoryram.yml"
         prefix:   /memoriaram
+
+iListBackendBundle_deletedreason:
+        resource: "@iListBackendBundle/Resources/config/routing/deletedreason.yml"
+        prefix:   /deletedreason

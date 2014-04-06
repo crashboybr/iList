@@ -7,6 +7,7 @@ iListFrontendBundle_account:
         resource: "@iListFrontendBundle/Resources/config/routing/account.yml"
         prefix:   /account
         #host:     "%base_host%"
+        host:     "www.%base_host%"
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
@@ -96,6 +97,7 @@ subdomain_vi:
 home:
     path:  /
     defaults: { _controller: iListFrontendBundle:Default:index }
+    host:     "www.%base_host%"
 
 
 brasil_search:

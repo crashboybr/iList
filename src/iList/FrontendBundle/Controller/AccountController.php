@@ -17,6 +17,7 @@ use iList\BackendBundle\Entity\AdMsg;
 use iList\BackendBundle\Entity\User;
 use iList\BackendBundle\Form\UserType;
 
+
 use iList\BackendBundle\Classes\Tools;
 
 use FOS\UserBundle\Event\GetResponseUserEvent;
@@ -79,8 +80,16 @@ class AccountController extends Controller
 
         $ads = $user->getAds();
 
+        $page_number = $this->get('request')->get('pagina') ? $this->get('request')->get('pagina') : 1; 
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $ads,
+            $this->get('request')->query->get('page', $page_number)/*page number*/,
+            10
+        );
+
         return $this->render('iListFrontendBundle:Account:ads.html.twig',array(
-            'ads' => $ads
+            'pagination' => $pagination
 
             ));
     }

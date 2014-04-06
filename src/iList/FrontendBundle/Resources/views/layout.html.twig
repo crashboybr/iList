@@ -38,7 +38,7 @@
                         <form class="" action="" method="get">
                             <fieldset>                              
                             <input autocomplete="off" placeholder="Busque seu Apple" class="" type="text" value="" name="q" id="q">           
-                            <input class="searchButton" type="image" src="/images/lupa.png" alt="Buscar">
+                            <input class="searchButton" type="submit" value="" alt="Buscar">
                             </fieldset>
 
                         </form>
@@ -48,7 +48,7 @@
                 	<a href="{{ path('anuncio_new_wizard') }}" class="mainButton">Venda seu Apple</a>
                 </div>
                 <div class="breadcrumb">
-                    <div class="breadcrumb-left">{{ wo_render_breadcrumbs() }}</div>
+                    {{ wo_render_breadcrumbs() }}
                     
                     <div class="account">
                        	<img src="{{ asset('images/sec.gif') }}" width="23" height="24" alt="security" class="iconSec"/>
@@ -78,45 +78,42 @@
             <div class="footer">
             	<ul class="list">
                 	<li class="item">
-                        <a href="#" class="btn-footer">Iphone</a>
+                        <a href="{{ path('brasil_search', {'category_name': 'iphone' }) }}" class="btn-footer">iPhone</a>
                     </li>
                     <li class="item">
-                        <a href="#" class="btn-footer">Ipad</a>
+                        <a href="{{ path('brasil_search', {'category_name': 'ipad' }) }}" class="btn-footer">iPad</a>
                     </li>
                     <li class="item">
-                        <a href="#" class="btn-footer">Ipod</a>
+                        <a href="{{ path('brasil_search', {'category_name': 'ipod' }) }}" class="btn-footer">iPod</a>
                     </li>
                     <li class="item">
-                        <a href="#" class="btn-footer">Macbook</a>
+                        <a href="{{ path('brasil_search', {'category_name': 'macbook' }) }}" class="btn-footer">Macbook</a>
                     </li>
                     <li class="item">
-                        <a href="#" class="btn-footer">Imac</a>
+                        <a href="{{ path('brasil_search', {'category_name': 'imac' }) }}" class="btn-footer">iMac</a>
                     </li>
                     <li class="item">
-                        <a href="#" class="btn-footer">Acessórios</a>
+                        <a href="{{ path('brasil_search', {'category_name': 'acessorios' }) }}" class="btn-footer">Acessórios</a>
                     </li>
                 </ul>
                 <ul class="list">
                 	<li class="item">
-                        <a href="#" class="btn-footer">Venda seu Apple</a>
+                        <a href="{{ path('anuncio_new_wizard') }}" class="btn-footer">Venda seu Apple</a>
                     </li>
                     <li class="item">
-                        <a href="#" class="btn-footer">Cadastre-se</a>
+                        <a href="{{ path('fos_user_registration_register') }}" class="btn-footer">Cadastre-se</a>
                     </li>
                     <li class="item">
-                        <a href="#" class="btn-footer">Concectar pelo Facebook</a>
+                        <a href="/login" class="btn-footer">Login</a>
                     </li>
                     <li class="item">
-                        <a href="#" class="btn-footer">Login</a>
-                    </li>
-                    <li class="item">
-                        <a href="#" class="btn-footer">Esqueci Minha Senha</a>
+                        <a href="{{ path('fos_user_resetting_request') }}" class="btn-footer">Esqueci Minha Senha</a>
                     </li>
                     <li class="item">
                         <a href="#" class="btn-footer"></a>
                     </li>
                 </ul>
-                <div class="facebook"></div>
+                <div class=""></div>
             </div>
         </div>
         

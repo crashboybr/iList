@@ -324,6 +324,20 @@ class Ad
      */
     protected $declinedAds;
 
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="deleted_reason_id", type="integer", nullable=true)
+     */
+    private $deletedReasonId;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="DeletedReason", inversedBy="ads")
+     * @ORM\JoinColumn(name="deleted_reason_id", referencedColumnName="id", nullable=true)
+     */
+    protected $deletedReason;
+
     public function __construct()
     {
         $this->ad_images = new ArrayCollection();
@@ -732,6 +746,19 @@ class Ad
         return $this->updatedAt;
     }
 
+
+    /**
+     *
+     * @ORM\PostPersist
+     * @ORM\PostUpdate
+     */
+    public function modifySlug()
+    {
+        $this->slug = $this->slug . '-' . $this->id;
+        //var_dump($this->getSlug());exit;
+        
+    }
+     
     /**
      * Set slug
      *
@@ -747,7 +774,8 @@ class Ad
         }
 
         $service = $kernel->getContainer()->get('slug.helper');
-        $this->slug = $service->modifySlug($slug) . '-' . $this->id;
+        $this->slug = $service->modifySlug($slug);
+        //var_dump($this->slug);
 
         return $this;
     }
@@ -920,17 +948,7 @@ class Ad
         }
     }
 
-    /**
-     *
-     * @ORM\PostPersist
-     * @ORM\PostUpdate
-     */
-    public function modifySlug()
-    {
-        //$this->slug = $this->slug . '-' . $this->id;
-        //var_dump($this->getSlug());exit;
-        
-    }
+    
 
 
 
@@ -1265,5 +1283,51 @@ class Ad
     public function getMemory()
     {
         return $this->memory;
+    }
+
+    /**
+     * Set deletedReasonId
+     *
+     * @param integer $deletedReasonId
+     * @return Ad
+     */
+    public function setDeletedReasonId($deletedReasonId)
+    {
+        $this->deletedReasonId = $deletedReasonId;
+    
+        return $this;
+    }
+
+    /**
+     * Get deletedReasonId
+     *
+     * @return integer 
+     */
+    public function getDeletedReasonId()
+    {
+        return $this->deletedReasonId;
+    }
+
+    /**
+     * Set deletedReason
+     *
+     * @param \iList\BackendBundle\Entity\DeletedReason $deletedReason
+     * @return Ad
+     */
+    public function setDeletedReason(\iList\BackendBundle\Entity\DeletedReason $deletedReason = null)
+    {
+        $this->deletedReason = $deletedReason;
+    
+        return $this;
+    }
+
+    /**
+     * Get deletedReason
+     *
+     * @return \iList\BackendBundle\Entity\DeletedReason 
+     */
+    public function getDeletedReason()
+    {
+        return $this->deletedReason;
     }
 }

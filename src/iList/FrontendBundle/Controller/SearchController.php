@@ -9,6 +9,7 @@ use FOS\UserBundle\Controller\RegistrationController as BaseController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use iList\BackendBundle\Entity\Product;
+use iList\BackendBundle\Entity\Search;
 use iList\FrontendBundle\Form\iPhoneFilterType;
 use iList\FrontendBundle\Form\iPadFilterType;
 use iList\FrontendBundle\Form\iPodFilterType;
@@ -35,14 +36,15 @@ class SearchController extends Controller
         $category = $em->getRepository('iListBackendBundle:Category')
             ->findOneBy(array('name' => $category_name));
 
-        //$subcategory = $em->getRepository('iListBackendBundle:SubCategory')
-        //    ->findOneBy(array('name' => $subcategory_name));
+        
 
-        //if (!$category)
-        //{
-        	//return $this->redirect($this->generateUrl('i_list_frontend_homepage'));
-
-        //} 
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        // Simple example
+        $breadcrumbs->addItem("Home", $this->get("router")->generate("home"));
+        if ($state == "brasil")
+            $breadcrumbs->addItem("Brasil", $this->get("router")->generate("brasil_search"));
+        else
+            $breadcrumbs->addItem(strtoupper($state), $this->get("router")->generate("subdomain_search", array('state' => $state)));
 
         $filterForm = null;
         
@@ -58,7 +60,10 @@ class SearchController extends Controller
 
         if ($category)
         {
-
+            if ($state == "brasil")
+                $breadcrumbs->addItem($category->getName(), $this->get("router")->generate("brasil_search", array('category_name' => $category_name)));
+            else
+                $breadcrumbs->addItem($category->getName(), $this->get("router")->generate("subdomain_search", array('state' => $state, 'category_name' => $category_name))); 
         	$filters['category'] = $category;
             
             switch ($category_name)
@@ -94,8 +99,7 @@ class SearchController extends Controller
 
         //echo "<pre>";
         //\Doctrine\Common\Util\Debug::dump($filterForm->createView());exit;
-        $q = "%" . $q . "%";
-        $filters['q'] = $q;
+        
 
         $qb = $em->createQueryBuilder();
         $qb->select('f')
@@ -105,8 +109,18 @@ class SearchController extends Controller
         if ($category)
             $qb->andWhere('f.category = :category');
         if ($q)
-            $qb->andWhere('f.title like :q');
+        {
+            $search = new Search();
+            $search->setQuery($q);
+            $search->setIp($_SERVER['REMOTE_ADDR']);
 
+            $em->persist($search);
+            $em->flush($search);
+
+            $q = "%" . $q . "%";
+            $filters['q'] = $q;
+            $qb->andWhere('f.title like :q');
+        }
         
         
         if ($this->getRequest()->getMethod() == 'POST') 
@@ -193,35 +207,45 @@ class SearchController extends Controller
         $qb->andWhere('f.status = :status');
         
         if ($state != "brasil")
-            $qb->andWhere('f.state = :state');
+            $qb->andWhere('f.state in (:state)');
 
         $qb->setParameters($filters);
         
+    
         
+        $ads = $qb->getQuery()->getResult();
 
+        if (count($ads) == 0)
+        {
+            $filters['state'] = array(
+                "ac","al","am","ap","ba","ce","df","es","go","ma","mg","ms","mt","pa","pb","pe","pi","pr","rj","rn","ro","rr","rs","sc","se","sp","to"
+            );
+            //var_dump($filters);exit;
+            $qb->setParameters($filters);
+            //$qb->andWhere('f.state != :state');
+            $ads = $qb->getQuery()->getResult();
+            $this->get('session')->getFlashBag()->add(
+                    'failover',
+                    'Busca não foi encontrada. Expandindo para todo Brasil.');
+
+
+        }
         //var_dump();
-        //echo "<pre>";
+        
         //\Doctrine\Common\Util\Debug::dump($logger->queries);
         //\Doctrine\Common\Util\Debug::dump($filters);
-        //\Doctrine\Common\Util\Debug::dump($qb->getQuery());exit;
+        
         //exit;
-        $ads = $qb->getQuery()->getResult();
-//var_dump($ads);exit;
+
+        $page_number = $this->get('request')->get('pagina') ? $this->get('request')->get('pagina') : 1; 
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $ads,
-            $this->get('request')->query->get('page', 1)/*page number*/,
-            5
+            $this->get('request')->query->get('page', $page_number)/*page number*/,
+            10
         );
 
 
-        $breadcrumbs = $this->get("white_october_breadcrumbs");
-        // Simple example
-        //$breadcrumbs->addItem("Home", $this->get("router")->generate("i_list_backend_homepage"));
-
-
-
- 
          //echo "<pre>";
         // var_dump($state);
         //\Doctrine\Common\Util\Debug::dump($pagination);exit;

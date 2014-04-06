@@ -1,0 +1,30 @@
+deletedreason:
+    pattern:  /
+    defaults: { _controller: "iListBackendBundle:DeletedReason:index" }
+
+deletedreason_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "iListBackendBundle:DeletedReason:show" }
+
+deletedreason_new:
+    pattern:  /new
+    defaults: { _controller: "iListBackendBundle:DeletedReason:new" }
+
+deletedreason_create:
+    pattern:  /create
+    defaults: { _controller: "iListBackendBundle:DeletedReason:create" }
+    requirements: { _method: post }
+
+deletedreason_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "iListBackendBundle:DeletedReason:edit" }
+
+deletedreason_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "iListBackendBundle:DeletedReason:update" }
+    requirements: { _method: post|put }
+
+deletedreason_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "iListBackendBundle:DeletedReason:delete" }
+    requirements: { _method: post|delete }

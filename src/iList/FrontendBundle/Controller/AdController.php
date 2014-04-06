@@ -12,6 +12,7 @@ use iList\BackendBundle\Form\AdType;
 use iList\BackendBundle\Form\AdMsgType;
 use Symfony\Component\HttpFoundation\Response;
 use iList\BackendBundle\Entity\Category;
+use iList\FrontendBundle\Form\DeletedReasonType;
 
 use iList\BackendBundle\Form\NewAdType;
 
@@ -56,6 +57,15 @@ class AdController extends Controller
         $entity = new AdMsg();
         $entity->setAd($ad);
         $form   = $this->createAdMsgForm($entity);
+
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        // Simple example
+        $breadcrumbs->addItem("Home", $this->get("router")->generate("home"));
+        $breadcrumbs->addItem(strtoupper($state), $this->get("router")->generate("subdomain_search", array('state' => $state)));
+        $breadcrumbs->addItem($category->getName(), $this->get("router")->generate("subdomain_search", array('state' => $state, 'category_name' => $category_name)));
+        $breadcrumbs->addItem($category->getName() . " " . $ad->getSubcategory(), $this->get("router")->generate("brasil_search"));
+
+        //path('subdomain_search', {'state': state, 'category_name': 'iphone' })
 
         //echo "<pre>";
         //\Doctrine\Common\Util\Debug::dump($this->getUser());exit;
@@ -645,7 +655,7 @@ class AdController extends Controller
         if ($editForm->isValid()) {
             
             $entity->setStatus(-1); //revisao
-            $entity->setSlug($entity->getTitle());
+            //$entity->setSlug($entity->getTitle());
 
             $em->persist($entity);
             $em->flush();
@@ -663,19 +673,54 @@ class AdController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
+
+
+
+    public function chooseReasonAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+
+        $user = $this->get('security.context')->getToken()->getUser();
+
+        if (!$user)
+            return $this->redirect($this->generateUrl('home'));
+
+        $ad = $em->getRepository('iListBackendBundle:Ad')->findOneBy(
+            array( 'id' => $id, 'user' => $user, 'status' => 1)
+        );
+
+        if (!$ad) {
+            return $this->redirect($this->generateUrl('home'));
+        }
+
+        $entity = $em->getRepository('iListBackendBundle:DeletedReason')->findAll();
+
+        $form = $this->createForm(new DeletedReasonType(), null, array(
+            'action' => $this->generateUrl('anuncio_delete', array('id' => $id)),
+            'method' => 'POST',
+        ));
+        $form->add('submit', 'submit', array('label' => 'Excluir'));
+        //echo "<pre>";
+        //\Doctrine\Common\Util\Debug::dump($form->createView());exit;
+        return $this->render('iListFrontendBundle:Ad:choose_reason.html.twig', array(
+            'entity'      => $entity,
+            'form'        => $form->createView(),
+        ));
+    }
     /**
      * Deletes a Ad entity.
      *
      */
     public function deleteAction(Request $request, $id)
     {
-        //$form = $this->createDeleteForm($id);
+        //$form = $this->createForm($id);
         //$form->handleRequest($request);
-
+        //var_dump($form->isValid());exit;
         //if ($form->isValid()) {
 
         $em = $this->getDoctrine()->getManager();
-        //$entity = $em->getRepository('iListBackendBundle:Ad')->find($id);
+        //$ad = $em->getRepository('iListBackendBundle:Ad')->find($id);
         $user = $this->get('security.context')->getToken()->getUser();
 
         if (!$user)
@@ -690,11 +735,29 @@ class AdController extends Controller
         }
 
         //$em->remove($entity);
+        $deleted_reason_id = $request->request->get('ilist_frontendbundle_deleted_reason');
+        $deleted_reason = $em->getRepository('iListBackendBundle:DeletedReason')->findOneBy(
+            array( 'id' => $deleted_reason_id['msg'])
+        );
+        //var_dump($deleted_reason);exit;
         $entity->setStatus(-1000); //deleted
+        $entity->setDeletedReason($deleted_reason);
         $em->flush();
-        //}
+        $this->get('session')->getFlashBag()->add(
+                    'delete',
+                    'Anúncio excluído com sucesso!');
 
-        return $this->redirect($this->generateUrl('account_home'));
+
+        return $this->redirect($this->generateUrl('account_ads'));
+        //}
+        /*$entity = $em->getRepository('iListBackendBundle:DeletedReason')->findAll();
+
+        return $this->render('iListFrontendBundle:Ad:choose_reason.html.twig', array(
+            'entity'      => $entity,
+            'form'   => $form->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));*/
+        
     }
 
     /**

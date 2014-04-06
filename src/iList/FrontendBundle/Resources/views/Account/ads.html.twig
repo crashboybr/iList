@@ -49,13 +49,22 @@
             <a class="link-aba" href="{{ path('account_ads') }}">Meus Anúncios</a></li></br></br>
       </ul>
     </div>
+    {% for flashMessage in app.session.flashbag.get('delete') %}
+        <div class="flash-notice">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
     <div class="my-account-container" id="tabs-1">
         <div id="tabs-1">
-            {% for ad in ads %}
+            {% for ad in pagination %}
                 {% if (ad.status != -1000) %}
                     <div class="box">
                         <div class="photo">
-                            <img src="{{ asset(ad.defaultImg) }}" width="300" height="200">
+                            {% if (ad.defaultImg == "initial") %}
+                                <div style="text-align:center; margin-top:15px;"><img src="/images/noimage.png" /></div>
+                            {% else %}
+                                <img src="{{ asset(ad.defaultImg) }}" width="300" height="200">
+                            {% endif %}
                             
                         </div>
                         
@@ -71,7 +80,7 @@
                         <div class="edit"><br/><br/>
                             <!--<a href="#" class="link-msg-new"><strong>12 mensagens</strong></a>-->
                             <a href="{{ path('anuncio_edit', { id: ad.id }) }}" class="link-edit">Editar</a>
-                            <a href="{{ path('anuncio_delete', { id: ad.id }) }}" class="link-edit">Excluir</a>
+                            <a href="{{ path('anuncio_choose_reason', { id: ad.id }) }}" class="link-edit">Excluir</a>
                         </div>
 
                     </div>

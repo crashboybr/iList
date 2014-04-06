@@ -38,6 +38,8 @@ framework:
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
+    globals:
+        base_host: %base_host%
 
 # Assetic Configuration
 assetic:
@@ -136,6 +138,10 @@ knp_paginator:
 
 white_october_breadcrumbs: 
     separator:          ' > '
+    separatorClass:     'breadcrumb-list'
+    listClass:          'breadcrumb-left'
+    itemClass:          'breadcrumb-list'
+    #linkRel:            'aaa' 
 
 fos_facebook:
     alias:  facebook

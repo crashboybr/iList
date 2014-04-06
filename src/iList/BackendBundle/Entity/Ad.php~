@@ -193,6 +193,11 @@ class Ad
      * @Assert\NotBlank(
      *      message = "Digite o Preço"
      *)
+     * @Assert\Regex(
+     *     pattern="/\d+(?:,\d{1,2})?/",
+     *     match=true,
+     *     message="Formato Inválido."
+     * )
      * @ORM\Column(name="price", type="float")
      */
     private $price;
@@ -318,6 +323,20 @@ class Ad
      * @ORM\OneToMany(targetEntity="DeclinedAds", mappedBy="ad")
      */
     protected $declinedAds;
+
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="deleted_reason_id", type="integer", nullable=true)
+     */
+    private $deletedReasonId;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="DeletedReason", inversedBy="ads")
+     * @ORM\JoinColumn(name="deleted_reason_id", referencedColumnName="id", nullable=true)
+     */
+    protected $deletedReason;
 
     public function __construct()
     {
@@ -727,6 +746,19 @@ class Ad
         return $this->updatedAt;
     }
 
+
+    /**
+     *
+     * @ORM\PostPersist
+     * @ORM\PostUpdate
+     */
+    public function modifySlug()
+    {
+        $this->slug = $this->slug . '-' . $this->id;
+        //var_dump($this->getSlug());exit;
+        
+    }
+     
     /**
      * Set slug
      *
@@ -742,7 +774,8 @@ class Ad
         }
 
         $service = $kernel->getContainer()->get('slug.helper');
-        $this->slug = $service->modifySlug($slug) . '-' . $this->id;
+        $this->slug = $service->modifySlug($slug);
+        //var_dump($this->slug);
 
         return $this;
     }
@@ -915,17 +948,7 @@ class Ad
         }
     }
 
-    /**
-     *
-     * @ORM\PostPersist
-     * @ORM\PostUpdate
-     */
-    public function modifySlug()
-    {
-        //$this->slug = $this->slug . '-' . $this->id;
-        //var_dump($this->getSlug());exit;
-        
-    }
+    
 
 
 

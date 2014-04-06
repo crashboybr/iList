@@ -1,0 +1,32 @@
+{% extends 'iListFrontendBundle::layout.html.twig' %}
+
+{% block body -%}
+    <h1>Qual motivo você quer deletar seu anúncio?</h1>
+
+    {{ form_start(form, { attr: { 'novalidate': 'novalidate' }}) }}
+                		
+		{{ form_errors(form) }}
+		<div class="cont" id="">
+			<div class="cont-right">
+        		{% for msg in form.msg %}
+					
+					{{ form_widget(msg, { attr: { 'class': 'ipt_radio', 'checked': 'checked'}}) }}
+
+            		<label class="ipt_label">{{ msg.vars.label }}</label>
+
+            		<br />
+
+				{% endfor %}
+				
+			</div>
+		</div>
+		{{ form_widget(form.submit, { label: 'Excluir', attr: { 'class': 'ButtonRegister'} } )}}
+
+
+
+					
+
+
+	{{ form_end(form) }}
+
+{% endblock %}

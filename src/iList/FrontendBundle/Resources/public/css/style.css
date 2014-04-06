@@ -13,7 +13,7 @@ body{margin:0;color:#666;font-family:"Trebuchet MS", Arial, Helvetica, sans-seri
 #wrapper .container .header .search{width:377px;float: left;margin: 10px 0 0 60px;}
 #wrapper .container .header .search form fieldset{border:none;}
 #wrapper .container .header .search form fieldset input{width: 284px;background: #FFF none;display: inline-block;border: 1px solid #cacaca;border-radius: 3px;height: 25px;margin: 8px 0 0 0;padding: 5px 4px 3px;color: #666;font-size: 16px;line-height: 1.143em;}
-#wrapper .container .header .search form fieldset .searchButton{float:right;width:40px;background-color: #666;}
+#wrapper .container .header .search form fieldset .searchButton{float:right;width:45px; height:35px;background-color: #666;background-image: url(/images/lupa.png);background-position-x: 0px; background-position-y: 2px;}
 #wrapper .container .header .sell-apple{float:right;width:240px;height: 60px;margin: 20px 0 0 0;}
 #wrapper .container .header .sell-apple .mainButton{float:right;width: 212px;height: 41px;background: url(/images/btn-venda-seu-apple.png) no-repeat;
 border: none;color: #FFF;cursor: pointer;display: inline-block;font-size: 15px;font-weight: bold;line-height:40px;padding:0 2px 0 0px;text-decoration:none;text-align: center;text-shadow: 0 1px 0 rgba(0,0,0,0.3);}
@@ -22,7 +22,7 @@ border: none;color: #FFF;cursor: pointer;display: inline-block;font-size: 15px;f
 /* Header */
 #wrapper .container .header .breadcrumb{float:left;width:960px;height:32px;}
 #wrapper .container .header .breadcrumb .account{float:right;width:auto;height:auto;margin:5px 0 0 0;}
-#wrapper .container .header .breadcrumb .breadcrumb-left{float:left;width:auto;height:auto;margin:5px 0 0 0;font-size:13px;line-height: 23px;}
+#wrapper .container .header .breadcrumb .breadcrumb-left{float:left;width:auto;height:auto;margin:5px 0 0 0;font-size:13px;line-height: 23px;padding:0;}
 #wrapper .container .header .breadcrumb .account .security{color:#666;text-decoration:none;font-size:14px;line-height: 20px;}
 #wrapper .container .header .breadcrumb .account .iconSec{float: left;margin: -2px 5px 0 0;}
 #wrapper .container .header .breadcrumb .account .security:hover {text-decoration:underline;}
@@ -242,6 +242,16 @@ input[type='checkbox']:checked::before {color: #808080;content: url(/images/tick
 #wrapper .container .content .menu-div{border-bottom:1px #ccc solid;line-height:20px;}
 #wrapper .container .content .menu-div .count{margin:10px 0 10px 0;}
 #wrapper .container .content .my-account-container{margin:0 0 30px 0;}
+
+/*comp - 23/04/2014 */
+#wrapper .container .header .breadcrumb .breadcrumb-left{float:left;width:auto;height:auto;margin:5px 0 0 0;font-size:13px;line-height: 23px;padding:0;}
+#wrapper .container .header .breadcrumb .breadcrumb-left .breadcrumb-list{list-style:none;float:left;margin:0 10px 0 0;}
+#wrapper .container .header .breadcrumb .breadcrumb-left .breadcrumb-list .bread-link{color: #666;text-decoration: none;font-size: 13px;}
+#wrapper .container .header .breadcrumb .breadcrumb-left .breadcrumb-list .bread-link:hover{text-decoration: underline;}
+#wrapper .container .header .breadcrumb .breadcrumb-left .breadcrumb-list .bread-link-current{font-weight:bold;color: #666;text-decoration: none;font-size: 13px;}
+#wrapper .container .header .logo{cursor:pointer;float:left;width:190px;height:87px;background-image:url(../images/logo-ilist.png);background-repeat: no-repeat;background-position: 0 10px;}
+
+
 
 /* alert */
 .conte.alert{height:35px;}

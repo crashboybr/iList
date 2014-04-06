@@ -192,7 +192,7 @@ class AdImage
     {
         // get rid of the __DIR__ so it doesnt screw up
         // when displaying uploaded doc/image in the view.
-        return 'ads/images';
+        return 'upload/ads/images';
     } 
 
     /* end upload file */

@@ -224,6 +224,12 @@ class Ad
 
     /**
      * @var string
+     * @ORM\Column(name="city_slug", type="string", length=100, nullable=true)
+     */
+    private $city_slug;
+
+    /**
+     * @var string
      * @Assert\NotBlank(
      *      message = "Digite o CEP"
      *)
@@ -594,6 +600,7 @@ class Ad
     public function setCity($city)
     {
         $this->city = $city;
+        $this->setCitySlug($city);
     
         return $this;
     }
@@ -1329,5 +1336,35 @@ class Ad
     public function getDeletedReason()
     {
         return $this->deletedReason;
+    }
+
+    /**
+     * Set city_slug
+     *
+     * @param string $citySlug
+     * @return Ad
+     */
+    public function setCitySlug($citySlug)
+    {
+        global $kernel;
+
+        if ('AppCache' == get_class($kernel)) {
+            $kernel = $kernel->getKernel();
+        }
+
+        $service = $kernel->getContainer()->get('slug.helper');
+        $this->city_slug = $service->modifySlug($citySlug);
+    
+        return $this;
+    }
+
+    /**
+     * Get city_slug
+     *
+     * @return string 
+     */
+    public function getCitySlug()
+    {
+        return $this->city_slug;
     }
 }

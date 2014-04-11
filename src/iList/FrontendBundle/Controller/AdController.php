@@ -47,9 +47,10 @@ class AdController extends Controller
 
         $category = $em->getRepository('iListBackendBundle:Category')
             ->findOneBy(array('name' => $category_name));
+        //$city = str_replace("-", " ", $city);
 
         $ad = $em->getRepository('iListBackendBundle:Ad')
-            ->findOneBy(array('status' => 1, 'category' => $category, 'city' => $city, 'slug' => $slug, 'state' => $state));
+            ->findOneBy(array('status' => 1, 'category' => $category, 'city_slug' => $city, 'slug' => $slug, 'state' => $state));
         
         if (!$ad)
             throw $this->createNotFoundException('Oops! Não encontramos este anúncio! :(');

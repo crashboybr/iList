@@ -224,6 +224,12 @@ class Ad
 
     /**
      * @var string
+     * @ORM\Column(name="city_slug", type="string", length=100, nullable=true)
+     */
+    private $city_slug;
+
+    /**
+     * @var string
      * @Assert\NotBlank(
      *      message = "Digite o CEP"
      *)
@@ -1283,5 +1289,51 @@ class Ad
     public function getMemory()
     {
         return $this->memory;
+    }
+
+    /**
+     * Set deletedReasonId
+     *
+     * @param integer $deletedReasonId
+     * @return Ad
+     */
+    public function setDeletedReasonId($deletedReasonId)
+    {
+        $this->deletedReasonId = $deletedReasonId;
+    
+        return $this;
+    }
+
+    /**
+     * Get deletedReasonId
+     *
+     * @return integer 
+     */
+    public function getDeletedReasonId()
+    {
+        return $this->deletedReasonId;
+    }
+
+    /**
+     * Set deletedReason
+     *
+     * @param \iList\BackendBundle\Entity\DeletedReason $deletedReason
+     * @return Ad
+     */
+    public function setDeletedReason(\iList\BackendBundle\Entity\DeletedReason $deletedReason = null)
+    {
+        $this->deletedReason = $deletedReason;
+    
+        return $this;
+    }
+
+    /**
+     * Get deletedReason
+     *
+     * @return \iList\BackendBundle\Entity\DeletedReason 
+     */
+    public function getDeletedReason()
+    {
+        return $this->deletedReason;
     }
 }

@@ -83,7 +83,7 @@ subdomain_search:
     host:     "{state}.%base_host%"
     defaults: { _controller: iListFrontendBundle:Search:index, category_name: '', subcategory_name: '', adtype: '', size: ''}
     requirements:
-        state:  rj|mg
+        state:  ac|al|am|ap|ba|ce|df|es|go|ma|mg|ms|mt|pa|pb|pe|pi|pr|rj|rn|ro|rr|rs|sc|se|sp|to
 
 subdomain_vi:
     path:     /{city}/{category_name}/{slug}
@@ -93,6 +93,8 @@ subdomain_vi:
         #state:  rj|mg
     #requirements:
     #    domain: "%domain%"
+    #requirements:
+    #    state:  ac|al|am|ap|ba|ce|df|es|go|ma|mg|ms|mt|pa|pb|pe|pi|pr|rj|rn|ro|rr|rs|sc|se|sp|to
 
 home:
     path:  /

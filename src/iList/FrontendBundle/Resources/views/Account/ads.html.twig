@@ -70,7 +70,8 @@
                         
                         {% if (ad.status == 0) %}
                             {{ ad.title }}
-                            <br />Este anúncio foi rejeitado
+                            <br />Este anúncio foi rejeitado:<br />
+                            {{ ad.declinedAds.last.declinedMsg.msg }}
                         {% elseif (ad.status == -1) %}
                             {{ ad.title }}
                             <br />Este anúncio está em revisão

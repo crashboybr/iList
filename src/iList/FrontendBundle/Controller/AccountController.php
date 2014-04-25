@@ -88,6 +88,9 @@ class AccountController extends Controller
             10
         );
 
+        //\Doctrine\Common\Util\Debug::dump($ad->getLastDeclinedMsg());
+        
+        //exit;
         return $this->render('iListFrontendBundle:Account:ads.html.twig',array(
             'pagination' => $pagination
 

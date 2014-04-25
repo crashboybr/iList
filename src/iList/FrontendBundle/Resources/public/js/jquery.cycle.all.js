@@ -71,7 +71,7 @@ $.fn.cycle = function(options, arg2) {
 		var $slides = opts.slideExpr ? $(opts.slideExpr, this) : $cont.children();
 		var els = $slides.get();
 
-		if (els.length < 2) {
+		if (els.length < 1) {
 			log('terminating; too few slides: ' + els.length);
 			return;
 		}

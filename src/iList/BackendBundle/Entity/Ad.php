@@ -327,6 +327,7 @@ class Ad
 
     /**
      * @ORM\OneToMany(targetEntity="DeclinedAds", mappedBy="ad")
+     * @ORM\OrderBy({"createdAt" = "ASC"})
      */
     protected $declinedAds;
 

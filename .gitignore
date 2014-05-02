@@ -1,15 +1,22 @@
 # Bootstrap
-app/bootstrap*
-
+#app/bootstrap*
+Capfile
+ilist.sublime-project
+composer.lock
 # Symfony directories
 vendor/*
 */logs/*
 */cache/*
 web/uploads/*
+web/upload/ads/*
 web/bundles/*
 web/js/*
+web/media/*
+web/ads/*
 web/bundles/*
 web/css/*
+app/config/*deploy*
 # Configuration files
 app/config/parameters.ini
 app/config/parameters.yml
+

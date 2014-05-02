@@ -194,7 +194,7 @@ class Ad
      *      message = "Digite o Preço"
      *)
      * @Assert\Regex(
-     *     pattern="/\d+(?:,\d{1,2})?/",
+     *     pattern="/\d{1,3}(\.\d{3})*(,\d{2})?/",
      *     match=true,
      *     message="Formato Inválido."
      * )
@@ -566,7 +566,7 @@ class Ad
      */
     public function getPrice()
     {
-        return $this->price;
+        return $this->price*100;
     }
 
     /**

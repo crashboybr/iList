@@ -374,10 +374,21 @@ class AdController extends Controller
         
         $form = $this->createCreateForm($entity);
         
+        if (isset($request->request->get('ilist_frontendbundle_ad')['price'])) {
+            $price = $request->request->get('ilist_frontendbundle_ad')['price'];
+            if ($price) {
+                $price = str_replace('.', '', $price);
+                $price = str_replace(',', '.', $price);
+                $data = $request->request->get('ilist_frontendbundle_ad');
+                $data['price'] = $price;
+                $request->request->set('ilist_frontendbundle_ad', $data);
+            }
+        }
+        
         $form->handleRequest($request);
 
-        //echo "<pre>";
-        //\Doctrine\Common\Util\Debug::dump($form->isValid());exit;
+        
+        
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             
@@ -386,7 +397,8 @@ class AdController extends Controller
             $entity->setUser($user);
             $entity->setStatus(-1); //revisao
             $entity->setSlug($entity->getTitle());
-            //var_dump($entity->getSlug());exit;    
+
+            $entity->setPrice($entity->getPrice()/100);    
             //echo "<pre>";
             //\Doctrine\Common\Util\Debug::dump($entity);exit;
             

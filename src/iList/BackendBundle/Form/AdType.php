@@ -103,7 +103,7 @@ class AdType extends AbstractType
                       'empty_value' => 'Escolha o Processador' ))
             ->add('title')
             ->add('content')
-            ->add('price')
+            ->add('price', 'money')
             ->add('state', 'choice', array(
                 'choices' => $states,
                 'attr' => array('readonly' => 'readonly')

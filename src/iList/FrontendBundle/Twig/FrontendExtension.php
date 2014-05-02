@@ -14,7 +14,7 @@ class FrontendExtension extends \Twig_Extension
 
     public function priceFilter($number, $decimals = 2, $decPoint = ',', $thousandsSep = '.')
     {
-        $price = number_format($number, $decimals, $decPoint, $thousandsSep);
+        $price = number_format($number/100, $decimals, $decPoint, $thousandsSep);
         $price = 'R$ '.$price;
 
         return $price;

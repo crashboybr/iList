@@ -123,12 +123,12 @@ $(document).ready(function(){
                 <div id="slider1">
                     {% if (ad.defaultImg == "initial") %}
                         
-                        <img border="0" src="/images/noimage.png" width="625" height="345" alt="" title="" />
+                        <img src="{{ asset('images/noimage.png') }}" width="625" height="345" />
                     {% else %}
                     
                         {% for img in ad.adImages %}
                             {% if (img.pic != "initial") %}
-                                <img border="0" src="{{ asset(img.pic) }}" width="625" height="345" alt="" title="" />
+                                <img border="0" src="{{ asset(img.pic|apply_filter('vi')) }}"  alt="" title="" />
                             {% endif %}
                         {% endfor %}
                     {% endif %}

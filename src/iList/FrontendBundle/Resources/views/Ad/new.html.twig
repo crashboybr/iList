@@ -31,6 +31,14 @@ $(document).ready(function () {
 	
 	$('#ilist_frontendbundle_ad_price').number( true, 2, ",", ".");
 
+	$("#ilist_frontendbundle_ad_adType_1").on('click', function() {
+		$("#product_type").hide();
+	});
+
+	$("#ilist_frontendbundle_ad_adType_0").on('click', function() {
+		$("#product_type").show();
+	});
+
 
 var $sport = $('#ilist_frontendbundle_ad_category');
 // When sport gets selected ...
@@ -141,7 +149,7 @@ $sport.change(function(){
                         {% endif %}
 
 
-						<div class="cont" id="">
+						<div class="cont" id="product_type">
 	                		<div class="cont-left">
 	                        	{{ form_label(form.productType,'Tipo do Produto', { attr: { 'class': 'item_desc' } }) }}
 	                        </div>
@@ -302,7 +310,7 @@ $sport.change(function(){
 	                        </div>
 						     <div class="cont-right">
 						     	<div class="estados">
-									{{ form_widget(form.price, { attr: { 'class': 'price' } }) }}
+									{{ form_widget(form.price, { attr: { 'class': 'price', 'value': '' } }) }}
 								</div>
 							</div>
 						</div>

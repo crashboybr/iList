@@ -304,7 +304,7 @@ class Ad
     /**
      * @var string
      *
-     * @ORM\Column(name="slug", type="string", length=255)
+     * @ORM\Column(name="slug", type="string", length=255, nullable=true)
      */
     private $slug;
 
@@ -762,9 +762,8 @@ class Ad
      */
     public function modifySlug()
     {
+        $this->setSlug($this->getTitle());
         $this->slug = $this->slug . '-' . $this->id;
-        //var_dump($this->getSlug());exit;
-        
     }
      
     /**

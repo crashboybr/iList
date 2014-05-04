@@ -124,6 +124,8 @@ services:
         class:        iList\FrontendBundle\Util\Mailer
         arguments: ['@mailer', '@twig']
 
+    
+
 
 knp_paginator:
     page_range: 5                     # default page range used in pagination control
@@ -158,6 +160,24 @@ avalanche_imagine:
         vi:
             type:    resize
             options: { size: [625, 345], mode: outbound, quality: 100, format: jpg }
+
+        vi2:
+            type:    relative_resize
+            options: { widen: 600 }
+
+        watermark:
+            type:                chain
+            options:
+                filters:
+                    resize:                                          # filter type
+                        size:    [625, 345]                             # filter options
+                        mode:    outbound
+                        quality: 100
+                        format: jpg
+                    paste:
+                        image:   %kernel.root_dir%/../web/bundles/ilistfrontend/images/watermark.png
+                        x:       right
+                        y:       bottom
 
 
 

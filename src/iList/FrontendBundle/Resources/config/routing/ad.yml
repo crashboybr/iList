@@ -12,6 +12,7 @@ anuncio_new:
 
 anuncio_new_wizard:
     pattern:  /novo
+    host:     "www.%base_host%"
     defaults: { _controller: "iListFrontendBundle:Ad:newWizard" }
 
 anuncio_new_wizard_2:

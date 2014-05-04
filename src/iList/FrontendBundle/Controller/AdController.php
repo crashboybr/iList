@@ -396,7 +396,7 @@ class AdController extends Controller
             
             $entity->setUser($user);
             $entity->setStatus(-1); //revisao
-            $entity->setSlug($entity->getTitle());
+            //$entity->setSlug($entity->getTitle());
 
             $entity->setPrice($entity->getPrice()/100);    
             //echo "<pre>";
@@ -661,14 +661,25 @@ class AdController extends Controller
             return $this->redirect($this->generateUrl('home'));
         }
 
+        if (isset($request->request->get('ilist_frontendbundle_ad')['price'])) {
+            $price = $request->request->get('ilist_frontendbundle_ad')['price'];
+            if ($price) {
+                $price = str_replace('.', '', $price);
+                $price = str_replace(',', '.', $price);
+                $data = $request->request->get('ilist_frontendbundle_ad');
+                $data['price'] = $price;
+                $request->request->set('ilist_frontendbundle_ad', $data);
+            }
+        }
+
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
             
-            $entity->setStatus(-1); //revisao
-            //$entity->setSlug($entity->getTitle());
+            //$entity->setStatus(-1); //revisao
+            
             
             $i = 1;
             foreach ($entity->getAdImages() as $adImage)

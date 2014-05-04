@@ -5,3 +5,4 @@ ALTER TABLE ads CHANGE price price VARCHAR(100) NOT NULL
 Nothing to update - your database is already in sync with the current entity metadata.
 ALTER TABLE ads CHANGE price price DOUBLE PRECISION NOT NULL
 ALTER TABLE ads CHANGE price price DOUBLE PRECISION NOT NULL
+ALTER TABLE ads CHANGE slug slug VARCHAR(255) DEFAULT NULL

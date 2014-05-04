@@ -20,7 +20,7 @@
 
 .slider{
  margin: 0 auto;
- width: 625px;
+ width: 625x;
  height: 345px;
  border: 8px solid #e1e1e1;
  border-radius:5px;
@@ -146,7 +146,7 @@ $(document).ready(function(){
 
     <!--inicio detalhes anuncio-->
     <div class="product-info">
-        <div class="price-detail"><span style="color:#666;">Preço:</span> R$ {{ ad.price }}</div>
+        <div class="price-detail"><span style="color:#666;">Preço:</span> {{ ad.price|price }}</div>
     	<div class="product-content">
         	<p class="text">
             	{{ ad.content }}
@@ -164,7 +164,7 @@ $(document).ready(function(){
                     	<p class="text">{{ ad.category }} - {{ ad.subcategory }}</p>
                     </div>
                 </li>
-
+                {% if ad.adType == 1 %}
                 <li class="list-detail">
                     <div class="detail-left">
                         <p class="text">Condição</p>
@@ -173,6 +173,7 @@ $(document).ready(function(){
                         <p class="text"><strong>{{ ad.productType }}</strong></p>
                     </div>
                 </li>
+                {% endif %}
 
                 {% if ad.size %}
                 <li class="list-detail">

@@ -149,7 +149,7 @@ $(document).ready(function(){
         <div class="price-detail"><span style="color:#666;">Preço:</span> {{ ad.price|price }}</div>
     	<div class="product-content">
         	<p class="text">
-            	{{ ad.content }}
+            	{{ ad.content|striptags('<br>')|raw }}
             </p>
         </div>
     	<div class="product-detail">

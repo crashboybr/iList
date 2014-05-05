@@ -678,7 +678,7 @@ class AdController extends Controller
 
         if ($editForm->isValid()) {
             
-            //$entity->setStatus(-1); //revisao
+            $entity->setStatus(-1); //revisao
             
             
             $i = 1;

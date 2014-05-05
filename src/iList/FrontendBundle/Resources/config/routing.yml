@@ -107,4 +107,6 @@ brasil_search:
     path:  /{category_name}/{subcategory_name}
     defaults: { _controller: iListFrontendBundle:Search:index, category_name: '', state: 'brasil', subcategory_name: '' }
     host:     "www.%base_host%"
+    requirements:
+        category_name: iphone|ipod|ipad|macbook|imac|acessorios|others
 

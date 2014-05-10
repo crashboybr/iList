@@ -95,7 +95,6 @@ class AdImage
     {
         $this->file = $file;
 
-        
         // check if we have an old image path
         if (isset($this->pic)) {
             // store the old name to delete after the update
@@ -112,6 +111,7 @@ class AdImage
      */
     public function preUpload()
     {
+        //var_dump($this->getFile());exit;
         if (null !== $this->getFile()) {
             // do whatever you want to generate a unique name
             $filename = "image_" . uniqid();
@@ -125,7 +125,7 @@ class AdImage
      */
     public function upload()
     {
-
+        //var_dump($this->getFile());exit;
         if (null === $this->getFile()) {
             return;
         }

@@ -31,7 +31,7 @@ class NewAdType extends AbstractType
         
       
 
-        $states[''] = 'Digite seu CEP';
+        $states[''] = 'Escolha o Estado';
         $states['AC'] = 'AC - Acre';
         $states['AL'] = 'AL - Alagoas';
         $states['AM'] = 'AM - Amazonas';

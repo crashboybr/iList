@@ -59,3 +59,7 @@ iListBackendBundle_memoriaram:
 iListBackendBundle_deletedreason:
         resource: "@iListBackendBundle/Resources/config/routing/deletedreason.yml"
         prefix:   /deletedreason
+
+iListBackendBundle_state:
+        resource: "@iListBackendBundle/Resources/config/routing/state.yml"
+        prefix:   /state

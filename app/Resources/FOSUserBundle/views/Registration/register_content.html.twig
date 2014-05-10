@@ -7,7 +7,7 @@
 	    <div class="inputLabel">
 	    	
 	    	
-			{{ form_widget(form.name, { 'attr': {'class': 'rounder', 'placeholder': form.name.vars.label } }) }}
+			{{ form_widget(form.name, { 'attr': {'class': 'rounder', 'placeholder': 'Nome Completo' } }) }}
 			{% if (form.name.vars.errors|length > 0) %}
 	    		<div class="alert">
 					<p class="alert-text">{{ form.name.vars.errors[0].message }}</p>
@@ -17,7 +17,7 @@
 
 		<div class="inputLabel">	
 				
-			{{ form_widget(form.username, { 'attr': {'class': 'rounder', 'placeholder': form.username.vars.label }}) }}
+			{{ form_widget(form.username, { 'attr': {'class': 'rounder', 'placeholder': 'Apelido' }}) }}
 			{% if (form.username.vars.errors|length > 0) %}
 	    		<div class="alert">
 					<p class="alert-text">{{ form.username.vars.errors[0].message }}</p>

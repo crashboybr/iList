@@ -21,7 +21,7 @@ class AdType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
    
-        $states[''] = 'Digite seu CEP';
+        $states[''] = 'Escolha seu Estado';
         $states['AC'] = 'AC - Acre';
         $states['AL'] = 'AL - Alagoas';
         $states['AM'] = 'AM - Amazonas';

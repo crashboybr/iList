@@ -5,9 +5,11 @@
     {
         //alert($("#ilist_frontendbundle_ad_zipcode").val());
         
+        var zipcode = $("#ilist_frontendbundle_" + entity + "_zipcode").val();
+        zipcode = zipcode.slice(0,5) + zipcode.slice(6,9);
 
-        var url = 'http://cep.correiocontrol.com.br/' + $("#ilist_frontendbundle_" + entity + "_zipcode").val() + '.json';
-
+        var url = 'http://cep.correiocontrol.com.br/' + zipcode + '.json';
+        
         var jqxhr = $.getJSON( url, {
     		format: "json"
   		})
@@ -32,6 +34,14 @@
 
 		    });
 
-	    });
+	    })
+	    .error(function (data) { 
+	    	$('#ilist_frontendbundle_' + entity + '_city').val("");
+	    	$('#ilist_frontendbundle_' + entity + '_state').find('option[value=""]').attr('selected',true);
+	    	$('#ilist_frontendbundle_' + entity + '_street').val("");
+	    	$('#ilist_frontendbundle_' + entity + '_neighbourhood').val("");
+	    	$("#ilist_frontendbundle_" + entity + "_zipcode_error").show().html("<p class='alert-text'>CEP não encontrado!</p>");
+
+		});
 
     }

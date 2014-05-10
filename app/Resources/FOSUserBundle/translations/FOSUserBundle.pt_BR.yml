@@ -54,7 +54,7 @@ registration:
             Para completar a validação da sua conta, clique no link: %confirmationUrl%
 
             Atenciosamente,
-            a Equipe.
+            Equipe iList.
 
 # Password resetting
 resetting:
@@ -76,7 +76,7 @@ resetting:
             Para redefinir sua senha, clique no link: %confirmationUrl%
 
             Atenciosamente,
-            a Equipe.
+            Equipe iList.
 
 # Global strings
 layout:
@@ -88,7 +88,7 @@ layout:
 # Form field labels
 form:
     group_name: "Nome do Grupo:"
-    username: "Usuário"
+    username: "Usuário iList"
     email: "Email"
     current_password: "Senha atual"
     password: "Senha"

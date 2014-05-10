@@ -69,8 +69,8 @@
                 {{ form_errors(form) }}
                 {{ form_row(form._token) }} 
                 <div class="inputLabel-account">
-                    <p class="text">Nome</p>
-                    {{ form_widget(form.name, { 'attr': {'class': 'rounder', 'placeholder': form.name.vars.label } }) }}
+                    <p class="text">Nome Completo</p>
+                    {{ form_widget(form.name, { 'attr': {'class': 'rounder', 'placeholder': 'Nome Completo'} }) }}
                 </div>
                 {% if (form.name.vars.errors|length > 0) %}
                     <div class="conte alert">
@@ -79,8 +79,8 @@
                 {% endif %}
 
                 <div class="inputLabel-account">
-                    <p class="text">Usuário</p>
-                    {{ form_widget(form.username, { 'attr': {'class': 'rounder', 'placeholder': form.username.vars.label } }) }}
+                    <p class="text">Apelido</p>
+                    {{ form_widget(form.username, { 'attr': {'class': 'rounder', 'placeholder': 'Apelido' } }) }}
                 </div>
                 {% if (form.username.vars.errors|length > 0) %}
                     <div class="conte alert">

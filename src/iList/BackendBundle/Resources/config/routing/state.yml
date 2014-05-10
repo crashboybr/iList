@@ -1,0 +1,30 @@
+state:
+    pattern:  /
+    defaults: { _controller: "iListBackendBundle:State:index" }
+
+state_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "iListBackendBundle:State:show" }
+
+state_new:
+    pattern:  /new
+    defaults: { _controller: "iListBackendBundle:State:new" }
+
+state_create:
+    pattern:  /create
+    defaults: { _controller: "iListBackendBundle:State:create" }
+    requirements: { _method: post }
+
+state_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "iListBackendBundle:State:edit" }
+
+state_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "iListBackendBundle:State:update" }
+    requirements: { _method: post|put }
+
+state_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "iListBackendBundle:State:delete" }
+    requirements: { _method: post|delete }

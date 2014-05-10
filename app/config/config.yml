@@ -92,8 +92,8 @@ fos_user:
             enabled:    true
 
     from_email:
-        address:        noreply@acmedemo.com
-        sender_name:    Acme Demo App
+        address:        nao-responda@ilist.com.br
+        sender_name:    Equie iList
 
 
 services:

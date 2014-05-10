@@ -36,6 +36,12 @@ class SearchController extends Controller
         $category = $em->getRepository('iListBackendBundle:Category')
             ->findOneBy(array('name' => $category_name));
 
+        $state_obj = $em->getRepository('iListBackendBundle:State')
+            ->findOneBy(array('shortName' => $state));
+        
+        if (!$state_obj)
+            throw $this->createNotFoundException('Unable to find State entity.');
+        
         
 
         $breadcrumbs = $this->get("white_october_breadcrumbs");
@@ -217,7 +223,6 @@ class SearchController extends Controller
 
         $qb->setParameters($filters);
         
-        //var_dump($filters);exit;
         
         $ads = $qb->getQuery()->getResult();
 
@@ -265,7 +270,9 @@ class SearchController extends Controller
                 'domain' => $domain, 
                 'pagination' => $pagination,
                 'category' => $category_name,
-                'filterForm' => $filterForm
+                'filterForm' => $filterForm,
+                'category_name' => $category->getName(),
+                'state_obj' => $state_obj
         	));
     }
 

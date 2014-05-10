@@ -39,6 +39,9 @@ $(document).ready(function () {
 		$("#product_type").show();
 	});
 
+	$("#ilist_frontendbundle_ad_zipcode").mask("99999-999");
+
+
 
 var $sport = $('#ilist_frontendbundle_ad_category');
 // When sport gets selected ...
@@ -336,6 +339,9 @@ $sport.change(function(){
 	                        	<p class="alert-text">{{ form.zipcode.vars.errors[0].message }}</p>
 	                        </div>
                         {% endif %}
+                        <div class="conte alert" id="ilist_frontendbundle_ad_zipcode_error" style="display: none;">
+                        	
+                        </div>
 
 
 						<div class="cont" id="">

@@ -271,7 +271,7 @@ class SearchController extends Controller
                 'pagination' => $pagination,
                 'category' => $category_name,
                 'filterForm' => $filterForm,
-                'category_name' => $category->getName(),
+                'category_name' => $category ? $category->getName() : 'Tudo',
                 'state_obj' => $state_obj
         	));
     }

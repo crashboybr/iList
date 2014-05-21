@@ -93,7 +93,7 @@ fos_user:
 
     from_email:
         address:        nao-responda@ilist.com.br
-        sender_name:    Equie iList
+        sender_name:    Equipe iList
 
 
 services:

@@ -234,8 +234,8 @@ class Ad
      *      message = "Digite o CEP"
      *)
      * @Assert\Length(
-     *      min = "8",
-     *      max = "8",
+     *      min = "9",
+     *      max = "9",
      *      minMessage = "CEP inválido",
      *      maxMessage = "CEP inválido"
      * )

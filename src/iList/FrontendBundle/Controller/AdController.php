@@ -441,6 +441,8 @@ class AdController extends Controller
             
 
             $this->get('send_mail')->sendEmail($entity, 'revision');
+
+            //$this->get('send_mail')->sendEmailToMe($entity, 'revision');
             
 
             return $this->render('iListFrontendBundle:Ad:review.html.twig');

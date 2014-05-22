@@ -5,7 +5,7 @@ imports:
 
 parameters:
     #domain: ilist
-    base_host: atencaoatencao.com.br
+    base_host: ilists.com.br
     pdo.db_options:
         db_table:    session
         db_id_col:   session_id

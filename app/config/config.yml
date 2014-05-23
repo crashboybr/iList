@@ -6,11 +6,11 @@ imports:
 parameters:
     #domain: ilist
     base_host: ilists.com.br
-    pdo.db_options:
-        db_table:    session
-        db_id_col:   session_id
-        db_data_col: session_value
-        db_time_col: session_time
+    #pdo.db_options:
+    #    db_table:    session
+    #    db_id_col:   session_id
+    #    db_data_col: session_value
+    #    db_time_col: session_time
 framework:
     #esi:             ~
     default_locale:  pt_BR
@@ -28,9 +28,9 @@ framework:
         #assets_version: SomeVersionScheme
     #default_locale:  "%locale%"
     trusted_proxies: ~
-    session: 
-        cookie_domain: .%base_host%
-        handler_id:     session.handler.pdo
+    session: ~
+        #cookie_domain: .%base_host%
+        #handler_id:     session.handler.pdo
     fragments:       ~
     http_method_override: true
 
@@ -116,9 +116,9 @@ services:
             - [setAttribute, [3, 2]] 
 
 
-    session.handler.pdo:
-        class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
-        arguments: ["@pdo", "%pdo.db_options%"]
+    #session.handler.pdo:
+    #    class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
+    #    arguments: ["@pdo", "%pdo.db_options%"]
 
     send_mail:
         class:        iList\FrontendBundle\Util\Mailer

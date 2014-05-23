@@ -48,7 +48,10 @@ class RegistrationController extends BaseController
                 }
     
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
-    
+                /* @var $session \Symfony\Component\HttpFoundation\Session\Session */
+                $session = $this->container->get('session');
+                $session->save();
+
                 return $response;
             }
         }

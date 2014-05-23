@@ -45,7 +45,7 @@
             <div class="container-fluid">
                 <!-- BEGIN LOGO -->
                 <a class="brand" href="#" style='width: 120px;' >
-                <img src="{{ asset('bundles/ilistfrontend/images/logo-ilist.png')}}" />
+                MUSEU
                 </a>
                 <!-- END LOGO -->
                 <!-- BEGIN RESPONSIVE MENU TOGGLER -->
@@ -84,8 +84,8 @@
                     <ul class="sub-menu" style="display: none;">
                         
                         <li>
-                            <a href="{{ path('fila') }}">
-                            Fila</a>
+                            <a href="{{ path('banner', { page: 'home' }) }}">
+                            Banners</a>
                         </li>
 
                     </ul>
@@ -93,16 +93,16 @@
                 <li>
                     <a href="javascript:;">
                     <i class="icon-file-text"></i> 
-                    <span class="title">Categoria</span>
+                    <span class="title">Exposições</span>
                     <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu" style="display: none;">
                         <li>
-                            <a href="{{ path('categoria_new') }}">
+                            <a href="">
                             Criar</a>
                         </li>
                         <li>
-                            <a href="{{ path('categoria') }}">
+                            <a href="">
                             Listar</a>
                         </li>
                     </ul>

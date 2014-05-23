@@ -23,3 +23,6 @@ i_list_frontend:
 _imagine:
     resource: .
     type:     imagine
+
+logout:
+    path:   /logout

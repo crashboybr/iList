@@ -120,7 +120,7 @@ input[type='checkbox']:checked::before {color: #808080;content: url(/images/tick
 /* Footer */
 #wrapper .container .footer{width:950px;float:left;margin: 60px 0 0 0;border: 1px #e4e4e4 solid;border-radius: 4px;background-color: #f7f7f7;}
 #wrapper .container .footer .list{float:left;width: 150px;padding:0;list-style:none;margin: 15px 0 15px 15px;line-height: 20px;}
-#wrapper .container .footer .facebook{float:right;width:350px;height:80px;background-image: url(/images/facebook.png);float: right;background-repeat: no-repeat;margin: 15px 15px 0 0;}
+#wrapper .container .footer .facebook{float:right;width:350px;height:80px;float: right;background-repeat: no-repeat;margin: 15px 15px 0 0;}
 #wrapper .container .footer .list .item .btn-footer{color:#666;text-decoration:none;font-size:13px;}
 #wrapper .container .footer .list .item .btn-footer:hover{text-decoration:underline;}
 

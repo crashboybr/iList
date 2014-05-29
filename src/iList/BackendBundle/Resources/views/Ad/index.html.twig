@@ -1,0 +1,93 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Ad list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Adtype</th>
+                <th>Userid</th>
+                <th>Categoryid</th>
+                <th>Subcategoryid</th>
+                <th>Productid</th>
+                <th>Sizeid</th>
+                <th>Colorid</th>
+                <th>Screenid</th>
+                <th>Processorid</th>
+                <th>Memoryid</th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Price</th>
+                <th>State</th>
+                <th>City</th>
+                <th>City_slug</th>
+                <th>Zipcode</th>
+                <th>Neighbourhood</th>
+                <th>Street</th>
+                <th>Complement</th>
+                <th>Status</th>
+                <th>Producttype</th>
+                <th>Createdat</th>
+                <th>Updatedat</th>
+                <th>Slug</th>
+                <th>Default_img</th>
+                <th>Deletedreasonid</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('anuncios_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.adType }}</td>
+                <td>{{ entity.userId }}</td>
+                <td>{{ entity.categoryId }}</td>
+                <td>{{ entity.subcategoryId }}</td>
+                <td>{{ entity.productId }}</td>
+                <td>{{ entity.sizeId }}</td>
+                <td>{{ entity.colorId }}</td>
+                <td>{{ entity.screenId }}</td>
+                <td>{{ entity.processorId }}</td>
+                <td>{{ entity.memoryId }}</td>
+                <td>{{ entity.title }}</td>
+                <td>{{ entity.content }}</td>
+                <td>{{ entity.price }}</td>
+                <td>{{ entity.state }}</td>
+                <td>{{ entity.city }}</td>
+                <td>{{ entity.cityslug }}</td>
+                <td>{{ entity.zipcode }}</td>
+                <td>{{ entity.neighbourhood }}</td>
+                <td>{{ entity.street }}</td>
+                <td>{{ entity.complement }}</td>
+                <td>{{ entity.status }}</td>
+                <td>{{ entity.productType }}</td>
+                <td>{% if entity.createdAt %}{{ entity.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.updatedAt %}{{ entity.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.slug }}</td>
+                <td>{{ entity.defaultimg }}</td>
+                <td>{{ entity.deletedReasonId }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('anuncios_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('anuncios_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('anuncios_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

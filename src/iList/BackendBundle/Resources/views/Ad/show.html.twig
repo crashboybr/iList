@@ -1,0 +1,136 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Ad</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Adtype</th>
+                <td>{{ entity.adType }}</td>
+            </tr>
+            <tr>
+                <th>Userid</th>
+                <td>{{ entity.userId }}</td>
+            </tr>
+            <tr>
+                <th>Categoryid</th>
+                <td>{{ entity.categoryId }}</td>
+            </tr>
+            <tr>
+                <th>Subcategoryid</th>
+                <td>{{ entity.subcategoryId }}</td>
+            </tr>
+            <tr>
+                <th>Productid</th>
+                <td>{{ entity.productId }}</td>
+            </tr>
+            <tr>
+                <th>Sizeid</th>
+                <td>{{ entity.sizeId }}</td>
+            </tr>
+            <tr>
+                <th>Colorid</th>
+                <td>{{ entity.colorId }}</td>
+            </tr>
+            <tr>
+                <th>Screenid</th>
+                <td>{{ entity.screenId }}</td>
+            </tr>
+            <tr>
+                <th>Processorid</th>
+                <td>{{ entity.processorId }}</td>
+            </tr>
+            <tr>
+                <th>Memoryid</th>
+                <td>{{ entity.memoryId }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ entity.title }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ entity.content }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ entity.price }}</td>
+            </tr>
+            <tr>
+                <th>State</th>
+                <td>{{ entity.state }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ entity.city }}</td>
+            </tr>
+            <tr>
+                <th>City_slug</th>
+                <td>{{ entity.cityslug }}</td>
+            </tr>
+            <tr>
+                <th>Zipcode</th>
+                <td>{{ entity.zipcode }}</td>
+            </tr>
+            <tr>
+                <th>Neighbourhood</th>
+                <td>{{ entity.neighbourhood }}</td>
+            </tr>
+            <tr>
+                <th>Street</th>
+                <td>{{ entity.street }}</td>
+            </tr>
+            <tr>
+                <th>Complement</th>
+                <td>{{ entity.complement }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ entity.status }}</td>
+            </tr>
+            <tr>
+                <th>Producttype</th>
+                <td>{{ entity.productType }}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{{ entity.createdAt|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Updatedat</th>
+                <td>{{ entity.updatedAt|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ entity.slug }}</td>
+            </tr>
+            <tr>
+                <th>Default_img</th>
+                <td>{{ entity.defaultimg }}</td>
+            </tr>
+            <tr>
+                <th>Deletedreasonid</th>
+                <td>{{ entity.deletedReasonId }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('anuncios') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('anuncios_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

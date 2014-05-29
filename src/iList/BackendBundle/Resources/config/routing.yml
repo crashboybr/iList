@@ -63,3 +63,7 @@ iListBackendBundle_deletedreason:
 iListBackendBundle_state:
         resource: "@iListBackendBundle/Resources/config/routing/state.yml"
         prefix:   /state
+
+iListBackendBundle_anuncios:
+        resource: "@iListBackendBundle/Resources/config/routing/ad.yml"
+        prefix:   /anuncios

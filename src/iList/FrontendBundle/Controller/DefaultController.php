@@ -46,6 +46,25 @@ class DefaultController extends Controller
         return $this->render('iListFrontendBundle:Default:index.html.twig',array('form' => $form->createView()));
     }
 
+    public function contactAction(Request $request)
+    {   
+        return $this->render('iListFrontendBundle:Default:contact.html.twig');   
+    }
+
+    public function sendContactAction(Request $request)
+    {   
+        $data = $request->request->get('ilist_frontendbundle_user');
+
+        $this->get('send_mail')->sendContactEmail($data);
+
+        $this->get('session')->getFlashBag()->add(
+            'contact',
+            'Contato enviado com sucesso!'
+        );
+
+
+        return $this->render('iListFrontendBundle:Default:contact.html.twig');   
+    }
 
     public function bomAction(Request $request)
     {   

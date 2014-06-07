@@ -1207,3 +1207,21 @@ s.ui-widget-header a {color: #222222;}
 	filter: Alpha(Opacity=30);
 	border-radius: 8px;
 }
+
+/*comp. - 31/05/2014 */ 
+
+.my-account-container textarea {
+width: 284px;
+background: #FFF none;
+display: inline-block;
+border: 1px solid #cacaca;
+border-radius: 3px;
+width:600px;
+height: 145px;
+margin: 8px 0 15px 0;
+padding: 5px 4px 3px;
+color: #666;
+font-size: 16px;
+line-height: 1.143em;
+resize: none;
+}

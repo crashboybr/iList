@@ -1,6 +1,6 @@
-i_list_backend_homepage:
-    pattern:  /
-    defaults: { _controller: iListBackendBundle:Default:index }
+#i_list_backend_homepage:
+#    pattern:  /
+#    defaults: { _controller: iListBackendBundle:Default:index }
 
 admin_login:
     pattern:   /login
@@ -42,7 +42,7 @@ iListBackendBundle_declinedmsg:
 
 iListBackendBundle_fila:
         resource: "@iListBackendBundle/Resources/config/routing/adqueue.yml"
-        prefix:   /fila
+        prefix:   /
 
 iListBackendBundle_polegadas:
         resource: "@iListBackendBundle/Resources/config/routing/screensize.yml"

@@ -34,9 +34,18 @@ fos_user_change_password:
     #host:     "%base_host%"
 
 
-bomnegocio:
-    path:  /bom
-    defaults: { _controller: iListFrontendBundle:Default:bom }
+#bomnegocio:
+#    path:  /bom
+#    defaults: { _controller: iListFrontendBundle:Default:bom }
+
+contact:
+    path:  /contato
+    defaults: { _controller: iListFrontendBundle:Default:contact }
+
+send_contact:
+    path:  /enviarcontato
+    defaults: { _controller: iListFrontendBundle:Default:sendContact }
+    methods: POST
 
 find_subcategory_by_category_id:
     path:  /buscaSubCategoria

@@ -6,7 +6,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>Área Administrativa - Spa das Sobrancelhas</title>
+    <title>Área Administrativa - iList</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -93,21 +93,92 @@
                 <li>
                     <a href="javascript:;">
                     <i class="icon-file-text"></i> 
-                    <span class="title">Categoria</span>
+                    <span class="title">Produto</span>
                     <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu" style="display: none;">
                         <li>
-                            <a href="{{ path('categoria_new') }}">
+                            <a href="{{ path('categoria') }}">
+                            Categoria</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('subcategoria') }}">
+                            SubCategoria</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('size') }}">
+                            Capacidades</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('color') }}">
+                            Cores</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('polegadas') }}">
+                            Tamanho de Tela</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('processadores') }}">
+                            Processadores</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('memoriaram') }}">
+                            Memória Ram</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li>
+                    <a href="javascript:;">
+                    <i class="icon-file-text"></i> 
+                    <span class="title">Mensagens</span>
+                    <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu" style="display: none;">
+                        <li>
+                            <a href="{{ path('declinedmsg') }}">
+                            Rejeitar Anúncio</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('deletedreason') }}">
+                            Excluir Anúncio</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li>
+                    <a href="javascript:;">
+                    <i class="icon-file-text"></i> 
+                    <span class="title">Estados</span>
+                    <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu" style="display: none;">
+                        <li>
+                            <a href="{{ path('state_new') }}">
                             Criar</a>
                         </li>
                         <li>
-                            <a href="{{ path('categoria') }}">
+                            <a href="{{ path('state') }}">
                             Listar</a>
                         </li>
                     </ul>
                 </li>
                 
+                <li>
+                    <a href="javascript:;">
+                    <i class="icon-file-text"></i> 
+                    <span class="title">Anúncios</span>
+                    <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu" style="display: none;">
+                        <li>
+                            <a href="{{ path('anuncios') }}">
+                            Listar</a>
+                        </li>
+                    </ul>
+                </li>
                
                 
             </ul>

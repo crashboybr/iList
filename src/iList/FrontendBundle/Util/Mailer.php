@@ -38,9 +38,35 @@ class Mailer
             ->setSubject($subject)
             ->setFrom("contato@ilists.com.br")
             ->setTo($user->getEmail())
+            //->setCco('bernardoniteroi@gmail.com')
             ->setBody($body, 'text/html');
 
 
         $this->mailer->send($message);
+    }
+
+    public function sendContactEmail($data)
+    {
+        $subject = "Contato iList";
+
+        $templateFile = "iListFrontendBundle:Email:email-contact.html.twig";
+        //$templateFile = "iListFrontendBundle:Email:email-published.html.twig";
+        $templateContent = $this->twig->loadTemplate($templateFile);
+
+        // Render the whole template including any layouts etc
+
+        $body = $templateContent->renderBlock("body", array("data" => $data));
+
+        $message = \Swift_Message::newInstance()
+            ->setSubject($subject)
+            ->setFrom("contato@ilists.com.br")
+            ->setTo('bernardoniteroi@gmail.com')
+            ->setBody($body, 'text/html');
+
+
+        $this->mailer->send($message);
+
+
+
     }
 }

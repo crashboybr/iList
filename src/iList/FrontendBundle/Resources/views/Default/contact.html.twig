@@ -1,0 +1,59 @@
+{% extends 'iListFrontendBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+{{ parent() }}
+    {% stylesheets 
+        'bundles/ilistfrontend/css/style-tabs.css'
+    filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+
+
+<h3>Contato</h3>
+
+    {% for flashMessage in app.session.flashbag.get('contact') %}
+        <div class="flash-notice">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    
+    <div class="my-account-container" id="tabs-1">
+        <div id="tabs-1">
+            <form action="{{ path('send_contact') }}"  method="POST" class="new_entity_factories_free_entity_factory" novalidate>
+                                
+                    <input type="hidden" id="ilist_frontendbundle_user__token" name="ilist_frontendbundle_user[_token]" value="3nalkTwyYIeyXnfUEOfhaXFrs8nsFQtfS0zGxGfVM_c" />
+ 
+                <div class="inputLabel-account">
+                  <p class="text"><strong>Nome</strong></p>
+                    <input type="text" id="ilist_frontendbundle_user_name" name="ilist_frontendbundle_user[name]" required="required" maxlength="30" pattern=".{3,}" class="rounder" placeholder="" value="Bernardo" />
+                </div>
+                
+                
+                
+                <div class="inputLabel-account">
+                    <p class="text">Email</p>
+                    <input type="email" id="ilist_frontendbundle_user_email" name="ilist_frontendbundle_user[email]" required="required" maxlength="254" pattern=".{2,}" class="rounder" placeholder="" value="bernardoniteroi@gmail.com" />
+                </div>
+                
+                <div class="inputLabel-account">
+                    <p class="text">Telefone</p>
+                    <input type="text" id="ilist_frontendbundle_user_phone" name="ilist_frontendbundle_user[phone]" maxlength="255" pattern="\(\d{2}\)\s{0,1}\d{4,5}-\d{4}" class="rounder" placeholder="" value="(21) 32527-7888" />
+                </div>
+                
+                <div class="inputLabel">
+            
+            <textarea id="ilist_frontendbundle_user_msg" name="ilist_frontendbundle_user[msg]" required="required" class="rounder" placeholder="Mensagem" rows="4" cols="150"></textarea>
+            
+            
+        </div>
+                
+                
+                <input class="ButtonRegister-account" name="commit" type="submit" value="Finalizar">
+            </form>
+
+        </div>        
+    </div>
+{% endblock %}

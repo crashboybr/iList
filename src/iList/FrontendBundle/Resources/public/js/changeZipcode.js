@@ -14,6 +14,7 @@
     		format: "json"
   		})
 	    .done(function( data ) {
+	    	$("#ilist_frontendbundle_" + entity + "_zipcode_error").hide();
 			$.each( data, function( key, item ) {
 		        
 		        switch(key)

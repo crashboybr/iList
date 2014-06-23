@@ -33,5 +33,5 @@ assetic:
 
 swiftmailer:
     transport: gmail
-    username:  ilist@ilists.com.br
-    password:  Dyd6cOf2
+    username:  contato@ilist.com.br
+    password:  dyd6cof2

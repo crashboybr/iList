@@ -36,7 +36,7 @@ class Mailer
 
         $message = \Swift_Message::newInstance()
             ->setSubject($subject)
-            ->setFrom("contato@ilists.com.br")
+            ->setFrom("contato@ilist.com.br")
             ->setTo($user->getEmail())
             //->setCco('bernardoniteroi@gmail.com')
             ->setBody($body, 'text/html');
@@ -59,7 +59,7 @@ class Mailer
 
         $message = \Swift_Message::newInstance()
             ->setSubject($subject)
-            ->setFrom("contato@ilists.com.br")
+            ->setFrom("contato@ilist.com.br")
             ->setTo('bernardoniteroi@gmail.com')
             ->setBody($body, 'text/html');
 

@@ -44,6 +44,8 @@
     });
 
     $("ilist_frontendbundle_user_phone").trigger("focus");
+
+    $("#ilist_frontendbundle_user_zipcode").mask("99999-999");
   });
   </script>
 
@@ -117,6 +119,9 @@
                         <p class="alert-text">{{ form.zipcode.vars.errors[0].message }}</p>
                     </div>
                 {% endif %}
+                <div class="conte alert" id="ilist_frontendbundle_user_zipcode_error" style="display: none;">
+                            
+                </div>
 
                 <div class="inputLabel-account">
                     <p class="text">Estado</p>

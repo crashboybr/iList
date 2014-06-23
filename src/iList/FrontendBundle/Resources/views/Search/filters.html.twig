@@ -9,7 +9,7 @@ function submitFilter()
     <p>Escolha um Apple</p>
 </div>
 
-    <li class="item iphone" onclick="location.href = '{{ path('brasil_search', {'category_name': 'iphone'}) }}';">
+    <li class="item iphone" onclick="location.href = '{% if (state != 'brasil') %} {{ path('subdomain_search', {'state': state, 'category_name': 'iphone' }) }} {% else %} {{ path('brasil_search', {'category_name': 'iphone'}) }} {% endif %}';">
         
         {% if (state != 'brasil') %}
             <a href="{{ path('subdomain_search', {'state': state, 'category_name': 'iphone' }) }}" class="btn-product">iPhone</a>
@@ -76,7 +76,7 @@ function submitFilter()
     </li>   
 
 
-    <li class="item ipad" onclick="location.href = '{{ path('brasil_search', {'category_name': 'ipad'}) }}';">
+    <li class="item ipad" onclick="location.href = '{% if (state != 'brasil') %} {{ path('subdomain_search', {'state': state, 'category_name': 'ipad' }) }} {% else %} {{ path('brasil_search', {'category_name': 'ipad'}) }} {% endif %}';">
 
         {% if (state != 'brasil') %}
             <a href="{{ path('subdomain_search', {'state': state, 'category_name': 'ipad' }) }}" class="btn-product">iPad</a>
@@ -140,7 +140,7 @@ function submitFilter()
         {% endif %}
     </li>
 
-    <li class="item ipod" onclick="location.href = '{{ path('brasil_search', {'category_name': 'ipod'}) }}';">
+    <li class="item ipod" onclick="location.href = '{% if (state != 'brasil') %} {{ path('subdomain_search', {'state': state, 'category_name': 'ipod' }) }} {% else %} {{ path('brasil_search', {'category_name': 'ipod'}) }} {% endif %}';">
         
         {% if (state != 'brasil') %}
             <a href="{{ path('subdomain_search', {'state': state, 'category_name': 'ipod' }) }}" class="btn-product">iPod</a>
@@ -216,7 +216,7 @@ function submitFilter()
         {% endif %}
     </li>
 
-    <li class="item macbook" onclick="location.href = '{{ path('brasil_search', {'category_name': 'macbook'}) }}';">
+    <li class="item macbook" onclick="location.href = '{% if (state != 'brasil') %} {{ path('subdomain_search', {'state': state, 'category_name': 'macbook' }) }} {% else %} {{ path('brasil_search', {'category_name': 'macbook'}) }} {% endif %}';">
         
         {% if (state != 'brasil') %}
             <a href="{{ path('subdomain_search', {'state': state, 'category_name': 'macbook' }) }}" class="btn-product">MacBook</a>
@@ -320,7 +320,7 @@ function submitFilter()
         {% endif %}
     </li>
 
-    <li class="item imac" onclick="location.href = '{{ path('brasil_search', {'category_name': 'imac'}) }}';">
+    <li class="item imac" onclick="location.href = '{% if (state != 'brasil') %} {{ path('subdomain_search', {'state': state, 'category_name': 'imac' }) }} {% else %} {{ path('brasil_search', {'category_name': 'imac'}) }} {% endif %}';">
         
         {% if (state != 'brasil') %}
             <a href="{{ path('subdomain_search', {'state': state, 'category_name': 'imac' }) }}" class="btn-product">iMac</a>
@@ -424,7 +424,7 @@ function submitFilter()
         {% endif %}
     </li>
 
-    <li class="item others" onclick="location.href = '{{ path('brasil_search', {'category_name': 'others'}) }}';">
+    <li class="item others" onclick="location.href = '{% if (state != 'brasil') %} {{ path('subdomain_search', {'state': state, 'category_name': 'acessorios' }) }} {% else %} {{ path('brasil_search', {'category_name': 'acessorios'}) }} {% endif %}';">
         
         {% if (state != 'brasil') %}
             <a href="{{ path('subdomain_search', {'state': state, 'category_name': 'acessorios' }) }}" class="btn-product">Acessórios</a>

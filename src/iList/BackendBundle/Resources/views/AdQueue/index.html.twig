@@ -24,11 +24,17 @@
            
             
     </div>
-    <div>
+    <div class="a">
         <form method="POST">
             Aprovar: <br />
-            <input type="radio" name="approve" value="1" checked onclick="$('#reason').hide();"> Sim 
-            <input type="radio" name="approve" value="0" onclick="$('#reason').show();"> Não
+            
+            <label class="radio-inline">
+                <input type="radio" name="approve" id="approve" value="1" checked onclick="$('#reason').hide();"> Sim 
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="approve" id="approve" value="0" onclick="$('#reason').show();"> Não 
+            </label>
+
             <select name="reason" id="reason" style="display: none">
                 {% for msg in declined_msgs %}
                     <option value="{{ msg.id }}">{{ msg.msg }}</option>
@@ -42,5 +48,6 @@
     {% else %}
         <h3>Não há nada para aprovar! :D</h3>
     {% endif %}
+
 
 {% endblock %}

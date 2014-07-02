@@ -66,7 +66,7 @@
                             {% for m in ms %}   
                                 {% if (loop.first) %}      
                                     <p class="text">
-                                        <strong>De:</strong> {{ m.fromUser.name }}<br/>
+                                        <strong>De:</strong> {% if (m.fromUser) %}{{ m.fromUser.name }}{% else %}{{ m.name }}{% endif %}<br/>
                                         <strong>Enviado:</strong> {{ m.createdAt|date('H:m - d/m/Y') }}<br/>
                                         {% if (m.phone) %}<strong>Telefone:</strong> {{ m.phone }}<br/>{% endif %}
                                         <br/>
@@ -88,7 +88,7 @@
                                 {% else %}
                                     <div class="reply-msg">
                                         <p class="text">
-                                            <strong>De:</strong> {{ m.fromUser.name }}<br/>
+                                            <strong>De:</strong>  {% if (m.fromUser) %}{{ m.fromUser.name }}{% else %}{{ m.name }}{% endif %}<br/>
                                             <strong>Enviado:</strong> {{ m.createdAt|date('H:m - d/m/Y') }}<br/>
                                             {% if (m.phone) %}<strong>Telefone:</strong> {{ m.phone }}<br/>{% endif %}
                                             <br/>

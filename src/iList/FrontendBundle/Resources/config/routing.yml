@@ -76,12 +76,12 @@ find_product_by_subcategory_id:
     defaults: { _controller: iListFrontendBundle:Ad:getBySubCategoryId }
 
 ad_msg_send:
-    path:  /enviar
-    defaults: { _controller: iListFrontendBundle:Ad:sendAdMsg }
+    path:  /send_msg
+    defaults: { _controller: iListFrontendBundle:AdReply:sendAdReply }
 
 ad_reply_msg_send:
     path:  /reply_msg
-    defaults: { _controller: iListFrontendBundle:Account:replyMsg }
+    defaults: { _controller: iListFrontendBundle:AdReply:replyAdReply }
 
 find_address_by_zipcode:
     path:  /buscaCep/{zipcode}

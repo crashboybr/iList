@@ -297,9 +297,46 @@ class AdController extends Controller
      * Creates a new Ad entity.
      *
      */
-  
+    public function replyAdReplyAction(Request $request)
+    {
 
-    public function sendAdMsgAction(Request $request)
+        $entity = new AdMsg();
+        
+        $ad_id = $request->get('ad_id');
+        $user_id = $request->get('user_id');
+        $msg = $request->get('msg');
+
+        $em = $this->getDoctrine()->getManager();
+        $ad = $em->getRepository('iListBackendBundle:Ad')->find($ad_id);
+        $user = $em->getRepository('iListBackendBundle:User')->find($user_id);
+        
+        $me = $this->getUser();
+
+        $entity->setFromUser($me);
+
+        $entity->setName($me->getName());
+        $entity->setEmail($me->getEmail());
+        $entity->setAd($ad);
+        $entity->setToUser($user);
+        $entity->setContent($msg);
+        $entity->setTitle("RE: " . $ad->getTitle());
+        $entity->setStatus(-1); //nao lido
+            
+        $em->persist($entity);
+        $em->flush($entity);
+
+        $this->get('session')->getFlashBag()->add(
+        'notice',
+        'Resposta enviada com sucesso!');
+
+        //$this->get('send_mail')->sendEmail($user->getEmail(), 'Vc teve uma resposta na sua caixa de entrada', 'Nova Msg');
+        $this->get('send_mail')->sendAdReply($user, 'replymsg');
+
+        return $this->redirect($this->generateUrl('account_home'));
+ 
+    }
+
+    public function sendAdReplyAction(Request $request)
     {
 
         $entity = new AdMsg();
@@ -308,9 +345,6 @@ class AdController extends Controller
         
         $form->handleRequest($request);
 
-        
-        //var_dump($form->isValid());exit;
-
         $ad = $form->getData()->getAd();
         //echo "<pre>";
         //\Doctrine\Common\Util\Debug::dump($form->getData()->getAd());exit;
@@ -318,10 +352,12 @@ class AdController extends Controller
             $em = $this->getDoctrine()->getManager();
             
             $user = $this->getUser();
-
             if ($user)
                 $entity->setFromUser($user);
-
+            //else
+                //$entity->setFromEmail();
+            //echo "<pre>";
+            //\Doctrine\Common\Util\Debug::dump($entity);exit;
 
             
             $entity->setTitle("Nova Mensagem - Anúncio: " . $ad->getTitle());
@@ -329,12 +365,11 @@ class AdController extends Controller
 
             $toUser = $ad->getUser();
             $entity->setToUser($toUser);
-            //echo "<pre>";
-            //\Doctrine\Common\Util\Debug::dump($ad->getUser();exit;
+
             $em->persist($entity);
             $em->flush($entity);
 
-            $this->get('send_mail')->sendEmail($ad, 'newmsg');
+            $this->get('send_mail')->sendAdReply($ad, 'newmsg');
 
             $this->get('session')->getFlashBag()->add(
             'notice',

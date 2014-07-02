@@ -269,6 +269,11 @@ $(document).ready(function(){
             {{ flashMessage }}
         </div>
     {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        <div class="flash-error" style="color: red;">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
     {{ form_start(form, { attr: { 'novalidate': 'novalidate', 'class': 'new_entity_factories_free_entity_factory'}}) }}
         {% set name = null %}
         {% set email = null %}

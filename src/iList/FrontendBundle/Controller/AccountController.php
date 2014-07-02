@@ -177,7 +177,7 @@ class AccountController extends Controller
         $user = $em->getRepository('iListBackendBundle:User')->find($user_id);
         
         $me = $this->getUser();
-        
+
         $entity->setFromUser($me);
 
         $entity->setName($me->getName());
@@ -196,7 +196,7 @@ class AccountController extends Controller
         'Resposta enviada com sucesso!');
 
         //$this->get('send_mail')->sendEmail($user->getEmail(), 'Vc teve uma resposta na sua caixa de entrada', 'Nova Msg');
-        $this->get('send_mail')->sendEmail($ad, 'newmsg');
+        $this->get('send_mail')->sendAdReply($user, 'replymsg');
 
         return $this->redirect($this->generateUrl('account_home'));
  

@@ -1,7 +1,7 @@
 fos_user:
     username:
         already_used: Este nome de usuário já está sendo usado
-        blank: É necessário preencher o nome de usuário
+        blank: É necessário escolher um apelido
         short: "[-Inf,Inf]Este de usuário é muito curto"
         long: "[-Inf,Inf]Este de usuário é muito longo"
     email:

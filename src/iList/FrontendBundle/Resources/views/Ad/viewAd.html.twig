@@ -233,13 +233,13 @@ $(document).ready(function(){
             </ul>
            
             <ul class="user-info">
-            	<li class="list-user">
+            	{#<li class="list-user">
                 	<div class="detail-left">
            	      		<img src="/images/mail.jpg" width="30" height="30" alt="email" /></div>
                 	<div class="detail-rigth">
                     	<p class="text">{{ ad.user.email }}</p>
                     </div>
-                </li>
+                </li>#}
                 {% if (ad.user.phone) %}
                 <li class="list-user">
                 	<div class="detail-left">
@@ -318,6 +318,6 @@ $(document).ready(function(){
     {{ form_end(form) }}
     
 <div class="ad-banner-sidebar">
-	  <img src="/images/guga-ad.jpg" width="300" height="250" /></div>                 
+             
 </div>
 {% endblock %}

@@ -48,22 +48,28 @@ class DefaultController extends Controller
 
     public function contactAction(Request $request)
     {   
-        return $this->render('iListFrontendBundle:Default:contact.html.twig');   
+        return $this->render('iListFrontendBundle:Default:contact.html.twig', array('data' => null));   
     }
 
     public function sendContactAction(Request $request)
     {   
         $data = $request->request->get('ilist_frontendbundle_user');
+        
+        if (!$data['name'] || !$data['email'] || !$data['msg']) {
+            $this->get('session')->getFlashBag()->add(
+            'error',
+            'Favor preencher os campos!'
+            );
+        } else {
+            $this->get('send_mail')->sendContactEmail($data);
 
-        $this->get('send_mail')->sendContactEmail($data);
+            $this->get('session')->getFlashBag()->add(
+                'contact',
+                'Contato enviado com sucesso!'
+            );
+        }
 
-        $this->get('session')->getFlashBag()->add(
-            'contact',
-            'Contato enviado com sucesso!'
-        );
-
-
-        return $this->render('iListFrontendBundle:Default:contact.html.twig');   
+        return $this->render('iListFrontendBundle:Default:contact.html.twig', array('data' => $data));   
     }
 
     public function bomAction(Request $request)

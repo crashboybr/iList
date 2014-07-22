@@ -14,6 +14,7 @@
     	'@iListFrontendBundle/Resources/public/js/jquery.maskedinput.min.js'
     	'@iListFrontendBundle/Resources/public/js/jquery.number.min.js'
         '@iListFrontendBundle/Resources/public/js/changeZipcode.js'
+        '@iListFrontendBundle/Resources/public/js/jquery.validate.js'
         
      %}
         <script src="{{ asset_url }}"></script>
@@ -23,6 +24,23 @@
 {% block body %}
 <script>
 $(document).ready(function () {
+
+
+
+	$("#ad_insert").validate({
+			rules: {
+				ilist_frontendbundle_ad_title: "remote",
+			},
+			messages: {
+				ilist_frontendbundle_ad_title: "Vai"
+			}
+
+		});
+
+
+
+
+
 
     $('#ilist_frontendbundle_ad_price').on('change',function(){
 		var val = $('#ilist_frontendbundle_ad_price').val();
@@ -127,7 +145,7 @@ $sport.change(function(){
                     </div>
                     
 
-                	{{ form_start(form, { attr: { 'novalidate': 'novalidate' }}) }}
+                	{{ form_start(form, { attr: { 'novalidate': 'novalidate', 'id': 'ad_insert' }}) }}
                 		
                 		{{ form_errors(form) }}
                 		<div class="cont" id="">
@@ -281,7 +299,7 @@ $sport.change(function(){
 	                        </div>
 						     <div class="cont-right">
 						     	<div class="estados">
-									{{ form_widget(form.title) }}
+									{{ form_widget(form.title, { attr: { 'style': 'width: 60%;'}}) }}
 								</div>
 							</div>
 						</div>
@@ -297,7 +315,7 @@ $sport.change(function(){
 	                        </div>
 						     <div class="cont-right">
 						     	<div class="text-ad">
-									{{ form_widget(form.content) }}
+									{{ form_widget(form.content, { attr: { 'style': 'width: 60%;'}}) }}
 								</div>
 							</div>
 						</div>
@@ -425,7 +443,7 @@ $sport.change(function(){
 						<div class="cont pics" id="">
 	                		<div class="cont-left">
 	                			
-	                        	{{ form_label(form.ad_images,'Imagens', { attr: { 'class': 'item_desc' } }) }}
+	                        	{{ form_label(form.ad_images,'Fotos', { attr: { 'class': 'item_desc' } }) }}
 	                        </div>
 						     <div class="cont-right">
 						     	<div class="estados">

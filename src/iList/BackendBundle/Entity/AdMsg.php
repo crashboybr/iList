@@ -56,7 +56,7 @@ class AdMsg
      *      maxMessage = "Máximo de {{ limit }} caracteres"
      * )
      * @Assert\Regex(
-     *     pattern="/^[A-Za-zçÇãõÃÕáéíóúÁÉÍÓÚâêîôûÂÊÎÔÛàèìòùÀÈÌÒÙ]+$/",
+     *     pattern="/^[ A-Za-zçÇãõÃÕáéíóúÁÉÍÓÚâêîôûÂÊÎÔÛàèìòùÀÈÌÒÙ]+$/",
      *     match=true,
      *     message="Seu nome só pode conter letras"
      * )

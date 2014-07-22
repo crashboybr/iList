@@ -84,7 +84,7 @@ class NewAdType extends AbstractType
                 'attr' => array('readonly' => 'readonly')
                 ))
             ->add('zipcode','text', array(
-                'attr' => array('onchange' => 'changeZipcode("ad")', 'maxlength' => 8),
+                'attr' => array('onchange' => 'changeZipcode("ad")', 'maxlength' => 9),
                 ))
             ->add('neighbourhood','text', array(
                 'attr' => array('readonly' => 'readonly')
@@ -98,9 +98,9 @@ class NewAdType extends AbstractType
                 'expanded' => true,
                 'data' => '1',
             ))
-            ->add('ad_images', 'collection', array('type' => new AdImageType())
+            ->add('ad_images', 'collection', array('type' => new AdImageType(), 'required' => false))
 
-            );
+            ;
 
             
 

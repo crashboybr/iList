@@ -441,7 +441,7 @@ function submitFilter()
 
                                 <li class="filter-item">
                                     {{ form_widget(subcategory, { attr: { 'class': 'filtrosclick selectGenero', 'onclick': 'submitFilter()' }}) }}
-                                    <label class="text-filter" for="">iMac {{ subcategory.vars.label }}</label>
+                                    <label class="text-filter" for="">{{ subcategory.vars.label }}</label>
                                 </li>
                             {% endfor %}
 

@@ -14,7 +14,9 @@
 
 <h3>Contato</h3>
 
-    {% for flashMessage in app.session.flashbag.get('contact') %}
+
+
+{% for flashMessage in app.session.flashbag.get('contact') %}
         <div class="flash-notice">
             {{ flashMessage }}
         </div>
@@ -29,6 +31,11 @@
                 <div class="inputLabel-account">
                   <p class="text"><strong>Nome</strong></p>
                     <input type="text" id="ilist_frontendbundle_user_name" name="ilist_frontendbundle_user[name]" required="required" maxlength="30" pattern=".{3,}" class="rounder" placeholder="" value="" />
+                    {% if data and not data.name %}
+                        <div class="alert-text" style="margin-bottom: 10px;">
+                            É necessário preencher seu nome
+                        </div>
+                    {% endif %}
                 </div>
                 
                 
@@ -36,6 +43,11 @@
                 <div class="inputLabel-account">
                     <p class="text">Email</p>
                     <input type="email" id="ilist_frontendbundle_user_email" name="ilist_frontendbundle_user[email]" required="required" maxlength="254" pattern=".{2,}" class="rounder" placeholder="" value="" />
+                    {% if data and not data.email %}
+                        <div class="alert-text" style="margin-bottom: 10px;">
+                            É necessário preencher seu email
+                        </div>
+                    {% endif %}
                 </div>
                 
                 <div class="inputLabel-account">
@@ -46,6 +58,11 @@
                 <div class="inputLabel">
             
             <textarea id="ilist_frontendbundle_user_msg" name="ilist_frontendbundle_user[msg]" required="required" class="rounder" placeholder="Mensagem" rows="4" cols="150"></textarea>
+            {% if data and not data.msg %}
+                <div class="alert-text" style="margin-bottom: 10px;">
+                    É necessário digitar uma mensagem
+                </div>
+            {% endif %}
             
             
         </div>

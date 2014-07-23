@@ -647,12 +647,22 @@ class AdController extends Controller
             array( 'id' => $id, 'user' => $user)
         );
 
+
         if (!$entity) {
             return $this->redirect($this->generateUrl('account_home'));
         }
 
+        //echo "<pre>";
+        //\Doctrine\Common\Util\Debug::dump($entity->getContent());
+
+        $entity->setContent(strip_tags($entity->getContent()));
+
+        //echo "<pre>";
+        //\Doctrine\Common\Util\Debug::dump($entity->getContent());exit;
+
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
+
 
         return $this->render('iListFrontendBundle:Ad:new.html.twig', array(
             'entity'      => $entity,
@@ -717,7 +727,7 @@ class AdController extends Controller
             
             $entity->setStatus(-1); //revisao
             
-            
+            /*
             $i = 1;
             foreach ($entity->getAdImages() as $adImage)
             {
@@ -728,18 +738,38 @@ class AdController extends Controller
                 $file = $adImage->getPic();
                 $adImage->setPic(null);
                 $adImage->setFile($file);
+            }*/
+
+            //$em->persist($entity);
+            //$em->flush();
+
+            $img = $entity->getAdImages();
+            //echo "<pre>";
+            //\Doctrine\Common\Util\Debug::dump($img);exit;
+            if ($img) 
+            {
+                $i = 0;
+                foreach ($entity->getAdImages() as $adImage)
+                {
+                    
+                    $entity->setDefaultImg('indo');
+                    $adImage->setAds($entity);
+                    $adImage->setPosition($i++);
+                    $file = $adImage->getPic();
+                    $adImage->setPic(null);
+                    $adImage->setFile($file);                    
+
+                }
+                $em->persist($entity);
+                $em->flush();
+                
+                $entity->setDefaultImg($img[0]->getPic());
+                //echo "<pre>";
+                //\Doctrine\Common\Util\Debug::dump($img[0]->getPic());exit;
             }
 
             $em->persist($entity);
             $em->flush();
-
-            $img = $entity->getAdImages();
-            if ($img) 
-            {
-                $entity->setDefaultImg($img[0]->getPic());
-                $em->persist($entity);
-                $em->flush();
-            }
 
             //return $this->redirect($this->generateUrl('anuncio_edit', array('id' => $id)));
             $this->get('send_mail')->sendEmail($entity, 'revision');

@@ -123,29 +123,30 @@ class NewAdType extends AbstractType
                 'class'       => 'iListBackendBundle:Color',
                 'empty_value' => 'Escolha a Cor',
                 'choices'     => $colors,
-                'property'    => 'name'
+                'property'    => 'name', 'required' => false
             ));
 
             $form->add('size' , 'entity' , array(
                       'class'    => 'iListBackendBundle:Size' ,
                       'property' => 'size' ,
                       'choices'     => $sizes,
-                      'empty_value' => 'Escolha a Capacidade' ));
+                      'empty_value' => 'Escolha a Capacidade',
+                      'required' => false ));
             $form->add('memory' , 'entity' , array(
                       'class'    => 'iListBackendBundle:MemoryRam' ,
                       'property' => 'name' ,
                       'choices'     => $memories,
-                      'empty_value' => 'Escolha a Memória' ));
+                      'empty_value' => 'Escolha a Memória', 'required' => false ));
             $form->add('screen' , 'entity' , array(
                       'class'    => 'iListBackendBundle:ScreenSize' ,
                       'property' => 'size' ,
                       'choices'     => $screens,
-                      'empty_value' => 'Escolha o tamanho da tela' ));
+                      'empty_value' => 'Escolha o tamanho da tela', 'required' => false ));
             $form->add('processor' , 'entity' , array(
                       'class'    => 'iListBackendBundle:Processor' ,
                       'property' => 'name' ,
                       'choices'     => $processors,
-                      'empty_value' => 'Escolha o Processador' ));
+                      'empty_value' => 'Escolha o Processador', 'required' => false ));
 
         };
 

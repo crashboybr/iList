@@ -531,7 +531,8 @@ class Ad
      */
     public function setContent($content)
     {
-        $this->content = nl2br($content);
+        //$this->content = nl2br($content);
+        $this->content = $content;
     
         return $this;
     }

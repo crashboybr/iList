@@ -28,17 +28,20 @@ $(document).ready(function () {
 
 
 	$("#ad_insert").validate({
-			rules: {
-				ilist_frontendbundle_ad_title: "remote",
-			},
-			messages: {
-				ilist_frontendbundle_ad_title: "Vai"
-			}
+			//errorElement: "div",
 
 		});
 
+	$("#ilist_frontendbundle_ad_title").rules(
+		"add", {
+			required: true,
+			messages: { required: "Campo obrigatório" }
+		});
 
 
+	{% if entity.price %}
+		$('#ilist_frontendbundle_ad_price').val('{{ entity.price/100 }}');
+	{% endif %}
 
 
 
@@ -137,13 +140,19 @@ $sport.change(function(){
 });
 </script>
 
+<style type="text/css">
+#ad_insert label.error {
+	color: red;
+	margin-left: 10px;
+}
+
+</style>
 
 
            		<div class="content-ad">
                 	<div class="titleMenu">
                         <p class="titleStyle">Informações sobre o produto</p>
                     </div>
-                    
 
                 	{{ form_start(form, { attr: { 'novalidate': 'novalidate', 'id': 'ad_insert' }}) }}
                 		

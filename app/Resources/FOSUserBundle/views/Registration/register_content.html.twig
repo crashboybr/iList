@@ -1,6 +1,19 @@
 {% trans_default_domain 'FOSUserBundle' %}
+<script type="text/javascript">
 
-<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="new_entity_factories_free_entity_factory" novalidate>
+$(document).ready(function () {
+
+
+
+	$("#form").validate({
+			
+
+		});
+
+});
+
+</script>
+<form action="{{ path('fos_user_registration_register') }}" id="form" {{ form_enctype(form) }} method="POST" class="new_entity_factories_free_entity_factory" novalidate>
     	{{ form_errors(form) }}
     	{{ form_row(form._token) }} 
  

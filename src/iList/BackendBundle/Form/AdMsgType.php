@@ -26,7 +26,7 @@ class AdMsgType extends AbstractType
         $builder
             ->add('name', 'text', array('label' => 'Nome'))
             ->add('email', 'text', array('label' => 'Email'))
-            ->add('phone', 'text', array('label' => 'Telefone (opcional)'))
+            ->add('phone', 'text', array('label' => 'Telefone (opcional)', 'required' => false))
             ->add('content','textarea', array('label' => 'Mensagem'))
             ->add('ad', 'hidden_entity', array(
                 "class" => "iList\\BackendBundle\\Entity\\Ad"

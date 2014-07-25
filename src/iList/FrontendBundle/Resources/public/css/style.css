@@ -290,3 +290,14 @@ input[type='checkbox']:checked::before {color: #808080;content: url(/images/tick
 
 
 
+
+#ad_insert label.error {
+	color: red;
+	margin-left: 10px;
+}
+
+#reply label.error {
+	color: red;
+	margin-top: 5px;
+}
+

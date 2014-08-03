@@ -274,7 +274,7 @@ $(document).ready(function(){
 
 <div class="content-right new	">
 	<h3>Falar com o anunciante</h3>
-    {% for flashMessage in app.session.flashbag.get('notice') %}
+    {% for flashMessage in app.session.flashbag.get('notice-ad-reply') %}
         <div class="flash-notice">
             {{ flashMessage }}
         </div>

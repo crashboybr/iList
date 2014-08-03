@@ -226,19 +226,24 @@ class SearchController extends Controller
         
         $ads = $qb->getQuery()->getResult();
 
-        if (count($ads) == 0 && $state != "brasil")
-        {
-            $filters['state'] = $all_states;
-            //var_dump($filters);exit;
-            $qb->setParameters($filters);
-            //$qb->andWhere('f.state != :state');
-            $ads = $qb->getQuery()->getResult();
-            $this->get('session')->getFlashBag()->add(
-                    'failover',
-                    'Busca não foi encontrada. Expandindo para todo Brasil.');
+        if (count($ads) == 0)
+            if ($state != "brasil")
+            {
+                $filters['state'] = $all_states;
+                //var_dump($filters);exit;
+                $qb->setParameters($filters);
+                //$qb->andWhere('f.state != :state');
+                $ads = $qb->getQuery()->getResult();
+                $this->get('session')->getFlashBag()->add(
+                        'failover',
+                        'Busca não foi encontrada. Expandindo para todo Brasil.');
 
 
-        }
+            }  else {
+                $this->get('session')->getFlashBag()->add(
+                        'failover',
+                        'Não foram encontrados nenhum anúncio.');
+            }
         //var_dump();
         
         //\Doctrine\Common\Util\Debug::dump($logger->queries);

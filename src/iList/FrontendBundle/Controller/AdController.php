@@ -71,7 +71,11 @@ class AdController extends Controller
         //echo "<pre>";
         //\Doctrine\Common\Util\Debug::dump($this->getUser());exit;
     
-
+        //var_dump($this->get('session')->getFlashBag());
+/*$this->get('session')->getFlashBag()->add(
+                'notice-ad-reply',
+                'Mensagem enviada com sucesso!!!');
+*/
         return $this->render('iListFrontendBundle:Ad:viewAd.html.twig', array(
             'ad' => $ad, 
             'form' => $form->createView()

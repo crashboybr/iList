@@ -91,7 +91,7 @@
 
         {# knp_pagination_sortable(pagination, 'Preço', 'a.price') #}
         {% for flashMessage in app.session.flashbag.get('failover') %}
-                <div class="flash-notice">
+                <div class="flash-notice" style="margin-top: 15px;">
                     {{ flashMessage }}
                 </div>
             {% endfor %}

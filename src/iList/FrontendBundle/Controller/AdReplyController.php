@@ -85,6 +85,12 @@ class AdReplyController extends Controller
                 'Você precisa estar logado para enviar uma mensagem!');
         } else {
             if ($form->isValid()) {
+
+                $this->get('session')->getFlashBag()->add(
+                'notice-ad-reply',
+                'Mensagem enviada com sucesso!!!');
+
+
                 $em = $this->getDoctrine()->getManager();
                 
                 $entity->setFromUser($me);
@@ -108,24 +114,15 @@ class AdReplyController extends Controller
 
                 $this->get('send_mail')->sendAdReply($conf, 'newmsg');
 
-                $this->get('session')->getFlashBag()->add(
-                'notice',
-                'Mensagem enviada com sucesso!');
-
-
-
-                return $this->redirect($this->generateUrl('subdomain_vi', 
+                return $this->forward('iListFrontendBundle:Ad:viewAd', 
                     array(
                         'city' => $ad->getCitySlug(),
                         'category_name' => strtolower($ad->getCategory()),
                         'slug' => $ad->getSlug(),
-                        'state' => $ad->getState()
+                        'state' => strtolower($ad->getState())
                         
                         )
-                    ));
-                
-
-
+                    );
 
             }
         }

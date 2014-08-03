@@ -23,7 +23,7 @@ class AcessoriesFilterType extends AbstractType
     {
    
 
-        $builder
+        /*$builder
             ->add('adType', 'choice', array(
                 'choices' => array('1' => 'Novo', '2' => 'Usado'),
                 'expanded' => true,
@@ -80,8 +80,8 @@ class AcessoriesFilterType extends AbstractType
                           },
                       'property' => 'name' ,
                       'expanded' => true ,
-                      'multiple' => true , ))
-            ->add('subcategory' , 'entity' , array(
+                      'multiple' => true , ))*/
+            $builder->add('subcategory' , 'entity' , array(
                       'class'    => 'iListBackendBundle:SubCategory' ,
                       'query_builder' => function(EntityRepository $er) {
 
